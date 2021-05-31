@@ -35,7 +35,7 @@ $config['base_url'] = 'localhost/Proyecto2-progra4/marketplace';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
