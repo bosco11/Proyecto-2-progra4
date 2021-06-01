@@ -18,7 +18,7 @@ Class Auth_model extends CI_Model {
 	//Retorna los datos del usuario indicado por parámetro
 	public function get_user_information($username) {
 
-		$query = $this->db->query("SELECT user.* from tbl_usuarios WHERE tbl_usuarios.user = '$username'");
+		$query = $this->db->query("SELECT u.* FROM tbl_usuarios u where u.user = '$username'");
 
 		if ($query->num_rows() == 1) {
 			return $query->result();

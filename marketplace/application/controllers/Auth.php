@@ -19,9 +19,9 @@ Class Auth extends CI_Controller {
 
 	function load_data_view($view)
     {
-    	//precarga todos los datos con los que la vista debe iniciar
-    	$this->load->model('Twitter_model');
-        $data['tweets'] = $this->Twitter_model->get_all_tweets();
+    	// precarga todos los datos con los que la vista debe iniciar
+    	// $this->load->model('Twitter_model');
+        // $data['tweets'] = $this->Twitter_model->get_all_tweets();
         $data['_view'] = $view;
 		$this->load->view('layouts/main',$data);
     }
@@ -39,7 +39,7 @@ Class Auth extends CI_Controller {
 			//Esto es para el caso de si la sesión aún está activa
 			if(isset($this->session->userdata['logged_in'])){
 				 //Función propia para cargar la vista indicada con datos precargados
-				$this->load_data_view('twitter/index');
+				$this->load_data_view('user/add');
 			}else{
 				$this->load->view('auth/login');
 			}
@@ -48,7 +48,7 @@ Class Auth extends CI_Controller {
 
 			//Si se cumple la validación procedemos a comprobar la autenticación
 			$data = array(
-				'username' => $this->input->post('txt_username'),
+				'user' => $this->input->post('txt_username'),
 				'password' => $this->input->post('txt_password')
 			);
 
@@ -63,17 +63,18 @@ Class Auth extends CI_Controller {
 				if ($result != false) {
 					$session_data = array(
 						'logged_in' => TRUE,
-						'users_id' => $result[0]->users_id,
-						'username' => $result[0]->username,
-						'realname' => $result[0]->realname,
-						'photo' => $result[0]->photo,
+						'users_id' => $result[0]->id_usuarios,
+						'user' => $result[0]->user,
+						'nombre_real' => $result[0]->nombre_real,
+						'tipo'=>$result[0]->tipo_usuario,
+						'imagen' => $result[0]->imagen,
 					);
 
 					// Agregamos la infomación del usuario en forma de arreglo a la Variable de Sesion con nombre logged_in
 					$this->session->set_userdata('logged_in', $session_data);
 					//Función propia para cargar la vista indicada con datos precargados
-					redirect('twitter/index', 'refresh'); //redireccionamos a la URL raíz para evitar que nos quede auth/login/ en la URL
-					$this->load_data_view('twitter/index'); //luego cargamos la vista
+					redirect('user/add', 'refresh'); //redireccionamos a la URL raíz para evitar que nos quede auth/login/ en la URL
+					$this->load_data_view('user/add'); //luego cargamos la vista
 
 				}
 			} else { //Si No autenticamos regreamos a la vista Login con un mensaje de error seteado
@@ -92,11 +93,12 @@ Class Auth extends CI_Controller {
 		// Removemos los datos de la sesion
 		$sess_array = array(
 			'logged_in' => FALSE,
-			'username' => '',
+			'user' => '',
 		);
 		$this->session->unset_userdata('logged_in', $sess_array);
 		$this->session->sess_destroy();
 		$data['message_display'] = 'Has cerrado tu sesión de forma exitosa.';
+		redirect('auth/login', 'refresh');
 		$this->load->view('auth/login', $data);
 	}
 
