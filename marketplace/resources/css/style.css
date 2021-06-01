@@ -448,12 +448,16 @@ img {
 	bottom: 5px;
 	float: left;
 	width: 50%;
+	/* margin-bottom: 10px; */
+	/* padding-bottom: 80px; */
 }
 #div2 {
 	position: relative;
 	bottom: 5px;
 	float: right;
 	width: 50%;
+	margin-bottom: 60px;
+	/* padding-bottom: 90px; */
 }
 #div3 {
 	position: relative;

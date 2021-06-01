@@ -71,9 +71,7 @@
 
 					<button type="submit" class="btn btn-primary" name="btn_login" id="btn_login">Ingresar</button>
 					<?php echo form_close(); ?>
-					<div id="actions">
-						<a href="<?php echo site_url('user/add'); ?>" class="link-primary" id="btn_adduser" name='btn_adduser' title="Registrarse">Registrarse</a>
-					</div>
+					
 				</div>
 
 

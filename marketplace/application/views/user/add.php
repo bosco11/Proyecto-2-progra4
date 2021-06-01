@@ -1,3 +1,21 @@
+<?php
+if (isset($logout_message)) {
+	echo "<div class='login_msg_box success'>" . $logout_message . "</div>";
+}
+
+if (isset($message_display)) {
+	echo "<div class='login_msg_box success' >" . $message_display . "</div>";
+}
+
+if (isset($error_message)) {
+	echo "<div class='login_msg_box warning'>" . $error_message . "</div>";
+}
+
+if (validation_errors() !== "") {
+	echo "<div class='login_msg_box warning'>" . validation_errors() . "</div>";
+}
+
+?>
 <div id="panel_app">
 	<div class="box-header">
 		<h2 class="box-title">Agregando Usuario</h2>
@@ -28,7 +46,10 @@
 				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" />
 				<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
 			</div>
+			<label for="file" class="control-label"><span class="text-danger">* </span>Elegir una imagen de perfil:</label><br>
+			<input type="file" name="txt_file" size="20" class="btn btn-info" accept="image/jpeg,image/gif,image/png" />
 		</div>
+
 		<div id="div2">
 			<label for="txt_telefono" class="control-label"><span class="text-danger">* </span>Telefono:</label>
 			<div class="form-group">
@@ -53,8 +74,7 @@
 				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
 			</div>
 		</div>
-		
-		
+
 		<div id="div3">
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary">Guardar</button>
