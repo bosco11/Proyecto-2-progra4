@@ -1,6 +1,6 @@
 <?php
 
-Class Tienda extends CI_Controller {
+Class Comprador extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
@@ -13,9 +13,9 @@ Class Tienda extends CI_Controller {
 
 	//Muestra la vista del Login
 	public function index() {
-		$this->load_data_view('tienda/tiendaHome');
+		$this->load_data_view('comprador/compradorHome');
 	}
-	function tiendaHome(){
+	function compradorHome(){
 		$this->index();
 	}
 

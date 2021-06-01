@@ -10,7 +10,7 @@ class User extends CI_Controller{
 
     function index()
     {
-        $data['_view'] = 'twitter/index';
+        $data['_view'] = 'tienda/tiendaHome';
         $this->load->view('layouts/main',$data);
     }
 

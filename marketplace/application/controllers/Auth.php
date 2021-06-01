@@ -1,8 +1,10 @@
 <?php
 
-Class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 
 		$this->load->helper('form');
@@ -12,22 +14,24 @@ Class Auth extends CI_Controller {
 	}
 
 	//Muestra la vista del Login
-	public function index() {
+	public function index()
+	{
 		$this->load->view('auth/login');
 	}
 
 
 	function load_data_view($view)
-    {
-    	// precarga todos los datos con los que la vista debe iniciar
-    	// $this->load->model('Twitter_model');
-        // $data['tweets'] = $this->Twitter_model->get_all_tweets();
-        $data['_view'] = $view;
-		$this->load->view('layouts/main',$data);
-    }
+	{
+		// precarga todos los datos con los que la vista debe iniciar
+		// $this->load->model('Twitter_model');
+		// $data['tweets'] = $this->Twitter_model->get_all_tweets();
+		$data['_view'] = $view;
+		$this->load->view('layouts/main', $data);
+	}
 
 	//Proceso de autenticación Login
-	public function login() {
+	public function login()
+	{
 
 		$this->form_validation->set_rules('txt_username', 'Username', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('txt_password', 'Password', 'trim|required|xss_clean');
@@ -37,13 +41,16 @@ Class Auth extends CI_Controller {
 			//Si autenticamos vamos a la vista principal
 			//Sino nos devielve al login
 			//Esto es para el caso de si la sesión aún está activa
-			if(isset($this->session->userdata['logged_in'])){
-				 //Función propia para cargar la vista indicada con datos precargados
-				$this->load_data_view('user/add');
-			}else{
+			if (isset($this->session->userdata['logged_in'])) {
+				//Función propia para cargar la vista indicada con datos precargados
+				if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+					redirect('comprador/compradorHome', 'refresh');
+				} else {
+					redirect('tienda/tiendaHome', 'refresh');
+				}
+			} else {
 				$this->load->view('auth/login');
 			}
-
 		} else {
 
 			//Si se cumple la validación procedemos a comprobar la autenticación
@@ -66,16 +73,18 @@ Class Auth extends CI_Controller {
 						'users_id' => $result[0]->id_usuarios,
 						'user' => $result[0]->user,
 						'nombre_real' => $result[0]->nombre_real,
-						'tipo'=>$result[0]->tipo_usuario,
+						'tipo' => $result[0]->tipo_usuario,
 						'imagen' => $result[0]->imagen,
 					);
 
 					// Agregamos la infomación del usuario en forma de arreglo a la Variable de Sesion con nombre logged_in
 					$this->session->set_userdata('logged_in', $session_data);
 					//Función propia para cargar la vista indicada con datos precargados
-					redirect('user/add', 'refresh'); //redireccionamos a la URL raíz para evitar que nos quede auth/login/ en la URL
-					$this->load_data_view('user/add'); //luego cargamos la vista
-
+					if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+						redirect('comprador/compradorHome', 'refresh');
+					} else {
+						redirect('tienda/tiendaHome', 'refresh');
+					}
 				}
 			} else { //Si No autenticamos regreamos a la vista Login con un mensaje de error seteado
 				$data = array(
@@ -88,7 +97,8 @@ Class Auth extends CI_Controller {
 	}
 
 	//Proceso de Logout 
-	public function logout() {
+	public function logout()
+	{
 
 		// Removemos los datos de la sesion
 		$sess_array = array(
@@ -101,7 +111,4 @@ Class Auth extends CI_Controller {
 		redirect('auth/login', 'refresh');
 		$this->load->view('auth/login', $data);
 	}
-
 }
-
-?>
