@@ -19,17 +19,26 @@ class User extends CI_Controller{
     {   
         $this->load->library('form_validation');
 
-		$this->form_validation->set_rules('txt_usuario','Usuario','required|max_length[64]');
-        $this->form_validation->set_rules('txt_clave','Contraseña','required|max_length[128]');
-		$this->form_validation->set_rules('txt_nombre','Nombre','required|max_length[64]');
+		$this->form_validation->set_rules('txt_usuario','Usuario','required|max_length[50]');
+        $this->form_validation->set_rules('txt_clave','Contraseña','required|max_length[200]');
+		$this->form_validation->set_rules('txt_nombre','Nombre','required|max_length[100]');
+		$this->form_validation->set_rules('txt_telefono','Telefono','required|max_length[14]');
+		$this->form_validation->set_rules('txt_correo','Correo','required|max_length[45]');
+		$this->form_validation->set_rules('txt_cedula','Cedula','required|max_length[100]');
+		$this->form_validation->set_rules('txt_pais','Pais','required|max_length[100]');
 		
 		if($this->form_validation->run())     
         {   
             $params = array(
-				'username' => $this->input->post('txt_usuario'),
+				'user' => $this->input->post('txt_usuario'),
 				'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
-				'realname' => $this->input->post('txt_nombre'),
-                'photo' => 'unknown.jpg',
+				'nombre_real' => $this->input->post('txt_nombre'),
+				'telefono' => $this->input->post('txt_telefono'),
+				'correo' => $this->input->post('txt_correo'),
+				'cedula' => $this->input->post('txt_cedula'),
+				'pais' => $this->input->post('txt_pais'),
+				'tipo_usuario' => $this->input->post('cmb_tipo'),
+                'imagen' => 'unknown.jpg',
             );
             
             $user_id = $this->User_model->add_user($params);
@@ -48,39 +57,39 @@ class User extends CI_Controller{
     function edit($users_id)
     {   
 
-        $data['user'] = $this->User_model->get_user($users_id);
+        // $data['user'] = $this->User_model->get_user($users_id);
         
-        if(isset($data['user']['users_id']) && $this->session->userdata['logged_in']['users_id'] == $data['user']['users_id'])
-        {
-            $this->load->library('form_validation');
+        // if(isset($data['user']['users_id']) && $this->session->userdata['logged_in']['users_id'] == $data['user']['users_id'])
+        // {
+        //     $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('txt_usuario','Usuario','required|max_length[64]');
-            $this->form_validation->set_rules('txt_clave','Contraseña','required|max_length[128]');
-            $this->form_validation->set_rules('txt_nombre','Nombre','required|max_length[64]');
+        //     $this->form_validation->set_rules('txt_usuario','Usuario','required|max_length[64]');
+        //     $this->form_validation->set_rules('txt_clave','Contraseña','required|max_length[128]');
+        //     $this->form_validation->set_rules('txt_nombre','Nombre','required|max_length[64]');
             
-            if($this->form_validation->run())    
-            {   
-                $params = array(
-                    'username' => $this->input->post('txt_usuario'),
-                    'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
-                    'realname' => $this->input->post('txt_nombre'),
-                );
+        //     if($this->form_validation->run())    
+        //     {   
+        //         $params = array(
+        //             'username' => $this->input->post('txt_usuario'),
+        //             'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
+        //             'realname' => $this->input->post('txt_nombre'),
+        //         );
 
-                $this->User_model->update_user($users_id,$params);
+        //         $this->User_model->update_user($users_id,$params);
 
-                $this->session->set_flashdata('success', "Tus datos de usuario se han actualizado. Vuelve a autenticarte para ver los cambios.");
+        //         $this->session->set_flashdata('success', "Tus datos de usuario se han actualizado. Vuelve a autenticarte para ver los cambios.");
 
-                $data['_view'] = 'user/edit';
-                $this->load->view('layouts/main',$data);
-            }
-            else
-            {
-                $data['_view'] = 'user/edit';
-                $this->load->view('layouts/main',$data);
-            }
-        } else {       
-            redirect('twitter/index/');
-        }
+        //         $data['_view'] = 'user/edit';
+        //         $this->load->view('layouts/main',$data);
+        //     }
+        //     else
+        //     {
+        //         $data['_view'] = 'user/edit';
+        //         $this->load->view('layouts/main',$data);
+        //     }
+        // } else {       
+        //     redirect('twitter/index/');
+        // }
     } 
 
 

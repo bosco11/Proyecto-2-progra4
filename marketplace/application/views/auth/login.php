@@ -7,7 +7,8 @@
 	<title>Chatwitter</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-	
+	<link rel="icon" href="<?php echo site_url('resources/img/favicon.png'); ?>" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="<?php echo site_url('resources/css/login.css'); ?>">
 </head>
 
 <body>
@@ -38,7 +39,9 @@
 				<input type="password" name="txt_password" id="txt_password" placeholder="**********" title="Contraseña" class="cajatexto" /><br />
 				<input type="submit" value="OK" name="btn_login" id="btn_login" /><br />
 				<?php echo form_close(); ?>
-				
+				<div id="actions">
+					<a href="<?php echo site_url('user/add'); ?>" id="btn_adduser" name='btn_adduser' title="Registrarse">Registrarse</a>
+				</div>
 			</div>
 		</div>
 	</div>
