@@ -82,7 +82,7 @@ img {
 	margin: 10px;
 	border-radius: 5px;
 	border: 1px solid #1DA1F2;
-	width: 300px;
+	width: 80%;
 	color: #FFF;
 	background: #15202B;
 }
@@ -322,58 +322,7 @@ img {
 	}
 }
 
-#btc {
-	margin-left: 10px;
-}
-
-#btn_like,
-#btn_dislike {
-	background: #666;
-}
-
-#btn_like:hover,
-#btn_dislike:hover {
-
-	background-color: #DC4E41;
-}
-
-ul {
-	padding: 0;
-	width: 100%;
-}
-
-#btn_archivo {
-	outline: none;
-	text-decoration: none;
-	display: inline-block;
-	width: auto;
-	margin-right: 0.625%;
-	text-align: center;
-	line-height: 3;
-	font-size: 12px;
-	border-radius: 6px;
-	color: white;
-	font-weight: bold;
-}
-
-#btn_archivo:link,
-#btn_archivo:visited,
-#btn_archivo:focus {
-	background: #666;
-}
-
-#btn_archivo:hover {
-	background: rgb(0, 255, 76);
-	color: black;
-}
-
-#btn_archivo:active {
-	background: red;
-	color: white;
-}
-
-
-h1 {
+/* h1 {
 	font-size: 30px;
 	color: #fff;
 	text-transform: uppercase;
@@ -406,7 +355,7 @@ h1 {
 	display: table;
 	padding: 0 0 8em 0;
 	/* background-color: crimson; */
-}
+
 
 .container td,
 .container th {
@@ -473,35 +422,7 @@ h1 {
 	overflow: auto;
 	width: 100%;
 	height: 430px;
-}
-
-#btn_reaccion {
-	outline: none;
-	text-decoration: none;
-	display: inline-block;
-	width: auto;
-	text-align: center;
-	height: 30px;
-	font-size: 10px;
-	border-radius: 6px;
-	color: white;
-}
-
-#btn_reaccion:link,
-#btn_reaccion:visited,
-#btn_reaccion:focus {
-	background: #1DA1F2;
-}
-
-#btn_reaccion:hover {
-	background: rgb(0, 255, 76);
-	color: black;
-}
-
-#btn_reaccion:active {
-	background: red;
-	color: white;
-}
+} */
 
 #ico {
 	position: relative;
@@ -510,6 +431,36 @@ h1 {
 	padding-left: 4px;
 	
 }
+
 #cmb_tipo{
-	width: 310px;
+	padding: 5px;
+	margin: 10px;
+	border-radius: 5px;
+	border: 1px solid #1DA1F2;
+	color: rgb(0, 0, 0);
+	background: #ffffff;
+	width: 80%;
+}
+
+
+
+
+#div1 {
+	position: relative;
+	bottom: 5px;
+	float: left;
+	width: 50%;
+}
+#div2 {
+	position: relative;
+	bottom: 5px;
+	float: right;
+	width: 50%;
+}
+#div3 {
+	position: relative;
+	bottom: 5px;
+	margin-top: 10px;
+	float: left;
+	/* width: 50%; */
 }
