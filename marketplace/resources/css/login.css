@@ -1,17 +1,27 @@
-html, body 
-{
-	margin: 0px; /* Comentario en CSS*/
-	padding: 0px; /* Los margenes son reducidos a 0*/
-	overflow: hidden; /*Ocultamos el Scroll de la pagina*/
-	font-family: Segoe UI, Century Gothic,Verdana, Arial;
+html,
+body {
+	margin: 0px;
+	/* Comentario en CSS*/
+	padding: 0px;
+	/* Los margenes son reducidos a 0*/
+	overflow: hidden;
+	/*Ocultamos el Scroll de la pagina*/
+	font-family: Segoe UI, Century Gothic, Verdana, Arial;
 	background: #15202B;
+	background-size: cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	-o-background-size: cover;
+	height: 100%;
+	width: 100%;
+	font-family: "Numans", sans-serif;
 }
 
-#form_container{
+#form_container {
 	text-align: center;
 }
 
-#login{
+#login {
 	position: relative;
 	width: 350px;
 	height: 260px;
@@ -24,7 +34,7 @@ html, body
 	background: #253341;
 }
 
-.cajatexto{
+.cajatexto {
 	padding: 5px;
 	margin: 10px;
 	border-radius: 5px;
@@ -34,11 +44,7 @@ html, body
 	background: #15202B;
 }
 
-#btn_login:active{
-	background: #184D71;
-}
-
-.login_msg_box{
+.login_msg_box {
 	position: relative;
 	border: 1px solid #CCCCCC;
 	padding: 10px;
@@ -56,34 +62,31 @@ html, body
 	cursor: pointer;
 	position: relative;
 	float: inherit;
-	
+
 }
 
-#btn_adduser {
-	color: #1F8DB1;
-}
-
-.error{
+.error {
 	background: #C00000;
 }
 
-.success{
+.success {
 	background: #29CC70;
 }
 
-.info{
+.info {
 	background: #1F8DB1;
 }
 
-.warning{
+.warning {
 	background: #FF9900;
 }
+
 #btn_adduser {
 	outline: none;
 	text-decoration: none;
 	display: inline-block;
-	width: auto;
-	heigth:8px;
+	width: 90%;
+	heigth: 8px;
 	margin-right: 0.620%;
 	text-align: center;
 	line-height: 2.5;
@@ -96,7 +99,169 @@ html, body
 #btn_adduser:link,
 #btn_adduser:visited,
 #btn_adduser:focus {
-	background: rgb(0, 153, 153 );
+	background: #00b46f;
+
 }
 
+.container {
+	height: 110%;
+	align-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
+.card {
+	height: 450px;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 450px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-header h3 {
+	color: white;
+	text-align: center;
+	font-size: 22px;
+}
+
+.input-group-prepend span {
+	width: 40px;
+	height: 50px;
+	background-color: dodgerblue;
+	color: black;
+	border: 0 !important;
+	font-size: 20px;
+}
+
+.input-group-append span {
+	width: 40px;
+	height: 50;
+	color: black;
+	border: 0 !important;
+	font-size: 20px;
+}
+
+.form-control {
+	width: 30;
+	height: 50px;
+	background-color: white;
+	color: black;
+	border: 0 !important;
+	font-size: 14px;
+	font-weight: bold;
+
+}
+
+#btn_login {
+	font-weight: bold;
+	color: rgb(255, 254, 254);
+	font-size: 18px;
+	background-color: dodgerblue !important;
+	width: 90%;
+	height: 17%;
+}
+
+#btn_login:hover {
+	font-weight: bold;
+	color: black;
+	background-color: white;
+}
+
+.imgcontainer {
+	text-align: center;
+	margin: 24px 0 12px 0;
+}
+
+.img.avatar {
+	width: 30%;
+	border-radius: 30%;
+}
+
+@media (max-width: 575.98px) {
+
+	html,
+	body {
+		background-size: cover;
+		-moz-background-size: cover;
+		-webkit-background-size: cover;
+		-o-background-size: cover;
+		height: 100%;
+		width: 100%;
+		font-family: "Numans", sans-serif;
+	}
+
+	.form-control {
+		width: 20px;
+		height: 40px;
+		background-color: white;
+		color: black;
+		border: 0 !important;
+		font-size: 14px;
+		font-weight: bold;
+
+	}
+
+	.card-header h3 {
+		color: white;
+		text-align: center;
+		font-size: 14px;
+	}
+
+	.input-group-prepend span {
+		width: 50px;
+		height: 40px;
+		background-color: dodgerblue;
+		color: black;
+		border: 0 !important;
+		font-size: 20px;
+	}
+
+	.input-group-append span {
+		width: 20px;
+		height: 40;
+		color: black;
+		border: 0 !important;
+		font-size: 12px;
+	}
+
+	.imgcontainer {
+		text-align: center;
+		margin: 16px 0 6px 0;
+	}
+
+	.img.avatar {
+		width: 20%;
+		border-radius: 20%;
+	}
+
+	#btn_login {
+		font-weight: bold;
+		color: rgb(255, 251, 251);
+		font-size: 14px;
+		background-color: dodgerblue !important;
+		width: 90%;
+		height: 17%;
+	}
+	#btn_adduser {
+		outline: none;
+		text-decoration: none;
+		display: inline-block;
+		width: 90%;
+		heigth: 8px;
+		margin-right: 0.620%;
+		text-align: center;
+		line-height: 2.5;
+		font-size: 8px;
+		border-radius: 6px;
+		color: white;
+		font-weight: bold;
+	}
+	
+	#btn_adduser:link,
+	#btn_adduser:visited,
+	#btn_adduser:focus {
+		background: #00b46f;
+	}
+}

@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <link rel="icon" href="<?php echo site_url('resources/img/favicon.png');?>" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="icon" href="<?php echo site_url('resources/img/tienda.png'); ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?php echo site_url('resources/css/style.css');?>">
-    <title>Chatwitter</title>
+    <title>Marketplace</title>
   </head>
 
   <body id="main_page">
