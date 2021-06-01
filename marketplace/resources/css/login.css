@@ -14,7 +14,7 @@ html, body
 #login{
 	position: relative;
 	width: 350px;
-	height: 230px;
+	height: 260px;
 	margin: 150px auto;
 	border: 1px solid #1DA1F2;
 	border-top: 20px solid #1DA1F2;
@@ -34,23 +34,6 @@ html, body
 	background: #15202B;
 }
 
-#btn_login{
-	border-radius: 80px;
-	background: #1DA1F2;
-	color: #FFF;
-	position: relative;
-	border: 0px;
-	padding: 5px;
-	margin: 10px 0 0 0;
-	height: 50px;
-	width: 50px;
-}
-
-#btn_login:hover{
-	background: #1A91DA;
-	cursor: pointer;
-}
-
 #btn_login:active{
 	background: #184D71;
 }
@@ -63,15 +46,17 @@ html, body
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	color: #FFFFFF;
-	/*text-shadow: 2px 2px 2px #000;*/
 	font-weight: bold;
 	text-align: center;
 }
 
 #actions a {
 	font-size: 16px;
-	margin: 5px;
+	/* margin: 5px; */
 	cursor: pointer;
+	position: relative;
+	float: inherit;
+	
 }
 
 #btn_adduser {
@@ -98,11 +83,11 @@ html, body
 	text-decoration: none;
 	display: inline-block;
 	width: auto;
-        heigth:10px;
-	margin-right: 0.625%;
+	heigth:8px;
+	margin-right: 0.620%;
 	text-align: center;
-	line-height: 3;
-	font-size: 10px;
+	line-height: 2.5;
+	font-size: 8px;
 	border-radius: 6px;
 	color: white;
 	font-weight: bold;
@@ -114,13 +99,4 @@ html, body
 	background: rgb(0, 153, 153 );
 }
 
-#btn_adduser:hover {
-	background: rgb(0, 255, 76);
-	color: black;
-        cursor: pointer;
-}
 
-#btn_adduser:active {
-	background: blue;
-	color: white;
-}

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="<?php echo site_url('resources/css/login.css'); ?>">
 </head>
 
 <body>
@@ -41,10 +42,10 @@
 				<?php echo form_open('auth/login');	?>
 				<input type="text" name="txt_username" id="txt_username" placeholder="USUARIO" title="Usuario" class="cajatexto" /><br />
 				<input type="password" name="txt_password" id="txt_password" placeholder="**********" title="Contraseña" class="cajatexto" /><br />
-				<input type="submit" value="OK" name="btn_login" id="btn_login" /><br />
+				<button type="submit" class="btn btn-primary" name="btn_login" id="btn_login">Ingresar</button>
 				<?php echo form_close(); ?>
 				<div id="actions">
-					<a href="<?php echo site_url('user/add'); ?>" id="btn_adduser" name='btn_adduser' title="Registrarse">Registrarse</a>
+					<a href="<?php echo site_url('user/add'); ?>" class="link-primary" id="btn_adduser" name='btn_adduser' title="Registrarse">Registrarse</a>
 				</div>
 			</div>
 		</div>

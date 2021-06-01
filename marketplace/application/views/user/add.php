@@ -39,7 +39,7 @@
 		</div>
 		<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
 		<div class="form-group">
-			<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="d-flex form-control form-control-sm" /*v-model="form.id_proveedor" * />
+			<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm" /*v-model="form.id_proveedor" * />
 			<option value="Comprador">Comprador</option>
 			<option value="Tienda">Tienda</option>
 			</select>
@@ -51,7 +51,7 @@
 		</div>
 		<br>
 		<div class="box-footer">
-			<button type="submit" class="boton">Guardar</button>
+			<button type="submit" class="btn btn-primary">Guardar</button>
 		</div>
 		<?php echo form_close(); ?>
 	</div>
