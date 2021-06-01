@@ -1,12 +1,13 @@
 <?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
 		<div id="user_box">
+		<a href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>" title="Editar Perfil">
 			<?php
 			echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
 				. "' alt='photo_profile'  width=50 id='photo_profile' />"
-				. $this->session->userdata['logged_in']['nombre_real'] . ".</span>";
+				. $this->session->userdata['logged_in']['nombre_real'] . ". ✎</span>";
 			?>
-
+		</a>
 			<div id="logout">
 				<?php echo form_open('auth/logout'); ?>
 				<button type="submit" name="btn_logout" id="btn_logout" class="btn btn-danger" title="Salir">X</button>
@@ -32,7 +33,6 @@
 						</tr>
 					</thead>
 					<tbody id="tbTable">
-						
 						<?php foreach ($productos as $pro) { ?>
 							<?php echo form_open('tienda/mantPro/'.$pro['id_productos']); ?>
 							<tr align="center">
