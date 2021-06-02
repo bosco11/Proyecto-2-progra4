@@ -83,8 +83,8 @@ img {
 	border-radius: 5px;
 	border: 1px solid #1DA1F2;
 	width: 80%;
-	color: #FFF;
-	background: #15202B;
+	color: rgb(0, 0, 0);
+	background: #f8f8f8;
 }
 
 .post_block {
@@ -465,4 +465,13 @@ img {
 	margin-top: 10px;
 	float: left;
 	/* width: 50%; */
+}
+#vencimiento{
+	padding: 5px;
+	margin: 10px;
+	border-radius: 5px;
+	border: 1px solid #1DA1F2;
+	width: 80%;
+	color: rgb(0, 0, 0);
+	background: #ffffff;
 }

@@ -20,6 +20,11 @@ class User extends CI_Controller
         $data['_view'] = 'user/add';
         $this->load->view('layouts/main', $data);
     }
+    function social()
+    {
+        $data['_view'] = 'user/social';
+        $this->load->view('layouts/main', $data);
+    }
 
     function agregarUsuario()
     {

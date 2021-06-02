@@ -1,29 +1,29 @@
 <?php
 if (isset($logout_message)) {
-	echo "<div class='login_msg_box success'>" . $logout_message . "</div>";
+    echo "<div class='login_msg_box success'>" . $logout_message . "</div>";
 }
 
 if (isset($message_display)) {
-	echo "<div class='login_msg_box success' >" . $message_display . "</div>";
+    echo "<div class='login_msg_box success' >" . $message_display . "</div>";
 }
 
 if (isset($error_message)) {
-	echo "<div class='login_msg_box warning'>" . $error_message . "</div>";
+    echo "<div class='login_msg_box warning'>" . $error_message . "</div>";
 }
 
 if (validation_errors() !== "") {
-	echo "<div class='login_msg_box warning'>" . validation_errors() . "</div>";
+    echo "<div class='login_msg_box warning'>" . validation_errors() . "</div>";
 }
 
 ?>
 <div id="panel_app">
-	<div class="box-header">
-		<h2 class="box-title">Agregando Usuario</h2>
-		<?php echo form_open('comprador/compradorHome'); ?>
-		<button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">🗙</button>
-		<?php echo form_close(); ?>
-	</div>
-	<?php echo form_open_multipart('user/agregarUsuario'); ?>
+    <div class="box-header">
+        <h2 class="box-title">Otras configuraciones del usuario</h2>
+        <?php echo form_open('user/add'); ?>
+        <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">←</button>
+        <?php echo form_close(); ?>
+    </div>
+    <!-- <?php echo form_open_multipart('user/agregarUsuario'); ?>
 	<div id="edit_panel">
 		<div id="div1">
 			<label for="txt_usuario" class="control-label"><span class="text-danger">* </span>Usuario:</label>
@@ -63,7 +63,7 @@ if (validation_errors() !== "") {
 			</div>
 			<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
 			<div class="form-group">
-				<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
+				<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm" /*v-model="form.id_proveedor" * />
 				<option value="Comprador">Comprador</option>
 				<option value="Tienda">Tienda</option>
 				</select>
@@ -80,17 +80,43 @@ if (validation_errors() !== "") {
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</div>
+		<?php echo form_close(); ?> -->
 
-		<?php echo form_close(); ?>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<?php echo form_open('user/social'); ?>
-		<br><button type="submit" class="btn btn-primary">Redes sociales,direcciones,metodo pagos</button>
-		<?php echo form_close(); ?>
-		
-	</div>
+
+
+
+    <h2>Formas de pago</h2>
+    <div class="form-row">
+        <div class="column" id="primero">
+            <div class="col-md-4 mb-3">
+                <label for="validationServer013">Nombre del propietario</label>
+                <input type="text" id="propietario" placeholder="Nombre del propietario" class="cajatexto" required>
+
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationServer023">Numero tarjeta</label>
+                <input type="number" id="numero" placeholder="Numero tarjeta" class="cajatexto" required>
+
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationServer023">CVV</label><br>
+                <input type="number" id="numero" placeholder="Codigo de seguridad" class="cajatexto" required>
+
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationServer023">Fecha vencimiento</label>
+                <input type="date" name="vencimiento" id="vencimiento" required>
+
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="validationServer023">Saldo tarjeta</label>
+                <input type="number" id="numero" placeholder="Saldo tarjeta" class="cajatexto" required>
+
+            </div>
+
+            <button class="btn btn-primary" type="submit">Agregar metodo pago</button>
+        </div>
+        <div></div>
+    </div>
 
 </div>
