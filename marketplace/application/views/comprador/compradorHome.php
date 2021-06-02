@@ -21,7 +21,7 @@
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>">MarketPlace</a>
+			<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>"></h5>MarketPlace</h5></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -42,14 +42,14 @@
 						<option value="2">Hogar</option>
 						<option value="3">Herramienta</option>
 					</select>
-					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-secondary me-2" type="submit">Buscar</button>
+					<input class="form-control form-sm me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
 				</form>
 				<?php echo form_open('auth/logout'); ?>
-				<button class="btn btn-outline-primary btn-sm me-2" type="submit">Ingresar</button>
+				<button class="btn btn-outline-primary  me-2" type="submit">Ingresar</button>
 				<?php echo form_close(); ?>
 				<?php echo form_open('user/add'); ?>
-				<button class="btn btn-outline-success btn-sm me-2" type="submit">Registrarme</button>
+				<button class="btn btn-outline-success  me-2" type="submit">Registrarme</button>
 				<?php echo form_close(); ?>
 			</div>
 		</div>
