@@ -44,7 +44,7 @@
 								<td><?php echo $pro['categorias'] ?></td>
 								<td><?php echo $pro['tiempo_promedio'] ?></td>
 								<td><?php echo $pro['ubicacion_fisica'] ?></td>
-								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
+								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
 							</tr>
 							<?php echo form_close(); ?>
 						<?php } ?>
