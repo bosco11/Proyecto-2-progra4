@@ -15,9 +15,13 @@ class User extends CI_Controller
         $data['message_display'] = 'Te has registrado exitosamente.';
         $this->load->view('layouts/main', $data);
     }
-
-
     function add()
+    {
+        $data['_view'] = 'user/add';
+        $this->load->view('layouts/main', $data);
+    }
+
+    function agregarUsuario()
     {
         $this->load->library('form_validation');
 

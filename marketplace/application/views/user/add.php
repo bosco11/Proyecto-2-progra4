@@ -23,7 +23,7 @@ if (validation_errors() !== "") {
 		<button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">🗙</button>
 		<?php echo form_close(); ?>
 	</div>
-	<?php echo form_open_multipart('user/add'); ?>
+	<?php echo form_open_multipart('user/agregarUsuario'); ?>
 	<div id="edit_panel">
 		<div id="div1">
 			<label for="txt_usuario" class="control-label"><span class="text-danger">* </span>Usuario:</label>
