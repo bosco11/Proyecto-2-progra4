@@ -19,8 +19,8 @@ if (validation_errors() !== "") {
 <div id="panel_app">
 	<div class="box-header">
 		<h2 class="box-title">Agregando Usuario</h2>
-		<?php echo form_open('auth/login'); ?>
-		<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
+		<?php echo form_open('comprador/compradorHome'); ?>
+		<button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">🗙</button>
 		<?php echo form_close(); ?>
 	</div>
 	<?php echo form_open_multipart('user/add'); ?>
