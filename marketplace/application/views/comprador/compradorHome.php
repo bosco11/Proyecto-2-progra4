@@ -83,7 +83,7 @@
 														$cont = $cont + 1;
 													?>
 														<div class="carousel-item <?php echo $band ?>">
-															<img src='<?php echo site_url('/resources/photos/' . $g['imagen_producto']) ?>' class="d-block w-100" alt="...">
+															<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" alt="...">
 														</div>
 													<?php } ?>
 												<?php } ?>
