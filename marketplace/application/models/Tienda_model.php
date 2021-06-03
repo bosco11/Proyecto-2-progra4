@@ -33,5 +33,17 @@ Class Tienda_model extends CI_Model {
     public function get_elimnar_producto($id){
         $this->db->delete('tbl_productos', array('id_productos' => $id));
     }
+	public function get_categorias(){
+        return $this->db->get('tbl_categorias')->result_array();
+    }
+	public function addProducto($params){
+		$this->db->insert('tbl_productos',$params);
+        return $this->db->insert_id();
+	}
+	public function editProducto($params,$id){
+		$this->db->where('id_productos', $id);
+        $this->db->update('tbl_productos', $params);
+	}
+
 
 }
