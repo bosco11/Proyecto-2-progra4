@@ -48,8 +48,7 @@
 					<input type="text" name="txt_cedula" value="<?php echo ($this->input->post('txt_cedula') ? $this->input->post('txt_cedula') : $user['cedula']); ?>" class="cajatexto" id="txt_cedula" />
 					<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
 				</div>
-				<!-- <label for="file" class="control-label"><span class="text-danger">* </span>Elegir una imagen de perfil:</label><br>
-				<input type="file" name="txt_file" size="20" class="btn btn-info" accept="image/jpeg,image/gif,image/png" /> -->
+	
 			</div>
 
 			<div id="div2">
@@ -84,7 +83,7 @@
 
 			<br><br><br><br>
 			<div class="box-footer">
-				<button type="submit" class="boton">Guardar</button>
+				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 			<div id="actions">
 				<a href="<?php echo site_url('user/delete/' . $user['id_usuarios']); ?>" id="btn_eliminar" name="btn_eliminar" title="Eliminar" onclick="send()">🗙 Eliminar mi cuenta</a>
