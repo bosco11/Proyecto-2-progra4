@@ -87,9 +87,9 @@ if (validation_errors() !== "") {
 		<br>
 		<br>
 		<br>
-		<?php echo form_open('user/social'); ?>
+		<!-- <?php echo form_open('user/social'); ?>
 		<br><button type="submit" class="btn btn-primary">Redes sociales,direcciones,metodo pagos</button>
-		<?php echo form_close(); ?>
+		<?php echo form_close(); ?> -->
 		
 	</div>
 

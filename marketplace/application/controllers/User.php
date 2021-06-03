@@ -22,7 +22,15 @@ class User extends CI_Controller
     }
     function social()
     {
-        $data['_view'] = 'user/social';
+        $this->load_data_view('user/social');
+    }
+    function load_data_view($view)
+    {
+        $this->load->model('Tienda_model');
+        $data['direcciones'] = $this->User_model->get_directions("1");
+        $data['pagos'] = $this->User_model->get_forms_pay("1");
+        $data['social'] = $this->User_model->get_red_social("1");
+        $data['_view'] = $view;
         $this->load->view('layouts/main', $data);
     }
 

@@ -23,100 +23,196 @@ if (validation_errors() !== "") {
         <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">←</button>
         <?php echo form_close(); ?>
     </div>
-    <!-- <?php echo form_open_multipart('user/agregarUsuario'); ?>
-	<div id="edit_panel">
-		<div id="div1">
-			<label for="txt_usuario" class="control-label"><span class="text-danger">* </span>Usuario:</label>
-			<div class="form-group">
-				<input type="text" name="txt_usuario" value="<?php echo $this->input->post('txt_usuario'); ?>" class="cajatexto" id="txt_usuario" />
-				<span class="text-danger"><?php echo form_error('txt_usuario'); ?></span>
-			</div>
-			<label for="txt_clave" class="control-label"><span class="text-danger">* </span>Contraseña:</label>
-			<div class="form-group">
-				<input type="password" name="txt_clave" value="<?php echo $this->input->post('txt_clave'); ?>" class="cajatexto" id="txt_clave" />
-				<span class="text-danger"><?php echo form_error('txt_clave'); ?></span>
-			</div>
-			<label for="txt_nombre" class="control-label"><span class="text-danger">* </span>Nombre Real:</label>
-			<div class="form-group">
-				<input type="text" name="txt_nombre" value="<?php echo $this->input->post('txt_nombre'); ?>" class="cajatexto" id="txt_nombre" />
-				<span class="text-danger"><?php echo form_error('txt_nombre'); ?></span>
-			</div>
-			<label for="txt_cedula" class="control-label"><span class="text-danger">* </span>Cedula:</label>
-			<div class="form-group">
-				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" />
-				<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
-			</div>
-			<label for="file" class="control-label"><span class="text-danger">* </span>Elegir una imagen de perfil:</label><br>
-			<input type="file" name="txt_file" size="20" class="btn btn-info" accept="image/jpeg,image/gif,image/png" />
-		</div>
+    <br>
+    <br>
 
-		<div id="div2">
-			<label for="txt_telefono" class="control-label"><span class="text-danger">* </span>Telefono:</label>
-			<div class="form-group">
-				<input type="number" name="txt_telefono" value="<?php echo $this->input->post('txt_telefono'); ?>" class="cajatexto" id="txt_telefono" />
-				<span class="text-danger"><?php echo form_error('txt_telefono'); ?></span>
-			</div>
-			<label for="txt_correo" class="control-label"><span class="text-danger">* </span>Correo:</label>
-			<div class="form-group">
-				<input type="email" name="txt_correo" value="<?php echo $this->input->post('txt_correo'); ?>" class="cajatexto" id="txt_correo" />
-				<span class="text-danger"><?php echo form_error('txt_correo'); ?></span>
-			</div>
-			<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
-			<div class="form-group">
-				<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm" /*v-model="form.id_proveedor" * />
-				<option value="Comprador">Comprador</option>
-				<option value="Tienda">Tienda</option>
-				</select>
-			</div>
-			<label for="txt_pais" class="control-label"><span class="text-danger">* </span>Pais:</label>
-			<div class="form-group">
-				<input type="text" name="txt_pais" value="<?php echo $this->input->post('txt_pais'); ?>" class="cajatexto" id="txt_pais" />
-				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
-			</div>
-		</div>
-
-		<div id="div3">
-			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Guardar</button>
-			</div>
-		</div>
-		<?php echo form_close(); ?> -->
-
-
-
-
-    <h2>Formas de pago</h2>
     <div class="form-row">
-        <div class="column" id="primero">
-            <div class="col-md-4 mb-3">
-                <label for="validationServer013">Nombre del propietario</label>
-                <input type="text" id="propietario" placeholder="Nombre del propietario" class="cajatexto" required>
+        <div id="pago">
+            <h2 id="user">Formas de pago</h2>
+            <?php echo form_open('user/agregarUsuario'); ?>
+            <div class="column" id="primero">
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer013">Nombre del propietario</label>
+                    <input type="text" id="propietario" placeholder="Nombre del propietario" class="cajatexto2" required>
 
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Numero tarjeta</label>
+                    <input type="number" id="numero" placeholder="Numero tarjeta" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">CVV</label><br>
+                    <input type="number" id="numero" placeholder="Codigo de seguridad" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Fecha vencimiento</label>
+                    <input type="date" name="vencimiento" id="vencimiento" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Saldo tarjeta</label>
+                    <input type="number" id="numero" placeholder="Saldo tarjeta" class="cajatexto2" required>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">Agregar metodo pago</button>
             </div>
-            <div class="col-md-4 mb-3">
-                <label for="validationServer023">Numero tarjeta</label>
-                <input type="number" id="numero" placeholder="Numero tarjeta" class="cajatexto" required>
+            <?php echo form_close(); ?>
+            <div class="column" id="segundo">
+                <div id="tableview1">
+                    <table class="table table-striped table-dark" id="table">
+                        <thead>
+                            <tr align="center">
+                                <td>Propietario </td>
+                                <td>Numero tarjeta</td>
+                                <td>Fecha vencimiento</td>
+                                <td>Saldo</td>
+                                <td>Acciones</td>
 
+                            </tr>
+                        </thead>
+                        <tbody id="tbTable">
+                            <?php 
+                            foreach ($pagos as $pa) { ?>
+							<!-- <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?> -->
+							<tr align="center">
+								<td><?php echo $pa['nombre_dueño'] ?></td>
+								<td><?php echo $pa['numero_tarjeta'] ?></td>
+								<td><?php echo $pa['fecha_vencimiento'] ?></td>
+								<td><?php echo $pa['saldo'] ?></td>							
+								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
+							</tr>
+							<!-- <?php echo form_close(); ?> -->
+						<?php } ?>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <label for="validationServer023">CVV</label><br>
-                <input type="number" id="numero" placeholder="Codigo de seguridad" class="cajatexto" required>
-
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="validationServer023">Fecha vencimiento</label>
-                <input type="date" name="vencimiento" id="vencimiento" required>
-
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="validationServer023">Saldo tarjeta</label>
-                <input type="number" id="numero" placeholder="Saldo tarjeta" class="cajatexto" required>
-
-            </div>
-
-            <button class="btn btn-primary" type="submit">Agregar metodo pago</button>
         </div>
-        <div></div>
     </div>
 
+    <br>
+    <div id="direcciones">
+        <h2 id="user">Direcciones de envio</h2>
+        <div class="form-row">
+            <?php echo form_open('user/agregarUsuario'); ?>
+            <div class="column" id="primero">
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer013">Pais</label>
+                    <input type="text" name="pais" id="pais" placeholder="Pais" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Provincia</label>
+                    <input type="number" name="provincia" id="provincia" placeholder="Provincia" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Numero Casillero</label><br>
+                    <input type="text" name="casillero" id="casillero" placeholder="Numero de casillero" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Codigo postal</label>
+                    <input type="number" name="postal" id="postal" placeholder="Codigo postal" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">Observaciones</label>
+                    <input type="number" name="observaciones" id="observaciones" placeholder="observaciones" class="cajatexto2" required>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">Agregar dirección</button>
+            </div>
+            <?php echo form_close(); ?>
+            <div class="column" id="segundo">
+                <div id="tableview2">
+                    <table class="table table-striped table-dark" id="table">
+                        <thead>
+                            <tr align="center">
+                                <td>Pais </td>
+                                <td>Provincia</td>
+                                <td>Casillero</td>
+                                <td>Codigo Postal</td>
+                                <td>Observaciones</td>
+                                <td>Acciones</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbTable">
+                            <?php foreach ($direcciones as $pro) { ?>
+							<!-- <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?> -->
+							<tr align="center">
+                            <td><?php echo $pro['pais_direccion'] ?></td>
+								<td><?php echo $pro['provincia'] ?></td>
+								<td><?php echo $pro['numero_casillero'] ?></td>
+								<td><?php echo $pro['codigo_postal'] ?></td>
+								<td><?php echo $pro['observaciones'] ?></td>	
+								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
+							</tr>
+							<!-- <?php echo form_close(); ?> -->
+						<?php } ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <br>
+    <div id="Redes">
+        <h2 id="user">Redes sociales</h2>
+        <div class="form-row">
+            <?php echo form_open('user/agregarUsuario'); ?>
+            <div class="column" id="primero">
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer013">Nombre red social</label>
+                    <input type="text" name="red" id="red" placeholder="Red social" class="cajatexto2" required>
+
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationServer023">PNombre del usuario</label>
+                    <input type="number" name="usuario" id="usuario" placeholder="Nombre del usuario" class="cajatexto2" required>
+
+                </div>
+
+                <button class="btn btn-primary" type="submit">Agregar red social</button>
+            </div>
+            <?php echo form_close(); ?>
+            <div class="column" id="segundo">
+                <div id="tableview3">
+                    <table class="table table-striped table-dark" id="table">
+                        <thead>
+                            <tr align="center">
+                                <td>Red </td>
+                                <td>Nombre usuario</td>
+                                <td>Acciones</td>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbTable">
+                            <?php foreach ($social as $pro) { ?>
+							<!-- <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?> -->
+							<tr align="center">
+								<td><?php echo $pro['red_social'] ?></td>
+								<td><?php echo $pro['nombre_usuario'] ?></td>
+								
+								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
+							</tr>
+							<!-- <?php echo form_close(); ?> -->
+						<?php } ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
