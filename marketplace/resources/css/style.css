@@ -57,7 +57,7 @@ img {
 	position: relative;
 	width: auto;
 	margin: auto;
-	height: 90%;
+	height: 130%;
 	overflow: auto;
 	border: 1px solid #253341;
 	padding: 20px;
@@ -227,12 +227,25 @@ img {
 
 #btn_eliminar {
 	color: #DC4E41;
+	float: left;
+	padding-top: 20px;
+	padding-bottom: 4px;
+}
+#bt_social {
+	float: left;
+	/* padding-top: 100px; */
+	/* left: 501px; */
+}
+#bt_social2 {
+	/* float: left; */
+	padding-bottom: 100px;
+	/* left: 501px; */
 }
 
 .form-group-photo {
 	position: absolute;
-	top: 20px;
-	left: 400px;
+	top: 280px;
+	left: 550px;
 	color: #FFF;
 }
 

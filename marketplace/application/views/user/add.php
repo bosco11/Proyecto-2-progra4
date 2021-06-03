@@ -82,14 +82,12 @@ if (validation_errors() !== "") {
 		</div>
 
 		<?php echo form_close(); ?>
+		<!-- <br>
 		<br>
 		<br>
 		<br>
 		<br>
-		<br>
-		<!-- <?php echo form_open('user/social'); ?>
-		<br><button type="submit" class="btn btn-primary">Redes sociales,direcciones,metodo pagos</button>
-		<?php echo form_close(); ?> -->
+		 -->
 		
 	</div>
 

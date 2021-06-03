@@ -19,7 +19,7 @@ if (validation_errors() !== "") {
 <div id="panel_app">
     <div class="box-header">
         <h2 class="box-title">Otras configuraciones del usuario</h2>
-        <?php echo form_open('user/add'); ?>
+        <?php echo form_open('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>
         <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">←</button>
         <?php echo form_close(); ?>
     </div>
@@ -78,7 +78,7 @@ if (validation_errors() !== "") {
                             foreach ($pagos as $pa) { ?>
 							<!-- <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?> -->
 							<tr align="center">
-								<td><?php echo $pa['nombre_dueño'] ?></td>
+								<td><?php echo $pa['nombre_dueno'] ?></td>
 								<td><?php echo $pa['numero_tarjeta'] ?></td>
 								<td><?php echo $pa['fecha_vencimiento'] ?></td>
 								<td><?php echo $pa['saldo'] ?></td>							

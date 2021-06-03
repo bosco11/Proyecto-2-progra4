@@ -8,7 +8,7 @@ class User_model extends CI_Model
 
     function get_user($users_id)
     {
-        return $this->db->query("SELECT tbl_usuarios* FROM tbl_usuarios WHERE tbl_usuarios.id_usuarios = " . $users_id)->row_array();
+        return $this->db->query("SELECT tbl_usuarios.* FROM tbl_usuarios WHERE tbl_usuarios.id_usuarios = " . $users_id)->row_array();
     }
 
     function add_user($params)
