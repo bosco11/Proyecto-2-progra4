@@ -133,7 +133,7 @@ class Tienda extends CI_Controller
 		$this->load->library('upload', $config);
 		if ($this->upload->do_upload('txt_file')) {
 			$params = array(
-				'tbl_productos_id_productos' => $id,
+				'id_productos' => $id,
 				'imagen_producto' =>  $this->upload->data('file_name')
 			);
 			$this->Tienda_model->addFotoProducto($params);

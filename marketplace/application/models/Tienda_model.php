@@ -50,7 +50,7 @@ Class Tienda_model extends CI_Model {
         return $this->db->insert_id();
 	}
 	public function getFotosProducto($id){
-		$this->db->where('tbl_productos_id_productos', $id);
+		$this->db->where('id_productos', $id);
 		return $this->db->get('tbl_galeria')->result_array();
 	}
 	public function deleteFoto($id){
