@@ -2,6 +2,9 @@
 	<div id="panel_app">
 		<div class="box-header">
 			<h2 class="box-title">Mantenimiento Producto</h2>
+			<?php echo form_open('tienda/mantGaleriaProductos/'. $producto['id_productos']); ?>
+			<button type="submit" name="btn_galeria" id="btn_galeria" class="btn btn-secondary" title="AddProducto">Galeria de Producto</button>
+			<?php echo form_close(); ?>
 			<?php echo form_open('auth/login'); ?>
 			<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
 			<?php echo form_close(); ?>
@@ -33,12 +36,12 @@
 			<div id="div2">
 				<label for="cmb_categoria" class="control-label"><span class="text-danger">* </span>Categoria:</label>
 				<div class="form-group">
-					<select name="cmb_categoria" id="cmb_categoria" variant="primary"  class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
+					<select name="cmb_categoria" id="cmb_categoria" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
 						<?php foreach ($categorias as $cate) {
 							$selected = " ";
 							if ($cate['id_categorias'] == $producto['id_categorias']) {
 								$selected = " selected='selected' ";
-							}?>
+							} ?>
 							<option <?php echo $selected ?> value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
 						<?php } ?>
 					</select>

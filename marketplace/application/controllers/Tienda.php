@@ -60,7 +60,7 @@ class Tienda extends CI_Controller
 					'precio' => $this->input->post('txt_precio'),
 					'ubicacion_fisica' => $this->input->post('txt_ubicacion')
 				);
-				$this->Tienda_model->editProducto($params,$id);
+				$this->Tienda_model->editProducto($params, $id);
 
 				$data['message_display'] = 'Se ha guardado el producto exitosamente.';
 				$this->index();
@@ -112,5 +112,36 @@ class Tienda extends CI_Controller
 			$data['_view'] = 'tienda/addProducto';
 			$this->load->view('layouts/main', $data);
 		}
+	}
+	function mantGaleriaProductos($id)
+	{
+
+		$producto = $this->Tienda_model->get_productos_id($id);
+		$fotos = $this->Tienda_model->getFotosProducto($id);
+		$data['producto'] = $producto[0];
+		$data['fotos'] = $fotos;
+		$data['_view'] = 'tienda/addGaleriaProductos';
+		$this->load->view('layouts/main', $data);
+	}
+	function addFotoProducto($id)
+	{
+		$config['upload_path']          = './resources/files/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 2000; //2MB
+		$config['overwrite']            = true;
+
+		$this->load->library('upload', $config);
+		if ($this->upload->do_upload('txt_file')) {
+			$params = array(
+				'tbl_productos_id_productos' => $id,
+				'imagen_producto' =>  $this->upload->data('file_name')
+			);
+			$this->Tienda_model->addFotoProducto($params);
+		}
+		$this->mantGaleriaProductos($id);
+	}
+	function deleteFoto($idproducto,$idfoto){
+		$this->Tienda_model->deleteFoto($idfoto);
+		$this->mantGaleriaProductos($idproducto);
 	}
 }

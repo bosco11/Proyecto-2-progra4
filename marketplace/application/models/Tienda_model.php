@@ -44,6 +44,17 @@ Class Tienda_model extends CI_Model {
 		$this->db->where('id_productos', $id);
         $this->db->update('tbl_productos', $params);
 	}
-
+	public function addFotoProducto($params){
+		
+		$this->db->insert('tbl_galeria',$params);
+        return $this->db->insert_id();
+	}
+	public function getFotosProducto($id){
+		$this->db->where('tbl_productos_id_productos', $id);
+		return $this->db->get('tbl_galeria')->result_array();
+	}
+	public function deleteFoto($id){
+		$this->db->delete('tbl_galeria', array('id_galeria' => $id));
+	}
 
 }
