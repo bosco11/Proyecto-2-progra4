@@ -1,13 +1,16 @@
 <?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
 		<div id="user_box">
-		<a href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>" title="Editar Perfil">
-			<?php
-			echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
-				. "' alt='photo_profile'  width=50 id='photo_profile' />"
-				. $this->session->userdata['logged_in']['nombre_real'] . ". ✎</span>";
-			?>
-		</a>
+			<a href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>" title="Editar Perfil">
+				<?php
+				echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
+					. "' alt='photo_profile'  width=50 id='photo_profile' />"
+					. $this->session->userdata['logged_in']['nombre_real'] . ". ✎</span>";
+				?>
+			</a>
+			<?php echo form_open('tienda/addProducto/1'); ?>
+			<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary" title="AddProducto">Agregar Producto</button>
+			<?php echo form_close(); ?>
 			<div id="logout">
 				<?php echo form_open('auth/logout'); ?>
 				<button type="submit" name="btn_logout" id="btn_logout" class="btn btn-danger" title="Salir">X</button>
@@ -34,7 +37,7 @@
 					</thead>
 					<tbody id="tbTable">
 						<?php foreach ($productos as $pro) { ?>
-							<?php echo form_open('tienda/mantPro/'.$pro['id_productos']); ?>
+							<?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?>
 							<tr align="center">
 								<td><?php echo $pro['descripcion'] ?></td>
 								<td><?php echo $pro['cantidad'] ?></td>
@@ -44,11 +47,11 @@
 								<td><?php echo $pro['categorias'] ?></td>
 								<td><?php echo $pro['tiempo_promedio'] ?></td>
 								<td><?php echo $pro['ubicacion_fisica'] ?></td>
-								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
+								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button> </td>
 							</tr>
 							<?php echo form_close(); ?>
 						<?php } ?>
-						
+
 					</tbody>
 				</table>
 
