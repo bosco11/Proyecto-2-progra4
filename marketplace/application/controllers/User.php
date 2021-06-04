@@ -282,4 +282,171 @@ class User extends CI_Controller
             // }
         }
     }
+
+    function agregarDireccion()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('txt_pais', 'Pais', 'required|max_length[200]');
+        $this->form_validation->set_rules('txt_provincia', 'Provincia', 'required|max_length[200]');
+        $this->form_validation->set_rules('txt_casillero', 'Casillero', 'required|max_length[200]');
+        $this->form_validation->set_rules('txt_postal', 'Postal', 'required|max_length[100]');
+        $this->form_validation->set_rules('txt_observaciones', 'Observaciones', 'required|max_length[300]');
+
+
+        if ($this->form_validation->run()) {
+
+            $params = array(
+                'pais_direccion' => $this->input->post('txt_pais'),
+                'provincia' => $this->input->post('txt_provincia'),
+                'numero_casillero' => $this->input->post('txt_casillero'),
+                'codigo_postal' => $this->input->post('txt_postal'),
+                'observaciones' => $this->input->post('txt_observaciones'),
+                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+
+            );
+
+
+            $user_id = $this->User_model->add_direction($params);
+
+            $data['message_display'] = 'Ha registrado la dirección correctamente.';
+            $this->load_data_view2('user/social', $data['message_display']);
+        } else {
+            $data['_view'] = 'user/social';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+    function delete_direccion($dir_id)
+    {
+        $data['dir'] = $this->User_model->get_direction($dir_id);
+        $this->User_model->delete_direction($dir_id);
+        $data['message_display'] = 'Se ha eliminado la dirección!';
+        $this->load_data_view2('user/social', $data['message_display']);
+    }
+
+    function mantDir($id)
+    {
+
+
+        if (isset($_POST['btn_elim'])) {
+            $this->delete_direccion($id);
+        } else {
+            // $this->load->library('form_validation');
+
+            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
+            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
+            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
+
+            // if ($this->form_validation->run()) {
+            // 	$params = array(
+            // 		'descripcion' => $this->input->post('txt_descripcion'),
+            // 		'cantidad' => $this->input->post('txt_cantidad'),
+            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
+            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
+            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
+            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
+            // 		'precio' => $this->input->post('txt_precio'),
+            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
+            // 	);
+            // 	$this->Tienda_model->editProducto($params, $id);
+
+            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
+            // 	$this->index();
+            // } else {
+            // 	$producto = $this->Tienda_model->get_productos_id($id);
+            // 	if ($producto != FALSE) {
+            // 		$categoria = $this->Tienda_model->get_categorias();
+            // 		$data['categorias'] = $categoria;
+            // 		$data['producto'] = $producto[0];
+            // 		$data['_view'] = 'tienda/editProducto';
+            // 		$this->load->view('layouts/main', $data);
+            // 	} else {
+            // 		$this->index();
+            // 	}
+            // }
+        }
+    }
+
+    function agregarRed()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('txt_red', 'Red', 'required|max_length[64]');
+        $this->form_validation->set_rules('txt_usuario', 'Usuario', 'required|max_length[150]');
+
+        if ($this->form_validation->run()) {
+
+            $params = array(
+                'red_social' => $this->input->post('txt_ptxt_red'),
+                'nombre_usuario' => $this->input->post('txt_usuario'),
+                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+            );
+
+            $user_id = $this->User_model->add_red($params);
+
+            $data['message_display'] = 'Ha registrado la red social correctamente.';
+            $this->load_data_view2('user/social', $data['message_display']);
+        } else {
+            $data['_view'] = 'user/social';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+    function delete_red($red_id)
+    {
+        $data['dir'] = $this->User_model->get_red($red_id);
+        $this->User_model->delete_red($red_id);
+        $data['message_display'] = 'Se ha eliminado la red social!';
+        $this->load_data_view2('user/social', $data['message_display']);
+    }
+
+    function mantRed($id)
+    {
+
+
+        if (isset($_POST['btn_elim'])) {
+            $this->delete_red($id);
+        } else {
+            // $this->load->library('form_validation');
+
+            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
+            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
+            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
+
+            // if ($this->form_validation->run()) {
+            // 	$params = array(
+            // 		'descripcion' => $this->input->post('txt_descripcion'),
+            // 		'cantidad' => $this->input->post('txt_cantidad'),
+            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
+            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
+            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
+            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
+            // 		'precio' => $this->input->post('txt_precio'),
+            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
+            // 	);
+            // 	$this->Tienda_model->editProducto($params, $id);
+
+            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
+            // 	$this->index();
+            // } else {
+            // 	$producto = $this->Tienda_model->get_productos_id($id);
+            // 	if ($producto != FALSE) {
+            // 		$categoria = $this->Tienda_model->get_categorias();
+            // 		$data['categorias'] = $categoria;
+            // 		$data['producto'] = $producto[0];
+            // 		$data['_view'] = 'tienda/editProducto';
+            // 		$this->load->view('layouts/main', $data);
+            // 	} else {
+            // 		$this->index();
+            // 	}
+            // }
+        }
+    }
 }

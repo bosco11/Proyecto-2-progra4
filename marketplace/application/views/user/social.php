@@ -99,7 +99,7 @@ if (validation_errors() !== "") {
     <div id="direcciones">
         <h2 id="user">Direcciones de envio</h2>
         <div class="form-row">
-            <?php echo form_open('user/agregarUsuario'); ?>
+            <?php echo form_open('user/agregarDireccion'); ?>
             <div class="column" id="primero">
                 <div class="col-md-4 mb-3">
                     <label for="validationServer013">Pais</label>
@@ -113,17 +113,17 @@ if (validation_errors() !== "") {
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Numero Casillero</label><br>
-                    <input type="text" name="casillero" id="casillero" placeholder="Numero de casillero" class="cajatexto2" required>
+                    <input type="text" name="txt_casillero" id="txt_casillero" placeholder="Numero de casillero" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Codigo postal</label>
-                    <input type="number" name="postal" id="postal" placeholder="Codigo postal" class="cajatexto2" required>
+                    <input type="number" name="txt_postal" id="txt_postal" placeholder="Codigo postal" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Observaciones</label>
-                    <input type="number" name="observaciones" id="observaciones" placeholder="observaciones" class="cajatexto2" required>
+                    <input type="number" name="txt_observaciones" id="txt_observaciones" placeholder="observaciones" class="cajatexto2" required>
 
                 </div>
 
@@ -170,16 +170,16 @@ if (validation_errors() !== "") {
     <div id="Redes">
         <h2 id="user">Redes sociales</h2>
         <div class="form-row">
-            <?php echo form_open('user/agregarUsuario'); ?>
+            <?php echo form_open('user/agregarRed'); ?>
             <div class="column" id="primero">
                 <div class="col-md-4 mb-3">
                     <label for="validationServer013">Nombre red social</label>
-                    <input type="text" name="red" id="red" placeholder="Red social" class="cajatexto2" required>
+                    <input type="text" name="txt_red" id="txt_red" placeholder="Red social" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="validationServer023">PNombre del usuario</label>
-                    <input type="number" name="usuario" id="usuario" placeholder="Nombre del usuario" class="cajatexto2" required>
+                    <label for="validationServer023">Nombre del usuario</label>
+                    <input type="number" name="txt_usuario" id="txt_usuario" placeholder="Nombre del usuario" class="cajatexto2" required>
 
                 </div>
 

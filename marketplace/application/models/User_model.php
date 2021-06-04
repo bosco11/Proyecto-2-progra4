@@ -27,16 +27,54 @@ class User_model extends CI_Model
     {
         return $this->db->delete('tbl_usuarios', array('id_usuarios' => $users_id));
     }
+    
+
+    function get_red_social($users_id)
+    {
+        return $this->db->query("SELECT tbl_redes_sociales.* FROM tbl_redes_sociales WHERE tbl_redes_sociales.id_usuarios = " . $users_id)->result_array();
+    }
+    function get_red($red_id)
+    {
+        return $this->db->query("SELECT tbl_redes_sociales.* FROM tbl_redes_sociales WHERE tbl_redes_sociales.id_redes_sociales = " . $red_id)->row_array();
+    }
+    function add_red($params)
+    {
+        $this->db->insert('tbl_redes_sociales', $params);
+        return $this->db->insert_id();
+    }
+    function delete_red($red_id)
+    {
+        return $this->db->delete('tbl_redes_sociales', array('id_redes_sociales' => $red_id));
+    }
+    function update_red($red_id, $params)
+    {
+        $this->db->where('id_redes_sociales', $red_id);
+        return $this->db->update('tbl_redes_sociales', $params);
+    }
+
 
 
     function get_directions($users_id)
     {
         return $this->db->query("SELECT tbl_direcciones.* FROM tbl_direcciones WHERE tbl_direcciones.id_usuarios = " . $users_id)->result_array();
     }
-    
-    function get_red_social($users_id)
+    function get_direction($dir_id)
     {
-        return $this->db->query("SELECT tbl_redes_sociales.* FROM tbl_redes_sociales WHERE tbl_redes_sociales.id_usuarios = " . $users_id)->result_array();
+        return $this->db->query("SELECT tbl_direcciones.* FROM tbl_direcciones WHERE tbl_direcciones.id_direcciones = " . $dir_id)->row_array();
+    }
+    function add_direction($params)
+    {
+        $this->db->insert('tbl_direcciones', $params);
+        return $this->db->insert_id();
+    }
+    function delete_direction($dir_id)
+    {
+        return $this->db->delete('tbl_direcciones', array('id_direcciones' => $dir_id));
+    }
+    function update_direction($dir_id, $params)
+    {
+        $this->db->where('id_direcciones', $dir_id);
+        return $this->db->update('tbl_direcciones', $params);
     }
 
 
