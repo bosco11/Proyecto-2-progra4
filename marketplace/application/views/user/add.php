@@ -1,19 +1,33 @@
 <?php
 if (isset($logout_message)) {
-	echo "<div class='login_msg_box success'>" . $logout_message . "</div>";
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+		. $logout_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if (isset($message_display)) {
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+		. $message_display .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
 
-if (isset($message_display)) {
-	echo "<div class='login_msg_box success' >" . $message_display . "</div>";
-}
 
 if (isset($error_message)) {
-	echo "<div class='login_msg_box warning'>" . $error_message . "</div>";
+
+	echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+		. $error_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
 
 if (validation_errors() !== "") {
-	echo "<div class='login_msg_box warning'>" . validation_errors() . "</div>";
+
+	echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+		. validation_errors() .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
+
+?>
 
 ?>
 <div id="panel_app">
@@ -64,8 +78,8 @@ if (validation_errors() !== "") {
 			<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
 			<div class="form-group">
 				<select name="cmb_tipo" id="cmb_tipo" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
-				<option value="Comprador">Comprador</option>
-				<option value="Tienda">Tienda</option>
+					<option value="Comprador">Comprador</option>
+					<option value="Tienda">Tienda</option>
 				</select>
 			</div>
 			<label for="txt_pais" class="control-label"><span class="text-danger">* </span>Pais:</label>
@@ -93,7 +107,7 @@ if (validation_errors() !== "") {
 		<br>
 		<br>
 		 -->
-		
+
 	</div>
 
 </div>

@@ -22,20 +22,35 @@
 
 	<?php
 	if (isset($logout_message)) {
-		echo "<div class='login_msg_box success'>" . $logout_message . "</div>";
+
+		echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+			. $logout_message .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 
 	if (isset($message_display)) {
-		echo "<div class='login_msg_box success' >" . $message_display . "</div>";
+		
+		echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+			. $message_display .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 
+
 	if (isset($error_message)) {
-		echo "<div class='login_msg_box warning'>" . $error_message . "</div>";
+
+		echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+			. $error_message .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 
 	if (validation_errors() !== "") {
-		echo "<div class='login_msg_box warning'>" . validation_errors() . "</div>";
+
+		echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+			. validation_errors() .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
+
+	?>
 
 	?>
 
@@ -72,8 +87,8 @@
 					<button type="submit" class="btn btn-primary" name="btn_login" id="btn_login">Ingresar</button>
 					<?php echo form_close(); ?>
 					<div id="actions">
-					<a href="<?php echo site_url('comprador/compradorHome'); ?>" id="btn_adduser" name='btn_adduser' title="Registrarse">Volver al inicio</a>
-				</div>
+						<a href="<?php echo site_url('comprador/compradorHome'); ?>" id="btn_adduser" name='btn_adduser' title="Registrarse">Volver al inicio</a>
+					</div>
 				</div>
 
 

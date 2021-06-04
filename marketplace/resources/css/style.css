@@ -244,9 +244,11 @@ img {
 
 .form-group-photo {
 	position: absolute;
-	top: 66%;
+	top: 76%;
 	left: 50%;
 	color: #FFF;
+	padding-bottom: 100px;
+
 }
 
 .form-group-photo img {

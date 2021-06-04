@@ -30,6 +30,10 @@ class User extends CI_Controller
         $data['direcciones'] = $this->User_model->get_directions($this->session->userdata['logged_in']['users_id']);
         $data['pagos'] = $this->User_model->get_forms_pay($this->session->userdata['logged_in']['users_id']);
         $data['social'] = $this->User_model->get_red_social($this->session->userdata['logged_in']['users_id']);
+        $data['pagos2'] = null;
+        $data['direcciones2'] = null;
+        $data['social2'] = null;
+        $data['message_display'] = null;
         $data['_view'] = $view;
         $this->load->view('layouts/main', $data);
     }
@@ -39,8 +43,11 @@ class User extends CI_Controller
         $data['direcciones'] = $this->User_model->get_directions($this->session->userdata['logged_in']['users_id']);
         $data['pagos'] = $this->User_model->get_forms_pay($this->session->userdata['logged_in']['users_id']);
         $data['social'] = $this->User_model->get_red_social($this->session->userdata['logged_in']['users_id']);
+        $data['pagos2'] = $mess['pagos2'];
+        $data['direcciones2'] = $mess['direcciones2'];
+        $data['social2'] = $mess['social2'];
         $data['_view'] = $view;
-        $data['message_display'] = $mess;
+        $data['message_display'] = $mess['message_display'];
         $this->load->view('layouts/main', $data);
     }
 
@@ -204,27 +211,54 @@ class User extends CI_Controller
         $this->form_validation->set_rules('vencimiento', 'fecha', 'required');
         $this->form_validation->set_rules('txt_saldo', 'saldo', 'required');
 
+        if (isset($_POST['btn_save'])) {
 
-        if ($this->form_validation->run()) {
+            if ($this->form_validation->run()) {
 
-            $params = array(
-                'nombre_dueno' => $this->input->post('txt_propietario'),
-                'numero_tarjeta' => $this->input->post('txt_numero'),
-                'cvv' => $this->input->post('txt_codigo'),
-                'fecha_vencimiento' => $this->input->post('vencimiento'),
-                'saldo' => $this->input->post('txt_saldo'),
-                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+                $params = array(
+                    'nombre_dueno' => $this->input->post('txt_propietario'),
+                    'numero_tarjeta' => $this->input->post('txt_numero'),
+                    'cvv' => $this->input->post('txt_codigo'),
+                    'fecha_vencimiento' => $this->input->post('vencimiento'),
+                    'saldo' => $this->input->post('txt_saldo'),
+                    'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
 
-            );
+                );
 
 
-            $user_id = $this->User_model->add_pay($params);
+                $user_id = $this->User_model->add_pay($params);
 
-            $data['message_display'] = 'Ha registrado el metodo de pago correctamente.';
-            $this->load_data_view2('user/social', $data['message_display']);
+                $data['message_display'] = 'Ha registrado el metodo de pago correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
         } else {
-            $data['_view'] = 'user/social';
-            $this->load->view('layouts/main', $data);
+            if ($this->form_validation->run()) {
+                $params = array(
+                    'nombre_dueno' => $this->input->post('txt_propietario'),
+                    'numero_tarjeta' => $this->input->post('txt_numero'),
+                    'cvv' => $this->input->post('txt_codigo'),
+                    'fecha_vencimiento' => $this->input->post('vencimiento'),
+                    'saldo' => $this->input->post('txt_saldo')
+
+                );
+
+                $user_id = $this->User_model->update_pay($this->input->post('btn_edit'), $params);
+
+                $data['message_display'] = 'Ha actualizado el metodo de pago correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
         }
     }
 
@@ -233,7 +267,10 @@ class User extends CI_Controller
         $data['pay'] = $this->User_model->get_form_pay($pay_id);
         $this->User_model->delete_pay($pay_id);
         $data['message_display'] = 'Se ha eliminado el metodo de pago!';
-        $this->load_data_view2('user/social', $data['message_display']);
+        $data['pagos2'] = null;
+        $data['direcciones2'] = null;
+        $data['social2'] = null;
+        $this->load_data_view2('user/social', $data);
     }
 
     function mantmetodo($id)
@@ -243,43 +280,12 @@ class User extends CI_Controller
         if (isset($_POST['btn_elim'])) {
             $this->delete_metodos($id);
         } else {
-            // $this->load->library('form_validation');
-
-            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
-            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
-            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
-
-            // if ($this->form_validation->run()) {
-            // 	$params = array(
-            // 		'descripcion' => $this->input->post('txt_descripcion'),
-            // 		'cantidad' => $this->input->post('txt_cantidad'),
-            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
-            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
-            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
-            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
-            // 		'precio' => $this->input->post('txt_precio'),
-            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
-            // 	);
-            // 	$this->Tienda_model->editProducto($params, $id);
-
-            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
-            // 	$this->index();
-            // } else {
-            // 	$producto = $this->Tienda_model->get_productos_id($id);
-            // 	if ($producto != FALSE) {
-            // 		$categoria = $this->Tienda_model->get_categorias();
-            // 		$data['categorias'] = $categoria;
-            // 		$data['producto'] = $producto[0];
-            // 		$data['_view'] = 'tienda/editProducto';
-            // 		$this->load->view('layouts/main', $data);
-            // 	} else {
-            // 		$this->index();
-            // 	}
-            // }
+            $data['pay'] = $this->User_model->get_form_pay($id);
+            $data['message_display'] = null;
+            $data['pagos2'] = $data['pay'];
+            $data['direcciones2'] = null;
+            $data['social2'] = null;
+            $this->load_data_view2('user/social', $data);
         }
     }
 
@@ -293,27 +299,55 @@ class User extends CI_Controller
         $this->form_validation->set_rules('txt_postal', 'Postal', 'required|max_length[100]');
         $this->form_validation->set_rules('txt_observaciones', 'Observaciones', 'required|max_length[300]');
 
+        if (isset($_POST['btn_save'])) {
+            if ($this->form_validation->run()) {
 
-        if ($this->form_validation->run()) {
+                $params = array(
+                    'pais_direccion' => $this->input->post('txt_pais'),
+                    'provincia' => $this->input->post('txt_provincia'),
+                    'numero_casillero' => $this->input->post('txt_casillero'),
+                    'codigo_postal' => $this->input->post('txt_postal'),
+                    'observaciones' => $this->input->post('txt_observaciones'),
+                    'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
 
-            $params = array(
-                'pais_direccion' => $this->input->post('txt_pais'),
-                'provincia' => $this->input->post('txt_provincia'),
-                'numero_casillero' => $this->input->post('txt_casillero'),
-                'codigo_postal' => $this->input->post('txt_postal'),
-                'observaciones' => $this->input->post('txt_observaciones'),
-                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-
-            );
+                );
 
 
-            $user_id = $this->User_model->add_direction($params);
+                $user_id = $this->User_model->add_direction($params);
 
-            $data['message_display'] = 'Ha registrado la dirección correctamente.';
-            $this->load_data_view2('user/social', $data['message_display']);
-        } else {
-            $data['_view'] = 'user/social';
-            $this->load->view('layouts/main', $data);
+                $data['message_display'] = 'Ha registrado la dirección correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
+        }else{
+            if ($this->form_validation->run()) {
+
+                $params = array(
+                    'pais_direccion' => $this->input->post('txt_pais'),
+                    'provincia' => $this->input->post('txt_provincia'),
+                    'numero_casillero' => $this->input->post('txt_casillero'),
+                    'codigo_postal' => $this->input->post('txt_postal'),
+                    'observaciones' => $this->input->post('txt_observaciones')
+
+                );
+
+
+                $user_id = $this->User_model->update_direction($this->input->post('btn_edit'),$params);
+
+                $data['message_display'] = 'Ha actualizado la dirección correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
         }
     }
     function delete_direccion($dir_id)
@@ -329,45 +363,15 @@ class User extends CI_Controller
 
 
         if (isset($_POST['btn_elim'])) {
-            $this->delete_direccion($id);
+            $this->delete_direccion($$data['dir'] = $this->User_model->get_direction($dir_id));
         } else {
-            // $this->load->library('form_validation');
 
-            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
-            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
-            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
-
-            // if ($this->form_validation->run()) {
-            // 	$params = array(
-            // 		'descripcion' => $this->input->post('txt_descripcion'),
-            // 		'cantidad' => $this->input->post('txt_cantidad'),
-            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
-            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
-            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
-            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
-            // 		'precio' => $this->input->post('txt_precio'),
-            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
-            // 	);
-            // 	$this->Tienda_model->editProducto($params, $id);
-
-            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
-            // 	$this->index();
-            // } else {
-            // 	$producto = $this->Tienda_model->get_productos_id($id);
-            // 	if ($producto != FALSE) {
-            // 		$categoria = $this->Tienda_model->get_categorias();
-            // 		$data['categorias'] = $categoria;
-            // 		$data['producto'] = $producto[0];
-            // 		$data['_view'] = 'tienda/editProducto';
-            // 		$this->load->view('layouts/main', $data);
-            // 	} else {
-            // 		$this->index();
-            // 	}
-            // }
+            $data['dir'] = $this->User_model->get_direction($id);
+            $data['message_display'] = null;
+            $data['pagos2'] = null;
+            $data['direcciones2'] = $data['dir'];
+            $data['social2'] = null;
+            $this->load_data_view2('user/social', $data);
         }
     }
 
@@ -378,21 +382,45 @@ class User extends CI_Controller
         $this->form_validation->set_rules('txt_red', 'Red', 'required|max_length[64]');
         $this->form_validation->set_rules('txt_usuario', 'Usuario', 'required|max_length[150]');
 
-        if ($this->form_validation->run()) {
+        if (isset($_POST['btn_save'])) {
+            if ($this->form_validation->run()) {
 
-            $params = array(
-                'red_social' => $this->input->post('txt_ptxt_red'),
-                'nombre_usuario' => $this->input->post('txt_usuario'),
-                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-            );
+                $params = array(
+                    'red_social' => $this->input->post('txt_red'),
+                    'nombre_usuario' => $this->input->post('txt_usuario'),
+                    'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+                );
 
-            $user_id = $this->User_model->add_red($params);
+                $user_id = $this->User_model->add_red($params);
 
-            $data['message_display'] = 'Ha registrado la red social correctamente.';
-            $this->load_data_view2('user/social', $data['message_display']);
+                $data['message_display'] = 'Ha registrado la red social correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
         } else {
-            $data['_view'] = 'user/social';
-            $this->load->view('layouts/main', $data);
+            if ($this->form_validation->run()) {
+
+                $params = array(
+                    'red_social' => $this->input->post('txt_red'),
+                    'nombre_usuario' => $this->input->post('txt_usuario'),
+                );
+
+                $user_id = $this->User_model->update_red($this->input->post('btn_edit'), $params);
+
+                $data['message_display'] = 'Ha actualizado la red social correctamente.';
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            } else {
+                $data['_view'] = 'user/social';
+                $this->load->view('layouts/main', $data);
+            }
         }
     }
     function delete_red($red_id)
@@ -410,6 +438,12 @@ class User extends CI_Controller
         if (isset($_POST['btn_elim'])) {
             $this->delete_red($id);
         } else {
+            $data['red'] = $this->User_model->get_red($id);
+            $data['message_display'] = null;
+            $data['pagos2'] = null;
+            $data['direcciones2'] = null;
+            $data['social2'] = $data['red'];
+            $this->load_data_view2('user/social', $data);
             // $this->load->library('form_validation');
 
             // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
