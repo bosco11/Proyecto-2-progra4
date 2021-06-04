@@ -16,6 +16,7 @@ if (validation_errors() !== "") {
 }
 
 ?>
+
 <div id="panel_app">
     <div class="box-header">
         <h2 class="box-title">Otras configuraciones del usuario</h2>
@@ -29,21 +30,21 @@ if (validation_errors() !== "") {
     <div class="form-row">
         <div id="pago">
             <h2 id="user">Formas de pago</h2>
-            <?php echo form_open('user/agregarUsuario'); ?>
+            <?php echo form_open('user/agregarmetodo'); ?>
             <div class="column" id="primero">
                 <div class="col-md-4 mb-3">
                     <label for="validationServer013">Nombre del propietario</label>
-                    <input type="text" id="propietario" placeholder="Nombre del propietario" class="cajatexto2" required>
+                    <input type="text" name="txt_propietario" id="txt_propietario" placeholder="Nombre del propietario" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Numero tarjeta</label>
-                    <input type="number" id="numero" placeholder="Numero tarjeta" class="cajatexto2" required>
+                    <input type="number" name="txt_numero" id="txt_numero" placeholder="Numero tarjeta" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">CVV</label><br>
-                    <input type="number" id="numero" placeholder="Codigo de seguridad" class="cajatexto2" required>
+                    <input type="number" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
@@ -53,7 +54,7 @@ if (validation_errors() !== "") {
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Saldo tarjeta</label>
-                    <input type="number" id="numero" placeholder="Saldo tarjeta" class="cajatexto2" required>
+                    <input type="number" name="txt_saldo" id="txt_saldo" placeholder="Saldo tarjeta" class="cajatexto2" required>
 
                 </div>
 
@@ -76,7 +77,7 @@ if (validation_errors() !== "") {
                         <tbody id="tbTable">
                             <?php 
                             foreach ($pagos as $pa) { ?>
-							<!-- <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?> -->
+							<?php echo form_open('user/mantmetodo/' . $pa['id_formas_pago']); ?>
 							<tr align="center">
 								<td><?php echo $pa['nombre_dueno'] ?></td>
 								<td><?php echo $pa['numero_tarjeta'] ?></td>
@@ -84,7 +85,7 @@ if (validation_errors() !== "") {
 								<td><?php echo $pa['saldo'] ?></td>							
 								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar" >Eliminar</button> </td>
 							</tr>
-							<!-- <?php echo form_close(); ?> -->
+							<?php echo form_close(); ?>
 						<?php } ?>
 
                         </tbody>
@@ -102,12 +103,12 @@ if (validation_errors() !== "") {
             <div class="column" id="primero">
                 <div class="col-md-4 mb-3">
                     <label for="validationServer013">Pais</label>
-                    <input type="text" name="pais" id="pais" placeholder="Pais" class="cajatexto2" required>
+                    <input type="text" name="txt_pais" id="txt_pais" placeholder="Pais" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">
                     <label for="validationServer023">Provincia</label>
-                    <input type="number" name="provincia" id="provincia" placeholder="Provincia" class="cajatexto2" required>
+                    <input type="number" name="txt_provincia" id="txt_provincia" placeholder="Provincia" class="cajatexto2" required>
 
                 </div>
                 <div class="col-md-4 mb-3">

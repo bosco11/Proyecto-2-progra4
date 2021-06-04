@@ -73,6 +73,11 @@ if (validation_errors() !== "") {
 				<input type="text" name="txt_pais" value="<?php echo $this->input->post('txt_pais'); ?>" class="cajatexto" id="txt_pais" />
 				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
 			</div>
+			<label for="txt_direccion" class="control-label"><span class="text-danger">* </span>Direccion:</label>
+			<div class="form-group">
+				<input type="text" name="txt_direccion" value="<?php echo $this->input->post('txt_direccion'); ?>" class="cajatexto" id="txt_direccion" />
+				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
+			</div>
 		</div>
 
 		<div id="div3">

@@ -33,6 +33,16 @@ class User extends CI_Controller
         $data['_view'] = $view;
         $this->load->view('layouts/main', $data);
     }
+    function load_data_view2($view, $mess)
+    {
+        $this->load->model('Tienda_model');
+        $data['direcciones'] = $this->User_model->get_directions($this->session->userdata['logged_in']['users_id']);
+        $data['pagos'] = $this->User_model->get_forms_pay($this->session->userdata['logged_in']['users_id']);
+        $data['social'] = $this->User_model->get_red_social($this->session->userdata['logged_in']['users_id']);
+        $data['_view'] = $view;
+        $data['message_display'] = $mess;
+        $this->load->view('layouts/main', $data);
+    }
 
     function agregarUsuario()
     {
@@ -45,6 +55,7 @@ class User extends CI_Controller
         $this->form_validation->set_rules('txt_correo', 'Correo', 'required|max_length[45]');
         $this->form_validation->set_rules('txt_cedula', 'Cedula', 'required|max_length[100]');
         $this->form_validation->set_rules('txt_pais', 'Pais', 'required|max_length[100]');
+        $this->form_validation->set_rules('txt_direccion', 'Direccion', 'required|max_length[200]');
 
         if ($this->form_validation->run()) {
             $config['upload_path']          = './resources/files/';
@@ -63,6 +74,7 @@ class User extends CI_Controller
                     'cedula' => $this->input->post('txt_cedula'),
                     'pais' => $this->input->post('txt_pais'),
                     'tipo_usuario' => $this->input->post('cmb_tipo'),
+                    'direccion' => $this->input->post('txt_direccion'),
                     'imagen' => 'unknown.jpg',
                 );
             } else {
@@ -75,6 +87,7 @@ class User extends CI_Controller
                     'correo' => $this->input->post('txt_correo'),
                     'cedula' => $this->input->post('txt_cedula'),
                     'pais' => $this->input->post('txt_pais'),
+                    'direccion' => $this->input->post('txt_direccion'),
                     'tipo_usuario' => $this->input->post('cmb_tipo'),
                     'imagen' => $this->upload->data('file_name'),
                 );
@@ -83,7 +96,6 @@ class User extends CI_Controller
             $user_id = $this->User_model->add_user($params);
 
             $data['message_display'] = 'Te has registrado exitosamente.';
-            // $this->load->view('user/add', $data);
             $this->index();
         } else {
             $data['_view'] = 'user/add';
@@ -107,9 +119,10 @@ class User extends CI_Controller
             $this->form_validation->set_rules('txt_correo', 'Correo', 'required|max_length[45]');
             $this->form_validation->set_rules('txt_cedula', 'Cedula', 'required|max_length[100]');
             $this->form_validation->set_rules('txt_pais', 'Pais', 'required|max_length[100]');
+            $this->form_validation->set_rules('txt_direccion', 'Direccion', 'required|max_length[200]');
 
             if ($this->form_validation->run()) {
-                $params = array(                 
+                $params = array(
                     'user' => $this->input->post('txt_usuario'),
                     'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
                     'nombre_real' => $this->input->post('txt_nombre'),
@@ -117,6 +130,7 @@ class User extends CI_Controller
                     'correo' => $this->input->post('txt_correo'),
                     'cedula' => $this->input->post('txt_cedula'),
                     'pais' => $this->input->post('txt_pais'),
+                    'direccion' => $this->input->post('txt_direccion'),
                     'tipo_usuario' => $this->input->post('cmb_tipo'),
                 );
 
@@ -169,7 +183,7 @@ class User extends CI_Controller
         } else {
             $data = array('upload_data' => $this->upload->data());
             $params = array(
-                'photo' => $this->upload->data('file_name'),
+                'imagen' => $this->upload->data('file_name'),
             );
 
             $this->User_model->update_user($users_id, $params);
@@ -178,5 +192,94 @@ class User extends CI_Controller
         }
 
         redirect('user/edit/' . $users_id);
+    }
+
+    function agregarmetodo()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('txt_propietario', 'Dueño', 'required|max_length[200]');
+        $this->form_validation->set_rules('txt_numero', 'Numero', 'required|max_length[16]');
+        $this->form_validation->set_rules('txt_codigo', 'CVV', 'required|max_length[4]');
+        $this->form_validation->set_rules('vencimiento', 'fecha', 'required');
+        $this->form_validation->set_rules('txt_saldo', 'saldo', 'required');
+
+
+        if ($this->form_validation->run()) {
+
+            $params = array(
+                'nombre_dueno' => $this->input->post('txt_propietario'),
+                'numero_tarjeta' => $this->input->post('txt_numero'),
+                'cvv' => $this->input->post('txt_codigo'),
+                'fecha_vencimiento' => $this->input->post('vencimiento'),
+                'saldo' => $this->input->post('txt_saldo'),
+                'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+
+            );
+
+
+            $user_id = $this->User_model->add_pay($params);
+
+            $data['message_display'] = 'Ha registrado el metodo de pago correctamente.';
+            $this->load_data_view2('user/social', $data['message_display']);
+        } else {
+            $data['_view'] = 'user/social';
+            $this->load->view('layouts/main', $data);
+        }
+    }
+
+    function delete_metodos($pay_id)
+    {
+        $data['pay'] = $this->User_model->get_form_pay($pay_id);
+        $this->User_model->delete_pay($pay_id);
+        $data['message_display'] = 'Se ha eliminado el metodo de pago!';
+        $this->load_data_view2('user/social', $data['message_display']);
+    }
+
+    function mantmetodo($id)
+    {
+
+
+        if (isset($_POST['btn_elim'])) {
+            $this->delete_metodos($id);
+        } else {
+            // $this->load->library('form_validation');
+
+            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
+            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
+            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
+            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
+            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
+
+            // if ($this->form_validation->run()) {
+            // 	$params = array(
+            // 		'descripcion' => $this->input->post('txt_descripcion'),
+            // 		'cantidad' => $this->input->post('txt_cantidad'),
+            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
+            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
+            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
+            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
+            // 		'precio' => $this->input->post('txt_precio'),
+            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
+            // 	);
+            // 	$this->Tienda_model->editProducto($params, $id);
+
+            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
+            // 	$this->index();
+            // } else {
+            // 	$producto = $this->Tienda_model->get_productos_id($id);
+            // 	if ($producto != FALSE) {
+            // 		$categoria = $this->Tienda_model->get_categorias();
+            // 		$data['categorias'] = $categoria;
+            // 		$data['producto'] = $producto[0];
+            // 		$data['_view'] = 'tienda/editProducto';
+            // 		$this->load->view('layouts/main', $data);
+            // 	} else {
+            // 		$this->index();
+            // 	}
+            // }
+        }
     }
 }

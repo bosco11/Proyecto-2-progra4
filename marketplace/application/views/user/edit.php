@@ -48,7 +48,7 @@
 					<input type="text" name="txt_cedula" value="<?php echo ($this->input->post('txt_cedula') ? $this->input->post('txt_cedula') : $user['cedula']); ?>" class="cajatexto" id="txt_cedula" />
 					<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
 				</div>
-	
+
 			</div>
 
 			<div id="div2">
@@ -65,19 +65,24 @@
 				<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
 				<div class="form-group">
 					<select name="cmb_tipo" id="cmb_tipo" variant="primary" <?php echo ($this->input->post('cmb_tipo') ? $this->input->post('cmb_tipo') : $user['tipo_usuario']); ?> class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
-						<?php if($user['tipo_usuario']=='Comprador'){ ?>
+						<?php if ($user['tipo_usuario'] == 'Comprador') { ?>
 							<option value="Comprador" selected> Comprador</option>
 							<option value="Tienda">Tienda</option>
-						<?php } else{?>
+						<?php } else { ?>
 							<option value="Comprador"> Comprador</option>
 							<option value="Tienda" selected>Tienda</option>
-						<?php }?>
+						<?php } ?>
 					</select>
 				</div>
 				<label for="txt_pais" class="control-label"><span class="text-danger">* </span>Pais:</label>
 				<div class="form-group">
 					<input type="text" name="txt_pais" value="<?php echo ($this->input->post('txt_pais') ? $this->input->post('txt_pais') : $user['pais']); ?>" class="cajatexto" id="txt_pais" />
 					<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
+				</div>
+				<label for="txt_direccion" class="control-label"><span class="text-danger">* </span>Direccion:</label>
+				<div class="form-group">
+					<input type="text" name="txt_direccion" value="<?php echo ($this->input->post('txt_direccion') ? $this->input->post('txt_direccion') : $user['direccion']); ?>" class="cajatexto" id="txt_direccion" />
+					<span class="text-danger"><?php echo form_error('txt_direccion'); ?></span>
 				</div>
 			</div>
 
@@ -99,7 +104,7 @@
 
 			<div class="box-body">
 				<div class="form-group-photo">
-					<?php echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
+					<?php echo "<img src='" . site_url('/resources/photos/' . $user['imagen'])
 						. "' alt='Editar Foto' title='Editar Foto'  width=70 height=70 id='photo_profile' />"; ?>
 
 					<?php echo form_open_multipart('user/upload_photo/' . $user['id_usuarios']); ?>
