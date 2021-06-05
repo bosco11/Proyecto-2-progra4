@@ -23,11 +23,19 @@ class Tienda extends CI_Controller
 		$this->index();
 	}
 
-	function load_data_view($view)
+	function load_data_view($view,  $id = null, $catego = null, $descri = null)
 	{
 		// precarga todos los datos con los que la vista debe iniciar
 		$this->load->model('Tienda_model');
-		$data['productos'] = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
+		$categoria = $this->Tienda_model->get_categorias();
+		$data['categorias'] = $categoria;
+
+		if ($catego == null AND $descri == null) {
+			$data['productos'] = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
+		} else {
+			$data['productos'] = $this->Tienda_model->buscarProductos($id, $catego, $descri);
+		}
+
 		$data['_view'] = $view;
 		$this->load->view('layouts/main', $data);
 	}
@@ -78,7 +86,7 @@ class Tienda extends CI_Controller
 			}
 		}
 	}
-	function addProducto($vista)
+	function addProducto()
 	{
 		$this->load->library('form_validation');
 
@@ -140,8 +148,21 @@ class Tienda extends CI_Controller
 		}
 		$this->mantGaleriaProductos($id);
 	}
-	function deleteFoto($idproducto,$idfoto){
+	function deleteFoto($idproducto, $idfoto)
+	{
 		$this->Tienda_model->deleteFoto($idfoto);
 		$this->mantGaleriaProductos($idproducto);
+	}
+	function buscarProductos($id)
+	{
+		$cate = $this->input->post('cmb_categoria');
+		$desc = $this->input->post('txt_buscar');
+		if ($cate == 0) {
+			$cate = null;
+		}
+		if ($desc == '') {
+			$desc = null;
+		}
+		$this->load_data_view('tienda/tiendaHome', $id, $cate, $desc);
 	}
 }
