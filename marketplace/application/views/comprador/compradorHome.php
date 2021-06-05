@@ -34,17 +34,21 @@
 						<a class="nav-link active" aria-current="page" href="<?php echo site_url('comprador/index'); ?>">Acerca de</a>
 					</li>
 				</ul>
-				<form class="d-flex">
-
-					<select class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
-						<option selected>Seleccionar categoría</option>
-						<option value="1">Informática</option>
-						<option value="2">Hogar</option>
-						<option value="3">Herramienta</option>
-					</select>
-					<input class="form-control form-sm me-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
-				</form>
+				<!-- <form class="d-flex"> -->
+				<?php echo form_open('comprador/search'); ?>
+				<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+					<option value="">Sin seleccionar</option>
+					<?php if (!empty($categorias)) { ?>
+						<?php foreach ($categorias as $cate) { ?>
+							<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+						<?php } ?>
+					<?php } ?>
+				</select>
+				<input id="txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
+				<input id="txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
+				<button id="btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+				<?php echo form_close(); ?>
+				<!-- </form> -->
 				<?php echo form_open('auth/logout'); ?>
 				<button class="btn btn-outline-primary  me-2" type="submit">Ingresar</button>
 				<?php echo form_close(); ?>
@@ -57,49 +61,54 @@
 
 	<!-- traer tiendas de base de datos -->
 	<div id="main_panel">
-		<?php foreach ($tiendas as $t) { ?>
+		<?php if (!empty($tiendas)) { ?>
+			<?php foreach ($tiendas as $t) { ?>
+				<div class='post_block'>
+					<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
+					</span>
+					<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
+						<div class='post_detail'>
+							<?php echo $t['nombre_real']; ?>
+							<br>
+							<div class="row align-items">
+								<?php if (!empty($productos)) { ?>
+									<?php foreach ($productos as $p) { ?>
+										<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
+											<div class="col-3">
+												<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+													<div class="carousel-inner">
+														<?php $cont = 1 ?>
+														<?php if (!empty($galerias)) { ?>
+															<?php foreach ($galerias as $g) { ?>
+																<?php if ($g['id_productos'] == $p['id_productos']) {
+																	if ($cont == 1) {
+																		$band = 'active';
+																	} else {
+																		$band = '';
+																	}
+																	$cont = $cont + 1;
+																?>
+																	<div class="carousel-item <?php echo $band ?>">
+																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" alt="...">
+																	</div>
+																<?php } ?>
+															<?php } ?>
+														<?php } ?>
+													</div>
+													<label for=""><?php echo $p['descripcion'] ?></label>
 
-			<div class='post_block'>
-				<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
-				</span>
-				<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
-					<div class='post_detail'>
-						<?php echo $t['nombre_real']; ?>
-						<br>
-						<div class="row align-items">
-							<?php foreach ($productos as $p) { ?>
-								<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
-									<div class="col-3">
-										<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-											<div class="carousel-inner">
-												<?php $cont = 1 ?>
-												<?php foreach ($galerias as $g) { ?>
-													<?php if ($g['id_productos'] == $p['id_productos']) {
-														if ($cont == 1) {
-															$band = 'active';
-														} else {
-															$band = '';
-														}
-														$cont = $cont + 1;
-													?>
-														<div class="carousel-item <?php echo $band ?>">
-															<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" alt="...">
-														</div>
-													<?php } ?>
-												<?php } ?>
+												</div>
 											</div>
-											<label for=""><?php echo $p['descripcion'] ?></label>
-
-										</div>
-									</div>
+										<?php } ?>
+									<?php } ?>
 								<?php } ?>
-							<?php } ?>
-						</div>
+							</div>
 
 
-					</div><br />
+						</div><br />
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 		<?php } ?>
 	</div>
 	<!-- aqui termina el llamado a las tiendas  -->

@@ -1,8 +1,10 @@
 <?php
 
-Class Comprador extends CI_Controller {
+class Comprador extends CI_Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		parent::__construct();
 
 		$this->load->helper('form');
@@ -12,32 +14,54 @@ Class Comprador extends CI_Controller {
 	}
 
 	//Muestra la vista del Login
-	public function index($tweets_data = array()) {
+	public function index($tienda_data = array())
+	{
 
-		if ($tweets_data == null) {
-            $data['tiendas'] = $this->Comprador_model->get_all_tiendas();
+		if ($tienda_data == null) {
 			$data['productos'] = $this->Comprador_model->get_all_productos();
-			$data['galerias'] = $this->Comprador_model->get_all_galeria();
-        } else {
-
-        }
+			$data['galerias'] = $this->Comprador_model->get_all_galerias();
+			$data['categorias'] = $this->Comprador_model->get_all_categorias();
+			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
+		} else {
+			$data['tiendas'] = $tienda_data;
+			$data['productos'] = $this->Comprador_model->get_all_productos();
+			$data['galerias'] = $this->Comprador_model->get_all_galerias();
+			$data['categorias'] = $this->Comprador_model->get_all_categorias();
+		}
 		$data['_view'] = 'comprador/compradorHome';
-		$this->load->view('layouts/main',$data);
+		$this->load->view('layouts/main', $data);
 		// $this->load_data_view('comprador/compradorHome');
 	}
-	function compradorHome(){
+	function compradorHome()
+	{
 		$this->index();
 	}
 
+	function search()
+	{
+
+		if ($this->input->post('txt_tienda') != "") {
+			$result = $this->Comprador_model->search_tiendas($this->input->post('txt_tienda'));
+			$this->index($result);
+		} else if ($this->input->post('cmb_categoria') != "") {
+			$result = $this->Comprador_model->search_categoria($this->input->post('cmb_categoria'));
+			$this->index($result);
+		} else if ($this->input->post('txt_producto') != "") {
+			$result = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
+			$this->index($result);
+		}else {
+			$this->index();
+		}
+		
+	}
+
 	// function load_data_view($view)
-    // {
-    // 	// precarga todos los datos con los que la vista debe iniciar
-    // 	// $this->load->model('Twitter_model');
-    //     // $data['tweets'] = $this->Twitter_model->get_all_tweets();
-    //     $data['_view'] = $view;
+	// {
+	// 	// precarga todos los datos con los que la vista debe iniciar
+	// 	// $this->load->model('Twitter_model');
+	//     // $data['tweets'] = $this->Twitter_model->get_all_tweets();
+	//     $data['_view'] = $view;
 	// 	$this->load->view('layouts/main',$data);
-    // }
+	// }
 
 }
-
-?>
