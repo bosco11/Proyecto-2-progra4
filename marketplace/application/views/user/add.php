@@ -29,7 +29,6 @@ if (validation_errors() !== "") {
 
 ?>
 
-?>
 <div id="panel_app">
 	<div class="box-header">
 		<h2 class="box-title">Agregando Usuario</h2>
