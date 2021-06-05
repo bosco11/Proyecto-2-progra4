@@ -29,7 +29,7 @@
 							<?php } ?>
 						</select>
 
-						<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Buscar" aria-label="Buscar">
+						<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
 						<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
 						<?php echo form_close(); ?>
 						<?php echo form_open('tienda/addProducto'); ?>
