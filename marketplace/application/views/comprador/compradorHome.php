@@ -1,37 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>"></h5>MarketPlace</h5></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="<?php echo site_url('comprador/index'); ?>">Inicio</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="<?php echo site_url('comprador/index'); ?>">Acerca de</a>
-				</li>
-			</ul>
-			<!-- <form class="d-flex"> -->
-
-			<!-- </form> -->
-			<?php echo form_open('auth/logout'); ?>
-			<button class="btn btn-outline-primary  me-2" type="submit">Ingresar</button>
-			<?php echo form_close(); ?>
-			<?php echo form_open('user/add'); ?>
-			<button class="btn btn-outline-success  me-2" type="submit">Registrarme</button>
-			<?php echo form_close(); ?>
-		</div>
-	</div>
-</nav>
-
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 	<div class="container">
 
 		<!-- Brand -->
-		<a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+		<a class="navbar-brand waves-effect" href="#" target="_blank">
 			<strong class="blue-text">MarketPlace</strong>
 		</a>
 
@@ -51,7 +23,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">Acerca de
+					<a class="nav-link waves-effect" href="#" target="_blank">Acerca de
 					</a>
 				</li>
 			</ul>
