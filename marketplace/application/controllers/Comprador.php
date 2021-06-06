@@ -16,26 +16,29 @@ class Comprador extends CI_Controller
 	//Muestra la vista del Login
 	public function index($tienda_data = array())
 	{
+		$data['productos'] = $this->Comprador_model->get_all_productos();
+		$data['galerias'] = $this->Comprador_model->get_all_galerias();
+		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 
-		if(isset($this->session->userdata['logged_in']))
-		{
-			$data['seccion']=$this->session->userdata['logged_in'];
-		}else{
-			$data['seccion']=false;
-		}
-		if ($tienda_data == null) {
-			$data['productos'] = $this->Comprador_model->get_all_productos();
-			$data['galerias'] = $this->Comprador_model->get_all_galerias();
-			$data['categorias'] = $this->Comprador_model->get_all_categorias();
-			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
-			
+		if (isset($this->session->userdata['logged_in'])) {
+			$data['seccion'] = $this->session->userdata['logged_in'];
 		} else {
-			$data['tiendas'] = $tienda_data;
-			$data['productos'] = $this->Comprador_model->get_all_productos();
-			$data['galerias'] = $this->Comprador_model->get_all_galerias();
-			$data['categorias'] = $this->Comprador_model->get_all_categorias();
-			
+			$data['seccion'] = false;
 		}
+
+		if ($tienda_data == null) {
+			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
+		} else {
+			if($this->input->post('txt_tienda')!= "" || $this->input->post('cmb_categoria')!= "")
+			{
+				$data['tiendas'] = $tienda_data;
+			}
+			else if($this->input->post('txt_producto')!= ""){
+				$data['tiendas'] = $tienda_data;
+				$data['productos'] = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
+			}
+		}
+
 		$data['_view'] = 'comprador/compradorHome';
 		$this->load->view('layouts/main', $data);
 		// $this->load_data_view('comprador/compradorHome');
@@ -55,12 +58,11 @@ class Comprador extends CI_Controller
 			$result = $this->Comprador_model->search_categoria($this->input->post('cmb_categoria'));
 			$this->index($result);
 		} else if ($this->input->post('txt_producto') != "") {
-			$result = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
+			$result = $this->Comprador_model->search_productoT($this->input->post('txt_producto'));
 			$this->index($result);
-		}else {
+		} else {
 			$this->index();
 		}
-		
 	}
 
 	// function load_data_view($view)
