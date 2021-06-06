@@ -3,7 +3,7 @@
 	<div class="container">
 
 		<!-- Brand -->
-		<a class="navbar-brand waves-effect" href="#" target="_blank">
+		<a class="navbar-brand waves-effect" href="#">
 			<strong class="blue-text">MarketPlace</strong>
 		</a>
 
@@ -23,7 +23,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link waves-effect" href="#" target="_blank">Acerca de
+					<a class="nav-link waves-effect" href="#">Acerca de
 					</a>
 				</li>
 			</ul>
