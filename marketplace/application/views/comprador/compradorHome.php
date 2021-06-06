@@ -74,30 +74,57 @@
 								<?php if (!empty($productos)) { ?>
 									<?php foreach ($productos as $p) { ?>
 										<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
-											<div class="col-3">
-												<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-													<div class="carousel-inner">
-														<?php $cont = 1 ?>
-														<?php if (!empty($galerias)) { ?>
-															<?php foreach ($galerias as $g) { ?>
-																<?php if ($g['id_productos'] == $p['id_productos']) {
-																	if ($cont == 1) {
-																		$band = 'active';
-																	} else {
-																		$band = '';
-																	}
-																	$cont = $cont + 1;
-																?>
-																	<div class="carousel-item <?php echo $band ?>">
-																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" alt="...">
-																	</div>
+											<div class="col-lg-3 col-md-6 mb-4">
+												<div class="card">
+													<!--Card image-->
+													<div class="view overlay">
+														<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+															<div class="carousel-inner">
+																<?php $cont = 1 ?>
+																<?php if (!empty($galerias)) { ?>
+																	<?php foreach ($galerias as $g) { ?>
+																		<?php if ($g['id_productos'] == $p['id_productos']) {
+																			if ($cont == 1) {
+																				$band = 'active';
+																			} else {
+																				$band = '';
+																			}
+																			$cont = $cont + 1;
+																		?>
+																			<div class="carousel-item <?php echo $band ?>">
+																				<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
+																			</div>
+																		<?php } ?>
+																	<?php } ?>
 																<?php } ?>
-															<?php } ?>
-														<?php } ?>
+															</div>
+															<label for=""><?php echo $p['descripcion'] ?></label>
+
+														</div>
+														<a>
+															<div class="mask rgba-white-slight"></div>
+														</a>
 													</div>
-													<label for=""><?php echo $p['descripcion'] ?></label>
+													<!--Card image-->
+
+													<!--Card content-->
+													<div class="card-body text-center">
+														<!--Category & Title-->
+														<a href="" class="grey-text">
+															<h5><?php echo $p['descripcion'] ?></h5>
+														</a>
+														<button class="btn btn-primary">🛒</button>
+														<button class="btn btn-primary">❤️</button>
+
+														<h4 class="font-weight-bold black-text" style="color: black;">
+															<strong>₡ <?php echo $p['precio']?></strong>
+														</h4>
+
+													</div>
+													<!--Card content-->
 
 												</div>
+
 											</div>
 										<?php } ?>
 									<?php } ?>
