@@ -67,12 +67,12 @@ class Comprador_model extends CI_Model
     function search_producto($data)
     {
         return $this->db->query("SELECT tbl_productos.*
-        FROM tbl_usuarios,tbl_productos
-        WHERE tbl_usuarios.tipo_usuario = 'Tienda'
-        AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
-        AND tbl_productos.descripcion LIKE '%" . $data . "%'
-        group by tbl_productos.descripcion
-        ORDER BY tbl_productos.descripcion ASC")->result_array();
+                                FROM tbl_usuarios,tbl_productos
+                                WHERE tbl_usuarios.tipo_usuario = 'Tienda'
+                                AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
+                                AND tbl_productos.descripcion LIKE '%" . $data . "%'
+                                group by tbl_productos.descripcion
+                                ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
     function get_all_categorias()
