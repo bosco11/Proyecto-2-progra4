@@ -117,7 +117,7 @@
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" style="height: 34px;" alt="avatar image">
+							<img src='<?php echo site_url('/resources/photos/' . $seccion['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
 							<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Logout</a>
