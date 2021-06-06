@@ -82,7 +82,12 @@ class Comprador_model extends CI_Model
 
     function get_producto_id($prod_id)
     {
-        return $this->db->query("SELECT tbl_productos.* FROM tbl_productos WHERE tbl_productos.id_productos = " . $prod_id)->row_array();
+        return $this->db->query("SELECT p.*, ca.*, u.*,c.*
+        FROM tbl_productos p 
+        left join tbl_calificacion_productos ca on ca.id_productos=p.id_productos
+        join tbl_usuarios u on u.id_usuarios=p.id_usuarios
+        join tbl_categorias c on c.id_categorias=p.id_categorias 
+        WHERE p.id_productos = " . $prod_id)->row_array();
     }
     function get_galerias($id)
     {

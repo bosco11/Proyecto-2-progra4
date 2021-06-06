@@ -73,6 +73,11 @@ class Comprador extends CI_Controller
 	// }
 	function perfilProducto($id)
 	{
+		if (isset($this->session->userdata['logged_in'])) {
+			$data['seccion'] = $this->session->userdata['logged_in'];
+		} else {
+			$data['seccion'] = false;
+		}
 		$data['producto'] = $this->Comprador_model->get_producto_id($id);
 		$data['galeria'] = $this->Comprador_model->get_galerias($id);
 		$data['message_display'] = null;

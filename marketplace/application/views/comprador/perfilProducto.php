@@ -89,7 +89,7 @@ if (validation_errors() !== "") {
 
                     <div class="col-md-7">
                         <div class="product-title"><?php echo $producto['descripcion'] ?></div>
-                        <div class="product-desc">The Corsair Gaming Series GS600 is the ideal price/performance choice for mid-spec gaming PC</div>
+
                         <div class="product-rating">
                             <i class="fa fa-star gold"></i>
                             <i class="fa fa-star gold"></i>
@@ -105,12 +105,14 @@ if (validation_errors() !== "") {
                             <div class="product-stock2">Sin Stock</div>
                         <?php } ?>
                         <hr>
-                        <div class="btn-group cart">
-                            <button type="submit" class="btn btn-success" id="<?php echo $producto['id_productos'] ?>">🛒 agregar al carrito</button>
-                        </div>
-                        <div class="btn-group wishlist">
-                            <button type="submit" class="btn btn-danger" id="<?php echo $producto['id_productos'] ?>">❤️ agregar a la lista de deseos</button>
-                        </div>
+                        <?php if ($seccion == TRUE) { ?>
+                            <div class="btn-group cart">
+                                <button type="submit" class="btn btn-success" id="<?php echo $producto['id_productos'] ?>">🛒 agregar al carrito</button>
+                            </div>
+                            <div class="btn-group wishlist">
+                                <button type="submit" class="btn btn-danger" id="<?php echo $producto['id_productos'] ?>">❤️ agregar a la lista de deseos</button>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -119,47 +121,70 @@ if (validation_errors() !== "") {
                     <ul id="myTab" class="nav nav-tabs">
 
                         <li class="nav-item me-2">
-                            <a class="nav-link active" href="#service-one" data-toggle="tab">DESCRIPTION</a>
+                            <a class="nav-link active" href="#service-one" data-toggle="tab">DESCRIPCION</a>
                         </li>
                         <li class="nav-item me-2">
-                            <a class="nav-link" href="#service-two" data-toggle="tab">PRODUCT INFO</a>
+                            <a class="nav-link" href="#service-two" data-toggle="tab">INFORMACIÓN TIENDA</a>
                         </li>
-                        <!-- <li class="nav-item me-2">
-                            <a class="nav-link" href="#service-three" data-toggle="tab">REVIEWS</a>
-                        </li> -->
+                        <li class="nav-item me-2">
+                            <a class="nav-link" href="#service-three" data-toggle="tab">RESEÑAS Y CALIFICACIONES</a>
+                        </li>
 
                     </ul>
                     <div id="myTabContent" class="tab-content">
-                        <div class="tab-pane fade in active" id="service-one">
+                        <div class="tab-pane fade in active" id="service-one" style="font-size: 18px;">
 
                             <section class="container product-info">
-                                The Corsair Gaming Series GS600 power supply is the ideal price-performance solution for building or upgrading a Gaming PC. A single +12V rail provides up to 48A of reliable, continuous power for multi-core gaming PCs with multiple graphics cards. The ultra-quiet, dual ball-bearing fan automatically adjusts its speed according to temperature, so it will never intrude on your music and games. Blue LEDs bathe the transparent fan blades in a cool glow. Not feeling blue? You can turn off the lighting with the press of a button.
 
-                                <h3>Corsair Gaming Series GS600 Features:</h3>
-                                <li>It supports the latest ATX12V v2.3 standard and is backward compatible with ATX12V 2.2 and ATX12V 2.01 systems</li>
-                                <li>An ultra-quiet 140mm double ball-bearing fan delivers great airflow at an very low noise level by varying fan speed in response to temperature</li>
-                                <li>80Plus certified to deliver 80% efficiency or higher at normal load conditions (20% to 100% load)</li>
-                                <li>0.99 Active Power Factor Correction provides clean and reliable power</li>
-                                <li>Universal AC input from 90~264V — no more hassle of flipping that tiny red switch to select the voltage input!</li>
-                                <li>Extra long fully-sleeved cables support full tower chassis</li>
-                                <li>A three year warranty and lifetime access to Corsair’s legendary technical support and customer service</li>
-                                <li>Over Current/Voltage/Power Protection, Under Voltage Protection and Short Circuit Protection provide complete component safety</li>
-                                <li>Dimensions: 150mm(W) x 86mm(H) x 160mm(L)</li>
-                                <li>MTBF: 100,000 hours</li>
-                                <li>Safety Approvals: UL, CUL, CE, CB, FCC Class B, TÜV, CCC, C-tick</li>
-                            </section>
+
+                                <h3><?php echo $producto['descripcion'] ?> detalle de producto: </h3>
+                                <li>Nombre: <?php echo $producto['descripcion'] ?></li>
+                                <li>fecha publicación: <?php echo $producto['fecha_publicacion'] ?></li>
+                                <li>Ubicación física: <?php echo $producto['ubicacion_fisica'] ?></li>
+                                <li>Precio: ₡<?php echo $producto['precio'] ?></li>
+                                <li>Tiempo promedio de envío (horas): <?php echo $producto['tiempo_promedio'] ?></li>
+                                <li>Costo de envío: <?php echo $producto['costo_envio'] ?></li>
+                                <li>Cantidad en stock: <?php echo $producto['cantidad'] ?></li>
+                                <li>Nombre de la tienda: <?php echo $producto['nombre_real'] ?></li>
+                                <li>Categoría: <?php echo $producto['categorias'] ?></li>
 
                         </div>
-                        <!-- <div class="tab-pane fade" id="service-two">
+                        <div class="tab-pane fade" id="service-two" style="font-size: 18px;">
 
-                            <section class="container">
+                            <section class="container shop-info">
+                                <br>
+                                <br>
+                                <img src='<?php echo site_url('/resources/photos/' . $producto['imagen']) ?>' width="200" alt="">
+                                <h3> Información de tienda: </h3>
+                                <li>Nombre tienda:<?php echo $producto['nombre_real'] ?></li>
+                                <li>Teléfono:<?php echo $producto['telefono'] ?></li>
+                                <li>Correo:<?php echo $producto['correo'] ?></li>
+                                <li>País:<?php echo $producto['pais'] ?></li>
+                                <li>Dirección: <?php echo $producto['direccion'] ?></li>
 
                             </section>
 
                         </div>
                         <div class="tab-pane fade" id="service-three">
+                            <section class="container reviews-info">
+                                <div class="container d-flex justify-content-center mt-200">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="stars">
+                                                <form action="">
+                                                    <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
+                                                    <input class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
+                                                    <input class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
+                                                    <input class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
+                                                    <input class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
 
-                        </div> -->
+                        </div>
                     </div>
                     <hr>
                 </div>
