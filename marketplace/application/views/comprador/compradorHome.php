@@ -88,7 +88,7 @@
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src='<?php echo site_url('/resources/photos/' . $seccion['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
+							<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
 							<a class="dropdown-item" href="#!">Editar perfil</a>
