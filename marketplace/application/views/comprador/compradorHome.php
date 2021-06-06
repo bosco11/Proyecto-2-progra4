@@ -1,4 +1,3 @@
-
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 	<div class="container">
 
@@ -63,12 +62,12 @@
 							</div>
 						</div>
 					</li>
-					<li class="nav-item dropdown notifications-nav " >
-						<a  class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<li class="nav-item dropdown notifications-nav ">
+						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<span class="badge badge-pill bg-danger">1</span>
 							<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
 						</a>
-						<div  class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 							<a class="dropdown-item" href="#!">
 								<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
 								<span>New order received</span>
@@ -92,8 +91,8 @@
 							<img src='<?php echo site_url('/resources/photos/' . $seccion['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-							<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Logout</a>
-							<a class="dropdown-item" href="#!">Settings</a>
+							<a class="dropdown-item" href="#!">Editar perfil</a>
+							<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
 						</div>
 					</li>
 				<?php } else { ?>
