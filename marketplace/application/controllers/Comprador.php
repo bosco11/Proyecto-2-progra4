@@ -17,16 +17,24 @@ class Comprador extends CI_Controller
 	public function index($tienda_data = array())
 	{
 
+		if(isset($this->session->userdata['logged_in']))
+		{
+			$data['seccion']=$this->session->userdata['logged_in'];
+		}else{
+			$data['seccion']=false;
+		}
 		if ($tienda_data == null) {
 			$data['productos'] = $this->Comprador_model->get_all_productos();
 			$data['galerias'] = $this->Comprador_model->get_all_galerias();
 			$data['categorias'] = $this->Comprador_model->get_all_categorias();
 			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
+			
 		} else {
 			$data['tiendas'] = $tienda_data;
 			$data['productos'] = $this->Comprador_model->get_all_productos();
 			$data['galerias'] = $this->Comprador_model->get_all_galerias();
 			$data['categorias'] = $this->Comprador_model->get_all_categorias();
+			
 		}
 		$data['_view'] = 'comprador/compradorHome';
 		$this->load->view('layouts/main', $data);

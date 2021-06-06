@@ -1,5 +1,6 @@
-<div id="panel_app">
-	<!-- <div id="user_box">
+<?php if ($seccion == TRUE) { ?>
+	<div id="panel_app">
+		<div id="user_box">
 		<a href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>" title="Editar Perfil">
 			<?php
 			echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
@@ -16,8 +17,8 @@
 				<?php echo form_close(); ?>
 			</div>
 		</div>
-	</div> -->
-
+	</div>
+	<?php } ?>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
@@ -117,7 +118,7 @@
 														<button class="btn btn-primary">❤️</button>
 
 														<h4 class="font-weight-bold black-text" style="color: black;">
-															<strong>₡ <?php echo $p['precio']?></strong>
+															<strong>₡ <?php echo $p['precio'] ?></strong>
 														</h4>
 
 													</div>
@@ -139,4 +140,4 @@
 		<?php } ?>
 	</div>
 	<!-- aqui termina el llamado a las tiendas  -->
-</div>
+	</div>
