@@ -17,13 +17,9 @@
 				<?php echo form_close(); ?>
 			</div>
 		</div>
-<<<<<<< Updated upstream
 	</div>
 	<?php } ?>
 
-=======
-	</div> -->
->>>>>>> Stashed changes
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>"></h5>MarketPlace</h5></a>
