@@ -29,11 +29,9 @@ class Comprador extends CI_Controller
 		if ($tienda_data == null) {
 			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
 		} else {
-			if($this->input->post('txt_tienda')!= "" || $this->input->post('cmb_categoria')!= "")
-			{
+			if ($this->input->post('txt_tienda') != "" || $this->input->post('cmb_categoria') != "") {
 				$data['tiendas'] = $tienda_data;
-			}
-			else if($this->input->post('txt_producto')!= ""){
+			} else if ($this->input->post('txt_producto') != "") {
 				$data['tiendas'] = $tienda_data;
 				$data['productos'] = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
 			}
@@ -73,5 +71,12 @@ class Comprador extends CI_Controller
 	//     $data['_view'] = $view;
 	// 	$this->load->view('layouts/main',$data);
 	// }
-
+	function perfilProducto($id)
+	{
+		$data['producto'] = $this->Comprador_model->get_producto_id($id);
+		$data['galeria'] = $this->Comprador_model->get_galerias($id);
+		$data['message_display'] = null;
+		$data['_view'] = 'comprador/perfilProducto';
+		$this->load->view('layouts/main', $data);
+	}
 }

@@ -62,7 +62,7 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    
+
 
     function search_producto($data)
     {
@@ -78,5 +78,16 @@ class Comprador_model extends CI_Model
     function get_all_categorias()
     {
         return $this->db->get('tbl_categorias')->result_array();
+    }
+
+    function get_producto_id($prod_id)
+    {
+        return $this->db->query("SELECT tbl_productos.* FROM tbl_productos WHERE tbl_productos.id_productos = " . $prod_id)->row_array();
+    }
+    function get_galerias($id)
+    {
+        return $this->db->query("SELECT *
+                                FROM tbl_galeria
+                                where tbl_galeria.id_productos= " . $id)->result_array();
     }
 }

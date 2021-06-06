@@ -219,14 +219,14 @@
 												<!--Card content-->
 												<div class="card-body text-center">
 													<!--Category & Title-->
-													<a href="" class="grey-text">
+													<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
 														<h5><?php echo $p['descripcion'] ?></h5>
 													</a>
 													<?php if ($seccion == TRUE) { ?>
 														<button class="btn btn-primary">🛒</button>
-													<?php } ?>
-													<button class="btn btn-primary">❤️</button>
 
+														<button class="btn btn-primary">❤️</button>
+													<?php } ?>
 													<h4 class="font-weight-bold black-text" style="color: black;">
 														<strong>₡ <?php echo $p['precio'] ?></strong>
 													</h4>
