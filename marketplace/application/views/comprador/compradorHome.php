@@ -17,9 +17,13 @@
 				<?php echo form_close(); ?>
 			</div>
 		</div>
+<<<<<<< Updated upstream
 	</div>
 	<?php } ?>
 
+=======
+	</div> -->
+>>>>>>> Stashed changes
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>"></h5>MarketPlace</h5></a>
@@ -36,19 +40,7 @@
 					</li>
 				</ul>
 				<!-- <form class="d-flex"> -->
-				<?php echo form_open('comprador/search'); ?>
-				<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
-					<option value="">Sin seleccionar</option>
-					<?php if (!empty($categorias)) { ?>
-						<?php foreach ($categorias as $cate) { ?>
-							<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
-						<?php } ?>
-					<?php } ?>
-				</select>
-				<input id="txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
-				<input id="txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
-				<button id="btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
-				<?php echo form_close(); ?>
+
 				<!-- </form> -->
 				<?php echo form_open('auth/logout'); ?>
 				<button class="btn btn-outline-primary  me-2" type="submit">Ingresar</button>
@@ -59,6 +51,176 @@
 			</div>
 		</div>
 	</nav>
+
+
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
+		<div class="container">
+
+			<!-- Brand -->
+			<a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
+				<strong class="blue-text">MDB</strong>
+			</a>
+
+			<!-- Collapse -->
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<!-- Links -->
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+				<!-- Left -->
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link waves-effect" href="#">Home
+							<span class="sr-only">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">About
+							MDB</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link waves-effect" href="https://mdbootstrap.com/docs/jquery/getting-started/download/" target="_blank">Free
+							download</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link waves-effect" href="https://mdbootstrap.com/education/bootstrap/" target="_blank">Free tutorials</a>
+					</li>
+				</ul>
+
+				<!-- Right -->
+				<ul class="navbar-nav nav-flex-icons ml_auto">
+					<li class="nav-item">
+						<div class="dropdown">
+							<button type="button" class="btn btn-info" data-toggle="dropdown">
+								<i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">3</span>
+							</button>
+							<div class="dropdown-menu">
+								<div class="row total-header-section">
+									<div class="col-lg-6 col-sm-6 col-6">
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">3</span>
+									</div>
+									<div class="col-lg-6 col-sm-6 col-6 total-section text-right">
+										<p>Total: <span class="text-info">$2,978.24</span></p>
+									</div>
+								</div>
+								<div class="row cart-detail">
+									<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+										<img src="https://images-na.ssl-images-amazon.com/images/I/811OyrCd5hL._SX425_.jpg">
+									</div>
+									<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+										<p>Sony DSC-RX100M..</p>
+										<span class="price text-info"> $250.22</span> <span class="count">
+											Quantity:01</span>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 col-sm-12 col-12 text-center checkout">
+										<button class="btn btn-primary btn-block">Checkout</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="nav-item dropdown notifications-nav ">
+						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							<span class="badge badge-pill bg-danger">1</span>
+							<span><i class="fas fa-bell" style="font-size: 22px;"></i></span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+							<a class="dropdown-item" href="#!">
+								<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+								<span>New order received</span>
+								<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
+							</a>
+							<a class="dropdown-item" href="#!">
+								<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+								<span>New order received</span>
+								<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
+							</a>
+							<a class="dropdown-item" href="#!">
+								<i class="fas fa-chart-line mr-2" aria-hidden="true"></i>
+								<span>Your campaign is about end</span>
+								<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 53 min</span>
+							</a>
+						</div>
+
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg" class="rounded-circle" style="height: 34px;" alt="avatar image">
+						</a>
+						<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
+							<a class="dropdown-item" href="#!">Logout</a>
+							<a class="dropdown-item" href="#!">Settings</a>
+							<a class="dropdown-item" href="#!">Profile</a>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+	</nav>
+	<br><br><br><br>
+	<!-- Navbar -->
+	<!--Navbar-->
+	<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
+
+		<!-- Navbar brand -->
+		<span class="navbar-brand">Filtros:</span>
+
+		<!-- Collapse button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Collapsible content -->
+		<div class="collapse navbar-collapse" id="basicExampleNav">
+
+			<!-- Links -->
+			<ul class="navbar-nav mr-auto">			
+				<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
+				<li class="nav-item me-2">
+					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+						<option value="">Sin seleccionar</option>
+						<?php if (!empty($categorias)) { ?>
+							<?php foreach ($categorias as $cate) { ?>
+								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
+				</li>
+
+				<li class="nav-item me-2">
+					<input id=" txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
+
+				</li>
+				<li class="nav-item me-2">
+					<input id=" txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
+				</li>
+				<li class="nav-item me-2">
+					<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+				</li>
+
+				<?php echo form_close(); ?>
+
+			</ul>
+			<!-- Links -->
+
+			<!-- <form class="form-inline">
+				<div class="md-form my-0">
+					<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+				</div>
+			</form> -->
+		</div>
+		<!-- Collapsible content -->
+
+	</nav>
+	<!--/.Navbar-->
+
+
 
 	<!-- traer tiendas de base de datos -->
 	<div id="main_panel">
