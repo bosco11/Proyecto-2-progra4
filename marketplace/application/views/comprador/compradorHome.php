@@ -63,12 +63,12 @@
 							</div>
 						</div>
 					</li>
-					<li class="nav-item dropdown notifications-nav ">
-						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+					<li class="nav-item dropdown notifications-nav " >
+						<a  class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 							<span class="badge badge-pill bg-danger">1</span>
-							<span><i class="fas fa-bell" style="font-size: 22px;"></i></span>
+							<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
 						</a>
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+						<div  class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 							<a class="dropdown-item" href="#!">
 								<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
 								<span>New order received</span>
