@@ -194,6 +194,7 @@ class User extends CI_Controller
             );
 
             $this->User_model->update_user($users_id, $params);
+            $this->session->userdata['logged_in']['imagen']=$this->upload->data('file_name');
 
             $this->session->set_flashdata('success', "Archivo cargado al sistema exitosamente.");
         }
