@@ -1,45 +1,97 @@
 <?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
-		<div id="user_box">
-			<a href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>" title="Editar Perfil">
-				<?php
-				echo "<img src='" . site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen'])
-					. "' alt='photo_profile'  width=50 id='photo_profile' />"
-					. $this->session->userdata['logged_in']['nombre_real'] . ". ✎</span>";
-				?>
-			</a>
-		</div>
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
+			<div class="container">
+
+				<!-- Brand -->
+				<a class="navbar-brand waves-effect" href="#">
+					<strong class="blue-text">MarketPlace</strong>
+				</a>
+
+				<!-- Collapse -->
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- Links -->
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+					<!-- Left -->
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link waves-effect" href="#">Inicio
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/'.$this->session->userdata['logged_in']['users_id']);?>">Perfil tienda
+							</a>
+						</li>
+					</ul>
+
+					<!-- Right -->
+					<ul class="navbar-nav nav-flex-icons ml_auto">
+						<li class="nav-item dropdown notifications-nav ">
+							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								<span class="badge badge-pill bg-danger">1</span>
+								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+								<a class="dropdown-item" href="#!">
+									<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+									<span>New order received</span>
+									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
+								</a>
+								<a class="dropdown-item" href="#!">
+									<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
+									<span>New order received</span>
+									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
+								</a>
+								<a class="dropdown-item" href="#!">
+									<i class="fas fa-chart-line mr-2" aria-hidden="true"></i>
+									<span>Your campaign is about end</span>
+									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 53 min</span>
+								</a>
+							</div>
+
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
+							</a>
+							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
+								<a class="dropdown-item" href="#!">Editar perfil</a>
+								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
+							</div>
+						</li>
+					</ul>
+
+				</div>
+
+			</div>
+		</nav>
+		<br><br><br><br>
+		</nav>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="<?php echo site_url('comprador/index'); ?>"></h5>MarketPlace</h5></a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="<?php echo site_url('comprador/index'); ?>">Inicio</a>
-						</li>
-					</ul>
 					<?php echo form_open('tienda/buscarProductos/' . $this->session->userdata['logged_in']['users_id'], "class=\"d-flex\"") ?>
-						<select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
-							<option selected>Seleccionar categoría</option>
-							<?php foreach ($categorias as $cate) { ?>
-								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
-							<?php } ?>
-						</select>
+					<select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
+						<option selected>Seleccionar categoría</option>
+						<?php foreach ($categorias as $cate) { ?>
+							<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+						<?php } ?>
+					</select>
 
-						<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
-						<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
-						<?php echo form_close(); ?>
-						<?php echo form_open('tienda/addProducto'); ?>
-						<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="AddProducto">Agregar Producto</button>
+					<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
+					<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
 					<?php echo form_close(); ?>
-					<div id="logout">
-						<?php echo form_open('auth/logout'); ?>
-						<button type="submit" name="btn_logout" id="btn_logout" class="btn btn-danger" title="Salir">Salir</button>
-						<?php echo form_close(); ?>
-					</div>
+					<?php echo form_open('tienda/addProducto'); ?>
+					<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="AddProducto">Agregar Producto</button>
+					<?php echo form_close(); ?>
 				</div>
 			</div>
 		</nav>

@@ -22,7 +22,6 @@ class Tienda extends CI_Controller
 	{
 		$this->index();
 	}
-
 	function load_data_view($view,  $id = null, $catego = null, $descri = null)
 	{
 		// precarga todos los datos con los que la vista debe iniciar
@@ -164,5 +163,23 @@ class Tienda extends CI_Controller
 			$desc = null;
 		}
 		$this->load_data_view('tienda/tiendaHome', $id, $cate, $desc);
+	}
+	function perfiltienda($id){
+		$data['tienda'] =  $this->Tienda_model->get_user_information_id($id);
+		$data['productos'] = $this->Tienda_model->get_productos_tienda($id);
+		$data['_view'] = "tienda/perfiltienda";
+		$this->load->view('layouts/main', $data);
+	}
+	function calificarPro($id){
+		$calificacion=$this->input->post('star');
+
+		$params = array(
+			'calificacion' => $calificacion,
+			'tienda_id_usuarios' => $id,
+			'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id']
+		);
+		$this->Tienda_model->calificarTienda($params);
+		$this->perfiltienda($id);
+
 	}
 }

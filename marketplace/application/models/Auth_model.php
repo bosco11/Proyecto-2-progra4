@@ -1,10 +1,12 @@
 <?php
 
-Class Auth_model extends CI_Model {
+class Auth_model extends CI_Model
+{
 
 	//Se utiliza el algoritmo de encriptación nativo de PHP password_hash('contraseña', PASSWORD_BCRYPT) para encriptar.
 	//Para verificar la contraseña se utiliza password_verify('contraseña','passw de la BD')
-	public function login($data) {
+	public function login($data)
+	{
 		$userExists = $this->get_user_information($data['user']);
 
 		//Se compara el password que viene por POST con el encriptado de la BD por medio de password_verify()
@@ -16,7 +18,8 @@ Class Auth_model extends CI_Model {
 	}
 
 	//Retorna los datos del usuario indicado por parámetro
-	public function get_user_information($username) {
+	public function get_user_information($username)
+	{
 
 		$query = $this->db->query("SELECT u.* FROM tbl_usuarios u where u.user = '$username'");
 
@@ -26,5 +29,5 @@ Class Auth_model extends CI_Model {
 			return false;
 		}
 	}
-
+	
 }

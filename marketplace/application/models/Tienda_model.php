@@ -80,4 +80,16 @@ class Tienda_model extends CI_Model
 		
 		return $query->result_array();
 	}
+	public function get_user_information_id($id)
+	{
+
+		$query = $this->db->query("SELECT u.* FROM tbl_usuarios u where u.id_usuarios = $id");
+		return $query->row_array();
+	}
+	public function calificarTienda($params){
+		$this->db->delete('tbl_calificacion_tienda', array('tienda_id_usuarios' =>  $params['tienda_id_usuarios'],'comprador_id_usuarios'=>$params['comprador_id_usuarios']));
+
+		$this->db->insert('tbl_calificacion_tienda', $params);
+		return $this->db->insert_id();
+	}
 }

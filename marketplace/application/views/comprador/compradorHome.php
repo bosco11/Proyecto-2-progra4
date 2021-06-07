@@ -177,7 +177,8 @@
 				</span>
 				<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
 					<div class='post_detail'>
-						<?php echo $t['nombre_real']; ?>
+						<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $t['id_usuarios']); ?>"><?php echo $t['nombre_real']; ?></a>
+						<hr>
 						<br>
 						<div class="row align-items">
 							<?php if (!empty($productos)) { ?>
