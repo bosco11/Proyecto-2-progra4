@@ -24,7 +24,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/'.$this->session->userdata['logged_in']['users_id']);?>">Perfil tienda
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>">Perfil tienda
 							</a>
 						</li>
 					</ul>
@@ -33,25 +33,17 @@
 					<ul class="navbar-nav nav-flex-icons ml_auto">
 						<li class="nav-item dropdown notifications-nav ">
 							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-								<span class="badge badge-pill bg-danger">1</span>
+								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?> </span>
 								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
-								<a class="dropdown-item" href="#!">
-									<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
-									<span>New order received</span>
-									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 13 min</span>
-								</a>
-								<a class="dropdown-item" href="#!">
-									<i class="far fa-money-bill-alt mr-2" aria-hidden="true"></i>
-									<span>New order received</span>
-									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 33 min</span>
-								</a>
-								<a class="dropdown-item" href="#!">
-									<i class="fas fa-chart-line mr-2" aria-hidden="true"></i>
-									<span>Your campaign is about end</span>
-									<span class="float-right"><i class="far fa-clock" aria-hidden="true"></i> 53 min</span>
-								</a>
+								<?php foreach ($notificaciones as $notificacion) { ?>
+									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/'.$notificacion['id_notificaciones'])?>">
+										<i class="far fa-bell mr-2" aria-hidden="true"></i>
+										<span> <?php echo $notificacion['descripcion']?> </span>
+										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
+									</a>
+								<?php } ?>
 							</div>
 
 						</li>

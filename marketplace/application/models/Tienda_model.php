@@ -92,4 +92,12 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_calificacion_tienda', $params);
 		return $this->db->insert_id();
 	}
+	public function notificaionesTienda($id){
+		$query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
+		return $query->result_array();
+	}
+	public function ocultarNotificacion($id){
+		$this->db->where('id_notificaciones', $id);
+		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
+	}
 }

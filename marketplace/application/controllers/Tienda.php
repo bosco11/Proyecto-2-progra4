@@ -28,7 +28,7 @@ class Tienda extends CI_Controller
 		$this->load->model('Tienda_model');
 		$categoria = $this->Tienda_model->get_categorias();
 		$data['categorias'] = $categoria;
-
+		$data['notificaciones']= $this->Tienda_model->notificaionesTienda($this->session->userdata['logged_in']['users_id']);
 		if ($catego == null AND $descri == null) {
 			$data['productos'] = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
 		} else {
@@ -181,5 +181,9 @@ class Tienda extends CI_Controller
 		$this->Tienda_model->calificarTienda($params);
 		$this->perfiltienda($id);
 
+	}
+	function ocultarNotificacion($id){
+		$this->Tienda_model->ocultarNotificacion($id);
+		$this->index();
 	}
 }
