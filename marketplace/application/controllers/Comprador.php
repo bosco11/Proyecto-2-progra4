@@ -125,4 +125,17 @@ class Comprador extends CI_Controller
 			$this->index();
 	}
 
+	function calificarProducto($id)
+	{
+		$calificacion = $this->input->post('star');
+		print_r($calificacion);
+		// $params = array(
+		// 	'id_productos' => $id,
+		// 	'calificacion' => $calificacion,
+		// 	'comentarios' => $this->input->post('txt_comentario'),
+		// 	'id_usuarios' => $this->session->userdata['logged_in']['users_id']
+		// );
+		// $this->Comprador_model->calificarProducto($params);
+		// $this->perfilProducto($id);
+	}
 }
