@@ -28,8 +28,8 @@ class Tienda extends CI_Controller
 		$this->load->model('Tienda_model');
 		$categoria = $this->Tienda_model->get_categorias();
 		$data['categorias'] = $categoria;
-		$data['notificaciones']= $this->Tienda_model->notificaionesTienda($this->session->userdata['logged_in']['users_id']);
-		if ($catego == null AND $descri == null) {
+		$data['notificaciones'] = $this->Tienda_model->notificaionesTienda($this->session->userdata['logged_in']['users_id']);
+		if ($catego == null and $descri == null) {
 			$data['productos'] = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
 		} else {
 			$data['productos'] = $this->Tienda_model->buscarProductos($id, $catego, $descri);
@@ -164,14 +164,16 @@ class Tienda extends CI_Controller
 		}
 		$this->load_data_view('tienda/tiendaHome', $id, $cate, $desc);
 	}
-	function perfiltienda($id){
+	function perfiltienda($id)
+	{
 		$data['tienda'] =  $this->Tienda_model->get_user_information_id($id);
 		$data['productos'] = $this->Tienda_model->get_productos_tienda($id);
 		$data['_view'] = "tienda/perfiltienda";
 		$this->load->view('layouts/main', $data);
 	}
-	function calificarPro($id){
-		$calificacion=$this->input->post('star');
+	function calificarPro($id)
+	{
+		$calificacion = $this->input->post('star');
 
 		$params = array(
 			'calificacion' => $calificacion,
@@ -180,10 +182,42 @@ class Tienda extends CI_Controller
 		);
 		$this->Tienda_model->calificarTienda($params);
 		$this->perfiltienda($id);
-
 	}
-	function ocultarNotificacion($id){
+	function ocultarNotificacion($id)
+	{
 		$this->Tienda_model->ocultarNotificacion($id);
 		$this->index();
+	}
+	function addCategoria($id = null)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('txt_categoria', 'Nombre de la categoria', 'required|max_length[200]');
+		if ($this->form_validation->run()) {
+			$params = array(
+				'categorias' => $this->input->post('txt_categoria')
+			);
+			if ($id != null) {
+				$this->Tienda_model->editCategoria($id,$params);
+			}else{
+				$this->Tienda_model->addCategoria($params);
+			}
+			$this->mantCategoria();
+		}else{
+			if ($id != null) {
+				$data['categoria'] = $this->Tienda_model->get_categorias_id($id);
+			} else {
+				$data['categoria'] = null;
+			}
+			$data['_view'] = "tienda/addCategoria";
+			$this->load->view('layouts/main', $data);
+		}
+		
+	}
+	function mantCategoria()
+	{
+		$categoria = $this->Tienda_model->get_categorias();
+		$data['categorias'] = $categoria;
+		$data['_view'] = "tienda/mantCategorias";
+		$this->load->view('layouts/main', $data);
 	}
 }

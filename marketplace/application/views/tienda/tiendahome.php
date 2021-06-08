@@ -19,7 +19,7 @@
 					<!-- Left -->
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-							<a class="nav-link waves-effect" href="#">Inicio
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/mantCategoria')?>">Categorias
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>

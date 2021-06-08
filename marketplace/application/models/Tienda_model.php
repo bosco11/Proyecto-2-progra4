@@ -39,6 +39,22 @@ class Tienda_model extends CI_Model
 	{
 		return $this->db->get('tbl_categorias')->result_array();
 	}
+	public function get_categorias_id($id)
+	{
+		$this->db->where('id_categorias', $id);
+		return $this->db->get('tbl_categorias')->row_array();
+	}
+	public function addCategoria($params)
+	{
+		$this->db->insert('tbl_categorias', $params);
+		$this->db->insert_id();
+	}
+	public function editCategoria($id,$params)
+	{
+
+		$this->db->where('id_categorias', $id);
+		$this->db->update('tbl_categorias', $params);
+	}
 	public function addProducto($params)
 	{
 		$this->db->insert('tbl_productos', $params);
@@ -64,20 +80,20 @@ class Tienda_model extends CI_Model
 	{
 		$this->db->delete('tbl_galeria', array('id_galeria' => $id));
 	}
-	public function buscarProductos($id,$categoria,$descripcion)
+	public function buscarProductos($id, $categoria, $descripcion)
 	{
-		if($descripcion != null AND $categoria == null){
+		if ($descripcion != null and $categoria == null) {
 			$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.descripcion LIKE '$descripcion%'");
-		}else{
-			if($descripcion == null AND $categoria != null){
-				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.id_categorias = ". $categoria);
-			}else{
-				if($descripcion != null AND $categoria != null){
+		} else {
+			if ($descripcion == null and $categoria != null) {
+				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.id_categorias = " . $categoria);
+			} else {
+				if ($descripcion != null and $categoria != null) {
 					$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.descripcion LIKE '$descripcion%' AND u.id_categorias = $categoria");
 				}
 			}
 		}
-		
+
 		return $query->result_array();
 	}
 	public function get_user_information_id($id)
@@ -86,17 +102,20 @@ class Tienda_model extends CI_Model
 		$query = $this->db->query("SELECT u.* FROM tbl_usuarios u where u.id_usuarios = $id");
 		return $query->row_array();
 	}
-	public function calificarTienda($params){
-		$this->db->delete('tbl_calificacion_tienda', array('tienda_id_usuarios' =>  $params['tienda_id_usuarios'],'comprador_id_usuarios'=>$params['comprador_id_usuarios']));
+	public function calificarTienda($params)
+	{
+		$this->db->delete('tbl_calificacion_tienda', array('tienda_id_usuarios' =>  $params['tienda_id_usuarios'], 'comprador_id_usuarios' => $params['comprador_id_usuarios']));
 
 		$this->db->insert('tbl_calificacion_tienda', $params);
 		return $this->db->insert_id();
 	}
-	public function notificaionesTienda($id){
+	public function notificaionesTienda($id)
+	{
 		$query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
 		return $query->result_array();
 	}
-	public function ocultarNotificacion($id){
+	public function ocultarNotificacion($id)
+	{
 		$this->db->where('id_notificaciones', $id);
 		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
 	}
