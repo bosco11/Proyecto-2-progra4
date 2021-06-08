@@ -167,13 +167,18 @@ class Tienda extends CI_Controller
 	function perfiltienda($id)
 	{
 		$data['suscrito'] = true;
+		$data['calificacionComprador'] = 0;
 		if (isset($this->session->userdata['logged_in'])) {
 			$params = array(
 				'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
 				'tienda_id_usuarios' => $id
 			);
 			$data['suscrito'] = $this->Tienda_model->getSuscribircionTienda($params);
+			if ($this->Tienda_model->getCalificacionTiendaComprador($params) != false) {
+				$data['calificacionComprador'] = $this->Tienda_model->getCalificacionTiendaComprador($params);
+			}
 		}
+
 		$data['calificacion'] = $this->calificaciontienda($id);
 		$data['tienda'] =  $this->Tienda_model->get_user_information_id($id);
 		$data['productos'] = $this->Tienda_model->get_productos_tienda($id);
@@ -253,7 +258,7 @@ class Tienda extends CI_Controller
 		if (count($calificaciones) == 0) {
 			return 0;
 		} else {
-			return number_format($calificacion / count($calificaciones),0,",",".");
+			return number_format($calificacion / count($calificaciones), 0, ",", ".");
 		}
 	}
 }

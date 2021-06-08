@@ -109,6 +109,18 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_calificacion_tienda', $params);
 		return $this->db->insert_id();
 	}
+	public function getCalificacionTiendaComprador($params){
+		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = ". $params['tienda_id_usuarios'] ."  AND u.comprador_id_usuarios = ". $params['comprador_id_usuarios']);
+		if ($query->num_rows() == 1) {
+			return $query->row_array();
+		} else {
+			return false;
+		}
+	}
+	public function getCalificacionTienda($id){
+		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = $id");
+		return $query->result_array();
+	}
 	public function notificaionesTienda($id)
 	{
 		$query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
@@ -138,8 +150,5 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_suscriptores', $params);
 		return $this->db->insert_id();
 	}
-	public function getCalificacionTienda($id){
-		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = $id");
-		return $query->result_array();
-	}
+	
 }

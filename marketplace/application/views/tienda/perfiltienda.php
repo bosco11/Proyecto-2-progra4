@@ -48,7 +48,7 @@
                 <i class="fa fa-star"></i>
             <?php  } ?>
 
-            
+
         </div>
         <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
             $suscribir = "Suscribirse";
@@ -149,13 +149,37 @@
                                     <div class="col-md-12">
                                         <div class="stars">
                                             <?php echo form_open('tienda/calificarPro/' . $tienda['id_usuarios']) ?>
-                                            <!-- checked="checked" -->
+
                                             <div action="">
-                                                <input value="5" class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
-                                                <input value="4" class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
-                                                <input value="3" class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
-                                                <input value="2" class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
-                                                <input value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
+                                                <?php if ($calificacionComprador['calificacion'] == 5) { ?>
+                                                    <input checked="checked" value="5" class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
+                                                <?php  } else { ?>
+                                                    <input value="5" class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
+                                                <?php  } ?>
+                                                <?php if ($calificacionComprador['calificacion'] == 4) { ?>
+                                                    <input checked="checked" value="4" class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
+                                                <?php  } else { ?>
+                                                    <input value="4" class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
+                                                <?php  } ?>
+                                                <?php if ($calificacionComprador['calificacion'] == 3) { ?>
+                                                    <input checked="checked" value="3" class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
+                                                <?php  } else { ?>
+                                                    <input value="3" class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
+                                                <?php  } ?>
+                                                <?php if ($calificacionComprador['calificacion'] == 2) { ?>
+                                                    <input checked="checked" value="2" class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
+                                                <?php  } else { ?>
+                                                    <input value="2" class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
+                                                <?php  } ?>
+                                                <?php if ($calificacionComprador['calificacion'] == 1) { ?>
+                                                    <input checked="checked" value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
+                                                <?php  } else { ?>
+                                                    <input value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
+                                                <?php  } ?>
+
+
+
+
                                                 <button type="submit" name="btn_" id="btn_" class="btn btn-secondary me-2" title="Editar">Calificar</button>
                                             </div>
                                             <?php echo form_close(); ?>
