@@ -39,16 +39,28 @@ class Comprador_model extends CI_Model
                                  ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    function search_categoria($data)
+    function search_categoriaT($data)
     {
         return $this->db->query("SELECT tbl_usuarios.*
                                 FROM tbl_usuarios,tbl_productos,tbl_categorias
-                                WHERE tbl_usuarios.tipo_usuario = 'Tienda' 
+                                WHERE tbl_usuarios.tipo_usuario = 'Tienda'
                                 AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
                                 AND tbl_productos.id_categorias = tbl_categorias.id_categorias
                                 AND tbl_categorias.id_categorias = '$data'
-                                group by tbl_usuarios.nombre_real
+                                GROUP BY tbl_usuarios.nombre_real
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
+    }
+
+    function search_categoria($data)
+    {
+        return $this->db->query("SELECT tbl_productos.*
+                                FROM tbl_usuarios,tbl_productos,tbl_categorias
+                                WHERE tbl_usuarios.tipo_usuario = 'Tienda'
+                                AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
+                                AND tbl_productos.id_categorias = tbl_categorias.id_categorias
+                                AND tbl_categorias.id_categorias = '$data' 
+                                group by tbl_productos.descripcion
+                                ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
     function search_productoT($data)

@@ -29,8 +29,11 @@ class Comprador extends CI_Controller
 		if ($tienda_data == null) {
 			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
 		} else {
-			if ($this->input->post('txt_tienda') != "" || $this->input->post('cmb_categoria') != "") {
+			if ($this->input->post('txt_tienda') != "") {
 				$data['tiendas'] = $tienda_data;
+			} else if ($this->input->post('cmb_categoria') != "") {
+				$data['tiendas'] = $tienda_data;
+				$data['productos'] = $this->Comprador_model->search_categoria($this->input->post('cmb_categoria'));
 			} else if ($this->input->post('txt_producto') != "") {
 				$data['tiendas'] = $tienda_data;
 				$data['productos'] = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
@@ -53,7 +56,7 @@ class Comprador extends CI_Controller
 			$result = $this->Comprador_model->search_tiendas($this->input->post('txt_tienda'));
 			$this->index($result);
 		} else if ($this->input->post('cmb_categoria') != "") {
-			$result = $this->Comprador_model->search_categoria($this->input->post('cmb_categoria'));
+			$result = $this->Comprador_model->search_categoriaT($this->input->post('cmb_categoria'));
 			$this->index($result);
 		} else if ($this->input->post('txt_producto') != "") {
 			$result = $this->Comprador_model->search_productoT($this->input->post('txt_producto'));
