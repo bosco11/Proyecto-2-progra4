@@ -58,9 +58,7 @@ if (validation_errors() !== "") {
 			<div class="form-group">
 				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" />
 				<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
-			</div>
-			<label for="file" class="control-label"><span class="text-danger">* </span>Elegir una imagen de perfil:</label><br>
-			<input type="file" name="txt_file" size="20" class="btn btn-info" accept="image/jpeg,image/gif,image/png" />
+			</div>	
 		</div>
 
 		<div id="div2">
