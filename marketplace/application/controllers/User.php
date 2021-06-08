@@ -65,41 +65,19 @@ class User extends CI_Controller
         $this->form_validation->set_rules('txt_direccion', 'Direccion', 'required|max_length[200]');
 
         if ($this->form_validation->run()) {
-            $config['upload_path']          = './resources/files/';
-            $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 2000; //2MB
-            $config['overwrite']            = true;
 
-            $this->load->library('upload', $config);
-            if (!$this->upload->do_upload('txt_file')) {
-                $params = array(
-                    'user' => $this->input->post('txt_usuario'),
-                    'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
-                    'nombre_real' => $this->input->post('txt_nombre'),
-                    'telefono' => $this->input->post('txt_telefono'),
-                    'correo' => $this->input->post('txt_correo'),
-                    'cedula' => $this->input->post('txt_cedula'),
-                    'pais' => $this->input->post('txt_pais'),
-                    'tipo_usuario' => $this->input->post('cmb_tipo'),
-                    'direccion' => $this->input->post('txt_direccion'),
-                    'imagen' => 'unknown.jpg',
-                );
-            } else {
-                $data = array('upload_data' => $this->upload->data());
-                $params = array(
-                    'user' => $this->input->post('txt_usuario'),
-                    'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
-                    'nombre_real' => $this->input->post('txt_nombre'),
-                    'telefono' => $this->input->post('txt_telefono'),
-                    'correo' => $this->input->post('txt_correo'),
-                    'cedula' => $this->input->post('txt_cedula'),
-                    'pais' => $this->input->post('txt_pais'),
-                    'direccion' => $this->input->post('txt_direccion'),
-                    'tipo_usuario' => $this->input->post('cmb_tipo'),
-                    'imagen' => $this->upload->data('file_name'),
-                );
-            }
-
+            $params = array(
+                'user' => $this->input->post('txt_usuario'),
+                'password' => password_hash($this->input->post('txt_clave'), PASSWORD_BCRYPT),
+                'nombre_real' => $this->input->post('txt_nombre'),
+                'telefono' => $this->input->post('txt_telefono'),
+                'correo' => $this->input->post('txt_correo'),
+                'cedula' => $this->input->post('txt_cedula'),
+                'pais' => $this->input->post('txt_pais'),
+                'tipo_usuario' => $this->input->post('cmb_tipo'),
+                'direccion' => $this->input->post('txt_direccion'),
+                'imagen' => 'unknown.jpg'
+            );
             $user_id = $this->User_model->add_user($params);
 
             $data['message_display'] = 'Te has registrado exitosamente.';
@@ -194,7 +172,7 @@ class User extends CI_Controller
             );
 
             $this->User_model->update_user($users_id, $params);
-            $this->session->userdata['logged_in']['imagen']=$this->upload->data('file_name');
+            $this->session->userdata['logged_in']['imagen'] = $this->upload->data('file_name');
 
             $this->session->set_flashdata('success', "Archivo cargado al sistema exitosamente.");
         }
@@ -325,7 +303,7 @@ class User extends CI_Controller
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
-        }else{
+        } else {
             if ($this->form_validation->run()) {
 
                 $params = array(
@@ -338,7 +316,7 @@ class User extends CI_Controller
                 );
 
 
-                $user_id = $this->User_model->update_direction($this->input->post('btn_edit'),$params);
+                $user_id = $this->User_model->update_direction($this->input->post('btn_edit'), $params);
 
                 $data['message_display'] = 'Ha actualizado la dirección correctamente.';
                 $data['pagos2'] = null;
@@ -442,7 +420,7 @@ class User extends CI_Controller
             $data['pagos2'] = null;
             $data['direcciones2'] = null;
             $data['social2'] = $data['red'];
-            $this->load_data_view2('user/social', $data);      
+            $this->load_data_view2('user/social', $data);
         }
     }
 }
