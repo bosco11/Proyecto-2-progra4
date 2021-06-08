@@ -150,5 +150,14 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_suscriptores', $params);
 		return $this->db->insert_id();
 	}
+	public function getSuscriptoresTienda($id){
+		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.comprador_id_usuarios where u.tienda_id_usuarios = $id");
+		return $query->result_array();
+	}
+
+	public function getCantidadDeseosProducto($id){
+		$query = $this->db->query("SELECT u.* FROM tbl_carrito_deseos u where u.id_productos = $id AND u.tipo_producto='D'");
+		return $query->num_rows();
+	}
 	
 }

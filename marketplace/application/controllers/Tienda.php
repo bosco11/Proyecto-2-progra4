@@ -30,11 +30,25 @@ class Tienda extends CI_Controller
 		$data['categorias'] = $categoria;
 		$data['notificaciones'] = $this->Tienda_model->notificaionesTienda($this->session->userdata['logged_in']['users_id']);
 		if ($catego == null and $descri == null) {
-			$data['productos'] = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
+			$productos = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
+			$cont = 0;
+			$cantidad = 0;
+			foreach ($productos as $value) {
+				$cantidad = $this->Tienda_model->getCantidadDeseosProducto($value['id_productos']);
+				$productos[$cont] = array("cantidadDeseos" => $cantidad) + $productos[$cont];
+				$cont++;
+			}
 		} else {
-			$data['productos'] = $this->Tienda_model->buscarProductos($id, $catego, $descri);
+			$productos = $this->Tienda_model->buscarProductos($id, $catego, $descri);
+			$cont = 0;
+			$cantidad = 0;
+			foreach ($productos as $value) {
+				$cantidad = $this->Tienda_model->getCantidadDeseosProducto($value['id_productos']);
+				$productos[$cont] = array("cantidadDeseos" => $cantidad) + $productos[$cont];
+				$cont++;
+			}
 		}
-
+		$data['productos'] =  $productos;
 		$data['_view'] = $view;
 		$this->load->view('layouts/main', $data);
 	}
@@ -260,5 +274,12 @@ class Tienda extends CI_Controller
 		} else {
 			return number_format($calificacion / count($calificaciones), 0, ",", ".");
 		}
+	}
+	function viewSuscriptores($id)
+	{
+		$suscriptores = $this->Tienda_model->getSuscriptoresTienda($id);
+		$data['suscriptores'] = $suscriptores;
+		$data['_view'] = "tienda/suscriptoresTienda";
+		$this->load->view('layouts/main', $data);
 	}
 }

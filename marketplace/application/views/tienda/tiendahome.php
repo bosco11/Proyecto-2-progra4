@@ -84,6 +84,9 @@
 					<?php echo form_open('tienda/addProducto'); ?>
 					<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="AddProducto">Agregar Producto</button>
 					<?php echo form_close(); ?>
+					<?php echo form_open('tienda/viewSuscriptores/'. $this->session->userdata['logged_in']['users_id']); ?>
+					<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="AddProducto">Ver Suscriptores</button>
+					<?php echo form_close(); ?>
 				</div>
 			</div>
 		</nav>
@@ -102,6 +105,7 @@
 							<td>Categoria</td>
 							<td>Tiempo de entrega</td>
 							<td>Ubicacion del producto</td>
+							<td>Cantidad de deseos</td>
 							<td>Acciones</td>
 						</tr>
 					</thead>
@@ -117,6 +121,7 @@
 								<td><?php echo $pro['categorias'] ?></td>
 								<td><?php echo $pro['tiempo_promedio'] ?></td>
 								<td><?php echo $pro['ubicacion_fisica'] ?></td>
+								<td><?php echo $pro['cantidadDeseos'] ?></td>
 								<td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button> </td>
 							</tr>
 							<?php echo form_close(); ?>

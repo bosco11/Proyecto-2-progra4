@@ -47,8 +47,6 @@
             <?php  } else { ?>
                 <i class="fa fa-star"></i>
             <?php  } ?>
-
-
         </div>
         <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
             $suscribir = "Suscribirse";
@@ -176,10 +174,6 @@
                                                 <?php  } else { ?>
                                                     <input value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
                                                 <?php  } ?>
-
-
-
-
                                                 <button type="submit" name="btn_" id="btn_" class="btn btn-secondary me-2" title="Editar">Calificar</button>
                                             </div>
                                             <?php echo form_close(); ?>
@@ -194,5 +188,4 @@
             <hr>
         </div>
     </div>
-</div>
 </div>
