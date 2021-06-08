@@ -33,27 +33,60 @@
 					<li class="nav-item">
 						<div class="dropdown">
 							<button type="button" class="btn btn-info" data-toggle="dropdown">
-								<i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">3</span>
+								<i class="fa fa-shopping-cart" aria-hidden="true">
+								</i>
+								Carrito
+								<?php if (!empty($carrito)) { ?>
+									<?php $cont = 0;
+									$precio = 0; ?>
+									<?php foreach ($carrito as $car) {
+										foreach ($productos as $p) {
+											if ($car['id_productos'] == $p['id_productos']) {
+												$cont += 1;
+												$precio += $p['precio']*$car['cantidad'];
+											} ?>
+										<?php } ?>
+									<?php } ?>
+									<span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
+								<?php } else {
+									$cont = 0;
+									$precio = 0;
+								} ?>
 							</button>
 							<div class="dropdown-menu">
 								<div class="row total-header-section">
 									<div class="col-lg-6 col-sm-6 col-6">
-										<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger">3</span>
+										<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
 									</div>
 									<div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-										<p>Total: <span class="text-info">$2,978.24</span></p>
+										<p>Total: <span class="text-info">$<?php echo $precio ?></span></p>
 									</div>
 								</div>
-								<div class="row cart-detail">
-									<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-										<img src="https://images-na.ssl-images-amazon.com/images/I/811OyrCd5hL._SX425_.jpg">
-									</div>
-									<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-										<p>Sony DSC-RX100M..</p>
-										<span class="price text-info"> $250.22</span> <span class="count">
-											Quantity:01</span>
-									</div>
-								</div>
+								<?php if (!empty($carrito)) { ?>
+									<?php foreach ($carrito as $car) { ?>
+										<div class="row cart-detail">
+											<?php foreach ($productos as $p) { ?>
+												<?php if ($car['id_productos'] == $p['id_productos']) { ?>
+													<?php $band = true;
+													foreach ($galerias as $g) { ?>
+														<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
+															<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+																<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
+															</div>
+														<?php $band = false;
+														} ?>
+													<?php } ?>
+													<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+														<p><?php echo $p['descripcion'] ?>.</p>
+														<span class="price text-info">
+															$<?php echo $p['precio'] ?></span> <span class="count">
+															<?php echo $car['cantidad'] ?></span>
+													</div>
+												<?php } ?>
+											<?php } ?>
+										</div>
+									<?php } ?>
+								<?php } ?>
 								<div class="row">
 									<div class="col-lg-12 col-sm-12 col-12 text-center checkout">
 										<button class="btn btn-primary btn-block">Checkout</button>
@@ -91,7 +124,7 @@
 							<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-							<a class="dropdown-item" href="<?php echo site_url('user/edit/'. $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
+							<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
 							<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
 						</div>
 					</li>
@@ -224,9 +257,10 @@
 														<h5><?php echo $p['descripcion'] ?></h5>
 													</a>
 													<?php if ($seccion == TRUE) { ?>
-														<button class="btn btn-primary">🛒</button>
-
-														<button class="btn btn-primary">❤️</button>
+														<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+														<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
+														<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+														<?php echo form_close(); ?>
 													<?php } ?>
 													<h4 class="font-weight-bold black-text" style="color: black;">
 														<strong>₡ <?php echo $p['precio'] ?></strong>

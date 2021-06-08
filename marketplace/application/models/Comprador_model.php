@@ -7,6 +7,20 @@ class Comprador_model extends CI_Model
         parent::__construct();
     }
 
+    public function update_carrito($params, $id_producto,$id_user)
+    {
+
+        $this->db->where('id_productos', $id_producto);
+        $this->db->where('id_usuarios', $id_user);
+        $this->db->update('tbl_carrito_deseos', $params);
+    }
+
+    public function add_carrito($params)
+    {
+        $this->db->insert('tbl_carrito_deseos', $params);
+        // return $this->db->insert_id();
+    }
+
     function get_all_tiendas()
     {
         return $this->db->query("SELECT *
@@ -63,6 +77,24 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
+    function search_carrito_deseo($id_user,$id_producto,$tipo_producto)
+    {
+        return $this->db->query("SELECT * FROM tbl_carrito_deseos 
+                                WHERE tbl_carrito_deseos.id_usuarios = $id_user
+                                AND tbl_carrito_deseos.id_productos = $id_producto
+                                AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->row_array();
+    }
+
+    function get_all_carrito($id_usuario)
+    {
+        return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos
+                                WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
+                                AND tbl_productos.id_productos = tbl_carrito_deseos.id_productos
+                                AND tbl_carrito_deseos.tipo_producto = 'C'")->result_array();
+    }
+
+    
+
     function search_productoT($data)
     {
         return $this->db->query("SELECT tbl_usuarios.*
@@ -107,4 +139,5 @@ class Comprador_model extends CI_Model
                                 FROM tbl_galeria
                                 where tbl_galeria.id_productos= " . $id)->result_array();
     }
+
 }

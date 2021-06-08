@@ -19,9 +19,11 @@ class Comprador extends CI_Controller
 		$data['productos'] = $this->Comprador_model->get_all_productos();
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
+		
 
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
+			$data['carrito'] = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id']);
 		} else {
 			$data['seccion'] = false;
 		}
@@ -87,4 +89,40 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'comprador/perfilProducto';
 		$this->load->view('layouts/main', $data);
 	}
+
+	function addCarritoDeseo($id)
+	{
+			
+			if ($this->input->post('btn_carrito')) {
+				$tipo_producto='C';
+			}
+			else
+			{
+				$tipo_producto='D';//lista de deseo FALTA
+			}
+
+			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'],$id,$tipo_producto);
+
+			if($result!=null)
+			{
+				$suma=0;
+				$suma = $result['cantidad']; 
+				$suma=$suma+1;
+				$params = array(
+					'cantidad' => $suma,
+				);
+				$this->Comprador_model->update_carrito($params,$id,$this->session->userdata['logged_in']['users_id']);
+			}else{
+				$params = array(
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+					'id_productos' => $id,
+					'tipo_producto' => $tipo_producto,
+					'cantidad' => 1,
+				);
+				$this->Comprador_model->add_carrito($params);
+			}
+            
+			$this->index();
+	}
+
 }
