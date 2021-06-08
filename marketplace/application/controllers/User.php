@@ -290,8 +290,6 @@ class User extends CI_Controller
                     'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
 
                 );
-
-
                 $user_id = $this->User_model->add_direction($params);
 
                 $data['message_display'] = 'Ha registrado la dirección correctamente.';
@@ -317,7 +315,6 @@ class User extends CI_Controller
 
 
                 $user_id = $this->User_model->update_direction($this->input->post('btn_edit'), $params);
-
                 $data['message_display'] = 'Ha actualizado la dirección correctamente.';
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
@@ -333,19 +330,20 @@ class User extends CI_Controller
     {
         $data['dir'] = $this->User_model->get_direction($dir_id);
         $this->User_model->delete_direction($dir_id);
+        $data['pagos2'] = null;
+        $data['direcciones2'] = null;
+        $data['social2'] = null;
         $data['message_display'] = 'Se ha eliminado la dirección!';
-        $this->load_data_view2('user/social', $data['message_display']);
+        $this->load_data_view2('user/social', $data);
     }
 
-    function mantDir($id)
+    function mantDir($dir_id)
     {
-
-
         if (isset($_POST['btn_elim'])) {
-            $this->delete_direccion($$data['dir'] = $this->User_model->get_direction($dir_id));
+            $this->delete_direccion($dir_id);
         } else {
 
-            $data['dir'] = $this->User_model->get_direction($id);
+            $data['dir'] = $this->User_model->get_direction($dir_id);
             $data['message_display'] = null;
             $data['pagos2'] = null;
             $data['direcciones2'] = $data['dir'];
@@ -406,8 +404,11 @@ class User extends CI_Controller
     {
         $data['dir'] = $this->User_model->get_red($red_id);
         $this->User_model->delete_red($red_id);
+        $data['pagos2'] = null;
+        $data['direcciones2'] = null;
+        $data['social2'] = null;
         $data['message_display'] = 'Se ha eliminado la red social!';
-        $this->load_data_view2('user/social', $data['message_display']);
+        $this->load_data_view2('user/social', $data);
     }
 
     function mantRed($id)
