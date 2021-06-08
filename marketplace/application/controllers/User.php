@@ -434,8 +434,6 @@ class User extends CI_Controller
 
     function mantRed($id)
     {
-
-
         if (isset($_POST['btn_elim'])) {
             $this->delete_red($id);
         } else {
@@ -444,44 +442,7 @@ class User extends CI_Controller
             $data['pagos2'] = null;
             $data['direcciones2'] = null;
             $data['social2'] = $data['red'];
-            $this->load_data_view2('user/social', $data);
-            // $this->load->library('form_validation');
-
-            // $this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
-            // $this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
-            // $this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
-            // $this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
-            // $this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
-
-            // if ($this->form_validation->run()) {
-            // 	$params = array(
-            // 		'descripcion' => $this->input->post('txt_descripcion'),
-            // 		'cantidad' => $this->input->post('txt_cantidad'),
-            // 		'id_categorias ' => $this->input->post('cmb_categoria'),
-            // 		'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
-            // 		'costo_envio' => $this->input->post('txt_costoEnvio'),
-            // 		'tiempo_promedio' => $this->input->post('txt_entrega'),
-            // 		'precio' => $this->input->post('txt_precio'),
-            // 		'ubicacion_fisica' => $this->input->post('txt_ubicacion')
-            // 	);
-            // 	$this->Tienda_model->editProducto($params, $id);
-
-            // 	$data['message_display'] = 'Se ha guardado el producto exitosamente.';
-            // 	$this->index();
-            // } else {
-            // 	$producto = $this->Tienda_model->get_productos_id($id);
-            // 	if ($producto != FALSE) {
-            // 		$categoria = $this->Tienda_model->get_categorias();
-            // 		$data['categorias'] = $categoria;
-            // 		$data['producto'] = $producto[0];
-            // 		$data['_view'] = 'tienda/editProducto';
-            // 		$this->load->view('layouts/main', $data);
-            // 	} else {
-            // 		$this->index();
-            // 	}
-            // }
+            $this->load_data_view2('user/social', $data);      
         }
     }
 }

@@ -42,49 +42,37 @@ if (validation_errors() !== "") {
             <div class="item-container">
                 <div class="container">
                     <div class="col-md-12">
-                        <div class="product col-md-3 service-image-left">
+                        <center>
+                            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="padding-top: 20px;">
+                                <div class="carousel-inner " style="width: 500px; height: 300px; border-radius: 20px;">
+                                    <?php $cont = 1 ?>
+                                    <?php if (!empty($galeria)) { ?>
+                                        <?php foreach ($galeria as $g) { ?>
+                                            <?php
+                                            if ($cont == 1) {
+                                                $band = 'active';
+                                            } else {
+                                                $band = '';
+                                            }
+                                            $cont = $cont + 1;
+                                            ?>
+                                            <div class="carousel-item <?php echo $band ?>">
+                                                <img id="item-display" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" height="300px" width="300px" alt="...">
+                                            </div>
 
-                            <center>
-
-                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <?php $cont = 1 ?>
-                                        <?php if (!empty($galeria)) { ?>
-                                            <?php foreach ($galeria as $g) { ?>
-                                                <?php
-                                                if ($cont == 1) {
-                                                    $band = 'active';
-                                                } else {
-                                                    $band = '';
-                                                }
-                                                $cont = $cont + 1;
-                                                ?>
-                                                <div class="carousel-item <?php echo $band ?>">
-                                                    <img id="item-display" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' class="d-block w-100" height="300px" width="600px" alt="...">
-                                                </div>
-
-                                            <?php } ?>
                                         <?php } ?>
-                                    </div>
-                                    <label for=""><?php echo $producto['descripcion'] ?></label>
-
+                                    <?php } ?>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
-                            </center>
-                        </div>
-
-                        <!-- <div class="container service1-items col-sm-2 col-md-2 pull-left">
-						<center>
-							<a id="item-1" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-							<a id="item-2" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-							<a id="item-3" class="service1-item">
-								<img src="http://www.corsair.com/Media/catalog/product/g/s/gs600_psu_sideview_blue_2.png" alt=""></img>
-							</a>
-						</center>
-					</div> -->
+                            </div>
+                        </center>
                     </div>
 
                     <div class="col-md-7">
@@ -161,7 +149,9 @@ if (validation_errors() !== "") {
                                 <li>Correo:<?php echo $producto['correo'] ?></li>
                                 <li>País:<?php echo $producto['pais'] ?></li>
                                 <li>Dirección: <?php echo $producto['direccion'] ?></li>
-
+                                <?php echo form_open('tienda/perfiltienda/' . $producto['id_usuarios']); ?>
+                                <button class="btn btn-primary" type="submit">Ver perfil tienda</button>
+                                <?php echo form_close(); ?>
                             </section>
 
                         </div>
@@ -171,19 +161,47 @@ if (validation_errors() !== "") {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="stars">
-                                                <form action="">
+                                                <div action="">
                                                     <input class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
                                                     <input class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
                                                     <input class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
                                                     <input class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
                                                     <input class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
-                                                </form>
+                                                </div>
                                             </div>
+                                        </div>
+                                        <div id="primero2">
+                                            <h2>Comentario</h2>
+                                            <label for="comentario">Ingrese su comentario: </label>
+                                            <input type="text"><br>
+                                            <button class="btn btn-primary">Publicar</button>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
+                                <div id="primero2">
+                                    <h2>Lista Comentarios</h2>
+                                    <!-- <h2>Lista Comentarios</h2>
+                                    <h2>Lista Comentarios</h2>
+                                    <h2>Lista Comentarios</h2>
+                                    <h2>Lista Comentarios</h2>
+                                    <h2>Lista Comentarios</h2> -->
+                                    <!-- <div id='content_post_<?php echo $t['tweets_id']; ?>'>
+                                        <div class='post_detail'><?php echo $t['post']; ?></div><br />
+                                        <?php if ($t['archivo'] != "" || $t['archivo'] != NULL) {
+                                            $nombreDelArchivo = $t['archivo'];
+                                            $extension = pathinfo($nombreDelArchivo, PATHINFO_EXTENSION);
+                                            if ($extension === "doc" || $extension === "docx" || $extension === "pdf" || $extension === "txt") { ?>
+                                                <ul>
+                                                    <a href="<?php echo site_url('/resources/files/' . $t['archivo']); ?>" id="btn_archivo" name='btn_archivo' title="Archivo"><?php echo $nombreDelArchivo ?></a>
+                                                </ul>
+                                            <?php } else { ?>
+                                                <img src="<?php echo site_url('/resources/files/' . $t['archivo']); ?>" width='150' height='150' />
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </div> -->
+                                </div>
 
+                            </section>
                         </div>
                     </div>
                     <hr>
