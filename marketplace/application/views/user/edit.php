@@ -24,7 +24,7 @@
 			<?php } ?>
 
 		</div>
-		<?php echo form_open('user/edit/' . $user['id_usuarios'], 'onsubmit="send()"'); ?>
+		<?php echo form_open('user/edit/' . $user['id_usuarios']); ?>
 		<div id="edit_panel">
 
 			<div id="div1">

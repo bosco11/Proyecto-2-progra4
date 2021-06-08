@@ -139,5 +139,11 @@ class Comprador_model extends CI_Model
                                 FROM tbl_galeria
                                 where tbl_galeria.id_productos= " . $id)->result_array();
     }
+    public function calificarProducto($params)
+    {
+        // $this->db->delete('tbl_calificacion_productos', array('id_usuarios' =>  $params['id_usuarios'], 'id_productos' => $params['id_productos']));
 
+        $this->db->insert('tbl_calificacion_productos', $params);
+        return $this->db->insert_id();
+    }
 }
