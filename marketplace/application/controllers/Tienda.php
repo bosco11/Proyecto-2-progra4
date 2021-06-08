@@ -166,10 +166,34 @@ class Tienda extends CI_Controller
 	}
 	function perfiltienda($id)
 	{
+		$data['suscrito'] = true;
+		if (isset($this->session->userdata['logged_in'])) {
+			$params = array(
+				'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+				'tienda_id_usuarios' => $id
+			);
+			$data['suscrito'] = $this->Tienda_model->getSuscribircionTienda($params);
+		}
+		$data['calificacion'] = $this->calificaciontienda($id);
 		$data['tienda'] =  $this->Tienda_model->get_user_information_id($id);
 		$data['productos'] = $this->Tienda_model->get_productos_tienda($id);
 		$data['_view'] = "tienda/perfiltienda";
 		$this->load->view('layouts/main', $data);
+	}
+	function suscribirseTienda($id)
+	{
+		$params = array(
+			'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+			'tienda_id_usuarios' => $id
+		);
+		if ($this->input->post("btn_suscripcion") == "Suscribirse") {
+			$this->Tienda_model->suscribirseTienda($params);
+		} else {
+			if ($this->input->post("btn_suscripcion") == "Desuscribirse") {
+				$this->Tienda_model->desuscribirseTienda($params);
+			}
+		}
+		$this->perfiltienda($id);
 	}
 	function calificarPro($id)
 	{
@@ -197,12 +221,12 @@ class Tienda extends CI_Controller
 				'categorias' => $this->input->post('txt_categoria')
 			);
 			if ($id != null) {
-				$this->Tienda_model->editCategoria($id,$params);
-			}else{
+				$this->Tienda_model->editCategoria($id, $params);
+			} else {
 				$this->Tienda_model->addCategoria($params);
 			}
 			$this->mantCategoria();
-		}else{
+		} else {
 			if ($id != null) {
 				$data['categoria'] = $this->Tienda_model->get_categorias_id($id);
 			} else {
@@ -211,7 +235,6 @@ class Tienda extends CI_Controller
 			$data['_view'] = "tienda/addCategoria";
 			$this->load->view('layouts/main', $data);
 		}
-		
 	}
 	function mantCategoria()
 	{
@@ -219,5 +242,18 @@ class Tienda extends CI_Controller
 		$data['categorias'] = $categoria;
 		$data['_view'] = "tienda/mantCategorias";
 		$this->load->view('layouts/main', $data);
+	}
+	function calificaciontienda($id)
+	{
+		$calificaciones = $this->Tienda_model->getCalificacionTienda($id);
+		$calificacion = 0;
+		foreach ($calificaciones as $value) {
+			$calificacion += $value['calificacion'];
+		}
+		if (count($calificaciones) == 0) {
+			return 0;
+		} else {
+			return number_format($calificacion / count($calificaciones),0,",",".");
+		}
 	}
 }

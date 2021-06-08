@@ -52,7 +52,7 @@
 								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-								<a class="dropdown-item" href="#!">Editar perfil</a>
+								<a class="dropdown-item" href="<?php echo site_url('user/edit/'. $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
 								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
 							</div>
 						</li>
@@ -89,7 +89,7 @@
 		</nav>
 
 		<div class="box-header">
-			<h3 align="center">PROODUCTOS</h3>
+			<h3 align="center">PRODUCTOS</h3>
 			<div id="tableview">
 				<table class="table table-striped table-dark" id="table">
 					<thead>
@@ -101,7 +101,7 @@
 							<td>Fecha publicacion</td>
 							<td>Categoria</td>
 							<td>Tiempo de entrega</td>
-							<td>Ubcacion del producto</td>
+							<td>Ubicacion del producto</td>
 							<td>Acciones</td>
 						</tr>
 					</thead>

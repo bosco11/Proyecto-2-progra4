@@ -119,4 +119,27 @@ class Tienda_model extends CI_Model
 		$this->db->where('id_notificaciones', $id);
 		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
 	}
+	public function getSuscribircionTienda($params){
+		
+		$query = $this->db->query("SELECT u.*FROM tbl_suscriptores u where u.tienda_id_usuarios = ". $params['tienda_id_usuarios'] ." AND u.comprador_id_usuarios = ". $params['comprador_id_usuarios'] );
+		if ($query->num_rows() == 1) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+	public function desuscribirseTienda($params){
+		$this->db->delete('tbl_suscriptores', array('tienda_id_usuarios' =>  $params['tienda_id_usuarios'], 'comprador_id_usuarios' => $params['comprador_id_usuarios']));
+
+		
+	}
+	public function suscribirseTienda($params){
+		$this->db->insert('tbl_suscriptores', $params);
+		return $this->db->insert_id();
+	}
+	public function getCalificacionTienda($id){
+		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = $id");
+		return $query->result_array();
+	}
 }
