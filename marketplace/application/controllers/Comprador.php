@@ -2,9 +2,10 @@
 
 class Comprador extends CI_Controller
 {
-
+	
 	public function __construct()
 	{
+		
 		parent::__construct();
 
 		$this->load->helper('form');
@@ -19,7 +20,7 @@ class Comprador extends CI_Controller
 		$data['productos'] = $this->Comprador_model->get_all_productos();
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
-
+		$data['pro'] = $this->Comprador_model->get_all_productos();
 
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
@@ -118,7 +119,6 @@ class Comprador extends CI_Controller
 			);
 			$this->Comprador_model->add_carrito($params);
 		}
-
 		$this->index();
 	}
 
