@@ -19,7 +19,7 @@ class Comprador extends CI_Controller
 		$data['productos'] = $this->Comprador_model->get_all_productos();
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
-		
+
 
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
@@ -92,38 +92,81 @@ class Comprador extends CI_Controller
 
 	function addCarritoDeseo($id)
 	{
-			
-			if ($this->input->post('btn_carrito')) {
-				$tipo_producto='C';
-			}
-			else
-			{
-				$tipo_producto='D';//lista de deseo FALTA
-			}
 
-			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'],$id,$tipo_producto);
+		if ($this->input->post('btn_carrito')) {
+			$tipo_producto = 'C';
+		} else {
+			$tipo_producto = 'D'; //lista de deseo FALTA----------------------------------------------------------
+		}
 
-			if($result!=null)
-			{
-				$suma=0;
-				$suma = $result['cantidad']; 
-				$suma=$suma+1;
-				$params = array(
-					'cantidad' => $suma,
-				);
-				$this->Comprador_model->update_carrito($params,$id,$this->session->userdata['logged_in']['users_id']);
-			}else{
-				$params = array(
-					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-					'id_productos' => $id,
-					'tipo_producto' => $tipo_producto,
-					'cantidad' => 1,
-				);
-				$this->Comprador_model->add_carrito($params);
-			}
-            
-			$this->index();
+		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
+
+		if ($result != null) {
+			$suma = 0;
+			$suma = $result['cantidad'];
+			$suma = $suma + 1;
+			$params = array(
+				'cantidad' => $suma,
+			);
+			$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+		} else {
+			$params = array(
+				'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+				'id_productos' => $id,
+				'tipo_producto' => $tipo_producto,
+				'cantidad' => 1,
+			);
+			$this->Comprador_model->add_carrito($params);
+		}
+
+		$this->index();
 	}
+
+	function process($id)
+	{
+		if ($this->input->post('btn_eliminar')) {
+			$this->deleteCarrito($id);
+		} else if ($this->input->post('btn_mas')) {
+			$this->masCarrito($id);
+		} else if ($this->input->post('btn_menos')) {
+			$this->menosCarrito($id);
+		}
+	}
+
+	function deleteCarrito($id)
+	{
+		$this->Comprador_model->delete_carrito($id);
+		$this->index();
+	}
+
+	function menosCarrito($id)
+	{
+		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, 'C');
+		$suma = 0;
+		$suma = $result['cantidad'];
+		$suma = $suma - 1;
+		if ($suma >= 1) {
+			$params = array(
+				'cantidad' => $suma,
+			);
+			$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+		}
+		$this->index();
+	}
+
+	function masCarrito($id)
+	{
+		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, 'C');
+		$suma = 0;
+		$suma = $result['cantidad'];
+		$suma = $suma + 1;
+		$params = array(
+			'cantidad' => $suma,
+		);
+		$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+		$this->index();
+	}
+
 
 	function calificarProducto($id)
 	{

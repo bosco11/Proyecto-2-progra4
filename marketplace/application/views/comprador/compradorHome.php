@@ -43,7 +43,7 @@
 										foreach ($productos as $p) {
 											if ($car['id_productos'] == $p['id_productos']) {
 												$cont += 1;
-												$precio += $p['precio']*$car['cantidad'];
+												$precio += $p['precio'] * $car['cantidad'];
 											} ?>
 										<?php } ?>
 									<?php } ?>
@@ -78,10 +78,18 @@
 													<?php } ?>
 													<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
 														<p><?php echo $p['descripcion'] ?>.</p>
-														<span class="price text-info">
+														<span class="price text-info" style="display: inline-block;">
 															$<?php echo $p['precio'] ?></span> <span class="count">
-															<?php echo $car['cantidad'] ?></span>
+															<?php echo form_open('comprador/process/'. $p['id_productos']); ?>
+															<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
+															<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
+															<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+															<button type="submit" id=" btn_eliminar" name="btn_eliminar" value="btn_eliminar"  class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+															<?php echo form_close(); ?>
+														</span>
+														
 													</div>
+
 												<?php } ?>
 											<?php } ?>
 										</div>
