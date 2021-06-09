@@ -30,6 +30,15 @@ img {
 	text-align: center;
 	background: #253341;
 }
+#post_box {
+	position: relative;
+	width: auto;
+	margin: auto;
+	height: 140px;
+	top: 0px;
+	text-align: center;
+	background: #253341;
+}
 
 #post_react {
 	position: relative;
@@ -119,6 +128,11 @@ img {
 	color: #FFF;
 	margin: 5px;
 	text-align: justify;
+	border: 1px solid #161b20;
+	border-top: 1px solid #1DA1F2;
+	margin-top: 10px;
+	border-radius: 3px;
+	background: #15202B;
 }
 
 .boton {
@@ -427,6 +441,15 @@ img {
 	border-radius: 5px;
 	border: 1px solid #1DA1F2;
 	width: 250%;
+	color: rgb(0, 0, 0);
+	background: #f8f8f8;
+}
+.cajatexto3 {
+	padding: 5px;
+	margin: 10px;
+	border-radius: 5px;
+	border: 1px solid #1DA1F2;
+	width: 60%;
 	color: rgb(0, 0, 0);
 	background: #f8f8f8;
 }

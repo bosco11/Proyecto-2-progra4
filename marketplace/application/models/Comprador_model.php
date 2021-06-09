@@ -7,7 +7,7 @@ class Comprador_model extends CI_Model
         parent::__construct();
     }
 
-    public function update_carrito($params, $id_producto,$id_user)
+    public function update_carrito($params, $id_producto, $id_user)
     {
 
         $this->db->where('id_productos', $id_producto);
@@ -77,7 +77,7 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
-    function search_carrito_deseo($id_user,$id_producto,$tipo_producto)
+    function search_carrito_deseo($id_user, $id_producto, $tipo_producto)
     {
         return $this->db->query("SELECT * FROM tbl_carrito_deseos 
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_user
@@ -142,11 +142,33 @@ class Comprador_model extends CI_Model
                                 FROM tbl_galeria
                                 where tbl_galeria.id_productos= " . $id)->result_array();
     }
+    function get_calificaciones_productos($id)
+    {
+        return $this->db->query("SELECT *
+                                FROM tbl_calificacion_productos
+                                where tbl_calificacion_productos.id_productos= " . $id)->result_array();
+    }
+    function get_calificacion_producto_usuarioId($id_producto, $id_usuario)
+    {
+        return $this->db->query("SELECT *
+                                FROM tbl_calificacion_productos
+                                where tbl_calificacion_productos.id_productos=$id_producto 
+                                and tbl_calificacion_productos.id_usuarios=$id_usuario")->result_array();
+    }
+
     public function calificarProducto($params)
     {
         // $this->db->delete('tbl_calificacion_productos', array('id_usuarios' =>  $params['id_usuarios'], 'id_productos' => $params['id_productos']));
 
         $this->db->insert('tbl_calificacion_productos', $params);
         return $this->db->insert_id();
+    }
+
+    public function actualizarCalificarProducto($params, $id_producto, $id_user)
+    {
+
+        $this->db->where('id_productos', $id_producto);
+        $this->db->where('id_usuarios', $id_user);
+        $this->db->update('tbl_calificacion_productos', $params);
     }
 }

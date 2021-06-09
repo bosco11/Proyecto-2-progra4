@@ -81,11 +81,15 @@ class Comprador extends CI_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
+			$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id,$this->session->userdata['logged_in']['users_id']);
 		} else {
 			$data['seccion'] = false;
 		}
+		$data['producto_id'] = $id;
 		$data['producto'] = $this->Comprador_model->get_producto_id($id);
+		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);		
 		$data['galeria'] = $this->Comprador_model->get_galerias($id);
+		$data['calificacion'] = $this->calificacionProducto($id);
 		$data['message_display'] = null;
 		$data['_view'] = 'comprador/perfilProducto';
 		$this->load->view('layouts/main', $data);
@@ -170,15 +174,36 @@ class Comprador extends CI_Controller
 
 	function calificarProducto($id)
 	{
-		$calificacion = $this->input->post('star');
-		print_r($calificacion);
-		// $params = array(
-		// 	'id_productos' => $id,
-		// 	'calificacion' => $calificacion,
-		// 	'comentarios' => $this->input->post('txt_comentario'),
-		// 	'id_usuarios' => $this->session->userdata['logged_in']['users_id']
-		// );
-		// $this->Comprador_model->calificarProducto($params);
-		// $this->perfilProducto($id);
+		if (isset($_POST['btn_rating1'])) {
+			$calificacion = $this->input->post('star');
+			$params = array(
+				'id_productos' => $id,
+				'calificacion' => $calificacion,
+				'comentarios' => $this->input->post('txt_comentario'),
+				'id_usuarios' => $this->session->userdata['logged_in']['users_id']
+			);
+			$this->Comprador_model->calificarProducto($params);
+			$this->perfilProducto($id);
+		} else {
+			$calificacion = $this->input->post('star');
+			$params = array(
+				'calificacion' => $calificacion
+			);
+			$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
+			$this->perfilProducto($id);
+		}
+	}
+	function calificacionProducto($id)
+	{
+		$calificaciones = $this->Comprador_model->get_calificaciones_productos($id);
+		$calificacion = 0;
+		foreach ($calificaciones as $value) {
+			$calificacion += $value['calificacion'];
+		}
+		if (count($calificaciones) == 0) {
+			return 0;
+		} else {
+			return number_format($calificacion / count($calificaciones), 0, ",", ".");
+		}
 	}
 }
