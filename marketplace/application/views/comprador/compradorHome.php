@@ -180,18 +180,18 @@
 							</a>
 						</div>
 						<div class="card-body text-center">
-							<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+							<!-- <a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
 								<h5><?php echo $p['descripcion'] ?></h5>
-							</a>
+							</a> -->
 							<?php if ($seccion == TRUE) { ?>
 								<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
 								<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
 								<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
 								<?php echo form_close(); ?>
 							<?php } ?>
-							<h4 class="font-weight-bold black-text" style="color: black;">
+							<!-- <h4 class="font-weight-bold black-text" style="color: black;">
 								<strong>₡ <?php echo $p['precio'] ?></strong>
-							</h4>
+							</h4> -->
 						</div>
 					</div>
 				</div>
