@@ -154,145 +154,164 @@
 </nav>
 <br><br><br><br>
 <!-- Navbar -->
-<!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
 
-	<!-- Navbar brand -->
-	<span class="navbar-brand">Filtros:</span>
+<div id="mas_vendidos">
+	<div class='post_block'>
+		<div class='post_detail' style="text-align: center;">
+			<a class="nav-link waves-effect">
+				<h5>Productos más vendidos</h5>
+			</a>
+			<hr>
+			<br>
+			<div class="row align-items">
+				<div class="col-lg-3 col-md-6 mb-4">
+					<div class="card">
+						<div class="view overlay">
+							<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner">
+									<div class="carousel-item active">
+										<img src='<?php echo site_url('/resources/files/WIN_20190913_17_31_42_Pro.jpg')?>' height="200" class="d-block w-100" alt="...">
+									</div>
+								</div>
 
-	<!-- Collapse button -->
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<!-- Collapsible content -->
-	<div class="collapse navbar-collapse" id="basicExampleNav">
-
-		<!-- Links -->
-		<ul class="navbar-nav mr-auto">
-			<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
-			<li class="nav-item me-2">
-				<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
-					<option value="">Sin seleccionar</option>
-					<?php if (!empty($categorias)) { ?>
-						<?php foreach ($categorias as $cate) { ?>
-							<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
-						<?php } ?>
-					<?php } ?>
-				</select>
-			</li>
-
-			<li class="nav-item me-2">
-				<input id=" txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
-
-			</li>
-			<li class="nav-item me-2">
-				<input id=" txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
-			</li>
-			<li class="nav-item me-2">
-				<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
-			</li>
-
-			<?php echo form_close(); ?>
-
-		</ul>
-		<!-- Links -->
-
-		<!-- <form class="form-inline">
-				<div class="md-form my-0">
-					<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-				</div>
-			</form> -->
-	</div>
-	<!-- Collapsible content -->
-
-</nav>
-<!--/.Navbar-->
-
-
-
-<!-- traer tiendas de base de datos -->
-<div id="main_panel">
-	<?php if (!empty($tiendas)) { ?>
-		<?php foreach ($tiendas as $t) { ?>
-			<div class='post_block'>
-				<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
-				</span>
-				<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
-					<div class='post_detail'>
-						<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $t['id_usuarios']); ?>"><?php echo $t['nombre_real']; ?></a>
-						<hr>
-						<br>
-						<div class="row align-items">
-							<?php if (!empty($productos)) { ?>
-								<?php foreach ($productos as $p) { ?>
-									<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
-										<div class="col-lg-3 col-md-6 mb-4">
-											<div class="card">
-												<!--Card image-->
-												<div class="view overlay">
-													<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-														<div class="carousel-inner">
-															<?php $cont = 1 ?>
-															<?php if (!empty($galerias)) { ?>
-																<?php foreach ($galerias as $g) { ?>
-																	<?php if ($g['id_productos'] == $p['id_productos']) {
-																		if ($cont == 1) {
-																			$band = 'active';
-																		} else {
-																			$band = '';
-																		}
-																		$cont = $cont + 1;
-																	?>
-																		<div class="carousel-item <?php echo $band ?>">
-																			<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
-																		</div>
-																	<?php } ?>
-																<?php } ?>
-															<?php } ?>
-														</div>
-														<label for=""><?php echo $p['descripcion'] ?></label>
-
-													</div>
-													<a>
-														<div class="mask rgba-white-slight"></div>
-													</a>
-												</div>
-												<!--Card image-->
-
-												<!--Card content-->
-												<div class="card-body text-center">
-													<!--Category & Title-->
-													<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
-														<h5><?php echo $p['descripcion'] ?></h5>
-													</a>
-													<?php if ($seccion == TRUE) { ?>
-														<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-														<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
-														<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
-														<?php echo form_close(); ?>
-													<?php } ?>
-													<h4 class="font-weight-bold black-text" style="color: black;">
-														<strong>₡ <?php echo $p['precio'] ?></strong>
-													</h4>
-
-												</div>
-												<!--Card content-->
-
-											</div>
-
-										</div>
-									<?php } ?>
-								<?php } ?>
-							<?php } ?>
+							</div>
+							<a>
+								<div class="mask rgba-white-slight"></div>
+							</a>
 						</div>
-
-
-					</div><br />
+						<div class="card-body text-center">
+							<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+								<h5><?php echo $p['descripcion'] ?></h5>
+							</a>
+							<?php if ($seccion == TRUE) { ?>
+								<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+								<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
+								<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+								<?php echo form_close(); ?>
+							<?php } ?>
+							<h4 class="font-weight-bold black-text" style="color: black;">
+								<strong>₡ <?php echo $p['precio'] ?></strong>
+							</h4>
+						</div>
+					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<!--Navbar-->
+	<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
+
+		<span class="navbar-brand">Filtros:</span>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="basicExampleNav">
+			<ul class="navbar-nav mr-auto">
+				<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
+				<li class="nav-item me-2">
+					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+						<option value="">Sin seleccionar</option>
+						<?php if (!empty($categorias)) { ?>
+							<?php foreach ($categorias as $cate) { ?>
+								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
+				</li>
+
+				<li class="nav-item me-2">
+					<input id=" txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
+
+				</li>
+				<li class="nav-item me-2">
+					<input id=" txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
+				</li>
+				<li class="nav-item me-2">
+					<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+				</li>
+
+				<?php echo form_close(); ?>
+
+			</ul>
+		</div>
+	</nav>
+	<!--/.Navbar-->
+
+
+
+	<!-- traer tiendas de base de datos -->
+	<div id="main_panel">
+		<?php if (!empty($tiendas)) { ?>
+			<?php foreach ($tiendas as $t) { ?>
+				<div class='post_block'>
+					<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
+					</span>
+					<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
+						<div class='post_detail' style="text-align: center;">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $t['id_usuarios']); ?>">
+								<h5><?php echo $t['nombre_real']; ?></h5>
+							</a>
+							<hr>
+							<br>
+							<div class="row align-items">
+								<?php if (!empty($productos)) { ?>
+									<?php foreach ($productos as $p) { ?>
+										<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
+											<div class="col-lg-3 col-md-6 mb-4">
+												<div class="card">
+													<!--Card image-->
+													<div class="view overlay">
+														<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+															<div class="carousel-inner">
+																<?php $cont = 1 ?>
+																<?php if (!empty($galerias)) { ?>
+																	<?php foreach ($galerias as $g) { ?>
+																		<?php if ($g['id_productos'] == $p['id_productos']) {
+																			if ($cont == 1) {
+																				$band = 'active';
+																			} else {
+																				$band = '';
+																			}
+																			$cont = $cont + 1;
+																		?>
+																			<div class="carousel-item <?php echo $band ?>">
+																				<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
+																			</div>
+																		<?php } ?>
+																	<?php } ?>
+																<?php } ?>
+															</div>
+
+														</div>
+														<a>
+															<div class="mask rgba-white-slight"></div>
+														</a>
+													</div>
+													<div class="card-body text-center">
+														<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+															<h5><?php echo $p['descripcion'] ?></h5>
+														</a>
+														<?php if ($seccion == TRUE) { ?>
+															<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+															<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
+															<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+															<?php echo form_close(); ?>
+														<?php } ?>
+														<h4 class="font-weight-bold black-text" style="color: black;">
+															<strong>₡ <?php echo $p['precio'] ?></strong>
+														</h4>
+													</div>
+												</div>
+											</div>
+										<?php } ?>
+									<?php } ?>
+								<?php } ?>
+							</div>
+						</div><br />
+					</div>
+				</div>
+			<?php } ?>
 		<?php } ?>
-	<?php } ?>
-</div>
-<!-- aqui termina el llamado a las tiendas  -->
+	</div>
+	<!-- aqui termina el llamado a las tiendas  -->
 </div>
