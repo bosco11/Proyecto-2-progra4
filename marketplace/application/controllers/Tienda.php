@@ -215,7 +215,7 @@ class Tienda extends CI_Controller
 	{
 		$data['suscrito'] = true;
 		$data['denuncia'] = true;
-		$data['calificacionComprador'] = 0;
+		$data['calificacionComprador'] = array( 'calificacion'=>0);
 		if (isset($this->session->userdata['logged_in'])) {
 			$params = array(
 				'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
