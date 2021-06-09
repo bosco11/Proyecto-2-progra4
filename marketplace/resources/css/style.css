@@ -231,11 +231,13 @@ img {
 	padding-top: 20px;
 	padding-bottom: 4px;
 }
+
 #bt_social {
 	float: left;
 	/* padding-top: 100px; */
 	/* left: 501px; */
 }
+
 #bt_social2 {
 	/* float: left; */
 	padding-bottom: 100px;
@@ -337,115 +339,15 @@ img {
 	}
 }
 
-/* h1 {
-	font-size: 30px;
-	color: #fff;
-	text-transform: uppercase;
-	font-weight: 300;
-	text-align: center;
-	margin-bottom: 15px;
-}
-
-.container th h1 {
-	font-weight: bold;
-	font-size: 1em;
-	text-align: left;
-	color: #185875;
-}
-
-.container td {
-	font-weight: normal;
-	font-size: 1em;
-	-webkit-box-shadow: 0 2px 2px -2px #0E1119;
-	-moz-box-shadow: 0 2px 2px -2px #0E1119;
-	box-shadow: 0 2px 2px -2px #0E1119;
-}
-
-.container {
-	text-align: left;
-	overflow: scroll;
-	width: 80%;
-	height: 400px;
-	margin: 0 auto;
-	display: table;
-	padding: 0 0 8em 0;
-	/* background-color: crimson; */
-
-/* 
-.container td,
-.container th {
-	padding-bottom: 2%;
-	padding-top: 2%;
-	padding-left: 2%;
-	border-bottom: solid 1px crimson;
-	text-align: center;
-}
-
-.container tr:nth-child(odd) {
-	background-color: #323C50;
-}
-
-.container tr {
-	font-size: 16px;
-}
-
-.container tr:nth-child(even) {
-	background-color: #2C3446;
-}
-
-.container th {
-	background-color: #1F2739;
-	font-size: 16px;
-}
-
-.container td:first-child {
-	color: #FB667A;
-}
-
-.container tr:hover {
-	background-color: #464A52;
-	-webkit-box-shadow: 0 6px 6px -6px #0E1119;
-	-moz-box-shadow: 0 6px 6px -6px #0E1119;
-	box-shadow: 0 6px 6px -6px #0E1119;
-}
-
-.container td:hover {
-	background-color: #FFF842;
-	color: #403E10;
-	font-weight: bold;
-
-	box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
-	transform: translate3d(6px, -6px, 0);
-
-	transition-delay: 0s;
-	transition-duration: 0.4s;
-	transition-property: all;
-	transition-timing-function: line;
-}
-
-@media (max-width: 800px) {
-
-	.container td:nth-child(4),
-	.container th:nth-child(4) {
-		display: none;
-	}
-}
-
-.tbl-header {
-	overflow: auto;
-	width: 100%;
-	height: 430px;
-}  */
-
 #ico {
 	position: relative;
 	font-size: 18px;
 	padding-right: 4px;
 	padding-left: 4px;
-	
+
 }
 
-#cmb_tipo{
+#cmb_tipo {
 	padding: 5px;
 	margin: 10px;
 	border-radius: 5px;
@@ -466,14 +368,16 @@ img {
 	/* margin-bottom: 10px; */
 	/* padding-bottom: 80px; */
 }
+
 #div2 {
 	position: relative;
 	bottom: 5px;
 	float: right;
 	width: 50%;
-	margin-bottom: 60px;
+	/* margin-bottom: 60px; */
 	/* padding-bottom: 90px; */
 }
+
 #primero {
 	position: relative;
 	bottom: 5px;
@@ -482,14 +386,16 @@ img {
 	margin-bottom: 60px;
 	/* padding-bottom: 90px; */
 }
+
 #segundo {
 	position: relative;
 	bottom: 5px;
 	float: right;
 	width: 50%;
-	margin-bottom: 60px;
+	margin-bottom: 120px;
 	/* padding-bottom: 90px; */
 }
+
 #div3 {
 	position: relative;
 	bottom: 5px;
@@ -497,7 +403,8 @@ img {
 	float: left;
 	/* width: 50%; */
 }
-#vencimiento{
+
+#vencimiento {
 	padding: 5px;
 	margin: 10px;
 	border-radius: 5px;
@@ -506,7 +413,10 @@ img {
 	color: rgb(0, 0, 0);
 	background: #ffffff;
 }
-#tableview2, #tableview1, #tableview3{
+
+#tableview2,
+#tableview1,
+#tableview3 {
 	height: 450px;
 	overflow: auto;
 }
@@ -520,6 +430,12 @@ img {
 	color: rgb(0, 0, 0);
 	background: #f8f8f8;
 }
-#user{
+
+#user {
 	color: red;
+}
+
+#btn_editar,#btn_save{
+	/* padding-left: 10px; */
+	margin-left: 20px;
 }

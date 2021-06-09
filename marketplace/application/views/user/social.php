@@ -40,8 +40,8 @@ if (validation_errors() !== "") {
     </div>
     <br>
     <br>
-    <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador' && $this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
-        <div class="form-row">
+    
+        <!-- <div class="form-row"> -->
             <div id="pago">
                 <h2 id="user">Formas de pago</h2>
                 <?php echo form_open('user/agregarmetodo'); ?>
@@ -71,7 +71,6 @@ if (validation_errors() !== "") {
                         <input type="number" name="txt_saldo" id="txt_saldo" placeholder="Saldo tarjeta" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_saldo') ? $this->input->post('txt_saldo') : $pagos2['saldo']); ?>" <?php } ?> required>
 
                     </div>
-
                     <?php if ($pagos2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit">Agregar metodo pago</button> <?php } else { ?>
                         <button class="btn btn-primary" name="btn_edit" id="btn_edit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $pagos2['id_formas_pago']); ?>" type="submit">Actualizar metodo pago</button><?php } ?>
                 </div>
@@ -108,13 +107,13 @@ if (validation_errors() !== "") {
                     </div>
                 </div>
             </div>
-        </div>
-    <?php } ?>
+        <!-- </div> -->
+
     <br>
-    <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador' && $this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
+    
         <div id="direcciones">
             <h2 id="user">Direcciones de envio</h2>
-            <div class="form-row">
+            <!-- <div class="form-row"> -->
                 <?php echo form_open('user/agregarDireccion'); ?>
                 <div class="column" id="primero">
                     <div class="col-md-4 mb-3">
@@ -179,14 +178,14 @@ if (validation_errors() !== "") {
                     </div>
                 </div>
 
-            </div>
+            <!-- </div> -->
         </div>
-    <?php } ?>
+   
     <br>
     <br>
     <div id="Redes">
         <h2 id="user">Redes sociales</h2>
-        <div class="form-row">
+        <!-- <div class="form-row"> -->
             <?php echo form_open('user/agregarRed'); ?>
             <div class="column" id="primero">
                 <div class="col-md-4 mb-3">
@@ -233,6 +232,6 @@ if (validation_errors() !== "") {
                 </div>
             </div>
 
-        </div>
+        <!-- </div> -->
     </div>
 </div>
