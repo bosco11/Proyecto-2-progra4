@@ -55,7 +55,7 @@
             } ?>
             <?php echo form_open('tienda/suscribirseTienda/' . $tienda['id_usuarios']) ?>
             <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Editar"><?php echo $suscribir ?></button>
+            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Suscribirse"><?php echo $suscribir ?></button>
             <?php echo form_close(); ?>
             <?php
             $abuso = "Denunciar";
@@ -64,7 +64,7 @@
             } ?>
             <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
             <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="denunciar" title="Editar"><?php echo $abuso ?></button>
+            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="denunciar" title="Denuncia"><?php echo $abuso ?></button>
             <?php echo form_close(); ?>
         <?php } ?>
         <hr>
