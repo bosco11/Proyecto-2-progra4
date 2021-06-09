@@ -29,6 +29,7 @@ class Tienda extends CI_Controller
 		$categoria = $this->Tienda_model->get_categorias();
 		$data['categorias'] = $categoria;
 		$data['notificaciones'] = $this->Tienda_model->notificaionesTienda($this->session->userdata['logged_in']['users_id']);
+		$productos = array();
 		if ($catego == null and $descri == null) {
 			$productos = $this->Tienda_model->get_productos_tienda($this->session->userdata['logged_in']['users_id']);
 			$cont = 0;
@@ -52,51 +53,71 @@ class Tienda extends CI_Controller
 		$data['_view'] = $view;
 		$this->load->view('layouts/main', $data);
 	}
+	function mantProPerfil($id)
+	{
+		if (isset($_POST['btn_perfil'])) {
+			redirect('comprador/perfilProducto/' . $id, 'refresh');
+		}
+	}
 	function mantPro($id)
 	{
 
-
-		if (isset($_POST['btn_elim'])) {
-			$this->Tienda_model->get_elimnar_producto($id);
-			redirect('tienda/tiendaHome', 'refresh');
+		if (isset($_POST['btn_perfil'])) {
+			redirect('comprador/perfilProducto/' . $id, 'refresh');
 		} else {
-			$this->load->library('form_validation');
-
-			$this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
-			$this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
-			$this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
-			$this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
-			$this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
-			$this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
-			$this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
-
-			if ($this->form_validation->run()) {
-				$params = array(
-					'descripcion' => $this->input->post('txt_descripcion'),
-					'cantidad' => $this->input->post('txt_cantidad'),
-					'id_categorias ' => $this->input->post('cmb_categoria'),
-					'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
-					'costo_envio' => $this->input->post('txt_costoEnvio'),
-					'tiempo_promedio' => $this->input->post('txt_entrega'),
-					'precio' => $this->input->post('txt_precio'),
-					'ubicacion_fisica' => $this->input->post('txt_ubicacion')
-				);
-				$this->Tienda_model->editProducto($params, $id);
-
-				$data['message_display'] = 'Se ha guardado el producto exitosamente.';
-				$this->index();
+			if (isset($_POST['btn_elim'])) {
+				$this->Tienda_model->get_elimnar_producto($id);
+				redirect('tienda/tiendaHome', 'refresh');
 			} else {
-				$producto = $this->Tienda_model->get_productos_id($id);
-				if ($producto != FALSE) {
-					$categoria = $this->Tienda_model->get_categorias();
-					$data['categorias'] = $categoria;
-					$data['producto'] = $producto[0];
-					$data['_view'] = 'tienda/editProducto';
-					$this->load->view('layouts/main', $data);
-				} else {
+				$this->load->library('form_validation');
+
+				$this->form_validation->set_rules('txt_descripcion', 'Decripcion', 'required|max_length[200]');
+				$this->form_validation->set_rules('txt_cantidad', 'Cantidad', 'required|max_length[20]');
+				$this->form_validation->set_rules('txt_costoEnvio', 'ContoEnvio', 'required|max_length[200]');
+				$this->form_validation->set_rules('txt_precio', 'Precio', 'required|max_length[200]');
+				$this->form_validation->set_rules('cmb_categoria', 'Categoria', 'required|max_length[200]');
+				$this->form_validation->set_rules('txt_entrega', 'Entrega', 'required|max_length[45]');
+				$this->form_validation->set_rules('txt_ubicacion', 'Ubicacion', 'required|max_length[200]');
+
+				if ($this->form_validation->run()) {
+					$params = array(
+						'descripcion' => $this->input->post('txt_descripcion'),
+						'cantidad' => $this->input->post('txt_cantidad'),
+						'id_categorias ' => $this->input->post('cmb_categoria'),
+						'id_usuarios ' => $this->session->userdata['logged_in']['users_id'],
+						'costo_envio' => $this->input->post('txt_costoEnvio'),
+						'tiempo_promedio' => $this->input->post('txt_entrega'),
+						'precio' => $this->input->post('txt_precio'),
+						'ubicacion_fisica' => $this->input->post('txt_ubicacion')
+					);
+					$this->Tienda_model->editProducto($params, $id);
+					$this->notificarCambioProductos($id,$params['descripcion']);
+					$data['message_display'] = 'Se ha guardado el producto exitosamente.';
 					$this->index();
+				} else {
+					$producto = $this->Tienda_model->get_productos_id($id);
+					if ($producto != FALSE) {
+						$categoria = $this->Tienda_model->get_categorias();
+						$data['categorias'] = $categoria;
+						$data['producto'] = $producto[0];
+						$data['_view'] = 'tienda/editProducto';
+						$this->load->view('layouts/main', $data);
+					} else {
+						$this->index();
+					}
 				}
 			}
+		}
+	}
+	function notificarCambioProductos($id,$descripcion){
+		$deseos=$this->Tienda_model->getDeseosProducto($id);
+		foreach ($deseos as $value) {
+			$params = array(
+				'descripcion' => "El producto $descripcion cambio",
+				'id_usuarios' => $value['id_usuarios'],
+				'estado' => "N"
+			);
+			$this->Tienda_model->addNotificacionesProducto($params);
 		}
 	}
 	function addProducto()
@@ -178,15 +199,29 @@ class Tienda extends CI_Controller
 		}
 		$this->load_data_view('tienda/tiendaHome', $id, $cate, $desc);
 	}
-	function perfiltienda($id)
+	function buscarProductosPerfil($id)
+	{
+		$cate = $this->input->post('cmb_categoria');
+		$desc = $this->input->post('txt_buscar');
+		if ($cate == 0) {
+			$cate = null;
+		}
+		if ($desc == '') {
+			$desc = null;
+		}
+		$this->perfiltienda($id, $cate, $desc);
+	}
+	function perfiltienda($id, $catego = null, $descri = null)
 	{
 		$data['suscrito'] = true;
+		$data['denuncia'] = true;
 		$data['calificacionComprador'] = 0;
 		if (isset($this->session->userdata['logged_in'])) {
 			$params = array(
 				'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
 				'tienda_id_usuarios' => $id
 			);
+			$data['denuncia'] = $this->Tienda_model->getDenunciaTienda($params);
 			$data['suscrito'] = $this->Tienda_model->getSuscribircionTienda($params);
 			if ($this->Tienda_model->getCalificacionTiendaComprador($params) != false) {
 				$data['calificacionComprador'] = $this->Tienda_model->getCalificacionTiendaComprador($params);
@@ -195,9 +230,40 @@ class Tienda extends CI_Controller
 
 		$data['calificacion'] = $this->calificaciontienda($id);
 		$data['tienda'] =  $this->Tienda_model->get_user_information_id($id);
-		$data['productos'] = $this->Tienda_model->get_productos_tienda($id);
+		$productos = array();
+		if ($catego == null and $descri == null) {
+			$productos = $this->Tienda_model->get_productos_tienda($id);
+			$cont = 0;
+			$cantidad = 0;
+			foreach ($productos as $value) {
+				$cantidad = $this->Tienda_model->getCantidadDeseosProducto($value['id_productos']);
+				$productos[$cont] = array("cantidadDeseos" => $cantidad) + $productos[$cont];
+				$cont++;
+			}
+		} else {
+			$productos = $this->Tienda_model->buscarProductos($id, $catego, $descri);
+			$cont = 0;
+			$cantidad = 0;
+			foreach ($productos as $value) {
+				$cantidad = $this->Tienda_model->getCantidadDeseosProducto($value['id_productos']);
+				$productos[$cont] = array("cantidadDeseos" => $cantidad) + $productos[$cont];
+				$cont++;
+			}
+		}
+		$categoria = $this->Tienda_model->get_categorias();
+		$data['categorias'] = $categoria;
+		$data['productos'] = $productos;
 		$data['_view'] = "tienda/perfiltienda";
 		$this->load->view('layouts/main', $data);
+	}
+	function denunciarTienda($id)
+	{
+		$params = array(
+			'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+			'tienda_id_usuarios' => $id
+		);
+		$this->Tienda_model->denunciarTienda($params);
+		$this->perfiltienda($id);
 	}
 	function suscribirseTienda($id)
 	{

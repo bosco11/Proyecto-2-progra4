@@ -49,9 +49,9 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_categorias', $params);
 		$this->db->insert_id();
 	}
-	public function editCategoria($id,$params)
+	
+	public function editCategoria($id, $params)
 	{
-
 		$this->db->where('id_categorias', $id);
 		$this->db->update('tbl_categorias', $params);
 	}
@@ -109,17 +109,23 @@ class Tienda_model extends CI_Model
 		$this->db->insert('tbl_calificacion_tienda', $params);
 		return $this->db->insert_id();
 	}
-	public function getCalificacionTiendaComprador($params){
-		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = ". $params['tienda_id_usuarios'] ."  AND u.comprador_id_usuarios = ". $params['comprador_id_usuarios']);
+	public function getCalificacionTiendaComprador($params)
+	{
+		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = " . $params['tienda_id_usuarios'] . "  AND u.comprador_id_usuarios = " . $params['comprador_id_usuarios']);
 		if ($query->num_rows() == 1) {
 			return $query->row_array();
 		} else {
 			return false;
 		}
 	}
-	public function getCalificacionTienda($id){
+	public function getCalificacionTienda($id)
+	{
 		$query = $this->db->query("SELECT u.* FROM tbl_calificacion_tienda u where u.tienda_id_usuarios = $id");
 		return $query->result_array();
+	}
+	public function addNotificacionesProducto($params){
+		$this->db->insert('tbl_notificaciones', $params);
+		return $this->db->insert_id();
 	}
 	public function notificaionesTienda($id)
 	{
@@ -131,33 +137,62 @@ class Tienda_model extends CI_Model
 		$this->db->where('id_notificaciones', $id);
 		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
 	}
-	public function getSuscribircionTienda($params){
-		
-		$query = $this->db->query("SELECT u.*FROM tbl_suscriptores u where u.tienda_id_usuarios = ". $params['tienda_id_usuarios'] ." AND u.comprador_id_usuarios = ". $params['comprador_id_usuarios'] );
+
+
+	public function getSuscribircionTienda($params)
+	{
+
+		$query = $this->db->query("SELECT u.*FROM tbl_suscriptores u where u.tienda_id_usuarios = " . $params['tienda_id_usuarios'] . " AND u.comprador_id_usuarios = " . $params['comprador_id_usuarios']);
 		if ($query->num_rows() == 1) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
-	public function desuscribirseTienda($params){
+	public function desuscribirseTienda($params)
+	{
 		$this->db->delete('tbl_suscriptores', array('tienda_id_usuarios' =>  $params['tienda_id_usuarios'], 'comprador_id_usuarios' => $params['comprador_id_usuarios']));
-
-		
 	}
-	public function suscribirseTienda($params){
+	public function suscribirseTienda($params)
+	{
 		$this->db->insert('tbl_suscriptores', $params);
 		return $this->db->insert_id();
 	}
-	public function getSuscriptoresTienda($id){
+	public function getSuscriptoresTienda($id)
+	{
 		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.comprador_id_usuarios where u.tienda_id_usuarios = $id");
 		return $query->result_array();
 	}
 
-	public function getCantidadDeseosProducto($id){
+	public function getDeseosProducto($id){
+		$query = $this->db->query("SELECT u.* FROM tbl_carrito_deseos u where u.id_productos = $id AND u.tipo_producto='D'");
+		return $query->result_array();
+	}
+
+	public function getCantidadDeseosProducto($id)
+	{
 		$query = $this->db->query("SELECT u.* FROM tbl_carrito_deseos u where u.id_productos = $id AND u.tipo_producto='D'");
 		return $query->num_rows();
 	}
-	
+
+
+
+	public function denunciarTienda($params)
+	{
+		$query = $this->db->query("SELECT u.*FROM tbl_denuncias u where u.tienda_id_usuarios = " . $params['tienda_id_usuarios'] . " AND u.comprador_id_usuarios = " . $params['comprador_id_usuarios']);
+		if ($query->num_rows() == 0) {
+			$this->db->insert('tbl_denuncias', $params);
+			return $this->db->insert_id();
+		}
+	}
+	public function getDenunciaTienda($params)
+	{
+
+		$query = $this->db->query("SELECT u.*FROM tbl_denuncias u where u.tienda_id_usuarios = " . $params['tienda_id_usuarios'] . " AND u.comprador_id_usuarios = " . $params['comprador_id_usuarios']);
+		if ($query->num_rows() == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

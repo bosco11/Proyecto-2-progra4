@@ -57,6 +57,15 @@
             <hr>
             <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Editar"><?php echo $suscribir ?></button>
             <?php echo form_close(); ?>
+            <?php
+            $abuso = "Denunciar";
+            if ($denuncia) {
+                $abuso = "Denunciada";
+            } ?>
+            <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
+            <hr>
+            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="denunciar" title="Editar"><?php echo $abuso ?></button>
+            <?php echo form_close(); ?>
         <?php } ?>
         <hr>
         <div class="col-md-16 product-info">
@@ -79,7 +88,27 @@
                 <div class="tab-pane fade in active" id="service-one" style="font-size: 18px;">
 
                     <section class="container product-info">
+                        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                            <div class="container-fluid">
+                                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <?php echo form_open('tienda/buscarProductosPerfil/' . $tienda['id_usuarios'], "class=\"d-flex\"") ?>
+                                    <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
+                                        <option selected>Seleccionar categoría</option>
+                                        <?php foreach ($categorias as $cate) { ?>
+                                            <option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+                                        <?php } ?>
+                                    </select>
 
+                                    <input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
+                                    <button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+                                    <?php echo form_close(); ?>
+                                </div>
+                            </div>
+                        </nav>
+                        <br>
                         <div id="tableview">
                             <table class="table table-striped table-dark" id="table">
                                 <thead>
@@ -92,14 +121,12 @@
                                         <td>Categoria</td>
                                         <td>Tiempo de entrega</td>
                                         <td>Ubcacion del producto</td>
-                                        <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                            <td>Acciones</td>
-                                        <?php } ?>
+                                        <td>Acciones</td>
                                     </tr>
                                 </thead>
                                 <tbody id="tbTable">
                                     <?php foreach ($productos as $pro) { ?>
-                                        <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?>
+                                        <?php echo form_open('tienda/mantProPerfil/' . $pro['id_productos']); ?>
                                         <tr align="center">
                                             <td><?php echo $pro['descripcion'] ?></td>
                                             <td><?php echo $pro['cantidad'] ?></td>
@@ -110,9 +137,10 @@
                                             <td><?php echo $pro['tiempo_promedio'] ?></td>
                                             <td><?php echo $pro['ubicacion_fisica'] ?></td>
                                             <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">🛒</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">❤️</button> </td>
+                                                <td> <button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <button type="submit" name="btn_carrrito" id="btn_carrrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button> </td>
+                                            <?php } else { ?>
+                                                <td> <button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> </td>
                                             <?php } ?>
-
                                         </tr>
                                         <?php echo form_close(); ?>
                                     <?php } ?>
