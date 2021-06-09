@@ -152,7 +152,7 @@ if (validation_errors() !== "") {
 </div>
 <div class="container-fluid" style=" color: white;">
     <div class="col-md-12 product-info">
-        <ul id="myTab" class="nav nav-tabs">
+        <ul id="myTab" class="nav nav-pills">
 
             <li class="nav-item me-2">
                 <a class="nav-link active" href="#service-one" data-toggle="tab">DESCRIPCION</a>
@@ -204,64 +204,65 @@ if (validation_errors() !== "") {
             <div class="tab-pane fade" id="service-three">
                 <section class="container reviews-info">
                     <?php if ($seccion == TRUE) { ?>
-                        <div class="container d-flex justify-content-center mt-200">
-                            <div class="row">
-                                <?php if (!empty($calificaciones)) { ?>
-                                    <?php foreach ($calificaciones as $cal) {
-                                        // if($cal['id_usuarios']==$this->session->userdata['logged_in']['users_id'] &&$cal['id_productos']==$producto_id){
-                                    ?>
+                        <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
+                            <div class="container d-flex justify-content-center mt-200">
+                                <div class="row">
+                                    <?php if (!empty($calificaciones)) { ?>
+                                        <?php foreach ($calificaciones as $cal) {                                   
+                                        ?>
+                                            <?php echo form_open('comprador/calificarProducto/' . $producto_id); ?>
+                                            <div class="col-md-12">
+                                                <div class="stars">
+                                                    <div action="">
+                                                        <input value="5" class="star star-5" id="star-5" type="radio" name="star" <?php if ($cal['calificacion'] == '5' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-5" for="star-5"></label>
+                                                        <input value="4" class="star star-4" id="star-4" type="radio" name="star" <?php if ($cal['calificacion'] == '4' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-4" for="star-4"></label>
+                                                        <input value="3" class="star star-3" id="star-3" type="radio" name="star" <?php if ($cal['calificacion'] == '3' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-3" for="star-3"></label>
+                                                        <input value="2" class="star star-2" id="star-2" type="radio" name="star" <?php if ($cal['calificacion'] == '2' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-2" for="star-2"></label>
+                                                        <input value="1" class="star star-1" id="star-1" type="radio" name="star" <?php if ($cal['calificacion'] == '1' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-1" for="star-1"></label>
+                                                        <!-- <button type="submit" name="btn_" id="btn_" class="btn btn-secondary me-2" title="Editar">Calificar</button> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <?php
+                                            if ($cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['comentarios'] == '') { ?>
+                                                <div id="primero2">
+                                                    <h2>Comentario</h2>
+                                                    <label for="comentario">Ingrese su comentario: </label>
+                                                    <input type="text" class="cajatexto3" id="txt_comentario" name="txt_comentario" maxlength="300" placeholder="Ingrese su comentario"><br>
+                                                    <button class="btn btn-primary" type="submit" id="btn_rating1" name="btn_rating1" title="calificacion">Publicar</button>
+                                                </div>
+                                            <?php } else { ?>
+                                                <button class="btn btn-primary" type="submit" id="btn_rating2" name="btn_rating2" title="calificacion">Publicar</button>
+                                            <?php } ?>
+
+                                            <?php echo form_close(); ?>
+                                        <?php }
+                                    } else { ?>
                                         <?php echo form_open('comprador/calificarProducto/' . $producto_id); ?>
                                         <div class="col-md-12">
                                             <div class="stars">
                                                 <div action="">
-                                                    <input value="5" class="star star-5" id="star-5" type="radio" name="star" <?php if ($cal['calificacion'] == '5' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-5" for="star-5"></label>
-                                                    <input value="4" class="star star-4" id="star-4" type="radio" name="star" <?php if ($cal['calificacion'] == '4' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-4" for="star-4"></label>
-                                                    <input value="3" class="star star-3" id="star-3" type="radio" name="star" <?php if ($cal['calificacion'] == '3' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-3" for="star-3"></label>
-                                                    <input value="2" class="star star-2" id="star-2" type="radio" name="star" <?php if ($cal['calificacion'] == '2' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-2" for="star-2"></label>
-                                                    <input value="1" class="star star-1" id="star-1" type="radio" name="star" <?php if ($cal['calificacion'] == '1' && $cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['id_productos'] == $producto_id) { ?>checked='true' <?php } ?> /> <label class="star star-1" for="star-1"></label>
+                                                    <input value="5" class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
+                                                    <input value="4" class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
+                                                    <input value="3" class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
+                                                    <input value="2" class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
+                                                    <input value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
                                                     <!-- <button type="submit" name="btn_" id="btn_" class="btn btn-secondary me-2" title="Editar">Calificar</button> -->
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
-                                        if ($cal['id_usuarios'] == $this->session->userdata['logged_in']['users_id'] && $cal['comentarios'] == '') { ?>
-                                            <div id="primero2">
-                                                <h2>Comentario</h2>
-                                                <label for="comentario">Ingrese su comentario: </label>
-                                                <input type="text" class="cajatexto3" id="txt_comentario" name="txt_comentario" maxlength="300" placeholder="Ingrese su comentario"><br>
-                                                <button class="btn btn-primary" type="submit" id="btn_rating1" name="btn_rating1" title="calificacion">Publicar</button>
-                                            </div>
-                                        <?php } else { ?>
-                                            <button class="btn btn-primary" type="submit" id="btn_rating2" name="btn_rating2" title="calificacion">Publicar</button>
-                                        <?php } ?>
 
-                                        <?php echo form_close(); ?>
-                                    <?php }
-                                } else { ?>
-                                    <?php echo form_open('comprador/calificarProducto/' . $producto_id); ?>
-                                    <div class="col-md-12">
-                                        <div class="stars">
-                                            <div action="">
-                                                <input value="5" class="star star-5" id="star-5" type="radio" name="star" /> <label class="star star-5" for="star-5"></label>
-                                                <input value="4" class="star star-4" id="star-4" type="radio" name="star" /> <label class="star star-4" for="star-4"></label>
-                                                <input value="3" class="star star-3" id="star-3" type="radio" name="star" /> <label class="star star-3" for="star-3"></label>
-                                                <input value="2" class="star star-2" id="star-2" type="radio" name="star" /> <label class="star star-2" for="star-2"></label>
-                                                <input value="1" class="star star-1" id="star-1" type="radio" name="star" /> <label class="star star-1" for="star-1"></label>
-                                                <!-- <button type="submit" name="btn_" id="btn_" class="btn btn-secondary me-2" title="Editar">Calificar</button> -->
-                                            </div>
+                                        <div id="primero1">
+                                            <h2>Comentario</h2>
+                                            <label for="comentario">Ingrese su comentario: </label>
+                                            <input type="text" class="cajatexto3" id="txt_comentario" name="txt_comentario" maxlength="300" placeholder="Ingrese su comentario"><br>
+                                            <button class="btn btn-primary" type="submit" id="btn_rating1" name="btn_rating1" title="calificacion">Publicar</button>
                                         </div>
-                                    </div>
-
-                                    <div id="primero1">
-                                        <h2>Comentario</h2>
-                                        <label for="comentario">Ingrese su comentario: </label>
-                                        <input type="text" class="cajatexto3" id="txt_comentario" name="txt_comentario" maxlength="300" placeholder="Ingrese su comentario"><br>
-                                        <button class="btn btn-primary" type="submit" id="btn_rating1" name="btn_rating1" title="calificacion">Publicar</button>
-                                    </div>
-                                    <?php echo form_close(); ?>
+                                        <?php echo form_close(); ?>
+                                </div>
+                            <?php } ?>
                             </div>
                         <?php } ?>
-                        </div>
                     <?php } ?>
                     <br><br><br><br><br>
                     <div id="comentarios">
@@ -271,7 +272,7 @@ if (validation_errors() !== "") {
                                 <div id='content_post_<?php echo $c['id_usuarios']; ?>'>
                                     <div class='post_detail'><?php echo $c['comentarios']; ?><br>
                                         <?php if ($seccion == TRUE) { ?>
-                                            <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios']&&$this->session->userdata['logged_in']['tipo']=='Tienda') { ?>
+                                            <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios'] && $this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
                                                 <button class="btn btn-primary" data-toggle="collapse" data-target="#responder">Responder</button>
                                                 <div class="collapse" id="responder">
                                                     <input type="text" name="txt_respuesta" id="txt_respuesta" maxlength="300" placeholder="Ingrese las respuesta al comentario" class="cajatexto3">
