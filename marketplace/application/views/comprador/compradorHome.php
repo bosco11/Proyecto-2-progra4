@@ -1,3 +1,4 @@
+<?php if ($val) { ?>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 	<div class="container">
 
@@ -315,3 +316,7 @@
 	</div>
 	<!-- aqui termina el llamado a las tiendas  -->
 </div>
+<?php }else {
+  header("location: " . base_url()); //dirección de arranque especificada en config.php y luego en routes.php
+}
+?> 

@@ -23,10 +23,17 @@ class Comprador extends CI_Controller
 		$data['pro'] = $this->Comprador_model->get_all_productos();
 
 		if (isset($this->session->userdata['logged_in'])) {
+			if($this->session->userdata['logged_in']['tipo']=='Comprador')
+			{
+				$data['val']=true;
+			}else{
+				$data['val']=false;
+			}
 			$data['seccion'] = $this->session->userdata['logged_in'];
 			$data['carrito'] = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id']);
 		} else {
-			$data['seccion'] = false;
+			$data['seccion'] = FALSE;
+			$data['val']=true;
 		}
 
 		if ($tienda_data == null) {
