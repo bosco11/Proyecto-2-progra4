@@ -173,7 +173,7 @@ if (validation_errors() !== "") {
 
         </ul>
         <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade in active" id="service-one" style="font-size: 18px;">
+            <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
 
                 <section class="container product-info">
 
@@ -190,7 +190,7 @@ if (validation_errors() !== "") {
                     <li>Categoría: <?php echo $producto['categorias'] ?></li>
 
             </div>
-            <div class="tab-pane fade" id="service-two" style="font-size: 18px;">
+            <div class="tab-pane container" id="service-two" style="font-size: 18px;">
 
                 <section class="container shop-info">
                     <br>
@@ -208,7 +208,7 @@ if (validation_errors() !== "") {
                 </section>
 
             </div>
-            <div class="tab-pane fade" id="service-three">
+            <div class="tab-pane container" id="service-three">
                 <section class="container reviews-info">
                     <?php if ($seccion == TRUE) { ?>
                         <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
@@ -284,7 +284,7 @@ if (validation_errors() !== "") {
                                             <?php if ($seccion == TRUE) { ?>
                                                 <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios'] && $this->session->userdata['logged_in']['tipo'] == 'Tienda' && $c['respuetas'] == '') { ?>
                                                     <button class="btn btn-primary" data-toggle="collapse" data-target="#responder">Responder</button>
-                                                    <?php echo form_open('comprador/respuestaComentarios/' . $producto_id.'/'.$c['id_usuarios']); ?>
+                                                    <?php echo form_open('comprador/respuestaComentarios/' . $producto_id . '/' . $c['id_usuarios']); ?>
                                                     <div class="collapse" id="responder">
                                                         <input type="text" name="txt_respuesta" id="txt_respuesta" maxlength="300" placeholder="Ingrese las respuesta al comentario" class="cajatexto3">
                                                         <button class="btn btn-primary" type="submit" title="calificacion">Enviar</button>
@@ -304,7 +304,7 @@ if (validation_errors() !== "") {
                     </div>
             </div>
             </section>
-        </div>
+        </div>    
     </div>
     <!-- <hr> -->
 </div>
