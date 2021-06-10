@@ -149,7 +149,7 @@ if (validation_errors() !== "") {
                         <button type="submit" class="btn btn-success" id=" btn_carrito" name="btn_carrito" value="btn_carrito">🛒 agregar al carrito</button>
                     </div>
                     <div class="btn-group wishlist">
-                        <button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-danger">❤️ agregar a la lista de deseos</button>
+                        <button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-danger" value="btn_deseo">❤️ agregar a la lista de deseos</button>
                     </div>
                     <?php echo form_close(); ?>
                 <?php } ?>

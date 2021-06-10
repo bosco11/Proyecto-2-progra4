@@ -137,31 +137,40 @@ class Comprador extends CI_Controller
 	}
 	function addCarritoDeseo2($id)
 	{
-
 		if ($this->input->post('btn_carrito')) {
 			$tipo_producto = 'C';
-		} else {
-			$tipo_producto = 'D'; //lista de deseo FALTA----------------------------------------------------------
-		}
+			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
 
-		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
+			if ($result != null) {
+				$suma = 0;
+				$suma = $result['cantidad'];
+				$suma = $suma + 1;
+				$params = array(
+					'cantidad' => $suma,
+				);
+				$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+			} else {
+				$params = array(
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+					'id_productos' => $id,
+					'tipo_producto' => $tipo_producto,
+					'cantidad' => 1,
+				);
+				$this->Comprador_model->add_carrito($params);
+			}
+		} else if ($this->input->post('btn_deseo')) {
+			$tipo_producto = 'D';
+			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
 
-		if ($result != null) {
-			$suma = 0;
-			$suma = $result['cantidad'];
-			$suma = $suma + 1;
-			$params = array(
-				'cantidad' => $suma,
-			);
-			$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
-		} else {
-			$params = array(
-				'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-				'id_productos' => $id,
-				'tipo_producto' => $tipo_producto,
-				'cantidad' => 1,
-			);
-			$this->Comprador_model->add_carrito($params);
+			if ($result == null) {
+				$params = array(
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+					'id_productos' => $id,
+					'tipo_producto' => $tipo_producto,
+					'cantidad' => 1,
+				);
+				$this->Comprador_model->add_carrito($params);
+			}
 		}
 		$this->perfilProducto($id);
 	}
@@ -249,7 +258,7 @@ class Comprador extends CI_Controller
 			}
 		}
 	}
-	function respuestaComentarios($id_producto,$id_usuario)
+	function respuestaComentarios($id_producto, $id_usuario)
 	{
 		$params = array(
 			'respuetas' => $this->input->post('txt_respuesta')
