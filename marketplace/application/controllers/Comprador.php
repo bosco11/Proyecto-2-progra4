@@ -95,7 +95,7 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'comprador/perfilProducto';
 		$this->load->view('layouts/main', $data);
 	}
-	function perfilProducto2($id,$mess)
+	function perfilProducto2($id, $mess)
 	{
 
 		$data['seccion'] = $this->session->userdata['logged_in'];
@@ -155,7 +155,7 @@ class Comprador extends CI_Controller
 	}
 	function addCarritoDeseo2($id)
 	{
-		$data['message_display'] =null;
+		$data['message_display'] = null;
 		if ($this->input->post('btn_carrito')) {
 			$tipo_producto = 'C';
 			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
@@ -194,7 +194,7 @@ class Comprador extends CI_Controller
 				$data['message_display'] = 'Se ha agregado a la lista de deseos';
 			}
 		}
-		$this->perfilProducto2($id,$data['message_display']);
+		$this->perfilProducto2($id, $data['message_display']);
 	}
 
 	function process($id)
@@ -289,6 +289,18 @@ class Comprador extends CI_Controller
 		);
 		$this->Comprador_model->actualizarCalificarProducto($params, $id_producto, $id_usuario);
 		$this->perfilProducto($id_producto);
+	}
+	function ruleta()
+	{
+		if (isset($this->session->userdata['logged_in'])) {
+			$data['seccion'] = $this->session->userdata['logged_in'];
+			
+		} else {
+			$data['seccion'] = false;
+		}
+		$data['message_display'] = null;
+		$data['_view'] = 'comprador/ruleta';
+		$this->load->view('layouts/main', $data);
 	}
 	function calificacionProducto($id)
 	{
