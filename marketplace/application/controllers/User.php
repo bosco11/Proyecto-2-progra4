@@ -7,6 +7,7 @@ class User extends CI_Controller
         parent::__construct();
         $this->load->library('session');
         $this->load->model('User_model');
+        $this->load->model('Comprador_model');
     }
 
     function index()
@@ -34,6 +35,11 @@ class User extends CI_Controller
         $data['direcciones2'] = null;
         $data['social2'] = null;
         $data['message_display'] = null;
+        $data['_view'] = $view;
+        $this->load->view('layouts/main', $data);
+    }
+    function load_data_user($view, $data)
+    {
         $data['_view'] = $view;
         $this->load->view('layouts/main', $data);
     }
@@ -426,13 +432,14 @@ class User extends CI_Controller
     }
     function perfilUsuario($users_id)
     {
+        $data['carrito'] = $this->Comprador_model->get_all_carrito($users_id, 'D');
         if (isset($this->session->userdata['logged_in'])) {
             $data['seccion'] = $this->session->userdata['logged_in'];
             $data['user'] = $this->User_model->get_user($users_id);
         } else {
             $data['seccion'] = false;
         }
-         
-        $this->load_data_view('comprador/perfilComprador', $data);
+
+        $this->load_data_user('comprador/perfilComprador', $data);
     }
 }

@@ -14,12 +14,13 @@ if ($message_display != null) {
             "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 }
+if ($error_message != null) {
+    if (isset($error_message)) {
 
-if (isset($error_message)) {
-
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
-        . $error_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+            . $error_message .
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    }
 }
 
 if (validation_errors() !== "") {
