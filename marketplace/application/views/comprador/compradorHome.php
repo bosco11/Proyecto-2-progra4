@@ -12,6 +12,8 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
+
+
 			<!-- Links -->
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -56,7 +58,7 @@
 								<div class="dropdown-menu">
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
-											<i class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
+											<i  class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
 										</div>
 									</div>
 									<div style="overflow: scroll;width: 325px; height: 300px;">
@@ -160,7 +162,7 @@
 										<?php } ?>
 									</div>
 									<div class="row">
-										<div class="col-lg-12 col-sm-12 col-12 text-center checkout">
+										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 											<button class="btn btn-primary btn-block">Checkout</button>
 										</div>
 									</div>
@@ -216,6 +218,59 @@
 	</nav>
 	<br><br><br><br>
 	<!-- Navbar -->
+
+	<!-- Modal -->
+	<div class="modal fade"  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background-color: #15202B;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Realizar Pago</h5>
+					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<h6>Método de pago:</h6>
+					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm " aria-label=".form-select-sm example">
+						<option value="">Sin seleccionar</option>
+						<?php if (!empty($pagos)) { ?>
+							<?php foreach ($pagos as $pag) { ?>
+								<option value="<?php echo $pag['id_formas_pago'] ?>">Numero Tarjeta:<?php echo $pag['numero_tarjeta'] ?> - Saldo:<?php echo $pag['saldo'] ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
+					<br>
+					<h6>Dirección de envio:</h6>
+					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm " aria-label=".form-select-sm example">
+						<option value="">Sin seleccionar</option>
+						<?php if (!empty($direcciones)) { ?>
+							<?php foreach ($direcciones as $dir) { ?>
+								<option value="<?php echo $dir['id_direcciones'] ?>">Pais:<?php echo $dir['pais_direccion'] ?> - Dirección:<?php echo $dir['observaciones'] ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
+					<br>
+					<div style="text-align: center;">
+						<h6 style="display: inline-block;">CVV:</h6>
+						<input type="password" class="form-control" placeholder="CVV" aria-label="CVV" maxlength="3" style="width: 13%; font-size: 13px; display: inline-block;">
+					</div>
+					<br>
+					<h6>Premios alquiridos:</h6>
+					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm" aria-label=".form-select-sm example">
+						<option value="">Sin seleccionar</option>
+						<?php if (!empty($categorias)) { ?>
+							<?php foreach ($categorias as $cate) { ?>
+								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+							<?php } ?>
+						<?php } ?>
+					</select>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Pagar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Termina Modal -->
 
 	<div id="mas_vendidos">
 		<div class='post_block'>
