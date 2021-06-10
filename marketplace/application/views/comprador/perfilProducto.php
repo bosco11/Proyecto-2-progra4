@@ -188,6 +188,7 @@ if (validation_errors() !== "") {
                     <li>Cantidad disponible: <?php echo $producto['cantidad'] ?></li>
                     <li>Nombre de la tienda: <?php echo $producto['nombre_real'] ?></li>
                     <li>Categoría: <?php echo $producto['categorias'] ?></li>
+                </section>
 
             </div>
             <div class="tab-pane container" id="service-two" style="font-size: 18px;">
@@ -302,9 +303,10 @@ if (validation_errors() !== "") {
 
                         </div>
                     </div>
+                </section>
             </div>
-            </section>
-        </div>    
+
+        </div>
     </div>
     <!-- <hr> -->
 </div>
