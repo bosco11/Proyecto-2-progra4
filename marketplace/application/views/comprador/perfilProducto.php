@@ -143,12 +143,16 @@ if (validation_errors() !== "") {
             <?php } ?>
             <hr />
             <?php if ($seccion == TRUE) { ?>
-                <div class="btn-group cart">
-                    <button type="submit" class="btn btn-success" id="<?php echo $producto['id_productos'] ?>">🛒 agregar al carrito</button>
-                </div>
-                <div class="btn-group wishlist">
-                    <button type="submit" class="btn btn-danger" id="<?php echo $producto['id_productos'] ?>">❤️ agregar a la lista de deseos</button>
-                </div>
+                <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
+                    <?php echo form_open('comprador/addCarritoDeseo2/' . $producto_id); ?>
+                    <div class="btn-group cart">
+                        <button type="submit" class="btn btn-success" id=" btn_carrito" name="btn_carrito" value="btn_carrito">🛒 agregar al carrito</button>
+                    </div>
+                    <div class="btn-group wishlist">
+                        <button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-danger">❤️ agregar a la lista de deseos</button>
+                    </div>
+                    <?php echo form_close(); ?>
+                <?php } ?>
             <?php } ?>
         </div>
     </div>
