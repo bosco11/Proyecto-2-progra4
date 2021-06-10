@@ -85,7 +85,7 @@
 
             </ul>
             <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade in active" id="service-one" style="font-size: 18px;">
+                <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
 
                     <section class="container product-info">
                         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -135,11 +135,11 @@
                                             <td><?php echo $pro['categorias'] ?></td>
                                             <td><?php echo $pro['tiempo_promedio'] ?></td>
                                             <td><?php echo $pro['ubicacion_fisica'] ?></td>
-                                            
+
                                             <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                                <td>  <?php echo form_open('comprador/perfilProducto/'. $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?>  <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" name="btn_carrito" id="btn_carrito"  value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" value="btn_deseo"  name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button><?php echo form_close(); ?> </td>
+                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button><?php echo form_close(); ?> </td>
                                             <?php } else { ?>
-                                                <td>  <?php echo form_open('comprador/perfilProducto/'. $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?>  </td>
+                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?> </td>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
@@ -148,9 +148,9 @@
                             </table>
 
                         </div>
-
+                    </section>
                 </div>
-                <div class="tab-pane fade" id="service-two" style="font-size: 18px;">
+                <div class="tab-pane container" id="service-two" style="font-size: 18px;">
 
                     <section class="container shop-info">
                         <br>
@@ -167,7 +167,7 @@
 
                 </div>
                 <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                    <div class="tab-pane fade" id="service-three">
+                    <div class="tab-pane container" id="service-three">
                         <section class="container reviews-info">
                             <div class="container d-flex justify-content-center mt-200">
                                 <div class="row">
