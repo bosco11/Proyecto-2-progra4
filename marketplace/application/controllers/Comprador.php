@@ -23,11 +23,13 @@ class Comprador extends CI_Controller
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
-		$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
-		$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
+		
+		
 
 		if (isset($this->session->userdata['logged_in'])) {
 			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+				$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
+				$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
 				$data['val'] = true;
 			} else {
 				$data['val'] = false;
@@ -155,6 +157,8 @@ class Comprador extends CI_Controller
 					'cantidad' => 1,
 				);
 				$this->Comprador_model->add_carrito($params);
+				$this->index();
+			}else{
 				$this->index();
 			}
 		}
