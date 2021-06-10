@@ -93,6 +93,21 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'comprador/perfilProducto';
 		$this->load->view('layouts/main', $data);
 	}
+	function perfilProducto2($id,$mess)
+	{
+
+		$data['seccion'] = $this->session->userdata['logged_in'];
+		$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
+
+		$data['producto_id'] = $id;
+		$data['producto'] = $this->Comprador_model->get_producto_id($id);
+		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);
+		$data['galeria'] = $this->Comprador_model->get_galerias($id);
+		$data['calificacion'] = $this->calificacionProducto($id);
+		$data['message_display'] = $mess;
+		$data['_view'] = 'comprador/perfilProducto';
+		$this->load->view('layouts/main', $data);
+	}
 
 	function addCarritoDeseo($id)
 	{
@@ -138,6 +153,7 @@ class Comprador extends CI_Controller
 	}
 	function addCarritoDeseo2($id)
 	{
+		$data['message_display'] =null;
 		if ($this->input->post('btn_carrito')) {
 			$tipo_producto = 'C';
 			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
@@ -150,6 +166,7 @@ class Comprador extends CI_Controller
 					'cantidad' => $suma,
 				);
 				$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+				$data['message_display'] = 'Se ha actualizado el carrito de compras';
 			} else {
 				$params = array(
 					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
@@ -158,6 +175,7 @@ class Comprador extends CI_Controller
 					'cantidad' => 1,
 				);
 				$this->Comprador_model->add_carrito($params);
+				$data['message_display'] = 'Se ha agregado al carrito de compras';
 			}
 		} else if ($this->input->post('btn_deseo')) {
 			$tipo_producto = 'D';
@@ -171,28 +189,28 @@ class Comprador extends CI_Controller
 					'cantidad' => 1,
 				);
 				$this->Comprador_model->add_carrito($params);
+				$data['message_display'] = 'Se ha agregado a la lista de deseos';
 			}
 		}
-		$this->perfilProducto($id);
+		$this->perfilProducto2($id,$data['message_display']);
 	}
 
 	function process($id)
 	{
 		if ($this->input->post('btn_eliminar_carrito')) {
-			$this->deleteCarrito($id,'C');
+			$this->deleteCarrito($id, 'C');
 		} else if ($this->input->post('btn_mas')) {
 			$this->masCarrito($id);
 		} else if ($this->input->post('btn_menos')) {
 			$this->menosCarrito($id);
 		} else if ($this->input->post('btn_eliminar_deseo')) {
-			$this->deleteCarrito($id,'D');
-		} 
-		
+			$this->deleteCarrito($id, 'D');
+		}
 	}
 
-	function deleteCarrito($id,$tipo_producto)
+	function deleteCarrito($id, $tipo_producto)
 	{
-		$this->Comprador_model->delete_carrito($id,$tipo_producto);
+		$this->Comprador_model->delete_carrito($id, $tipo_producto);
 		$this->index();
 	}
 
