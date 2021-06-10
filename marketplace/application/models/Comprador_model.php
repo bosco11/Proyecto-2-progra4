@@ -93,9 +93,9 @@ class Comprador_model extends CI_Model
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
 
-    public function delete_carrito($id)
+    public function delete_carrito($id,$tipo_producto)
     {
-        $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id));
+        $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id,'tipo_producto' => $tipo_producto));
     }
 
     function search_productoT($data)

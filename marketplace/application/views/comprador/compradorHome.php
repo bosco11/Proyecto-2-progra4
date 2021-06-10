@@ -69,7 +69,7 @@
 															foreach ($galerias as $g) { ?>
 																<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
 																	<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
+																		<img width="50px" height="50px" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
 																	</div>
 																<?php $band = false;
 																} ?>
@@ -79,7 +79,7 @@
 																<span class="price text-info" style="display: inline-block;">
 																	$<?php echo $p['precio'] ?></span> <span class="count">
 																	<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
-																	<button type="submit" id=" btn_eliminar" name="btn_eliminar" value="btn_eliminar" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+																	<button type="submit" id=" btn_eliminar_deseo" name="btn_eliminar_deseo" value="btn_eliminar_deseo" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
 																	<?php echo form_close(); ?>
 																</span>
 															</div>
@@ -134,7 +134,7 @@
 															foreach ($galerias as $g) { ?>
 																<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
 																	<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
+																		<img width="50px" height="50px" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
 																	</div>
 																<?php $band = false;
 																} ?>
@@ -147,7 +147,7 @@
 																	<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
 																	<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
 																	<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
-																	<button type="submit" id=" btn_eliminar" name="btn_eliminar" value="btn_eliminar" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+																	<button type="submit" id=" btn_eliminar_carrito" name="btn_eliminar_carrito" value="btn_eliminar_carrito" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
 																	<?php echo form_close(); ?>
 																</span>
 

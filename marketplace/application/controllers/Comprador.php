@@ -178,18 +178,21 @@ class Comprador extends CI_Controller
 
 	function process($id)
 	{
-		if ($this->input->post('btn_eliminar')) {
-			$this->deleteCarrito($id);
+		if ($this->input->post('btn_eliminar_carrito')) {
+			$this->deleteCarrito($id,'C');
 		} else if ($this->input->post('btn_mas')) {
 			$this->masCarrito($id);
 		} else if ($this->input->post('btn_menos')) {
 			$this->menosCarrito($id);
-		}
+		} else if ($this->input->post('btn_eliminar_deseo')) {
+			$this->deleteCarrito($id,'D');
+		} 
+		
 	}
 
-	function deleteCarrito($id)
+	function deleteCarrito($id,$tipo_producto)
 	{
-		$this->Comprador_model->delete_carrito($id);
+		$this->Comprador_model->delete_carrito($id,$tipo_producto);
 		$this->index();
 	}
 
