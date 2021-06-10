@@ -126,7 +126,6 @@
                                 </thead>
                                 <tbody id="tbTable">
                                     <?php foreach ($productos as $pro) { ?>
-                                        <?php echo form_open('tienda/mantProPerfil/' . $pro['id_productos']); ?>
                                         <tr align="center">
                                             <td><?php echo $pro['descripcion'] ?></td>
                                             <td><?php echo $pro['cantidad'] ?></td>
@@ -136,13 +135,13 @@
                                             <td><?php echo $pro['categorias'] ?></td>
                                             <td><?php echo $pro['tiempo_promedio'] ?></td>
                                             <td><?php echo $pro['ubicacion_fisica'] ?></td>
+                                            
                                             <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                                <td> <button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <button type="submit" name="btn_carrrito" id="btn_carrrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button> </td>
+                                                <td>  <?php echo form_open('comprador/perfilProducto/'. $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?>  <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" name="btn_carrito" id="btn_carrito"  value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" value="btn_deseo"  name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button><?php echo form_close(); ?> </td>
                                             <?php } else { ?>
-                                                <td> <button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> </td>
+                                                <td>  <?php echo form_open('comprador/perfilProducto/'. $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?>  </td>
                                             <?php } ?>
                                         </tr>
-                                        <?php echo form_close(); ?>
                                     <?php } ?>
 
                                 </tbody>

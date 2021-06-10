@@ -53,12 +53,7 @@ class Tienda extends CI_Controller
 		$data['_view'] = $view;
 		$this->load->view('layouts/main', $data);
 	}
-	function mantProPerfil($id)
-	{
-		if (isset($_POST['btn_perfil'])) {
-			redirect('comprador/perfilProducto/' . $id, 'refresh');
-		}
-	}
+	
 	function mantPro($id)
 	{
 
