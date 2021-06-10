@@ -115,7 +115,7 @@
 										$precio = 0;
 									} ?>
 								</button>
-								<div class="dropdown-menu">
+								<div class="dropdown-menu" style="margin-right: 1000%">
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
@@ -235,7 +235,6 @@
 											<img src='<?php echo site_url('/resources/files/WIN_20190913_17_31_42_Pro.jpg') ?>' height="200" class="d-block w-100" alt="...">
 										</div>
 									</div>
-
 								</div>
 								<a>
 									<div class="mask rgba-white-slight"></div>
