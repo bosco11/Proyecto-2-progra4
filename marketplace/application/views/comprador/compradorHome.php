@@ -62,7 +62,7 @@
 								<div class="dropdown-menu">
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
-											<i  class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
+											<i class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
 										</div>
 									</div>
 									<div style="overflow: scroll;width: 325px; height: 300px;">
@@ -167,7 +167,9 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+											<?php echo form_open('auth/logout'); ?>
 											<button class="btn btn-primary btn-block">Checkout</button>
+											<?php echo form_close(); ?>
 										</div>
 									</div>
 								</div>
@@ -215,16 +217,15 @@
 						<?php echo form_close(); ?>
 					<?php } ?>
 				</ul>
-
 			</div>
 
 		</div>
 	</nav>
 	<br><br><br><br>
 	<!-- Navbar -->
-
+	
 	<!-- Modal -->
-	<div class="modal fade"  id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" style="background-color: #15202B;">
 				<div class="modal-header">
@@ -275,7 +276,18 @@
 		</div>
 	</div>
 	<!-- Termina Modal -->
+  
+    <?php
+	if ($message_display != null) {
+		
 
+			echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+            . $message_display .
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+		
+	}
+	?>
+ 
 	<div id="mas_vendidos">
 		<div class='post_block'>
 			<div class='post_detail' style="text-align: center;">

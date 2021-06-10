@@ -22,7 +22,7 @@ class Comprador extends CI_Controller
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
 		$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
-        $data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
+		$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
 
 		if (isset($this->session->userdata['logged_in'])) {
 			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
@@ -40,6 +40,7 @@ class Comprador extends CI_Controller
 
 		if ($tienda_data == null) {
 			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
+			$data['message_display'] = null;
 		} else {
 			if ($this->input->post('txt_tienda') != "") {
 				$data['tiendas'] = $tienda_data;
@@ -49,6 +50,9 @@ class Comprador extends CI_Controller
 			} else if ($this->input->post('txt_producto') != "") {
 				$data['tiendas'] = $tienda_data;
 				$data['productos'] = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
+			}else if($this->input->post('btn_mas') != "")
+			{
+				$data['message_display'] = $tienda_data;
 			}
 		}
 
@@ -210,6 +214,8 @@ class Comprador extends CI_Controller
 		}
 	}
 
+
+
 	function deleteCarrito($id, $tipo_producto)
 	{
 		$this->Comprador_model->delete_carrito($id, $tipo_producto);
@@ -233,15 +239,30 @@ class Comprador extends CI_Controller
 
 	function masCarrito($id)
 	{
+		$suma2 = 0;
 		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, 'C');
-		$suma = 0;
-		$suma = $result['cantidad'];
-		$suma = $suma + 1;
-		$params = array(
-			'cantidad' => $suma,
-		);
-		$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
-		$this->index();
+		$result2 = $this->Comprador_model->get_all_productos();
+		foreach ($result2 as $r) {
+			if ($r['id_productos'] == $result['id_productos']) {
+				$suma2 = $result['cantidad'];
+				if ($r['cantidad']  >= $suma2 + 1) {
+					$suma = 0;
+					$suma = $result['cantidad'];
+					$suma = $suma + 1;
+					$params = array(
+						'cantidad' => $suma,
+					);
+					$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
+					$this->index();
+					break;
+				} else {
+					$mesage = 'No hay suficiente producto en la tienda';
+					$this->index($mesage);
+				}
+			}
+		}
+
+		
 	}
 
 
