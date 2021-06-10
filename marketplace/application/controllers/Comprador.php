@@ -69,14 +69,6 @@ class Comprador extends CI_Controller
 		}
 	}
 
-	// function load_data_view($view)
-	// {
-	// 	// precarga todos los datos con los que la vista debe iniciar
-	// 	// $this->load->model('Twitter_model');
-	//     // $data['tweets'] = $this->Twitter_model->get_all_tweets();
-	//     $data['_view'] = $view;
-	// 	$this->load->view('layouts/main',$data);
-	// }
 	function perfilProducto($id)
 	{
 		if (isset($this->session->userdata['logged_in'])) {
