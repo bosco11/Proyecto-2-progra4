@@ -238,12 +238,12 @@ class Comprador extends CI_Controller
 			}
 		}
 	}
-	function respuestaComentarios($id_producto)
+	function respuestaComentarios($id_producto,$id_usuario)
 	{
 		$params = array(
 			'respuetas' => $this->input->post('txt_respuesta')
 		);
-		$this->Comprador_model->actualizarCalificarProducto($params, $id_producto, $this->session->userdata['logged_in']['users_id']);
+		$this->Comprador_model->actualizarCalificarProducto($params, $id_producto, $id_usuario);
 		$this->perfilProducto($id_producto);
 	}
 	function calificacionProducto($id)

@@ -284,7 +284,7 @@ if (validation_errors() !== "") {
                                             <?php if ($seccion == TRUE) { ?>
                                                 <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios'] && $this->session->userdata['logged_in']['tipo'] == 'Tienda' && $c['respuetas'] == '') { ?>
                                                     <button class="btn btn-primary" data-toggle="collapse" data-target="#responder">Responder</button>
-                                                    <?php echo form_open('comprador/respuestaComentarios/' . $producto_id); ?>
+                                                    <?php echo form_open('comprador/respuestaComentarios/' . $producto_id.'/'.$c['id_usuarios']); ?>
                                                     <div class="collapse" id="responder">
                                                         <input type="text" name="txt_respuesta" id="txt_respuesta" maxlength="300" placeholder="Ingrese las respuesta al comentario" class="cajatexto3">
                                                         <button class="btn btn-primary" type="submit" title="calificacion">Enviar</button>
