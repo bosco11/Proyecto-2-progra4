@@ -1,34 +1,3 @@
-<?php
-
-if (isset($logout_message)) {
-
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
-        . $logout_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
-if ($message_display != null) {
-    if (isset($message_display)) {
-
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
-            . $message_display .
-            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-    }
-}
-
-if (isset($error_message)) {
-
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
-        . $error_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
-
-if (validation_errors() !== "") {
-
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
-        . validation_errors() .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
-?>
 <div id="panel_app">
     <div class="box-header">
         <h2 class="box-title">Ruleta de la suerte</h2>
@@ -69,6 +38,7 @@ if (validation_errors() !== "") {
                     <h1>Premio:</h1><label for="" id="nota"></label>
                 </div>
                 <div class="modal-footer">
+                    <input type="hidden" value="" id="premio" name="premio">
                     <button type="button" class="btn btn-secondary" onclick="closeModal()" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
@@ -78,7 +48,7 @@ if (validation_errors() !== "") {
 
 </div>
 <script>
-    var options = ["$50", "Envío", "%10", "Nada","$50", "Envío", "%10", "Nada","$50", "Envío", "%10", "Nada","$50", "Envío", "%10", "Nada","$50", "Envío", "%10", "Nada" ];
+    var options = ["$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada"];
 
     var startAngle = 0;
     var arc = Math.PI / (options.length / 2);
@@ -199,6 +169,7 @@ if (validation_errors() !== "") {
         ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
         ctx.restore();
         document.getElementById('nota').innerHTML = text;
+        document.getElementById('premio').value = text;
         $('#exampleModalCenter').modal('show');
     }
 
