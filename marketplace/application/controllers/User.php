@@ -424,4 +424,15 @@ class User extends CI_Controller
             $this->load_data_view2('user/social', $data);
         }
     }
+    function perfilUsuario($users_id)
+    {
+        if (isset($this->session->userdata['logged_in'])) {
+            $data['seccion'] = $this->session->userdata['logged_in'];
+            $data['user'] = $this->User_model->get_user($users_id);
+        } else {
+            $data['seccion'] = false;
+        }
+         
+        $this->load_data_view('comprador/perfilComprador', $data);
+    }
 }

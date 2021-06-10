@@ -204,6 +204,7 @@
 								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
+								<a class="dropdown-item" href="<?php echo site_url('user/perfilUsuario/' . $this->session->userdata['logged_in']['users_id']); ?>">Ver perfil</a>
 								<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
 								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
 							</div>

@@ -2,6 +2,7 @@
 
 class Comprador extends CI_Controller
 {
+	public $mensaje = null;
 
 	public function __construct()
 	{
@@ -95,22 +96,7 @@ class Comprador extends CI_Controller
 		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);
 		$data['galeria'] = $this->Comprador_model->get_galerias($id);
 		$data['calificacion'] = $this->calificacionProducto($id);
-		$data['message_display'] = null;
-		$data['_view'] = 'comprador/perfilProducto';
-		$this->load->view('layouts/main', $data);
-	}
-	function perfilProducto2($id, $mess)
-	{
-
-		$data['seccion'] = $this->session->userdata['logged_in'];
-		$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
-
-		$data['producto_id'] = $id;
-		$data['producto'] = $this->Comprador_model->get_producto_id($id);
-		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);
-		$data['galeria'] = $this->Comprador_model->get_galerias($id);
-		$data['calificacion'] = $this->calificacionProducto($id);
-		$data['message_display'] = $mess;
+		$data['message_display'] = $this->mensaje;
 		$data['_view'] = 'comprador/perfilProducto';
 		$this->load->view('layouts/main', $data);
 	}
@@ -159,7 +145,7 @@ class Comprador extends CI_Controller
 	}
 	function addCarritoDeseo2($id)
 	{
-		$data['message_display'] = null;
+
 		if ($this->input->post('btn_carrito')) {
 			$tipo_producto = 'C';
 			$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, $tipo_producto);
@@ -172,7 +158,7 @@ class Comprador extends CI_Controller
 					'cantidad' => $suma,
 				);
 				$this->Comprador_model->update_carrito($params, $id, $this->session->userdata['logged_in']['users_id']);
-				$data['message_display'] = 'Se ha actualizado el carrito de compras';
+				$this->mensaje = 'Se ha actualizado el carrito de compras';
 			} else {
 				$params = array(
 					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
@@ -181,7 +167,7 @@ class Comprador extends CI_Controller
 					'cantidad' => 1,
 				);
 				$this->Comprador_model->add_carrito($params);
-				$data['message_display'] = 'Se ha agregado al carrito de compras';
+				$this->mensaje = 'Se ha agregado al carrito de compras';
 			}
 		} else if ($this->input->post('btn_deseo')) {
 			$tipo_producto = 'D';
@@ -195,10 +181,10 @@ class Comprador extends CI_Controller
 					'cantidad' => 1,
 				);
 				$this->Comprador_model->add_carrito($params);
-				$data['message_display'] = 'Se ha agregado a la lista de deseos';
+				$this->mensaje = 'Se ha agregado a la lista de deseos';
 			}
 		}
-		$this->perfilProducto2($id, $data['message_display']);
+		$this->perfilProducto($id);
 	}
 
 	function process($id)
@@ -277,7 +263,6 @@ class Comprador extends CI_Controller
 				'calificacion' => $calificacion
 			);
 			$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
-			$this->perfilProducto($id);
 		} else {
 
 			if (isset($_POST['btn_rating1']) && empty($datas)) {
@@ -290,7 +275,6 @@ class Comprador extends CI_Controller
 					'id_usuarios' => $this->session->userdata['logged_in']['users_id']
 				);
 				$this->Comprador_model->calificarProducto($params);
-				$this->perfilProducto($id);
 			} else {
 				$calificacion = $this->input->post('star');
 				$params = array(
@@ -299,9 +283,10 @@ class Comprador extends CI_Controller
 					'comentarios' => $this->input->post('txt_comentario')
 				);
 				$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
-				$this->perfilProducto($id);
 			}
 		}
+		$this->mensaje = 'Has realizado una calificacion sobre el producto';
+		$this->perfilProducto($id);
 	}
 	function respuestaComentarios($id_producto, $id_usuario)
 	{
@@ -315,7 +300,6 @@ class Comprador extends CI_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
-			
 		} else {
 			$data['seccion'] = false;
 		}
