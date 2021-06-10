@@ -100,4 +100,10 @@ class User_model extends CI_Model
         $this->db->where('id_formas_pago', $pay_id);
         return $this->db->update('tbl_formas_pago', $params);
     }
+
+    public function getTiendas_Suscritas($id)
+	{
+		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.tienda_id_usuarios where u.comprador_id_usuarios = $id");
+		return $query->result_array();
+	}
 }

@@ -16,93 +16,97 @@
     </div>
     <div class="container-fluid" style="color: white;">
         <div class="col-md-4">
-            <!-- <center> -->
             <div>
                 <img style="border-radius: 10px;" id="item-display" src='<?php echo site_url('/resources/photos/' . $user['imagen']) ?>' class="d-block w-100" height="300px" width="50px" alt="">
             </div>
-            <!-- </center> -->
         </div>
         <br>
         <div class="col-md-12">
             <h2>Informacion del usuario</h2>
             <hr>
-            <h3>Nombre completo:<?php echo $user['nombre_real'] ?></h3>
-            <h3>Identificacion:<?php echo $user['cedula'] ?></h3>
-            <h3>Telefono:<?php echo $user['telefono'] ?></h3>
-            <h3>Correo:<?php echo $user['correo'] ?></h3>
-            <h3>Dirección:<?php echo $user['direccion'] ?></h3>
-            <h3>País:<?php echo $user['pais'] ?></h3>
-            <?php print_r($carrito) ?>
-
+            <h3>Nombre completo: <?php echo $user['nombre_real'] ?></h3>
+            <h3>Identificacion: <?php echo $user['cedula'] ?></h3>
+            <h3>Telefono: <?php echo $user['telefono'] ?></h3>
+            <h3>Correo: <?php echo $user['correo'] ?></h3>
+            <h3>Dirección: <?php echo $user['direccion'] ?></h3>
+            <h3>País: <?php echo $user['pais'] ?></h3>  
+            <hr>
         </div>
     </div>
 </div>
 <div class="container-fluid" style=" color: white;">
     <div class="col-md-12 product-info">
         <ul id="myTab" class="nav nav-pills">
-
             <li class="nav-item me-2">
                 <a class="nav-link active" href="#service-one" data-toggle="tab">Lista Deseos</a>
             </li>
             <li class="nav-item me-2">
                 <a class="nav-link" href="#service-two" data-toggle="tab">Tiendas suscritas</a>
             </li>
-            <!-- <li class="nav-item me-2">
-                <a class="nav-link" href="#service-three" data-toggle="tab">RESEÑAS Y CALIFICACIONES</a>
-            </li> -->
-
         </ul>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
-
                 <section class="container lista-deseo">
-                <!-- <div id="tableview2">
+                    <div id="tableview2">
+                        <br><br><br>
                         <table class="table table-striped table-dark" id="table">
                             <thead>
                                 <tr align="center">
-                                    <td>Pais </td>
-                                    <td>Provincia</td>
-                                    <td>Casillero</td>
-                                    <td>Codigo Postal</td>
-                                    <td>Observaciones</td>
-                                    <td>Acciones</td>
-
+                                    <td>Descripcion </td>
+                                    <td>Fecha publicacion</td>
+                                    <td>Precio</td>
+                                    <td>Tiempo promedio</td>
+                                    <td>Costo envío</td>
                                 </tr>
                             </thead>
                             <tbody id="tbTable">
-                                <?php foreach ($direcciones as $pro) { ?>
-                                    <?php echo form_open('user/mantDir/' . $pro['id_direcciones']); ?>
-                                    <tr align="center">
-                                        <td><?php echo $pro['pais_direccion'] ?></td>
-                                        <td><?php echo $pro['provincia'] ?></td>
-                                        <td><?php echo $pro['numero_casillero'] ?></td>
-                                        <td><?php echo $pro['codigo_postal'] ?></td>
-                                        <td><?php echo $pro['observaciones'] ?></td>
-                                        <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button> </td>
-                                    </tr>
-                                    <?php echo form_close(); ?>
+                                <?php if (!empty($carrito)) { ?>
+                                    <?php foreach ($carrito as $pro) { ?>
+                                        <tr align="center">
+                                            <td><?php echo $pro['descripcion'] ?></td>
+                                            <td><?php echo $pro['fecha_publicacion'] ?></td>
+                                            <td><?php echo $pro['precio'] ?></td>
+                                            <td><?php echo $pro['tiempo_promedio'] ?></td>
+                                            <td><?php echo $pro['costo_envio'] ?></td>
+                                        </tr>
+                                    <?php }
+                                } else { ?>
+                                    <h2>No hay suscripciones por mostar</h2>
                                 <?php } ?>
-
                             </tbody>
                         </table>
-                    </div> -->
-
+                    </div>
                 </section>
-
             </div>
             <div class="tab-pane container" id="service-two" style="font-size: 18px;">
-
                 <section class="container suscripciones">
-
+                    <div id="tableview2">
+                        <br><br><br>
+                        <table class="table table-striped table-dark" id="table">
+                            <thead>
+                                <tr align="center">
+                                    <td>Nombre tienda </td>
+                                    <td>Imagen</td>
+                                    <td>Direccion</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbTable">
+                                <?php if (!empty($suscripciones)) { ?>
+                                    <?php foreach ($suscripciones as $pro) { ?>
+                                        <tr align="center">
+                                            <td><?php echo $pro['nombre_real'] ?></td>
+                                            <td><img style="border-radius: 10px;" id="item-display" src='<?php echo site_url('/resources/photos/' . $pro['imagen']) ?>' class="d-block w-100" height="90px" width="10px" alt=""></td>
+                                            <td><?php echo $pro['direccion'] ?></td>
+                                        </tr>
+                                    <?php }
+                                } else { ?>
+                                    <h2>No hay suscripciones por mostar</h2>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
-
             </div>
-            <!-- <div class="tab-pane container" id="service-three">
-                <section class="container reviews-info">
-
-                </section>
-            </div> -->
         </div>
-
     </div>
 </div>

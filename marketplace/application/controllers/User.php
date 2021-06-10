@@ -432,7 +432,9 @@ class User extends CI_Controller
     }
     function perfilUsuario($users_id)
     {
-        $data['carrito'] = $this->Comprador_model->get_all_carrito($users_id, 'D');
+        $data['carrito'] = $this->Comprador_model->get_all_carrito_deseo($users_id, 'D');
+        $data['suscripciones'] = $this->User_model->getTiendas_Suscritas($users_id);
+
         if (isset($this->session->userdata['logged_in'])) {
             $data['seccion'] = $this->session->userdata['logged_in'];
             $data['user'] = $this->User_model->get_user($users_id);
