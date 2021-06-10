@@ -85,12 +85,12 @@ class Comprador_model extends CI_Model
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->row_array();
     }
 
-    function get_all_carrito($id_usuario)
+    function get_all_carrito($id_usuario,$tipo_producto)
     {
         return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
                                 AND tbl_productos.id_productos = tbl_carrito_deseos.id_productos
-                                AND tbl_carrito_deseos.tipo_producto = 'C'")->result_array();
+                                AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
 
     public function delete_carrito($id)

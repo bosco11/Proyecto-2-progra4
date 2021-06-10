@@ -29,7 +29,8 @@ class Comprador extends CI_Controller
 				$data['val'] = false;
 			}
 			$data['seccion'] = $this->session->userdata['logged_in'];
-			$data['carrito'] = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id']);
+			$data['carrito'] = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
+			$data['Deseo'] = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'D');
 		} else {
 			$data['seccion'] = FALSE;
 			$data['val'] = true;

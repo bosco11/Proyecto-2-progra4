@@ -37,14 +37,13 @@
 									<i class="fa fa-heart" aria-hidden="true">
 									</i>
 									Lista de Deseos
-									<?php if (!empty($carrito)) { ?>
+									<?php if (!empty($Deseo)) { ?>
 										<?php $cont = 0;
 										$precio = 0; ?>
-										<?php foreach ($carrito as $car) {
+										<?php foreach ($Deseo as $des) {
 											foreach ($pro as $p) {
-												if ($car['id_productos'] == $p['id_productos']) {
+												if ($des['id_productos'] == $p['id_productos']) {
 													$cont += 1;
-													$precio += $p['precio'] * $car['cantidad'];
 												} ?>
 											<?php } ?>
 										<?php } ?>
@@ -57,18 +56,15 @@
 								<div class="dropdown-menu">
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
-											<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
-										</div>
-										<div class="col-lg-6 col-sm-6 col-6 total-section text-right">
-											<p>Total: <span class="text-info">$<?php echo $precio ?></span></p>
+											<i class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
 										</div>
 									</div>
 									<div style="overflow: scroll;width: 325px; height: 300px;">
-										<?php if (!empty($carrito)) { ?>
-											<?php foreach ($carrito as $car) { ?>
+										<?php if (!empty($Deseo)) { ?>
+											<?php foreach ($Deseo as $des) { ?>
 												<div class="row cart-detail">
 													<?php foreach ($pro as $p) { ?>
-														<?php if ($car['id_productos'] == $p['id_productos']) { ?>
+														<?php if ($des['id_productos'] == $p['id_productos']) { ?>
 															<?php $band = true;
 															foreach ($galerias as $g) { ?>
 																<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
@@ -83,25 +79,15 @@
 																<span class="price text-info" style="display: inline-block;">
 																	$<?php echo $p['precio'] ?></span> <span class="count">
 																	<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
-																	<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
-																	<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
-																	<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
 																	<button type="submit" id=" btn_eliminar" name="btn_eliminar" value="btn_eliminar" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
 																	<?php echo form_close(); ?>
 																</span>
-
 															</div>
-
 														<?php } ?>
 													<?php } ?>
 												</div>
 											<?php } ?>
 										<?php } ?>
-									</div>
-									<div class="row">
-										<div class="col-lg-12 col-sm-12 col-12 text-center checkout">
-											<button class="btn btn-primary btn-block">Checkout</button>
-										</div>
 									</div>
 								</div>
 							</div>
