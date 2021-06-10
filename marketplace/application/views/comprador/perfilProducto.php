@@ -89,11 +89,14 @@ if (validation_errors() !== "") {
             <div class="product-title"><?php echo $producto['descripcion'] ?></div>
 
             <div class="product-rating">
-                <!-- <i class="fa fa-star gold"></i>
-                <i class="fa fa-star gold"></i>
-                <i class="fa fa-star gold"></i>
-                <i class="fa fa-star gold"></i>
-                <i class="fa fa-star gold"></i> -->
+
+                <?php if ($calificacion == 0) { ?>
+                    <i class="fa fa-star gray"></i>
+                    <i class="fa fa-star gray"></i>
+                    <i class="fa fa-star gray"></i>
+                    <i class="fa fa-star gray"></i>
+                    <i class="fa fa-star gray"></i>
+                <?php } ?>
                 <?php if ($calificacion == 1) { ?>
                     <i class="fa fa-star gold"></i>
                     <i class="fa fa-star gray"></i>
@@ -208,7 +211,7 @@ if (validation_errors() !== "") {
                             <div class="container d-flex justify-content-center mt-200">
                                 <div class="row">
                                     <?php if (!empty($calificaciones)) { ?>
-                                        <?php foreach ($calificaciones as $cal) {                                   
+                                        <?php foreach ($calificaciones as $cal) {
                                         ?>
                                             <?php echo form_open('comprador/calificarProducto/' . $producto_id); ?>
                                             <div class="col-md-12">
@@ -267,23 +270,31 @@ if (validation_errors() !== "") {
                     <br><br><br><br><br>
                     <div id="comentarios">
                         <h2>Lista Comentarios</h2>
-                        <div class='post_block'>
-                            <?php foreach ($calificaciones_table as $c) { ?>
-                                <div id='content_post_<?php echo $c['id_usuarios']; ?>'>
-                                    <div class='post_detail'><?php echo $c['comentarios']; ?><br>
-                                        <?php if ($seccion == TRUE) { ?>
-                                            <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios'] && $this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
-                                                <button class="btn btn-primary" data-toggle="collapse" data-target="#responder">Responder</button>
-                                                <div class="collapse" id="responder">
-                                                    <input type="text" name="txt_respuesta" id="txt_respuesta" maxlength="300" placeholder="Ingrese las respuesta al comentario" class="cajatexto3">
-                                                    <button class="btn btn-primary" type="submit" title="calificacion">Enviar</button>
-                                                </div>
-                                            <?php } ?>
-                                        <?php } ?>
-                                    </div><br />
-                                <?php } ?>
+                        <div class='post_block2'>
+                            <?php
+                            foreach ($calificaciones_table as $c) { ?>
+                                <?php if ($c['comentarios'] != '') { ?>
+                                    <div id='content_post_<?php echo $c['id_usuarios']; ?>'>
 
-                                </div>
+                                        <div class='post_detail2'><?php echo $c['comentarios']; ?><br>
+                                            <?php if ($seccion == TRUE) { ?>
+                                                <?php if ($this->session->userdata['logged_in']['users_id'] == $producto['id_usuarios'] && $this->session->userdata['logged_in']['tipo'] == 'Tienda' && $c['respuetas'] == '') { ?>
+                                                    <button class="btn btn-primary" data-toggle="collapse" data-target="#responder">Responder</button>
+                                                    <?php echo form_open('comprador/respuestaComentarios/' . $producto_id); ?>
+                                                    <div class="collapse" id="responder">
+                                                        <input type="text" name="txt_respuesta" id="txt_respuesta" maxlength="300" placeholder="Ingrese las respuesta al comentario" class="cajatexto3">
+                                                        <button class="btn btn-primary" type="submit" title="calificacion">Enviar</button>
+                                                    </div>
+                                                    <?php echo form_close(); ?>
+                                                <?php } ?>
+                                            <?php } ?>
+                                            <?php if ($c['respuetas'] != '') { ?>
+                                                <div class='post_detail'><?php echo $c['respuetas']; ?></div>
+                                            <?php } ?>
+                                        </div><br />
+                                    <?php } ?>
+                                <?php } ?>
+                                    </div>
 
                         </div>
                     </div>

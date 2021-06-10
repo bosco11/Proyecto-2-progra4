@@ -2,10 +2,10 @@
 
 class Comprador extends CI_Controller
 {
-	
+
 	public function __construct()
 	{
-		
+
 		parent::__construct();
 
 		$this->load->helper('form');
@@ -81,13 +81,13 @@ class Comprador extends CI_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
-			$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id,$this->session->userdata['logged_in']['users_id']);
+			$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
 		} else {
 			$data['seccion'] = false;
 		}
 		$data['producto_id'] = $id;
 		$data['producto'] = $this->Comprador_model->get_producto_id($id);
-		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);		
+		$data['calificaciones_table'] = $this->Comprador_model->get_calificaciones_productos($id);
 		$data['galeria'] = $this->Comprador_model->get_galerias($id);
 		$data['calificacion'] = $this->calificacionProducto($id);
 		$data['message_display'] = null;
@@ -174,24 +174,48 @@ class Comprador extends CI_Controller
 
 	function calificarProducto($id)
 	{
-		if (isset($_POST['btn_rating1'])) {
-			$calificacion = $this->input->post('star');
-			$params = array(
-				'id_productos' => $id,
-				'calificacion' => $calificacion,
-				'comentarios' => $this->input->post('txt_comentario'),
-				'id_usuarios' => $this->session->userdata['logged_in']['users_id']
-			);
-			$this->Comprador_model->calificarProducto($params);
-			$this->perfilProducto($id);
-		} else {
+
+		$datas = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
+
+		if (isset($_POST['btn_rating2'])) {
 			$calificacion = $this->input->post('star');
 			$params = array(
 				'calificacion' => $calificacion
 			);
 			$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
 			$this->perfilProducto($id);
+		} else {
+
+			if (isset($_POST['btn_rating1']) && empty($datas)) {
+				$calificacion = $this->input->post('star');
+				$params = array(
+					'id_productos' => $id,
+					'calificacion' => $calificacion,
+					'comentarios' => $this->input->post('txt_comentario'),
+					'respuetas' => '',
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id']
+				);
+				$this->Comprador_model->calificarProducto($params);
+				$this->perfilProducto($id);
+			} else {
+				$calificacion = $this->input->post('star');
+				$params = array(
+					'id_productos' => $id,
+					'calificacion' => $calificacion,
+					'comentarios' => $this->input->post('txt_comentario')
+				);
+				$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
+				$this->perfilProducto($id);
+			}
 		}
+	}
+	function respuestaComentarios($id_producto)
+	{
+		$params = array(
+			'respuetas' => $this->input->post('txt_respuesta')
+		);
+		$this->Comprador_model->actualizarCalificarProducto($params, $id_producto, $this->session->userdata['logged_in']['users_id']);
+		$this->perfilProducto($id_producto);
 	}
 	function calificacionProducto($id)
 	{
