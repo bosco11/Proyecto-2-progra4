@@ -314,3 +314,10 @@ label.star:before {
 	content: '\f006';
 	font-family: FontAwesome
 }
+
+/* RULETA */
+#cen-ruleta{
+	position: relative;
+	bottom: 200px;
+	left: 394px;
+}
