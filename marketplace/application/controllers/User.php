@@ -219,6 +219,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
@@ -241,6 +245,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
@@ -304,6 +312,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
@@ -327,6 +339,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
@@ -382,6 +398,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }
@@ -401,6 +421,10 @@ class User extends CI_Controller
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
+                $data['message_display'] = null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
                 $data['_view'] = 'user/social';
                 $this->load->view('layouts/main', $data);
             }

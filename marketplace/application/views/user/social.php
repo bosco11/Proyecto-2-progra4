@@ -67,7 +67,7 @@ if (validation_errors() !== "") {
 
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="validationServer023">Saldo tarjeta</label>
+                        <label for="validationServer023">Saldo tarjeta $</label>
                         <input type="number" name="txt_saldo" id="txt_saldo" placeholder="Saldo tarjeta" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_saldo') ? $this->input->post('txt_saldo') : $pagos2['saldo']); ?>" <?php } ?> required>
 
                     </div>
