@@ -24,7 +24,9 @@
             <br>
             <hr>
             <nav class="navbar navbar-light bg-light justify-content-between">
-                <a href=""></a>
+                <?php echo form_open('tienda/tiendaHome'); ?>
+                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
+                <?php echo form_close(); ?>
                 <div class="nav-item">
                     <?php echo form_open('tienda/buscarProductosReportes', "class=\"d-flex\"") ?>
                     <input class="form-control mr-sm-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">

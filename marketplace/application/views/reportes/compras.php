@@ -24,13 +24,16 @@
             <br>
             <hr>
             <nav class="navbar navbar-light bg-light justify-content-between">
-                <a href=""></a>
+                <?php echo form_open('comprador/compradorHome'); ?>
+                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
+                <?php echo form_close(); ?>
                 <div class="nav-item">
                     <?php echo form_open('tienda/buscarProductosReportesCompras', "class=\"d-flex\"") ?>
                     <input class="form-control mr-sm-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
                     <input class="form-control mr-sm-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
                     <button class="btn btn-outline-success my-2 my-sm-0 me-2" type="submit">Buscar</button>
                     <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />
+                    <a hrf></a>
                     <?php echo form_close(); ?>
                 </div>
             </nav>
