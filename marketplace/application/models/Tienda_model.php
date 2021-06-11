@@ -180,6 +180,11 @@ class Tienda_model extends CI_Model
 		$query = $this->db->query("SELECT u.*,c.*,p.*,s.* FROM tbl_productos_compras u JOIN tbl_compras c ON c.id_compras=u.id_compras JOIN tbl_productos p ON p.id_productos=u.id_productos JOIN tbl_categorias s ON p.id_categorias=s.id_categorias  where p.id_usuarios = $id ");
 		return $query->result_array();
 	}
+	public function getProductosVendidosTiendaRangoFecha($id,$FechaInicial,$FechaFinal)
+	{
+		$query = $this->db->query("SELECT u.*,c.*,p.*,s.* FROM tbl_productos_compras u JOIN tbl_compras c ON c.id_compras=u.id_compras JOIN tbl_productos p ON p.id_productos=u.id_productos JOIN tbl_categorias s ON p.id_categorias=s.id_categorias  where p.id_usuarios = $id AND c.fecha between '".$FechaInicial ."' AND '".$FechaFinal."'");
+		return $query->result_array();
+	}
 
 
 
