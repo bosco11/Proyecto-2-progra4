@@ -18,11 +18,14 @@
             <?php echo form_close(); ?>
         <?php } ?>
     </div>
+    <br>
     <div style="text-align: center;">
         <!-- <input type="button" value="spin" id='spin' class="btn btn-primary" /> -->
-        <button type="button" style="float:left;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
-
-        <canvas id="canvas" width="500" height="500"></canvas>
+        <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
+        <canvas id="canvas" width="600" height="600"></canvas>
+        <div id="cen-ruleta">
+            <img style="position: absolute; left: 2px;bottom: 2px;" id="item-display" src='<?php echo site_url('/resources/img/ruleta.png') ?>'>
+        </div>
     </div>
     <br>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -39,7 +42,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" value="" id="premio" name="premio">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()" data-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-secondary" onclick="closeModal()" data-dismiss="modal">Close</button> -->
                     <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
@@ -95,7 +98,7 @@
             ctx.clearRect(0, 0, 500, 500);
 
             ctx.strokeStyle = "black";
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 4;
 
             ctx.font = 'bold 12px Helvetica, Arial';
 
@@ -125,7 +128,7 @@
             }
 
             //Arrow
-            ctx.fillStyle = "black";
+            ctx.fillStyle = "white";
             ctx.beginPath();
             ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
             ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));

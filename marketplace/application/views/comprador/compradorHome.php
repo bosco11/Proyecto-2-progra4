@@ -1,4 +1,7 @@
-<?php if ($val) { ?>
+<?php if ($val) {
+	$precio = 0;
+	$cobro_envio = 0;
+?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 		<div class="container">
 
@@ -105,8 +108,7 @@
 									</i>
 									Carrito
 									<?php if (!empty($carrito)) { ?>
-										<?php $cont = 0;
-										$precio = 0; ?>
+										<?php $cont = 0; ?>
 										<?php foreach ($carrito as $car) {
 											foreach ($pro as $p) {
 												if ($car['id_productos'] == $p['id_productos']) {
@@ -137,6 +139,7 @@
 													<?php foreach ($pro as $p) { ?>
 														<?php if ($car['id_productos'] == $p['id_productos']) { ?>
 															<?php $band = true;
+															$cobro_envio = $cobro_envio + $p['costo_envio'];
 															foreach ($galerias as $g) { ?>
 																<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
 																	<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
@@ -167,9 +170,9 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-											<?php echo form_open('auth/logout'); ?>
+
 											<button class="btn btn-primary btn-block">Checkout</button>
-											<?php echo form_close(); ?>
+
 										</div>
 									</div>
 								</div>
@@ -224,7 +227,7 @@
 	</nav>
 	<br><br><br><br>
 	<!-- Navbar -->
-	
+
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -233,10 +236,16 @@
 					<h5 class="modal-title" id="staticBackdropLabel">Realizar Pago</h5>
 					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 				</div>
+
 				<div class="modal-body" style="text-align: center;">
+					<div style="text-align: center;">
+						<h6 style="display: inline-block;">CVV:</h6>
+						<input type="password" name="cvv" id="cvv" class="form-control" placeholder="CVV" aria-label="CVV" maxlength="3" required style="width: 13%; font-size: 13px; display: inline-block;">
+					</div>
+					<br>
 					<h6>Método de pago:</h6>
-					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm " aria-label=".form-select-sm example">
-						<option value="">Sin seleccionar</option>
+					<select name="cmb_metodo" id="cmb_metodo" value="cmb_metodo" class="form-select form-select-sm " aria-label=".form-select-sm example">
+						<option value="0">Sin seleccionar</option>
 						<?php if (!empty($pagos)) { ?>
 							<?php foreach ($pagos as $pag) { ?>
 								<option value="<?php echo $pag['id_formas_pago'] ?>">Numero Tarjeta:<?php echo $pag['numero_tarjeta'] ?> - Saldo:<?php echo $pag['saldo'] ?></option>
@@ -245,19 +254,14 @@
 					</select>
 					<br>
 					<h6>Dirección de envio:</h6>
-					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm " aria-label=".form-select-sm example">
-						<option value="">Sin seleccionar</option>
+					<select name="cmb_direccion" id="cmb_direccion" value="cmb_direccion" class="form-select form-select-sm " aria-label=".form-select-sm example">
+						<option value="0">Sin seleccionar</option>
 						<?php if (!empty($direcciones)) { ?>
 							<?php foreach ($direcciones as $dir) { ?>
 								<option value="<?php echo $dir['id_direcciones'] ?>">Pais:<?php echo $dir['pais_direccion'] ?> - Dirección:<?php echo $dir['observaciones'] ?></option>
 							<?php } ?>
 						<?php } ?>
 					</select>
-					<br>
-					<div style="text-align: center;">
-						<h6 style="display: inline-block;">CVV:</h6>
-						<input type="password" class="form-control" placeholder="CVV" aria-label="CVV" maxlength="3" style="width: 13%; font-size: 13px; display: inline-block;">
-					</div>
 					<br>
 					<h6>Premios alquiridos:</h6>
 					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -269,26 +273,46 @@
 						<?php } ?>
 					</select>
 				</div>
+				<hr>
+				<div class="row total-section">
+					<div class="col-lg-4 col-sm-4 col-4 total-section text-right">
+						<h6>
+							<p>Subtotal: <span class="text-info">$<?php echo $precio ?></span></p>
+						</h6>
+						<h6>
+							<p>Costo de envio: <span class="text-info">$<?php echo $cobro_envio ?></span></p>
+						</h6>
+						<h6>
+							<p>Bonificación: <span class="text-info">Nada</span></p>
+						</h6>
+					</div>
+				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Pagar</button>
+					<div class="col-lg-6 col-sm-6 col-6 total-section text-left" style="display: inline-block; margin-top: 15px;">
+						<h4>
+							<p>Total: <span class="text-info">$<?php echo $precio + $cobro_envio ?></span></p>
+						</h4>
+					</div>
+					<button style="display: inline-block;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<?php echo form_open('comprador/'); ?>
+					<button style="display: inline-block;" disabled type="button" class="btn btn-primary" id="pagar">Pagar</button>
+					<?php echo form_close(); ?>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Termina Modal -->
-  
-    <?php
-	if ($message_display != null) {
-		
 
-			echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
-            . $message_display .
-            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-		
+	<?php
+	if ($message_display != null) {
+
+
+		echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+			. $message_display .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 	?>
- 
+
 	<div id="mas_vendidos">
 		<div class='post_block'>
 			<div class='post_detail' style="text-align: center;">
@@ -452,3 +476,56 @@
 	header("location: " . base_url()); //dirección de arranque especificada en config.php y luego en routes.php
 }
 ?>
+
+<script>
+	window.addEventListener('load', miFuncionLoad, false);
+
+	function miFuncionLoad() {
+		var unlock = document.getElementById("cmb_metodo");
+		unlock.addEventListener("click", validar, false);
+
+		var unlock = document.getElementById("cvv");
+		unlock.addEventListener("click", validar, false);
+
+
+		var unlock = document.getElementById("cmb_direccion");
+		unlock.addEventListener("click", validar, false);
+		// validar();
+
+		document.getElementById("cvv").addEventListener("input", (e) => {
+			let value = e.target.value;
+			e.target.value = value.replace(/[^A-Z\d-]/g, "");
+		});
+	}
+
+
+
+	function validar() {
+		if (esVacio("cmb_metodo") || esVacio("cmb_direccion") || esCVV('cvv')) {
+			document.getElementById('pagar').disabled = true; //boton disable   
+		} else {
+			document.getElementById('pagar').disabled = false;
+		}
+	}
+
+	function esCVV(text) {
+		var campo = document.getElementById(text);
+		console.log(campo.value);
+		if (campo.value == "") {
+			return true; //boton disable 
+		} else {
+			return false;
+		}
+	}
+
+	function esVacio(idcampo) {
+		var campo = document.getElementById(idcampo);
+		console.log(campo.value);
+		if (campo.value == "0") {
+			return true; //boton disable 
+		} else {
+			return false;
+		}
+
+	}
+</script>
