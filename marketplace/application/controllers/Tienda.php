@@ -370,4 +370,35 @@ class Tienda extends CI_Controller
 			$this->ventas($this->session->userdata['logged_in']['users_id'],$FechaInicial,$FechaFinal);
 		}
 	}
+	
+
+
+	
+	function compras($id, $FechaIni = null, $FechaFin = null)
+	{
+		if ($FechaIni != null and $FechaFin != null) {
+
+			$productos = $this->Tienda_model->getProductosCompradosRangoFecha($id,$FechaIni, $FechaFin);
+		} else {
+			$productos = $this->Tienda_model->getProductosComprados($id);
+			
+		}
+		$data['FechaIni'] = $FechaIni;
+		$data['FechaFin'] = $FechaFin;
+		$data['productos'] = $productos;
+		$data['_view'] = "reportes/compras";
+		$this->load->view('layouts/main', $data);
+	}
+	function buscarProductosReportesCompras()
+	{
+		$FechaInicial = $this->input->post('FechaInicial');
+		$FechaFinal = $this->input->post('FechaFinal');
+		if ($FechaInicial == "" and $FechaFinal == "") {
+			$this->compras($this->session->userdata['logged_in']['users_id']);
+		}else{
+			$this->compras($this->session->userdata['logged_in']['users_id'],$FechaInicial,$FechaFinal);
+		}
+	}
+
+
 }

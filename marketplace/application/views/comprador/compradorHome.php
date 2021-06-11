@@ -35,6 +35,12 @@
 						<a class="nav-link waves-effect" href="<?php echo site_url('comprador/ruleta'); ?>">Ruleta de la suerte
 						</a>
 					</li>
+					<?php if ($seccion == TRUE) { ?>
+						<li class="nav-item">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/compras/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte Compras
+							</a>
+						</li>
+					<?php } ?>
 				</ul>
 
 				<!-- Right -->

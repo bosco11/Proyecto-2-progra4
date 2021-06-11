@@ -19,14 +19,14 @@
         <div id="app">
             <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" />
             <br>
-            <h2 style='text-align: center; padding-top: 60px;'>Reporte Ventas</h2>
-            <h4 style='text-align: center;'>Tienda <?php echo $this->session->userdata['logged_in']['nombre_real'] ?></h4>
+            <h2 style='text-align: center; padding-top: 60px;'>Reporte Compras</h2>
+            <h4 style='text-align: center;'>Usuario <?php echo $this->session->userdata['logged_in']['nombre_real'] ?></h4>
             <br>
             <hr>
             <nav class="navbar navbar-light bg-light justify-content-between">
                 <a href=""></a>
                 <div class="nav-item">
-                    <?php echo form_open('tienda/buscarProductosReportes', "class=\"d-flex\"") ?>
+                    <?php echo form_open('tienda/buscarProductosReportesCompras', "class=\"d-flex\"") ?>
                     <input class="form-control mr-sm-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
                     <input class="form-control mr-sm-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
                     <button class="btn btn-outline-success my-2 my-sm-0 me-2" type="submit">Buscar</button>
@@ -40,7 +40,7 @@
                 <?php } ?>
             </div>
             <hr>
-            <div class="box-header-imprimir" id="ReporteVentas">
+            <div class="box-header-imprimir" id="ReporteCompras">
 
                 <h3 align="center">PRODUCTOS</h3>
                 <div id="tableview">
@@ -50,7 +50,7 @@
                                 <td>Descripcion </td>
                                 <td>Fecha compra</td>
                                 <td>Categoria</td>
-                                <td>Cantidad de vendido</td>
+                                <td>Unidades compradas</td>
                                 <td>Costo envio</td>
                                 <td>Precio del producto(Unidad)</td>
                             </tr>
@@ -118,18 +118,16 @@
                         ]);
 
                         var options = {
-                            title: 'Grafico unidades vendidas por producto',
+                            title: 'Grafico unidades compradas por producto',
                             width: "100%",
                             height: 500,
                         };
 
-                        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        var chart = new google.visualization.BarChart(document.getElementById('piechart'));
 
                         chart.draw(data, options);
                     }
                 </script>
-                <div>
-                </div>
                 <div style="text-align: center;" id="piechart"></div>
             </div>
         </div>
