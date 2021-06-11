@@ -51,6 +51,37 @@
                 </table>
 
             </div>
+            <hr>
+            <?php
+            $productosGrafico = array();
+
+            $precioTotal = 0;
+            foreach ($productos as $pro) {
+                for ($i = 0; $i < $pro['cantidades']; $i++) {
+                    $precioTotal += ($pro['costo_envio'] + $pro['precio']);
+                }
+            }
+
+            foreach ($productos as $pro) {
+                $cantidadProductos = 0;
+                $band = true;
+                foreach ($productosGrafico as $proGra) {
+                    if ($proGra['id_productos'] == $pro['id_productos']) {
+                        $band = false;
+                    }
+                }
+                if ($band) {
+                    foreach ($productos as $pro2) {
+                        if ($pro2['id_productos'] == $pro['id_productos'])
+                            $cantidadProductos += $pro2['cantidades'];
+                    }
+                    array_push($productosGrafico, array("id_productos" => $pro['id_productos'], "descripcion" => $pro['descripcion'], "cantidades" => $cantidadProductos));
+                }
+            }
+            echo "<h3>Precio Total : " . $precioTotal . "</h3>";
+            ?>
+            <hr>
+            <div style="text-align: center;"></div>
             <script type="text/javascript">
                 google.charts.load('current', {
                     'packages': ['corechart']
@@ -62,7 +93,7 @@
                     var data = google.visualization.arrayToDataTable([
                         ['Language', 'Rating'],
                         <?php
-                        foreach ($productos as $pro) {
+                        foreach ($productosGrafico as $pro) {
                             echo "['" . $pro['descripcion'] . "', " . $pro['cantidades'] . "],";
                         }
                         ?>
