@@ -39,6 +39,17 @@
                 </div>
                 <div class="modal-body" style="color: black;">
                     <h3>Premio:</h3><label for="" id="nota" style="font-size: 30;font-weight: bold;"></label>
+                    <select disabled name="cmb_tarjetas" id="cmb_tarjetas" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+                        <option value="">Sin seleccionar</option>
+                        <option value="">Sin seleccionar</option>
+                        <option value="">Sin seleccionar</option>
+                        <option value="">Sin seleccionar</option>
+                        <!-- <?php if (!empty($categorias)) { ?>
+								<?php foreach ($categorias as $cate) { ?>
+									<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+								<?php } ?>
+							<?php } ?> -->
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" value="" id="premio" name="premio">
@@ -173,6 +184,14 @@
         ctx.restore();
         document.getElementById('nota').innerHTML = text;
         document.getElementById('premio').value = text;
+        if (text == "$50") {          
+            $('#cmb_tarjetas').prop('disabled', false);
+            document.getElementById('cmb_tarjetas').style.display = "block";
+
+        } else {
+            $('#cmb_tarjetas').prop('disabled', true);
+            document.getElementById('cmb_tarjetas').style.display = "none";
+        }
         $('#exampleModalCenter').modal('show');
     }
 
