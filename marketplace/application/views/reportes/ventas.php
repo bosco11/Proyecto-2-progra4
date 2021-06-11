@@ -7,7 +7,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.28/dist/bootstrap-vue.js"></script>
-    <script src="app.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-vue@0.15.8/dist/bootstrap-vue.css" crossorigin="anonymous">
@@ -27,11 +27,11 @@
                     <thead>
                         <tr align="center">
                             <td>Descripcion </td>
-                            <td>Costo envio</td>
-                            <td>Precio</td>
                             <td>Fecha compra</td>
                             <td>Categoria</td>
                             <td>Cantidad de vendido</td>
+                            <td>Costo envio</td>
+                            <td>Precio del producto(Unidad)</td>
                         </tr>
                     </thead>
                     <tbody id="tbTable">
@@ -39,11 +39,11 @@
                             <?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?>
                             <tr align="center">
                                 <td><?php echo $pro['descripcion'] ?></td>
-                                <td><?php echo $pro['costo_envio'] ?></td>
-                                <td><?php echo $pro['precio'] ?></td>
                                 <td><?php echo $pro['fecha'] ?></td>
                                 <td><?php echo $pro['categorias'] ?></td>
                                 <td><?php echo $pro['cantidades'] ?></td>
+                                <td><?php echo $pro['costo_envio'] ?></td>
+                                <td><?php echo $pro['precio'] ?></td>
                             </tr>
                             <?php echo form_close(); ?>
                         <?php } ?>
@@ -51,8 +51,36 @@
                 </table>
 
             </div>
-        </div>
+            <script type="text/javascript">
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
 
+                function drawChart() {
+
+                    var data = google.visualization.arrayToDataTable([
+                        ['Language', 'Rating'],
+                        <?php
+                        foreach ($productos as $pro) {
+                            echo "['" . $pro['descripcion'] . "', " . $pro['cantidades'] . "],";
+                        }
+                        ?>
+                    ]);
+
+                    var options = {
+                        title: 'Cantidad de unidades vendidas por producto',
+                        width: 900,
+                        height: 500,
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+            <div id="piechart"></div>
+        </div>
     </div>
 </body>
 
