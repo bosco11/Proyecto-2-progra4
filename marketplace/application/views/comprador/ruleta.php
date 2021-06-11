@@ -25,17 +25,17 @@
         <canvas id="canvas" width="500" height="500"></canvas>
     </div>
     <br>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content" style="color: black;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Premio otorgado</h5>
                     <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="color: black;">
-                    <h1>Premio:</h1><label for="" id="nota"></label>
+                    <h3>Premio:</h3><label for="" id="nota" style="font-size: 30;font-weight: bold;"></label>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" value="" id="premio" name="premio">
