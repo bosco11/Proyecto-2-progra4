@@ -92,8 +92,8 @@
 			</div>
 			<!-- <div id="actions">
 				<a href="<?php echo site_url('user/delete/' . $user['id_usuarios']); ?>" id="btn_eliminar" name="btn_eliminar" title="Eliminar" onclick="send()">🗙 Eliminar mi cuenta</a>
-			</div>
-			<br><br><br><br> -->
+			</div> -->
+			<br><br><!--<br><br>-->
 			<?php echo form_close(); ?>
 
 			<?php echo form_open('user/social'); ?>
