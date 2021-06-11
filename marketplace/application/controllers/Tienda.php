@@ -53,7 +53,7 @@ class Tienda extends CI_Controller
 		$data['_view'] = $view;
 		$this->load->view('layouts/main', $data);
 	}
-	
+
 	function mantPro($id)
 	{
 
@@ -86,7 +86,7 @@ class Tienda extends CI_Controller
 						'ubicacion_fisica' => $this->input->post('txt_ubicacion')
 					);
 					$this->Tienda_model->editProducto($params, $id);
-					$this->notificarCambioProductos($id,$params['descripcion']);
+					$this->notificarCambioProductos($id, $params['descripcion']);
 					$data['message_display'] = 'Se ha guardado el producto exitosamente.';
 					$this->index();
 				} else {
@@ -104,8 +104,9 @@ class Tienda extends CI_Controller
 			}
 		}
 	}
-	function notificarCambioProductos($id,$descripcion){
-		$deseos=$this->Tienda_model->getDeseosProducto($id);
+	function notificarCambioProductos($id, $descripcion)
+	{
+		$deseos = $this->Tienda_model->getDeseosProducto($id);
 		foreach ($deseos as $value) {
 			$params = array(
 				'descripcion' => "El producto $descripcion cambio",
@@ -210,7 +211,7 @@ class Tienda extends CI_Controller
 	{
 		$data['suscrito'] = true;
 		$data['denuncia'] = true;
-		$data['calificacionComprador'] = array( 'calificacion'=>0);
+		$data['calificacionComprador'] = array('calificacion' => 0);
 		if (isset($this->session->userdata['logged_in'])) {
 			$params = array(
 				'comprador_id_usuarios' => $this->session->userdata['logged_in']['users_id'],
@@ -341,6 +342,13 @@ class Tienda extends CI_Controller
 		$suscriptores = $this->Tienda_model->getSuscriptoresTienda($id);
 		$data['suscriptores'] = $suscriptores;
 		$data['_view'] = "tienda/suscriptoresTienda";
+		$this->load->view('layouts/main', $data);
+	}
+	function ventas($id)
+	{
+		$productos = $this->Tienda_model->getProductosVendidosTienda($id);
+		$data['productos'] = $productos;
+		$data['_view'] = "reportes/ventas";
 		$this->load->view('layouts/main', $data);
 	}
 }
