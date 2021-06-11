@@ -29,5 +29,11 @@ class Auth_model extends CI_Model
 			return false;
 		}
 	}
-	
+	function get_denuncias($username)
+	{
+		return $this->db->query("SELECT d.*, u.*
+        FROM tbl_denuncias d 
+        join tbl_usuarios u on u.id_usuarios=d.tienda_id_usuarios
+        WHERE u.user = '$username'")->result_array();
+	}
 }

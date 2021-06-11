@@ -65,25 +65,33 @@ class Auth extends CI_Controller
 
 				$username = $this->input->post('txt_username');
 				$result = $this->Auth_model->get_user_information($username); //Función read_user_information del Modelo Auth
+				$resu = $this->Auth_model->get_denuncias($username); //Función read_user_information del Modelo Auth
 
 				//leemos los datos del usuario auntenticado y los ingresamos en las Variables de Sesion
 				if ($result != false) {
-					$session_data = array(
-						'logged_in' => TRUE,
-						'users_id' => $result[0]->id_usuarios,
-						'user' => $result[0]->user,
-						'nombre_real' => $result[0]->nombre_real,
-						'tipo' => $result[0]->tipo_usuario,
-						'imagen' => $result[0]->imagen,
-					);
+					if (sizeof($resu)< 10) {
+						$session_data = array(
+							'logged_in' => TRUE,
+							'users_id' => $result[0]->id_usuarios,
+							'user' => $result[0]->user,
+							'nombre_real' => $result[0]->nombre_real,
+							'tipo' => $result[0]->tipo_usuario,
+							'imagen' => $result[0]->imagen,
+						);
 
-					// Agregamos la infomación del usuario en forma de arreglo a la Variable de Sesion con nombre logged_in
-					$this->session->set_userdata('logged_in', $session_data);
-					//Función propia para cargar la vista indicada con datos precargados
-					if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
-						redirect('comprador/compradorHome', 'refresh');
+						// Agregamos la infomación del usuario en forma de arreglo a la Variable de Sesion con nombre logged_in
+						$this->session->set_userdata('logged_in', $session_data);
+						//Función propia para cargar la vista indicada con datos precargados
+						if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+							redirect('comprador/compradorHome', 'refresh');
+						} else {
+							redirect('tienda/tiendaHome', 'refresh');
+						}
 					} else {
-						redirect('tienda/tiendaHome', 'refresh');
+						$data = array(
+							'error_message' => 'La cuenta ha sido bloqueada, por acumular una cantidad de denuncias considerable.'
+						);
+						$this->load->view('auth/login', $data);
 					}
 				}
 			} else { //Si No autenticamos regreamos a la vista Login con un mensaje de error seteado
