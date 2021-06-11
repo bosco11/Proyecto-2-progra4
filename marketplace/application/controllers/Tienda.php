@@ -373,7 +373,7 @@ class Tienda extends CI_Controller
 	
 
 
-	
+
 	function compras($id, $FechaIni = null, $FechaFin = null)
 	{
 		if ($FechaIni != null and $FechaFin != null) {
@@ -398,6 +398,19 @@ class Tienda extends CI_Controller
 		}else{
 			$this->compras($this->session->userdata['logged_in']['users_id'],$FechaInicial,$FechaFinal);
 		}
+	}
+
+	function suscripciones($id){
+		$tiendas=$this->Tienda_model->getSuscripcionesComprador($id);
+		$cont = 0;
+		foreach ($tiendas as $val) {
+			$productos=$this->Tienda_model->getDeseosTiendaSuscripta($val['id_usuarios'],$id);
+			$tiendas[$cont] = array("productos" => $productos) + $tiendas[$cont];
+			$cont++;
+		}
+		$data['tiendas'] = $tiendas;
+		$data['_view'] = "reportes/suscripciones";
+		$this->load->view('layouts/main', $data);
 	}
 
 
