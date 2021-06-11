@@ -21,6 +21,12 @@ class Comprador_model extends CI_Model
         // return $this->db->insert_id();
     }
 
+    public function add_compra($params)
+    {
+        $this->db->insert('tbl_compras', $params);
+        // return $this->db->insert_id();
+    }
+
     function get_all_tiendas()
     {
         return $this->db->query("SELECT *
@@ -110,6 +116,13 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT * from tbl_formas_pago WHERE tbl_formas_pago.id_usuarios = $id_usuario")->result_array();
     }
 
+    function get_pagoUnico($id_pago,$cvv)
+    {
+        return $this->db->query("SELECT * FROM tbl_formas_pago 
+        WHERE tbl_formas_pago.id_formas_pago=$id_pago
+        AND tbl_formas_pago.cvv =$cvv")->row_array();
+    }
+
     public function delete_carrito($id,$tipo_producto)
     {
         $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id,'tipo_producto' => $tipo_producto));
@@ -186,4 +199,21 @@ class Comprador_model extends CI_Model
         $this->db->where('id_usuarios', $id_user);
         $this->db->update('tbl_calificacion_productos', $params);
     }
+
+    public function editProducto($params, $id)
+	{
+		$this->db->where('id_productos', $id);
+		$this->db->update('tbl_productos', $params);
+	}
+
+    public function get_productoUnico($id)
+	{
+		return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
+	}
+
+    public function comprarProducto($id)
+	{
+		return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
+	}
+
 }

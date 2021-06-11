@@ -23,8 +23,8 @@ class Comprador extends CI_Controller
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
-		
-		
+
+
 
 		if (isset($this->session->userdata['logged_in'])) {
 			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
@@ -136,14 +136,20 @@ class Comprador extends CI_Controller
 					}
 				}
 			} else {
-				$params = array(
-					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-					'id_productos' => $id,
-					'tipo_producto' => $tipo_producto,
-					'cantidad' => 1,
-				);
-				$this->Comprador_model->add_carrito($params);
-				$this->index();
+				$igualCero = $this->Comprador_model->get_productoUnico($id);
+				if ($igualCero['cantidad'] > 0) {
+					$params = array(
+						'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+						'id_productos' => $id,
+						'tipo_producto' => $tipo_producto,
+						'cantidad' => 1,
+					);
+					$this->Comprador_model->add_carrito($params);
+					$this->index();
+				} else {
+					$mesage = 'No hay suficiente producto en la tienda';
+					$this->index($mesage);
+				}
 			}
 		} else if ($this->input->post('btn_deseo')) {
 			$tipo_producto = 'D';
@@ -158,7 +164,7 @@ class Comprador extends CI_Controller
 				);
 				$this->Comprador_model->add_carrito($params);
 				$this->index();
-			}else{
+			} else {
 				$this->index();
 			}
 		}
@@ -192,14 +198,20 @@ class Comprador extends CI_Controller
 					}
 				}
 			} else {
-				$params = array(
-					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-					'id_productos' => $id,
-					'tipo_producto' => $tipo_producto,
-					'cantidad' => 1,
-				);
-				$this->Comprador_model->add_carrito($params);
-				$this->mensaje = 'Se ha agregado al carrito de compras';
+				$igualCero = $this->Comprador_model->get_productoUnico($id);
+				if ($igualCero['cantidad'] > 0) {
+					$params = array(
+						'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+						'id_productos' => $id,
+						'tipo_producto' => $tipo_producto,
+						'cantidad' => 1,
+					);
+					$this->Comprador_model->add_carrito($params);
+					$this->mensaje = 'Se ha agregado al carrito de compras';
+				} else {
+					$this->mensaje = null;
+					$this->error = 'No hay suficiente producto en la tienda';
+				}
 			}
 		} else if ($this->input->post('btn_deseo')) {
 			$tipo_producto = 'D';
@@ -279,6 +291,46 @@ class Comprador extends CI_Controller
 				}
 			}
 		}
+	}
+
+	function comprarProductos($precioTotal)
+	{
+		$valor1 = 0;
+		$valor2 = 0;
+		$result = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
+		$result2 = $this->Comprador_model->get_all_productos();
+		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'),$this->input->post('cvv'));
+		print_r($this->input->post('cmb_metodo'));
+		print_r($this->input->post('cmb_direccion'));
+		if ($cvv != null) {
+			foreach ($result as $c) {
+				foreach ($result2 as $r) {
+					if ($r['id_productos'] == $c['id_productos']) {
+						$valor1 = $r['cantidad'] - $c['cantidad'];
+						if ($valor1 >= 0) {
+							$params = array(
+								'cantidad' => $valor1,
+							);
+							$this->Comprador_model->editProducto($params, $r['id_productos']);
+						}
+					}
+				}
+			}
+			$params = array(
+				'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+				'id_formas_pago' => $this->input->post('cmb_metodo'),
+				'fecha' => date('Y-m-d H:i:s'),
+				'precio_total' => $precioTotal,
+				'id_direcciones' => $this->input->post('cmb_direccion'),
+				'id_premios' => 1
+			);
+			$this->Comprador_model->add_compra($params);
+			$this->index();
+		}else{
+			//mensaje
+		}
+
+		
 	}
 
 
