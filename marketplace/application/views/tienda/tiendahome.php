@@ -27,6 +27,10 @@
 							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>">Perfil tienda
 							</a>
 						</li>
+						<li class="nav-item">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/ventas/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte tienda
+							</a>
+						</li>
 					</ul>
 
 					<!-- Right -->

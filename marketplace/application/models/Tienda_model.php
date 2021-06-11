@@ -175,6 +175,12 @@ class Tienda_model extends CI_Model
 		return $query->num_rows();
 	}
 
+	public function getProductosVendidosTienda($id)
+	{
+		$query = $this->db->query("SELECT u.*,c.*,p.*,s.* FROM tbl_productos_compras u JOIN tbl_compras c ON c.id_compras=u.id_compras JOIN tbl_productos p ON p.id_productos=u.id_productos JOIN tbl_categorias s ON p.id_categorias=s.id_categorias  where p.id_usuarios = $id ");
+		return $query->result_array();
+	}
+
 
 
 	public function denunciarTienda($params)
