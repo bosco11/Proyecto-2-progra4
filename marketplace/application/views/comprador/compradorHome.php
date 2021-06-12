@@ -355,10 +355,11 @@
 				<hr>
 				<br>
 				<div class="row align-items ">
-					<?php if (!empty($productosMasVendidos)) { ?>
+					<?php $TOP = 0;
+					if (!empty($productosMasVendidos)) { ?>
 						<?php foreach ($productosMasVendidos as $pmv) { ?>
 							<?php foreach ($pro as $p) { ?>
-								<?php if ($pmv['id_productos'] == $p['id_productos']) { ?>
+								<?php if ($pmv['id_productos'] == $p['id_productos']) {  $TOP=$TOP+1 ?>
 									<div class="col-4">
 										<div class="card">
 											<div class="view overlay">
@@ -406,6 +407,9 @@
 													<strong>₡ <?php echo $p['precio'] ?></strong>
 												</h4>
 											</div>
+										</div>
+										<div>
+											<h2>TOP <?php echo $TOP ?></h2>
 										</div>
 									</div>
 								<?php } ?>
