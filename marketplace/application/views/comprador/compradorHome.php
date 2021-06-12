@@ -41,6 +41,11 @@
 							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/compras/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte Compras
 							</a>
 						</li>
+
+						<li class="nav-item">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/suscripciones/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte suscripciones
+							</a>
+						</li>
 					<?php } ?>
 				</ul>
 
