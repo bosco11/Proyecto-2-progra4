@@ -343,7 +343,7 @@ class Comprador extends CI_Controller
 							$params2 = array(
 								'id_productos' => $r['id_productos'],
 								'id_compras' => $id_compra,
-								'cantidad' => $c['cantidad']
+								'cantidades' => $c['cantidad']
 							);
 							$this->Comprador_model->add_producto_compra($params2);
 						}
