@@ -2,14 +2,14 @@
 
 if (isset($logout_message)) {
 
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
         . $logout_message .
         "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
 if ($message_display != null) {
     if (isset($message_display)) {
 
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
             . $message_display .
             "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
@@ -17,7 +17,7 @@ if ($message_display != null) {
 if ($error_message != null) {
     if (isset($error_message)) {
 
-        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
             . $error_message .
             "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
@@ -25,7 +25,7 @@ if ($error_message != null) {
 
 if (validation_errors() !== "") {
 
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
         . validation_errors() .
         "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
