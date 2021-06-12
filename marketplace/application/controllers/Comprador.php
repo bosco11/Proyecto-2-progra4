@@ -25,7 +25,7 @@ class Comprador extends CI_Controller
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
 		$data['productosMasVendidos'] = $this->Comprador_model->get_productos_mas_vendidos();
-		
+
 
 
 		if (isset($this->session->userdata['logged_in'])) {
@@ -356,7 +356,7 @@ class Comprador extends CI_Controller
 							);
 							$this->Comprador_model->add_producto_compra($params2);
 
-							$descripcion=$r['descripcion'];
+							$descripcion = $r['descripcion'];
 							$params3 = array(
 								'descripcion' => "El producto $descripcion fue comprado",
 								'id_usuarios' => $r['id_usuarios'],
@@ -455,6 +455,32 @@ class Comprador extends CI_Controller
 	function guardarPremio($id_usuario)
 	{
 		if ($this->input->post('premio') == 'Nada') {
+			$fecha = date("Y-m-d");
+			$user = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
+			if ($user['fecha_giros'] == '' || $user['fecha_giros'] == null) {
+				$params2 = array(
+					'fecha_giros' => $fecha,
+					'cantidad_giros' => 1
+				);
+				$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+			} else {
+				if ($user['fecha_giros'] < $fecha) {
+					$params2 = array(
+						'fecha_giros' => $fecha,
+						'cantidad_giros' => 1
+					);
+					$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+				} else {
+					if ($user['fecha_giros'] <= $fecha) {
+						$cantidad = $user['cantidad_giros'] + 1;
+						$params2 = array(
+							'fecha_giros' => $fecha,
+							'cantidad_giros' => $cantidad
+						);
+						$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+					}
+				}
+			}
 		} else {
 			if ($this->input->post('premio') == '%10') {
 				$params = array(
@@ -464,7 +490,7 @@ class Comprador extends CI_Controller
 				);
 				$this->Comprador_model->insertPremio($params);
 			} else {
-				if ($this->input->post('premio') == 'Envio') {
+				if ($this->input->post('premio') == 'Envío') {
 					$params = array(
 						'descripcion' => $this->input->post('premio'),
 						'estado' => 'Activo',
