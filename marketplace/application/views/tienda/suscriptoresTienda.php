@@ -20,7 +20,7 @@
 
                             <div class="card-body text-center">
                                 <h4 class="font-weight-bold black-text" style="color: black;"><?php echo $suscriptor['nombre_real'] ?></h4>
-                                <?php echo form_open('user/edit/' . $suscriptor['id_usuarios']) ?>
+                                <?php echo form_open('user/perfilUsuario/' . $suscriptor['id_usuarios']) ?>
                                     <button type="submit" class="btn btn-primary">Ver perfil</button>
                                 <?php echo form_close() ?>
                             </div>
