@@ -299,7 +299,7 @@ class Comprador extends CI_Controller
 		$valor2 = 0;
 		$result = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
 		$result2 = $this->Comprador_model->get_all_productos();
-		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'),$this->input->post('cvv'));
+		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'), $this->input->post('cvv'));
 		print_r($this->input->post('cmb_metodo'));
 		print_r($this->input->post('cmb_direccion'));
 		if ($cvv != null) {
@@ -326,11 +326,9 @@ class Comprador extends CI_Controller
 			);
 			$this->Comprador_model->add_compra($params);
 			$this->index();
-		}else{
+		} else {
 			//mensaje
 		}
-
-		
 	}
 
 
@@ -382,10 +380,15 @@ class Comprador extends CI_Controller
 	{
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
+			$data['metodos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);;
 		} else {
 			$data['seccion'] = false;
 		}
-		$data['message_display'] = null;
+		if(sizeof($data['metodos'])==0){
+			$this->error='Por favor agrega un metodo de pago a su usuario, ya que en caso de ser acreedor de uno de los premios le será requerido y luego vuelva a ingresar a este apartado';
+		}
+		$data['message_display'] = $this->mensaje;
+		$data['error_message'] = $this->error;
 		$data['_view'] = 'comprador/ruleta';
 		$this->load->view('layouts/main', $data);
 	}

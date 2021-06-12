@@ -1,3 +1,36 @@
+<?php
+
+if (isset($logout_message)) {
+
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+        . $logout_message .
+        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if ($message_display != null) {
+    if (isset($message_display)) {
+
+        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+            . $message_display .
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    }
+}
+if ($error_message != null) {
+    if (isset($error_message)) {
+
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"
+            . $error_message .
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    }
+}
+
+if (validation_errors() !== "") {
+
+    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+        . validation_errors() .
+        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+
+?>
 <div id="panel_app">
     <div class="box-header">
         <h2 class="box-title">Ruleta de la suerte</h2>
@@ -21,7 +54,11 @@
     <br>
     <div style="text-align: center;">
         <!-- <input type="button" value="spin" id='spin' class="btn btn-primary" /> -->
-        <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
+        <?php if (sizeof($metodos) > 0) { ?>
+            <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
+        <?php } else { ?>
+            <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary" disabled>Girar la ruleta</button>
+        <?php } ?>
         <canvas id="canvas" width="600" height="600"></canvas>
         <div id="cen-ruleta">
             <img style="position: absolute; left: 2px;bottom: 2px;" id="item-display" src='<?php echo site_url('/resources/img/ruleta.png') ?>'>
@@ -32,24 +69,24 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="color: black;">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Premio otorgado</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Felicidades has sido premiado</h5>
                     <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body" style="color: black;">
-                    <h3>Premio:</h3><label for="" id="nota" style="font-size: 30;font-weight: bold;"></label>
-                    <select disabled name="cmb_tarjetas" id="cmb_tarjetas" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
-                        <option value="">Sin seleccionar</option>
-                        <option value="">Sin seleccionar</option>
-                        <option value="">Sin seleccionar</option>
-                        <option value="">Sin seleccionar</option>
-                        <!-- <?php if (!empty($categorias)) { ?>
-								<?php foreach ($categorias as $cate) { ?>
-									<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
-								<?php } ?>
-							<?php } ?> -->
-                    </select>
+                    <h3> Descripcion del premio:</h3>
+                    <h2 id="nota"></h2>
+                    <div id="pagos">
+                        <label for="">Seleccione un metodo de pago al cual desea acreditar su premio</label>
+                        <select name="cmb_tarjetas" id="cmb_tarjetas" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+                            <?php if (!empty($metodos)) { ?>
+                                <?php foreach ($metodos as $met) { ?>
+                                    <option value="<?php echo $met['id_formas_pago'] ?>">Numero Tarjeta:<?php echo $met['numero_tarjeta'] ?> - Saldo:<?php echo $met['saldo'] ?></option>
+                                <?php } ?>
+                            <?php } ?>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" value="" id="premio" name="premio">
@@ -184,13 +221,13 @@
         ctx.restore();
         document.getElementById('nota').innerHTML = text;
         document.getElementById('premio').value = text;
-        if (text == "$50") {          
-            $('#cmb_tarjetas').prop('disabled', false);
-            document.getElementById('cmb_tarjetas').style.display = "block";
+        if (text == "$50") {
+            $('#pagos').prop('disabled', false);
+            document.getElementById('pagos').style.display = "block";
 
         } else {
-            $('#cmb_tarjetas').prop('disabled', true);
-            document.getElementById('cmb_tarjetas').style.display = "none";
+            $('#cmb_tarjetas').prop('pagos', true);
+            document.getElementById('pagos').style.display = "none";
         }
         $('#exampleModalCenter').modal('show');
     }
