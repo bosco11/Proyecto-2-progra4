@@ -14,6 +14,7 @@ class Comprador extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->load->model('Comprador_model');
+		$this->load->model('User_model');
 	}
 
 	//Muestra la vista del Login
@@ -410,6 +411,7 @@ class Comprador extends CI_Controller
 		if (isset($this->session->userdata['logged_in'])) {
 			$data['seccion'] = $this->session->userdata['logged_in'];
 			$data['metodos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);;
+			$data['user'] = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
 		} else {
 			$data['seccion'] = false;
 		}
@@ -433,5 +435,65 @@ class Comprador extends CI_Controller
 		} else {
 			return number_format($calificacion / count($calificaciones), 0, ",", ".");
 		}
+	}
+	function guardarPremio($id_usuario)
+	{
+		if ($this->input->post('premio') == 'Nada') {
+		} else {
+			if ($this->input->post('premio') == '%10') {
+				$params = array(
+					'descripcion' => $this->input->post('premio'),
+					'estado' => 'Activo',
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id']
+				);
+				$this->Comprador_model->insertPremio($params);
+			} else {
+				if ($this->input->post('premio') == 'Envio') {
+					$params = array(
+						'descripcion' => $this->input->post('premio'),
+						'estado' => 'Activo',
+						'id_usuarios' => $this->session->userdata['logged_in']['users_id']
+					);
+					$this->Comprador_model->insertPremio($params);
+				} else {
+					if ($this->input->post('premio') == '$50') {
+						$metodo = $this->Comprador_model->get_pagoId_pago($this->input->post('cmb_tarjetas'));
+						$saldo = $metodo['saldo'] + 50;
+						$params = array(
+							'saldo' => $saldo,
+						);
+						$this->Comprador_model->editMonto($params, $this->input->post('cmb_tarjetas'));
+					}
+				}
+			}
+			// echo printf("la fecha actual es " . date("d") . " del " . date("m") . " de " . date("Y"));
+			$fecha = date("Y-m-d");
+			$user = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
+			if ($user['fecha_giros'] == '' || $user['fecha_giros'] == null) {
+				$params2 = array(
+					'fecha_giros' => $fecha,
+					'cantidad_giros' => 1
+				);
+				$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+			} else {
+				if ($user['fecha_giros'] < $fecha) {
+					$params2 = array(
+						'fecha_giros' => $fecha,
+						'cantidad_giros' => 1
+					);
+					$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+				} else {
+					if ($user['fecha_giros'] <= $fecha) {
+						$cantidad = $user['cantidad_giros'] + 1;
+						$params2 = array(
+							'fecha_giros' => $fecha,
+							'cantidad_giros' => $cantidad
+						);
+						$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+					}
+				}
+			}
+		}
+		$this->ruleta();
 	}
 }

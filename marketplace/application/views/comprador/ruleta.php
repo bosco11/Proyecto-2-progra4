@@ -41,10 +41,24 @@ if ($error_message != null) {
     <br>
     <div style="text-align: center;">
         <!-- <input type="button" value="spin" id='spin' class="btn btn-primary" /> -->
-        <?php if (sizeof($metodos) > 0) { ?>
+
+        <?php
+        $fecha = date("Y-m-d");
+        if ($user['fecha_giros'] < $fecha) {
+            $result = 3;
+        } else {
+            if ($user['fecha_giros'] <= $fecha) {
+                $total = 3;
+                $cantidad = $user['cantidad_giros'];
+                $result = $total - $cantidad;
+            }
+        }
+        if (sizeof($metodos) > 0 && $user['cantidad_giros'] < 3) { ?>
             <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
+            <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
         <?php } else { ?>
             <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary" disabled>Girar la ruleta</button>
+            <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
         <?php } ?>
         <canvas id="canvas" width="600" height="600"></canvas>
         <div id="cen-ruleta">
@@ -53,13 +67,14 @@ if ($error_message != null) {
     </div>
     <br>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <?php echo form_open('comprador/guardarPremio/' . $this->session->userdata['logged_in']['users_id']); ?>
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="color: black;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Felicidades has sido premiado</h5>
-                    <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="modal-body" style="color: black;">
                     <h3> Descripcion del premio:</h3>
@@ -78,10 +93,11 @@ if ($error_message != null) {
                 <div class="modal-footer">
                     <input type="hidden" value="" id="premio" name="premio">
                     <!-- <button type="button" class="btn btn-secondary" onclick="closeModal()" data-dismiss="modal">Close</button> -->
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
         </div>
+        <?php echo form_close(); ?>
     </div>
 
 </div>
@@ -178,6 +194,7 @@ if ($error_message != null) {
     }
 
     function spin() {
+        document.getElementById('spin').disabled = "true";
         spinAngleStart = Math.random() * 10 + 10;
         spinTime = 0;
         spinTimeTotal = Math.random() * 3 + 16 * 1000;

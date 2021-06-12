@@ -97,14 +97,14 @@ class Comprador_model extends CI_Model
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->row_array();
     }
 
-    function get_all_carrito($id_usuario,$tipo_producto)
+    function get_all_carrito($id_usuario, $tipo_producto)
     {
         return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
                                 AND tbl_productos.id_productos = tbl_carrito_deseos.id_productos
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
-    function get_all_carrito_deseo($id_usuario,$tipo_producto)
+    function get_all_carrito_deseo($id_usuario, $tipo_producto)
     {
         return $this->db->query("SELECT tbl_carrito_deseos.*,tbl_productos.* FROM tbl_carrito_deseos, tbl_productos
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
@@ -122,16 +122,21 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT * from tbl_formas_pago WHERE tbl_formas_pago.id_usuarios = $id_usuario")->result_array();
     }
 
-    function get_pagoUnico($id_pago,$cvv)
+    function get_pagoUnico($id_pago, $cvv)
     {
         return $this->db->query("SELECT * FROM tbl_formas_pago 
         WHERE tbl_formas_pago.id_formas_pago=$id_pago
         AND tbl_formas_pago.cvv =$cvv")->row_array();
     }
-
-    public function delete_carrito($id,$tipo_producto)
+    function get_pagoId_pago($id_pago)
     {
-        $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id,'tipo_producto' => $tipo_producto));
+        return $this->db->query("SELECT * FROM tbl_formas_pago 
+        WHERE tbl_formas_pago.id_formas_pago=$id_pago ")->row_array();
+    }
+
+    public function delete_carrito($id, $tipo_producto)
+    {
+        $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id, 'tipo_producto' => $tipo_producto));
     }
 
     function search_productoT($data)
@@ -207,20 +212,20 @@ class Comprador_model extends CI_Model
     }
 
     public function editProducto($params, $id)
-	{
-		$this->db->where('id_productos', $id);
-		$this->db->update('tbl_productos', $params);
-	}
+    {
+        $this->db->where('id_productos', $id);
+        $this->db->update('tbl_productos', $params);
+    }
 
     public function get_productoUnico($id)
-	{
-		return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
-	}
+    {
+        return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
+    }
 
     public function comprarProducto($id)
-	{
-		return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
-	}
+    {
+        return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
+    }
 
     public function editMonto($params, $id_pago)
 	{
@@ -236,7 +241,9 @@ class Comprador_model extends CI_Model
                                 ORDER BY SUM(tbl_productos_compras.cantidades) DESC
                                 LIMIT 3")->result_array();
     }
-
-    
-
+    public function insertPremio($params)
+    {
+        $this->db->insert('tbl_premios', $params);
+        return $this->db->insert_id();
+    }
 }
