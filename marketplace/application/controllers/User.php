@@ -66,7 +66,7 @@ class User extends CI_Controller
         $this->form_validation->set_rules('txt_nombre', 'Nombre', 'required|max_length[100]');
         $this->form_validation->set_rules('txt_telefono', 'Telefono', 'required|max_length[14]');
         $this->form_validation->set_rules('txt_correo', 'Correo', 'required|max_length[45]');
-        $this->form_validation->set_rules('txt_cedula', 'Cedula', 'required|max_length[100]');
+        $this->form_validation->set_rules('txt_cedula', 'Cedula', 'required|max_length[12]');
         $this->form_validation->set_rules('txt_pais', 'Pais', 'required|max_length[100]');
         $this->form_validation->set_rules('txt_direccion', 'Direccion', 'required|max_length[200]');
 
