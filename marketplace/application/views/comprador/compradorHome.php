@@ -193,7 +193,7 @@
 										} ?>
 									</div>
 									<div class="row">
-										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" <?php echo $funcionBoton ?> >
+										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" <?php echo $funcionBoton ?>>
 											<button class="btn btn-primary btn-block" <?php echo $botonDisable ?>>Checkout</button>
 										</div>
 									</div>
@@ -342,7 +342,7 @@
 	}
 	?>
 
-	<div id="mas_vendidos">
+	<div id="mas_vendidos" >
 		<div class='post_block'>
 			<div class='post_detail' style="text-align: center;">
 				<a class="nav-link waves-effect">
@@ -350,37 +350,64 @@
 				</a>
 				<hr>
 				<br>
-				<div class="row align-items">
-					<div class="col-lg-3 col-md-6 mb-4">
-						<div class="card">
-							<div class="view overlay">
-								<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-									<div class="carousel-inner">
-										<div class="carousel-item active">
-											<img src='<?php echo site_url('/resources/files/WIN_20190913_17_31_42_Pro.jpg') ?>' height="200" class="d-block w-100" alt="...">
+				<div class="row align-items ">
+					<?php if (!empty($productosMasVendidos)) { ?>
+						<?php foreach ($productosMasVendidos as $pmv) { ?>
+							<?php foreach ($pro as $p) { ?>
+								<?php if ($pmv['id_productos'] == $p['id_productos']) { ?>
+									<div class="col-4" >
+										<div class="card">
+											<div class="view overlay">
+												<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+													<div class="carousel-inner">
+														<?php $cont = 1 ?>
+														<?php if (!empty($galerias)) { ?>
+															<?php foreach ($galerias as $g) { ?>
+																<?php if ($g['id_productos'] == $p['id_productos']) {
+																	if ($cont == 1) {
+																		$band = 'active';
+																	} else {
+																		$band = '';
+																	}
+																	$cont = $cont + 1;
+																?>
+																	<div class="carousel-item <?php echo $band ?>">
+																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
+																	</div>
+																<?php } ?>
+															<?php } ?>
+														<?php } ?>
+													</div>
+												</div>
+												<a>
+													<div class="mask rgba-white-slight"></div>
+												</a>
+											</div>
+											<div class="card-body text-center">
+												<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+													<h5><?php echo $p['descripcion'] ?></h5>
+												</a>
+												<?php if ($p['cantidad'] > 0) { ?>
+													<div class="product-stock">Disponible</div>
+												<?php } else { ?>
+													<div class="product-stock2">No disponible</div>
+												<?php } ?>
+												<?php if ($seccion == TRUE) { ?>
+													<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+													<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
+													<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+													<?php echo form_close(); ?>
+												<?php } ?>
+												<h4 class="font-weight-bold black-text" style="color: black;">
+													<strong>₡ <?php echo $p['precio'] ?></strong>
+												</h4>
+											</div>
 										</div>
 									</div>
-								</div>
-								<a>
-									<div class="mask rgba-white-slight"></div>
-								</a>
-							</div>
-							<div class="card-body text-center">
-								<!-- <a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
-								<h5><?php echo $p['descripcion'] ?></h5>
-							</a> -->
-								<?php if ($seccion == TRUE) { ?>
-									<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-									<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
-									<button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
-									<?php echo form_close(); ?>
 								<?php } ?>
-								<!-- <h4 class="font-weight-bold black-text" style="color: black;">
-								<strong>₡ <?php echo $p['precio'] ?></strong>
-							</h4> -->
-							</div>
-						</div>
-					</div>
+							<?php } ?>
+						<?php } ?>
+					<?php } ?>
 				</div>
 			</div>
 		</div>

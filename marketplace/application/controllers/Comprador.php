@@ -23,7 +23,7 @@ class Comprador extends CI_Controller
 		$data['galerias'] = $this->Comprador_model->get_all_galerias();
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
-
+		$data['productosMasVendidos'] = $this->Comprador_model->get_productos_mas_vendidos();
 
 
 		if (isset($this->session->userdata['logged_in'])) {
@@ -302,7 +302,7 @@ class Comprador extends CI_Controller
 		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'), $this->input->post('cvv'));
 
 
-		
+
 
 		if ($cvv != null) {
 			$saldo = $cvv['saldo'] - $precioTotal;
@@ -350,9 +350,12 @@ class Comprador extends CI_Controller
 					}
 				}
 				$this->index();
+			} else {
+				$mesage = 'No tienes saldo suficiente para realizar la compra';
+				$this->index($mesage);
 			}
 		} else {
-			$mesage = 'CVV incorrecto porfavor vuelva a ingresar la informacion para realizar la compra';
+			$mesage = 'CVV incorrecto porfavor vuelva a ingresar la información para realizar la compra';
 			$this->index($mesage);
 		}
 	}

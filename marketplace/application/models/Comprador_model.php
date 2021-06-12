@@ -228,4 +228,15 @@ class Comprador_model extends CI_Model
 		$this->db->update('tbl_formas_pago', $params);
 	}
 
+    function get_productos_mas_vendidos()
+    {
+        return $this->db->query("SELECT  tbl_productos_compras.id_productos, SUM(tbl_productos_compras.cantidades)
+                                FROM tbl_productos_compras
+                                GROUP BY tbl_productos_compras.id_productos
+                                ORDER BY SUM(tbl_productos_compras.cantidades) DESC
+                                LIMIT 3")->result_array();
+    }
+
+    
+
 }
