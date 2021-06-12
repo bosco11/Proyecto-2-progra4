@@ -3,9 +3,8 @@
     <br>
     <h2 style='text-align: center; padding-top: 60px;'>Reporte Ofertas</h2>
     <br>
-    <hr>
     <nav class="navbar navbar-light bg-light justify-content-between">
-        <?php echo form_open('tienda/tiendaHome'); ?>
+        <?php echo form_open('comprador/compradorHome'); ?>
         <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
         <?php echo form_close(); ?>
         <div class="nav-item">
