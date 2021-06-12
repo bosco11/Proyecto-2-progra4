@@ -1,6 +1,8 @@
 <?php if ($val) {
 	$precio = 0;
 	$cobro_envio = 0;
+	$botonDisable = '';
+	$funcionBoton = '';
 ?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 		<div class="container">
@@ -131,13 +133,16 @@
 												} ?>
 											<?php } ?>
 										<?php } ?>
-										<span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
-									<?php } else {
+										<?php if ($cont > 0) { ?>
+											<span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
+									<?php }
+									} else {
 										$cont = 0;
 										$precio = 0;
 									} ?>
 								</button>
 								<div class="dropdown-menu" style="margin-right: 1000%">
+									<?php $botonDisable = 'disabled'; ?>
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
@@ -147,7 +152,9 @@
 										</div>
 									</div>
 									<div style="overflow: scroll;width: 325px; height: 300px;">
-										<?php if (!empty($carrito)) { ?>
+										<?php if (!empty($carrito)) {
+											$botonDisable = '';
+											$funcionBoton = 'data-bs-target="#staticBackdrop"'; ?>
 											<?php foreach ($carrito as $car) { ?>
 												<div class="row cart-detail">
 													<?php foreach ($pro as $p) { ?>
@@ -182,15 +189,15 @@
 													<?php } ?>
 												</div>
 											<?php } ?>
-										<?php } ?>
+										<?php
+										} ?>
 									</div>
 									<div class="row">
-										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-
-											<button class="btn btn-primary btn-block">Checkout</button>
-
+										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" <?php echo $funcionBoton ?> >
+											<button class="btn btn-primary btn-block" <?php echo $botonDisable ?>>Checkout</button>
 										</div>
 									</div>
+
 								</div>
 							</div>
 						</li>
@@ -247,8 +254,8 @@
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<?php $precioTotal=$precio + $cobro_envio ?>
-			<?php echo form_open('comprador/comprarProductos/'.$precioTotal); ?>
+			<?php $precioTotal = $precio + $cobro_envio ?>
+			<?php echo form_open('comprador/comprarProductos/' . $precioTotal); ?>
 			<div class="modal-content" style="background-color: #15202B;">
 
 				<div class="modal-header">
@@ -524,7 +531,7 @@
 			e.target.value = value.replace(/[^A-Z\d-]/g, "");
 		});
 	}
-  
+
 
 
 	function validar() {

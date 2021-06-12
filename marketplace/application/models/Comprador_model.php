@@ -21,10 +21,16 @@ class Comprador_model extends CI_Model
         // return $this->db->insert_id();
     }
 
+    public function add_producto_compra($params)
+    {
+        $this->db->insert('tbl_productos_compras', $params);
+        // return $this->db->insert_id();
+    }
+
     public function add_compra($params)
     {
         $this->db->insert('tbl_compras', $params);
-        // return $this->db->insert_id();
+        return $this->db->insert_id();
     }
 
     function get_all_tiendas()
@@ -214,6 +220,12 @@ class Comprador_model extends CI_Model
     public function comprarProducto($id)
 	{
 		return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
+	}
+
+    public function editMonto($params, $id_pago)
+	{
+		$this->db->where('id_formas_pago', $id_pago);
+		$this->db->update('tbl_formas_pago', $params);
 	}
 
 }

@@ -57,7 +57,7 @@ class Comprador extends CI_Controller
 				$data['message_display'] = null;
 				$data['tiendas'] = $tienda_data;
 				$data['productos'] = $this->Comprador_model->search_producto($this->input->post('txt_producto'));
-			} else if ($this->input->post('btn_mas') != "" || $this->input->post('btn_carrito') != "") {
+			} else if ($this->input->post('btn_mas') != "" || $this->input->post('btn_carrito') != "" || $this->input->post('cmb_metodo') != "") {
 				$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
 				$data['message_display'] = $tienda_data;
 			}
@@ -300,34 +300,60 @@ class Comprador extends CI_Controller
 		$result = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
 		$result2 = $this->Comprador_model->get_all_productos();
 		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'), $this->input->post('cvv'));
-		print_r($this->input->post('cmb_metodo'));
-		print_r($this->input->post('cmb_direccion'));
+
+
+		
+
 		if ($cvv != null) {
-			foreach ($result as $c) {
-				foreach ($result2 as $r) {
-					if ($r['id_productos'] == $c['id_productos']) {
-						$valor1 = $r['cantidad'] - $c['cantidad'];
-						if ($valor1 >= 0) {
-							$params = array(
-								'cantidad' => $valor1,
+			$saldo = $cvv['saldo'] - $precioTotal;
+			if ($saldo > 0) {
+
+				$params = array(
+					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+					'id_formas_pago' => $this->input->post('cmb_metodo'),
+					'fecha' => date('Y-m-d H:i:s'),
+					'precio_total' => $precioTotal,
+					'id_direcciones' => $this->input->post('cmb_direccion'),
+					'id_premios' => 1
+				);
+				$id_compra = $this->Comprador_model->add_compra($params);
+
+
+
+				$params1 = array(
+					'saldo' => $saldo,
+				);
+				$this->Comprador_model->editMonto($params1, $this->input->post('cmb_metodo'));
+
+				foreach ($result as $c) {
+					foreach ($result2 as $r) {
+						if ($r['id_productos'] == $c['id_productos']) {
+							$valor1 = $r['cantidad'] - $c['cantidad'];
+							if ($valor1 >= 0) {
+								$params = array(
+									'cantidad' => $valor1,
+								);
+								$this->Comprador_model->editProducto($params, $r['id_productos']);
+							}
+
+
+							$this->Comprador_model->delete_carrito($r['id_productos'], 'C');
+
+
+							$params2 = array(
+								'id_productos' => $r['id_productos'],
+								'id_compras' => $id_compra,
+								'cantidad' => $c['cantidad']
 							);
-							$this->Comprador_model->editProducto($params, $r['id_productos']);
+							$this->Comprador_model->add_producto_compra($params2);
 						}
 					}
 				}
+				$this->index();
 			}
-			$params = array(
-				'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-				'id_formas_pago' => $this->input->post('cmb_metodo'),
-				'fecha' => date('Y-m-d H:i:s'),
-				'precio_total' => $precioTotal,
-				'id_direcciones' => $this->input->post('cmb_direccion'),
-				'id_premios' => 1
-			);
-			$this->Comprador_model->add_compra($params);
-			$this->index();
 		} else {
-			//mensaje
+			$mesage = 'CVV incorrecto porfavor vuelva a ingresar la informacion para realizar la compra';
+			$this->index($mesage);
 		}
 	}
 
@@ -384,8 +410,8 @@ class Comprador extends CI_Controller
 		} else {
 			$data['seccion'] = false;
 		}
-		if(sizeof($data['metodos'])==0){
-			$this->error='Por favor agrega un metodo de pago a su usuario, ya que en caso de ser acreedor de uno de los premios le será requerido y luego vuelva a ingresar a este apartado';
+		if (sizeof($data['metodos']) == 0) {
+			$this->error = 'Por favor agrega un metodo de pago a su usuario, ya que en caso de ser acreedor de uno de los premios le será requerido y luego vuelva a ingresar a este apartado';
 		}
 		$data['message_display'] = $this->mensaje;
 		$data['error_message'] = $this->error;
