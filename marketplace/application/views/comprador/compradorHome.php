@@ -124,8 +124,10 @@
 										<?php foreach ($carrito as $car) {
 											foreach ($pro as $p) {
 												if ($car['id_productos'] == $p['id_productos']) {
-													$cont += 1;
-													$precio += $p['precio'] * $car['cantidad'];
+													if ($p['cantidad'] > 0) {
+														$cont += 1;
+														$precio += $p['precio'] * $car['cantidad'];
+													}
 												} ?>
 											<?php } ?>
 										<?php } ?>
@@ -150,30 +152,32 @@
 												<div class="row cart-detail">
 													<?php foreach ($pro as $p) { ?>
 														<?php if ($car['id_productos'] == $p['id_productos']) { ?>
-															<?php $band = true;
-															$cobro_envio = $cobro_envio + $p['costo_envio'];
-															foreach ($galerias as $g) { ?>
-																<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
-																	<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
-																		<img width="50px" height="50px" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
-																	</div>
-																<?php $band = false;
-																} ?>
+															<?php if ($p['cantidad'] > 0) { ?>
+																<?php $band = true;
+																$cobro_envio = $cobro_envio + $p['costo_envio'];
+																foreach ($galerias as $g) { ?>
+																	<?php if ($p['id_productos'] == $g['id_productos'] && $band) { ?>
+																		<div class="col-lg-4 col-sm-4 col-4 cart-detail-img">
+																			<img width="50px" height="50px" src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>'>
+																		</div>
+																	<?php $band = false;
+																	} ?>
+																<?php } ?>
+																<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
+																	<p><?php echo $p['descripcion'] ?>.</p>
+																	<span class="price text-info" style="display: inline-block;">
+																		$<?php echo $p['precio'] ?></span> <span class="count">
+																		<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
+																		<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
+																		<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
+																		<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
+																		<button type="submit" id=" btn_eliminar_carrito" name="btn_eliminar_carrito" value="btn_eliminar_carrito" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+																		<?php echo form_close(); ?>
+																	</span>
+
+																</div>
+
 															<?php } ?>
-															<div class="col-lg-8 col-sm-8 col-8 cart-detail-product">
-																<p><?php echo $p['descripcion'] ?>.</p>
-																<span class="price text-info" style="display: inline-block;">
-																	$<?php echo $p['precio'] ?></span> <span class="count">
-																	<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
-																	<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
-																	<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
-																	<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
-																	<button type="submit" id=" btn_eliminar_carrito" name="btn_eliminar_carrito" value="btn_eliminar_carrito" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
-																	<?php echo form_close(); ?>
-																</span>
-
-															</div>
-
 														<?php } ?>
 													<?php } ?>
 												</div>
@@ -243,7 +247,10 @@
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
+			<?php $precioTotal=$precio + $cobro_envio ?>
+			<?php echo form_open('comprador/comprarProductos/'.$precioTotal); ?>
 			<div class="modal-content" style="background-color: #15202B;">
+
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel">Realizar Pago</h5>
 					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
@@ -275,7 +282,7 @@
 						<?php } ?>
 					</select>
 					<br>
-					<h6>Premios alquiridos:</h6>
+					<!-- <h6>Premios alquiridos:</h6>
 					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						<option value="">Sin seleccionar</option>
 						<?php if (!empty($categorias)) { ?>
@@ -283,11 +290,12 @@
 								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
 							<?php } ?>
 						<?php } ?>
-					</select>
+					</select> -->
 				</div>
+
 				<hr>
 				<div class="row total-section">
-					<div class="col-lg-4 col-sm-4 col-4 total-section text-right">
+					<div class="col-lg-5 col-sm-5 col-5 total-section text-left">
 						<h6>
 							<p>Subtotal: <span class="text-info">$<?php echo $precio ?></span></p>
 						</h6>
@@ -306,11 +314,13 @@
 						</h4>
 					</div>
 					<button style="display: inline-block;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<?php echo form_open('comprador/'); ?>
-					<button style="display: inline-block;" disabled type="button" class="btn btn-primary" id="pagar">Pagar</button>
-					<?php echo form_close(); ?>
+
+					<button style="display: inline-block;" disabled type="submit" class="btn btn-primary" id="pagar">Pagar</button>
+
 				</div>
+
 			</div>
+			<?php echo form_close(); ?>
 		</div>
 	</div>
 	<!-- Termina Modal -->
@@ -460,6 +470,11 @@
 															<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
 																<h5><?php echo $p['descripcion'] ?></h5>
 															</a>
+															<?php if ($p['cantidad'] > 0) { ?>
+																<div class="product-stock">Disponible</div>
+															<?php } else { ?>
+																<div class="product-stock2">No disponible</div>
+															<?php } ?>
 															<?php if ($seccion == TRUE) { ?>
 																<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
 																<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
@@ -509,7 +524,7 @@
 			e.target.value = value.replace(/[^A-Z\d-]/g, "");
 		});
 	}
-
+  
 
 
 	function validar() {
