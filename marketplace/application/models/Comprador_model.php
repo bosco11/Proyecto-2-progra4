@@ -150,7 +150,23 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
+    public function notificaionesComprador($id)
+	{
+		$query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
+		return $query->result_array();
+	}
 
+    public function addNotificacionesTienda($params)
+	{
+		$this->db->insert('tbl_notificaciones', $params);
+		return $this->db->insert_id();
+	}
+
+    public function ocultarNotificacion($id)
+	{
+		$this->db->where('id_notificaciones', $id);
+		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
+	}
 
     function search_producto($data)
     {

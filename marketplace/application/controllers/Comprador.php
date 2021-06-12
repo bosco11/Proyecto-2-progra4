@@ -25,10 +25,12 @@ class Comprador extends CI_Controller
 		$data['categorias'] = $this->Comprador_model->get_all_categorias();
 		$data['pro'] = $this->Comprador_model->get_all_productos();
 		$data['productosMasVendidos'] = $this->Comprador_model->get_productos_mas_vendidos();
+		
 
 
 		if (isset($this->session->userdata['logged_in'])) {
 			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+				$data['notificaciones'] = $this->Comprador_model->notificaionesComprador($this->session->userdata['logged_in']['users_id']);
 				$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
 				$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
 				$data['val'] = true;
@@ -70,6 +72,12 @@ class Comprador extends CI_Controller
 	}
 	function compradorHome()
 	{
+		$this->index();
+	}
+
+	function ocultarNotificacion($id)
+	{
+		$this->Comprador_model->ocultarNotificacion($id);
 		$this->index();
 	}
 
@@ -298,8 +306,8 @@ class Comprador extends CI_Controller
 	{
 		$valor1 = 0;
 		$valor2 = 0;
-		$result = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
-		$result2 = $this->Comprador_model->get_all_productos();
+		$carrito = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
+		$producto = $this->Comprador_model->get_all_productos();
 		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'), $this->input->post('cvv'));
 
 
@@ -326,8 +334,8 @@ class Comprador extends CI_Controller
 				);
 				$this->Comprador_model->editMonto($params1, $this->input->post('cmb_metodo'));
 
-				foreach ($result as $c) {
-					foreach ($result2 as $r) {
+				foreach ($carrito as $c) {
+					foreach ($producto as $r) {
 						if ($r['id_productos'] == $c['id_productos']) {
 							$valor1 = $r['cantidad'] - $c['cantidad'];
 							if ($valor1 >= 0) {
@@ -347,6 +355,14 @@ class Comprador extends CI_Controller
 								'cantidades' => $c['cantidad']
 							);
 							$this->Comprador_model->add_producto_compra($params2);
+
+							$descripcion=$r['descripcion'];
+							$params3 = array(
+								'descripcion' => "El producto $descripcion fue comprado",
+								'id_usuarios' => $r['id_usuarios'],
+								'estado' => "N"
+							);
+							$this->Comprador_model->addNotificacionesTienda($params3);
 						}
 					}
 				}
