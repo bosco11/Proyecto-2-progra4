@@ -10,6 +10,10 @@ class Tienda_model extends CI_Model
 		$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id");
 		return $query->result_array();
 	}
+	function get_all_tiendas()
+	{
+		return $this->db->query("SELECT * FROM tbl_usuarios WHERE tbl_usuarios.tipo_usuario = 'Tienda'")->result_array();
+	}
 	//Retorna los datos del usuario indicado por parámetro
 	public function get_user_information($username)
 	{
@@ -193,7 +197,7 @@ class Tienda_model extends CI_Model
 		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.tienda_id_usuarios where u.comprador_id_usuarios = $id");
 		return $query->result_array();
 	}
-	public function getDeseosTiendaSuscripta($idTienda,$idComprador)
+	public function getDeseosTiendaSuscripta($idTienda, $idComprador)
 	{
 		$query = $this->db->query("SELECT u.*, p.*,s.* FROM tbl_carrito_deseos u JOIN tbl_productos p ON p.id_productos = u.id_productos JOIN tbl_categorias s ON p.id_categorias=s.id_categorias WHERE p.id_usuarios=$idTienda AND u.id_usuarios = $idComprador AND u.tipo_producto='D'");
 		return $query->result_array();
@@ -208,7 +212,7 @@ class Tienda_model extends CI_Model
 		$query = $this->db->query("SELECT u.*,c.*,p.*,s.* FROM tbl_productos_compras u JOIN tbl_compras c ON c.id_compras=u.id_compras JOIN tbl_productos p ON p.id_productos=u.id_productos JOIN tbl_categorias s ON p.id_categorias=s.id_categorias  where c.id_usuarios = $id AND c.fecha between '" . $FechaInicial . "' AND '" . $FechaFinal . "'");
 		return $query->result_array();
 	}
-// ------------------------------------------
+	// ------------------------------------------
 	public function denunciarTienda($params)
 	{
 		$query = $this->db->query("SELECT u.*FROM tbl_denuncias u where u.tienda_id_usuarios = " . $params['tienda_id_usuarios'] . " AND u.comprador_id_usuarios = " . $params['comprador_id_usuarios']);

@@ -348,10 +348,9 @@ class Tienda extends CI_Controller
 	{
 		if ($FechaIni != null and $FechaFin != null) {
 
-			$productos = $this->Tienda_model->getProductosVendidosTiendaRangoFecha($id,$FechaIni, $FechaFin);
+			$productos = $this->Tienda_model->getProductosVendidosTiendaRangoFecha($id, $FechaIni, $FechaFin);
 		} else {
 			$productos = $this->Tienda_model->getProductosVendidosTienda($id);
-			
 		}
 		$data['FechaIni'] = $FechaIni;
 		$data['FechaFin'] = $FechaFin;
@@ -366,11 +365,11 @@ class Tienda extends CI_Controller
 		$FechaFinal = $this->input->post('FechaFinal');
 		if ($FechaInicial == "" and $FechaFinal == "") {
 			$this->ventas($this->session->userdata['logged_in']['users_id']);
-		}else{
-			$this->ventas($this->session->userdata['logged_in']['users_id'],$FechaInicial,$FechaFinal);
+		} else {
+			$this->ventas($this->session->userdata['logged_in']['users_id'], $FechaInicial, $FechaFinal);
 		}
 	}
-	
+
 
 
 
@@ -378,10 +377,9 @@ class Tienda extends CI_Controller
 	{
 		if ($FechaIni != null and $FechaFin != null) {
 
-			$productos = $this->Tienda_model->getProductosCompradosRangoFecha($id,$FechaIni, $FechaFin);
+			$productos = $this->Tienda_model->getProductosCompradosRangoFecha($id, $FechaIni, $FechaFin);
 		} else {
 			$productos = $this->Tienda_model->getProductosComprados($id);
-			
 		}
 		$data['FechaIni'] = $FechaIni;
 		$data['FechaFin'] = $FechaFin;
@@ -395,16 +393,17 @@ class Tienda extends CI_Controller
 		$FechaFinal = $this->input->post('FechaFinal');
 		if ($FechaInicial == "" and $FechaFinal == "") {
 			$this->compras($this->session->userdata['logged_in']['users_id']);
-		}else{
-			$this->compras($this->session->userdata['logged_in']['users_id'],$FechaInicial,$FechaFinal);
+		} else {
+			$this->compras($this->session->userdata['logged_in']['users_id'], $FechaInicial, $FechaFinal);
 		}
 	}
 
-	function suscripciones($id){
-		$tiendas=$this->Tienda_model->getSuscripcionesComprador($id);
+	function suscripciones($id)
+	{
+		$tiendas = $this->Tienda_model->getSuscripcionesComprador($id);
 		$cont = 0;
 		foreach ($tiendas as $val) {
-			$productos=$this->Tienda_model->getDeseosTiendaSuscripta($val['id_usuarios'],$id);
+			$productos = $this->Tienda_model->getDeseosTiendaSuscripta($val['id_usuarios'], $id);
 			$tiendas[$cont] = array("productos" => $productos) + $tiendas[$cont];
 			$cont++;
 		}
@@ -412,6 +411,19 @@ class Tienda extends CI_Controller
 		$data['_view'] = "reportes/suscripciones";
 		$this->load->view('layouts/main', $data);
 	}
-
-
+	function getTiendasProductos()
+	{
+		$tiendas = $this->Tienda_model->get_all_tiendas();
+		$cont = 0;
+		foreach ($tiendas as $val) {
+			$productos = $this->Tienda_model->get_productos_tienda($val['id_usuarios']);
+			$tiendas[$cont] = array("productos" => $productos) + $tiendas[$cont];
+			$cont++;
+		}
+		$categoria = $this->Tienda_model->get_categorias();
+		$data['categorias'] = $categoria;
+		$data['tiendas'] = $tiendas;
+		$data['_view'] = "reportes/ofertas";
+		$this->load->view('layouts/main', $data);
+	}
 }
