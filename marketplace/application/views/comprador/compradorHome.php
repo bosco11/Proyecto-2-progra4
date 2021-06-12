@@ -33,6 +33,10 @@
 						<a class="nav-link waves-effect" href="#">Acerca de
 						</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link waves-effect" href="<?php echo site_url('tienda/getTiendasProductos'); ?>">Reporte Ofertas
+						</a>
+					</li>
 					<?php if ($seccion == TRUE) { ?>
 						<li class="nav-item">
 							<a class="nav-link waves-effect" href="<?php echo site_url('comprador/ruleta'); ?>">Ruleta de la suerte
@@ -342,7 +346,7 @@
 	}
 	?>
 
-	<div id="mas_vendidos" >
+	<div id="mas_vendidos">
 		<div class='post_block'>
 			<div class='post_detail' style="text-align: center;">
 				<a class="nav-link waves-effect">
@@ -355,7 +359,7 @@
 						<?php foreach ($productosMasVendidos as $pmv) { ?>
 							<?php foreach ($pro as $p) { ?>
 								<?php if ($pmv['id_productos'] == $p['id_productos']) { ?>
-									<div class="col-4" >
+									<div class="col-4">
 										<div class="card">
 											<div class="view overlay">
 												<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
