@@ -69,8 +69,8 @@ if (validation_errors() !== "") {
                 <input type="number" name="txt_saldo" id="txt_saldo" placeholder="Saldo tarjeta" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_saldo') ? $this->input->post('txt_saldo') : $pagos2['saldo']); ?>" <?php } ?> required>
 
             </div>
-            <?php if ($pagos2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit">Agregar metodo pago</button> <?php } else { ?>
-                <button class="btn btn-primary" name="btn_edit" id="btn_edit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $pagos2['id_formas_pago']); ?>" type="submit">Actualizar metodo pago</button><?php } ?>
+            <?php if ($pagos2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit"><i class="fas fa-save"></i> Agregar metodo pago</button> <?php } else { ?>
+                <button class="btn btn-primary" name="btn_edit" id="btn_edit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $pagos2['id_formas_pago']); ?>" type="submit"> <i class="fas fa-save"></i> Actualizar metodo pago</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
         <div class="column2" name='segundo' id="segundo">
@@ -96,8 +96,8 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pa['fecha_vencimiento'] ?></td>
                                 <td><?php echo $pa['saldo'] ?></td>
                                 <td>
-                                    <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button>
-                                    <!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button> -->
+                                    <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button>
+                                    <!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button> -->
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -136,8 +136,8 @@ if (validation_errors() !== "") {
                 <label for="validationServer023">Observaciones</label>
                 <input type="text" name="txt_observaciones" id="txt_observaciones" placeholder="observaciones" class="cajatexto2" maxlength="300" <?php if ($direcciones2 != null) { ?> value="<?php echo ($this->input->post('txt_observaciones') ? $this->input->post('txt_observaciones') : $direcciones2['observaciones']); ?>" <?php } ?>required>
             </div>
-            <?php if ($direcciones2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit">Agregar dirección</button> <?php } else { ?>
-                <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $direcciones2['id_direcciones']); ?>">Actualizar dirección</button><?php } ?>
+            <?php if ($direcciones2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit"> <i class="fas fa-save"></i> Agregar dirección</button> <?php } else { ?>
+                <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $direcciones2['id_direcciones']); ?>"><i class="fas fa-save"></i> Actualizar dirección</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
         <div class="column" id="segundo">
@@ -163,7 +163,7 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pro['numero_casillero'] ?></td>
                                 <td><?php echo $pro['codigo_postal'] ?></td>
                                 <td><?php echo $pro['observaciones'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button>-->
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>-->
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -189,8 +189,8 @@ if (validation_errors() !== "") {
                 <label for="validationServer023">Nombre del usuario</label>
                 <input type="text" name="txt_usuario" id="txt_usuario" placeholder="Nombre del usuario" class="cajatexto2" maxlength="150" <?php if ($social2 != null) { ?> value="<?php echo ($this->input->post('txt_usuario') ? $this->input->post('txt_usuario') : $social2['nombre_usuario']); ?>" <?php } ?> required>
             </div>
-            <?php if ($social2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit">Agregar red social</button> <?php } else { ?>
-                <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $social2['id_redes_sociales']); ?>">Actualizar red social</button><?php } ?>
+            <?php if ($social2 == null) { ?> <button class="btn btn-primary" name="btn_save" id="btn_save" type="submit"><i class="fas fa-save"></i> Agregar red social</button> <?php } else { ?>
+                <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $social2['id_redes_sociales']); ?>"><i class="fas fa-save"></i> Actualizar red social</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
         <div class="column" id="segundo">
@@ -209,7 +209,7 @@ if (validation_errors() !== "") {
                             <tr align="center">
                                 <td><?php echo $pro['red_social'] ?></td>
                                 <td><?php echo $pro['nombre_usuario'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button>-->
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i>Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>-->
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>

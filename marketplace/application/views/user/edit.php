@@ -88,12 +88,15 @@
 
 			<br><br><br><br>
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Guardar</button>
+				<button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
 			</div>
-			<!-- <div id="actions">
-				<a href="<?php echo site_url('user/delete/' . $user['id_usuarios']); ?>" id="btn_eliminar" name="btn_eliminar" title="Eliminar" onclick="send()">🗙 Eliminar mi cuenta</a>
-			</div> -->
-			<br><br><!--<br><br>-->
+			<?php echo form_close(); ?>
+
+			<?php echo form_open('user/delete/' . $user['id_usuarios']); ?>
+			<div id="delet">
+				<button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar mi cuenta</button>
+				<!-- <a href="<?php echo site_url('user/delete/' . $user['id_usuarios']); ?>" id="btn_eliminar" name="btn_eliminar" title="Eliminar" onclick="send()">🗙 Eliminar mi cuenta</a> -->
+			</div>
 			<?php echo form_close(); ?>
 
 			<?php echo form_open('user/social'); ?>
@@ -110,7 +113,7 @@
 					<?php echo form_open_multipart('user/upload_photo/' . $user['id_usuarios']); ?>
 					<input type="file" name="txt_file" size="20" class="btn btn-info" accept="image/jpeg,image/gif,image/png" />
 					<br><br>
-					<button type="submit" class="boton">Cargar Foto</button>
+					<button type="submit" class="boton"><i class="fas fa-redo-alt"></i> Cargar Foto</button>
 					<?php echo form_close(); ?>
 				</div>
 			</div>
