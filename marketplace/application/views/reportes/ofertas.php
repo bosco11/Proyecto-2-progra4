@@ -3,12 +3,13 @@
     <br>
     <h2 style='text-align: center; padding-top: 60px;'>Reporte Ofertas</h2>
     <br>
+    <hr>
     <nav class="navbar navbar-light bg-light justify-content-between">
         <?php echo form_open('comprador/compradorHome'); ?>
         <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
         <?php echo form_close(); ?>
         <div class="nav-item">
-            <?php echo form_open('tienda/buscarProductosReportes', "class=\"d-flex\"") ?>
+            <?php echo form_open('tienda/buscarProductosReportesOfertas', "class=\"d-flex\"") ?>
             <input class="form-control mr-sm-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
             <input class="form-control mr-sm-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
             <input class="form-control mr-sm-2" type="number" id="precio" name="precio" placeholder="Precio Maximo" aria-label="Precio Maximo">
@@ -23,8 +24,14 @@
             <?php echo form_close(); ?>
         </div>
     </nav>
+    <div style="text-align: center;">
+        <h5><?php if ($categoria != null) echo " Categorias: $categoria";
+            if ($fechaIni != null) echo " Fecha Inicial: $fechaIni";
+            if ($fechaFin != null) echo " Fecha Final: $fechaFin";
+            if ($precio != null) echo " Precio maximo: $precio"; ?></h5>
+    </div>
     <hr>
-    <div class="box-header-imprimir" id="ReporteSuscripciones">
+    <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones">
 
         <h3 align="center">Tiendas</h3>
         <?php

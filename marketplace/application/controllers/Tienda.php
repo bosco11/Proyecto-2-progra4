@@ -411,19 +411,39 @@ class Tienda extends CI_Controller
 		$data['_view'] = "reportes/suscripciones";
 		$this->load->view('layouts/main', $data);
 	}
-	function getTiendasProductos()
+	function getTiendasProductos($categoria = null, $FechaInicial = null, $FechaFinal = null, $precio = null)
 	{
-		$tiendas = $this->Tienda_model->get_all_tiendas();
-		$cont = 0;
-		foreach ($tiendas as $val) {
-			$productos = $this->Tienda_model->get_productos_tienda($val['id_usuarios']);
-			$tiendas[$cont] = array("productos" => $productos) + $tiendas[$cont];
-			$cont++;
+		$tiendas = array();
+		if ($precio != null) {
+			$tiendas = $this->Tienda_model->get_all_tiendas();
+			$cont = 0;
+			foreach ($tiendas as $val) {
+				$productos = $this->Tienda_model->buscarProductosOfertas($val['id_usuarios'], $categoria, $FechaInicial, $FechaFinal, $precio);
+				$tiendas[$cont] = array("productos" => $productos) + $tiendas[$cont];
+				$cont++;
+			}
 		}
-		$categoria = $this->Tienda_model->get_categorias();
-		$data['categorias'] = $categoria;
+		$data['fechaIni'] = $FechaInicial;
+		$data['fechaFin'] = $FechaFinal;
+		$data['categoria'] = $categoria;
+		$data['precio'] = $precio;
+		$categorias = $this->Tienda_model->get_categorias();
+		$data['categorias'] = $categorias;
 		$data['tiendas'] = $tiendas;
 		$data['_view'] = "reportes/ofertas";
 		$this->load->view('layouts/main', $data);
+	}
+	function buscarProductosReportesOfertas()
+	{
+
+		$FechaInicial = $this->input->post('FechaInicial');
+		$FechaFinal = $this->input->post('FechaFinal');
+		$categoria = $this->input->post('cmb_categoria');
+		$precio = $this->input->post('precio');
+
+		if ($categoria == "Seleccionar categoría") {
+			$categoria = null;
+		}
+		$this->getTiendasProductos($categoria, $FechaInicial, $FechaFinal, $precio);
 	}
 }

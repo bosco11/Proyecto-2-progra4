@@ -16,7 +16,7 @@
             </div>
         </nav>
         <hr>
-        <div class="box-header-imprimir" id="ReporteSuscripciones">
+        <div  style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones">
 
             <h3 align="center">Suscripciones</h3>
             <?php

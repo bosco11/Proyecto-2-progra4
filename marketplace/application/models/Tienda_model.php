@@ -100,6 +100,31 @@ class Tienda_model extends CI_Model
 
 		return $query->result_array();
 	}
+	public function buscarProductosOfertas($id, $categoria, $fechaInicial, $fechaFinal, $precioMax)
+	{
+		$query = null;
+		if ($fechaFinal != null and $fechaInicial != null and $categoria == null and $precioMax != null) {
+			$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal'");
+		} else {
+			if ($fechaFinal == null and $fechaInicial == null and $categoria != null and $precioMax != null)  {
+				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.id_categorias = " . $categoria);
+			} else {
+				if ($fechaFinal != null  and $fechaInicial != null and $categoria != null and $precioMax != null) {
+					$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal' AND u.id_categorias = $categoria");
+				} else {
+					if ($fechaFinal == null and $categoria == null and $precioMax != null) {
+						$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax");
+					}
+				}
+			}
+		}
+
+		if ($query != null) {
+			return $query->result_array();
+		} else {
+			return array();
+		}
+	}
 	public function get_user_information_id($id)
 	{
 

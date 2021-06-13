@@ -27,7 +27,7 @@
             <?php } ?>
         </div>
         <hr>
-        <div class="box-header-imprimir" id="ReporteCompras">
+        <div style="background-color: white; height: 1000px;"class="box-header-imprimir" id="ReporteCompras">
 
             <h3 align="center">PRODUCTOS</h3>
             <div id="tableview">
