@@ -1,15 +1,9 @@
 <?php
 
-if (isset($logout_message)) {
-
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
-        . $logout_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
 if ($message_display != null) {
     if (isset($message_display)) {
 
-        echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+        echo "<div style='font-size: 18px;' class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check-circle'></i>"
             . $message_display .
             "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
@@ -17,14 +11,14 @@ if ($message_display != null) {
 
 if (isset($error_message)) {
 
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+    echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'> <i class='fas fa-exclamation-triangle'></i>"
         . $error_message .
         "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
 
 if (validation_errors() !== "") {
 
-    echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+    echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'><i class='fas fa-exclamation-triangle'></i>"
         . validation_errors() .
         "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
@@ -97,7 +91,7 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pa['saldo'] ?></td>
                                 <td>
                                     <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button>
-                                    <!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button> -->
+                                    <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -163,7 +157,7 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pro['numero_casillero'] ?></td>
                                 <td><?php echo $pro['codigo_postal'] ?></td>
                                 <td><?php echo $pro['observaciones'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>-->
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -209,7 +203,7 @@ if (validation_errors() !== "") {
                             <tr align="center">
                                 <td><?php echo $pro['red_social'] ?></td>
                                 <td><?php echo $pro['nombre_usuario'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i>Editar</button><!-- <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>-->
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i>Editar</button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>

@@ -54,6 +54,7 @@ class User extends CI_Controller
         $data['social2'] = $mess['social2'];
         $data['_view'] = $view;
         $data['message_display'] = $mess['message_display'];
+        $data['error_message'] = $mess['error_message'];
         $this->load->view('layouts/main', $data);
     }
 
@@ -150,12 +151,29 @@ class User extends CI_Controller
     {
         $data['user'] = $this->User_model->get_user($users_id);
 
-        if ($this->session->userdata['logged_in']['users_id'] == $data['user']['id_usuarios'])
-            $this->User_model->delete_user($users_id);
-
-        $this->session->sess_destroy();
-        $data['message_display'] = 'Tu cuenta se ha eliminado exitosamente. ¡Vuelve pronto!';
-        $this->load->view('auth/login', $data);
+        if ($this->session->userdata['logged_in']['users_id'] == $data['user']['id_usuarios']) {
+            // $result = $this->User_model->delete_user($users_id);
+            // if ($result) {
+            //     echo "Success!";
+            // } else {
+            //     echo "Query failed!";
+            //     echo print_r($result);
+            // }
+            try {
+                $user = $this->User_model->delete_user($users_id);
+                if (!$user) {
+                    throw new exception();
+                } else {
+                    $this->session->sess_destroy();
+                    $data['message_display'] = 'Tu cuenta se ha eliminado exitosamente. ¡Vuelve pronto!';
+                    $this->load->view('auth/login', $data);
+                }
+            } catch (Exception $e) {
+                $this->session->set_flashdata('error', "La cuenta no se puede eliminar, debido a que los datos se encuentran en otros registros");
+                $data['_view'] = 'user/edit';
+                $this->load->view('layouts/main', $data);
+            }
+        }
     }
 
     function upload_photo($users_id)
@@ -214,12 +232,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_pay($params);
 
                 $data['message_display'] = 'Ha registrado el metodo de pago correctamente.';
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -241,11 +261,13 @@ class User extends CI_Controller
 
                 $data['message_display'] = 'Ha actualizado el metodo de pago correctamente.';
                 $data['pagos2'] = null;
+                $data['error_message'] =null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -257,13 +279,27 @@ class User extends CI_Controller
 
     function delete_metodos($pay_id)
     {
-        $data['pay'] = $this->User_model->get_form_pay($pay_id);
-        $this->User_model->delete_pay($pay_id);
-        $data['message_display'] = 'Se ha eliminado el metodo de pago!';
-        $data['pagos2'] = null;
-        $data['direcciones2'] = null;
-        $data['social2'] = null;
-        $this->load_data_view2('user/social', $data);
+        try {
+            $data['pay'] = $this->User_model->get_form_pay($pay_id);
+            $pago = $this->User_model->delete_pay($pay_id);
+            if (!$pago) {
+                throw new exception();
+            } else {
+                $data['message_display'] = 'Se ha eliminado el metodo de pago!';
+                $data['error_message'] =null;
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $this->load_data_view2('user/social', $data);
+            }
+        } catch (Exception $e) {
+            $data['error_message']  = 'Este metodo de pago no se puede eliminar, debido a que los datos se encuentran en otros registros';
+            $data['pagos2'] = null;
+            $data['direcciones2'] = null;
+            $data['social2'] = null;
+            $data['message_display'] = null;
+            $this->load_data_view2('user/social', $data);
+        }
     }
 
     function mantmetodo($id)
@@ -307,12 +343,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_direction($params);
 
                 $data['message_display'] = 'Ha registrado la dirección correctamente.';
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -334,12 +372,14 @@ class User extends CI_Controller
 
                 $user_id = $this->User_model->update_direction($this->input->post('btn_edit'), $params);
                 $data['message_display'] = 'Ha actualizado la dirección correctamente.';
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -350,13 +390,27 @@ class User extends CI_Controller
     }
     function delete_direccion($dir_id)
     {
-        $data['dir'] = $this->User_model->get_direction($dir_id);
-        $this->User_model->delete_direction($dir_id);
-        $data['pagos2'] = null;
-        $data['direcciones2'] = null;
-        $data['social2'] = null;
-        $data['message_display'] = 'Se ha eliminado la dirección!';
-        $this->load_data_view2('user/social', $data);
+        try {
+            $data['dir'] = $this->User_model->get_direction($dir_id);
+            $direction = $this->User_model->delete_direction($dir_id);
+            if (!$direction) {
+                throw new exception();
+            } else {
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $data['message_display'] = 'Se ha eliminado la dirección!';
+                $data['error_message'] =null;
+                $this->load_data_view2('user/social', $data);
+            }
+        } catch (Exception $e) {
+            $data['pagos2'] = null;
+            $data['direcciones2'] = null;
+            $data['social2'] = null;
+            $data['message_display'] = null;
+            $data['error_message'] = 'La dirección no se puede eliminar, debido a que los datos se encuentran en otros registros';
+            $this->load_data_view2('user/social', $data);
+        }
     }
 
     function mantDir($dir_id)
@@ -393,12 +447,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_red($params);
 
                 $data['message_display'] = 'Ha registrado la red social correctamente.';
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -416,12 +472,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->update_red($this->input->post('btn_edit'), $params);
 
                 $data['message_display'] = 'Ha actualizado la red social correctamente.';
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
+                $data['error_message'] =null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -432,13 +490,28 @@ class User extends CI_Controller
     }
     function delete_red($red_id)
     {
-        $data['dir'] = $this->User_model->get_red($red_id);
-        $this->User_model->delete_red($red_id);
-        $data['pagos2'] = null;
-        $data['direcciones2'] = null;
-        $data['social2'] = null;
-        $data['message_display'] = 'Se ha eliminado la red social!';
-        $this->load_data_view2('user/social', $data);
+        try {
+            $data['dir'] = $this->User_model->get_red($red_id);
+            $redes = $this->User_model->delete_red($red_id);
+            if (!$redes) {
+                throw new exception();
+            } else {
+                $data['pagos2'] = null;
+                $data['direcciones2'] = null;
+                $data['social2'] = null;
+                $data['message_display'] = 'Se ha eliminado la red social!';
+                $data['error_message'] =null;
+                $this->load_data_view2('user/social', $data);
+            }
+        } catch (Exception $e) {
+            $this->session->set_flashdata('error', "La cuenta no se puede eliminar, debido a que los datos se encuentran en otros registros");
+            $data['pagos2'] = null;
+            $data['direcciones2'] = null;
+            $data['social2'] = null;
+            $data['message_display'] = null;
+            $data['error_message'] = 'La red social no se puede eliminar, debido a que los datos se encuentran en otros registros';
+            $this->load_data_view2('user/social', $data);
+        }
     }
 
     function mantRed($id)

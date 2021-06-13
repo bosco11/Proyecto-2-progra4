@@ -1,13 +1,14 @@
 <?php
 if (isset($logout_message)) {
 
-	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+	echo "<div style='font-size: 18px;' class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check-circle'></i>"
 		. $logout_message .
 		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
+
 if (isset($message_display)) {
 
-	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>"
+	echo "<div style='font-size: 18px;' class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check-circle'></i>"
 		. $message_display .
 		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
@@ -15,14 +16,14 @@ if (isset($message_display)) {
 
 if (isset($error_message)) {
 
-	echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+	echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'> <i class='fas fa-exclamation-triangle'></i>"
 		. $error_message .
 		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
 
 if (validation_errors() !== "") {
 
-	echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>"
+	echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'><i class='fas fa-exclamation-triangle'></i>"
 		. validation_errors() .
 		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 }
@@ -58,7 +59,7 @@ if (validation_errors() !== "") {
 			<div class="form-group">
 				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" />
 				<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
-			</div>	
+			</div>
 		</div>
 
 		<div id="div2">

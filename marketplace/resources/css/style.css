@@ -453,6 +453,7 @@ img {
 #tableview1,
 #tableview3 {
 	height: 450px;
+	width: auto;
 	overflow: auto;
 }
 

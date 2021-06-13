@@ -1,9 +1,15 @@
 <?php if (!empty($this->session)) {
 	if ($this->session->flashdata('error')) {
-		echo "<div class='msg_box_user error' >" .  $this->session->flashdata('error') . "</div>";
+		
+		echo "<div style='font-size: 18px;' class='alert alert-danger alert-dismissible fade show' role='alert'><i class='fas fa-exclamation-triangle'></i> "
+			. $this->session->flashdata('error') .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 	if ($this->session->flashdata('success')) {
-		echo "<div class='msg_box_user success' >" .  $this->session->flashdata('success') . "</div>";
+		
+		echo "<div style='font-size: 18px;' class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check-circle'></i>"
+			. $this->session->flashdata('success') .
+			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 } ?>
 
@@ -95,7 +101,6 @@
 			<?php echo form_open('user/delete/' . $user['id_usuarios']); ?>
 			<div id="delet">
 				<button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar mi cuenta</button>
-				<!-- <a href="<?php echo site_url('user/delete/' . $user['id_usuarios']); ?>" id="btn_eliminar" name="btn_eliminar" title="Eliminar" onclick="send()">🗙 Eliminar mi cuenta</a> -->
 			</div>
 			<?php echo form_close(); ?>
 
