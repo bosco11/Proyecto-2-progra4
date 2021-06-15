@@ -115,7 +115,7 @@ class Tienda extends CI_Controller
 			if (isset($_POST['btn_elim'])) {
 				try {
 					$this->Tienda_model->get_elimnar_producto($id);
-					$this->error_message =  "Se ha producido un error al eliminar el prodcuto.";
+					$this->error_message =  "Se ha producido un error al eliminar el producto.";
 				} catch (Exception $e) {
 					$this->message_display = "Producto eliminado correctamente.";
 					

@@ -302,6 +302,15 @@ class Comprador extends CI_Controller
 		}
 	}
 
+	function facturaCompra($idCompra)
+	{
+		$compra =  $this->Comprador_model->getCompra($idCompra);
+		$productos = $this->Comprador_model->getProductosCompra($compra['id_compras']);
+		$compra = array("productos" => $productos) + $compra;
+		$data['compra'] = $compra;
+		$data['_view'] = 'reportes/factura';
+		$this->load->view('layouts/main', $data);
+	}
 	function comprarProductos($precioTotal)
 	{
 		$valor1 = 0;
@@ -366,7 +375,7 @@ class Comprador extends CI_Controller
 						}
 					}
 				}
-				$this->index();
+				$this->facturaCompra($id_compra);
 			} else {
 				$mesage = 'No tienes saldo suficiente para realizar la compra';
 				$this->index($mesage);

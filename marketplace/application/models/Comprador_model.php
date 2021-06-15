@@ -262,4 +262,12 @@ class Comprador_model extends CI_Model
         $this->db->insert('tbl_premios', $params);
         return $this->db->insert_id();
     }
+    public function getCompra($id){
+        $query = $this->db->query("SELECT u.*,c.*,d.*,s.* FROM tbl_compras u JOIN tbl_usuarios c ON c.id_usuarios=u.id_usuarios JOIN tbl_direcciones d ON d.id_direcciones=u.id_direcciones JOIN tbl_formas_pago s ON s.id_formas_pago=u.id_formas_pago JOIN tbl_premios t ON t.id_premios = u.id_premios  where u.id_compras = $id");
+        return $query->row_array();
+    }
+    public function getProductosCompra($id){
+        $query = $this->db->query("SELECT u.*,p.*,s.*,c.* FROM tbl_productos_compras u JOIN tbl_productos p ON u.id_productos=p.id_productos JOIN tbl_usuarios s ON s.id_usuarios = p.id_usuarios JOIN tbl_categorias c ON c.id_categorias = p.id_categorias where u.id_compras = $id");
+        return $query->result_array();
+    }
 }
