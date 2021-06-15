@@ -318,13 +318,17 @@ class Comprador extends CI_Controller
 		$valor2 = 0;
 		$carrito = $this->Comprador_model->get_all_carrito($this->session->userdata['logged_in']['users_id'], 'C');
 		$producto = $this->Comprador_model->get_all_productos();
-		$cvv = $this->Comprador_model->get_pagoUnico($this->input->post('cmb_metodo'), $this->input->post('cvv'));
+		$dataa = array(
+			'id_formas_pago' => $this->input->post('cmb_metodo'),
+			'cvv' => $this->input->post('cvv')
+		);
+		$cvv = $this->Comprador_model->get_pagoUnico($dataa);
 
 
 
 		$precioTotal=$this->input->post('total1');
-		
-		if ($cvv != null) {
+		if ($cvv == TRUE) {
+			$cvv =$this->Comprador_model->get_pagoUnicoTodo($this->input->post('cmb_metodo'));
 			$saldo = $cvv['saldo'] - $precioTotal;
 			if ($saldo > 0) {
 
@@ -393,7 +397,7 @@ class Comprador extends CI_Controller
 								'descripcion' => "El producto $descripcion fue comprado",
 								'id_usuarios' => $r['id_usuarios'],
 								'estado' => "N",
-								'id_productos' =>$r['id_productos']
+								'id_productos' => $r['id_productos']
 							);
 							$this->Comprador_model->addNotificacionesTienda($params3);
 						}

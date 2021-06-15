@@ -127,12 +127,42 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT * from tbl_formas_pago WHERE tbl_formas_pago.id_usuarios = $id_usuario")->result_array();
     }
 
-    function get_pagoUnico($id_pago, $cvv)
+
+    public function get_pagoUnico($data)
+	{
+		$pagoExists = $this->get_informacion_pago($data['id_formas_pago']);
+
+		//Se compara el password que viene por POST con el encriptado de la BD por medio de password_verify()
+		if ($pagoExists != false && password_verify($data['cvv'], $pagoExists[0]->cvv)) {
+			return true; //Existe: autenticado
+		} else {
+			return false; //No autenticado
+		}
+	}
+
+	//Retorna los datos del usuario indicado por parámetro
+	public function get_informacion_pago($id_formas_pago)
+	{
+
+		$query = $this->db->query("SELECT * FROM tbl_formas_pago 
+             WHERE tbl_formas_pago.id_formas_pago=$id_formas_pago");
+
+		if ($query->num_rows() == 1) {
+			return $query->result();
+		} else {
+			return false;
+		}
+	}
+
+    function get_pagoUnicoTodo($id_pago)
     {
         return $this->db->query("SELECT * FROM tbl_formas_pago 
-        WHERE tbl_formas_pago.id_formas_pago=$id_pago
-        AND tbl_formas_pago.cvv =$cvv")->row_array();
+        WHERE tbl_formas_pago.id_formas_pago=$id_pago")->row_array();
     }
+
+
+
+
     function get_pagoId_pago($id_pago)
     {
         return $this->db->query("SELECT * FROM tbl_formas_pago 
