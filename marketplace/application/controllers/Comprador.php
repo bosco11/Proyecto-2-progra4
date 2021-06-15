@@ -437,6 +437,14 @@ class Comprador extends CI_Controller
 			$data['seccion'] = $this->session->userdata['logged_in'];
 			$data['metodos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);;
 			$data['user'] = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
+			$fecha = date("Y-m-d");
+			if ($data['user']['fecha_giros'] < $fecha) {
+				$params2 = array(
+					'fecha_giros' => $fecha,
+					'cantidad_giros' => 0
+				);
+				$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
+			}
 		} else {
 			$data['seccion'] = false;
 		}
@@ -500,7 +508,7 @@ class Comprador extends CI_Controller
 				$this->Comprador_model->insertPremio($params);
 			} else {
 				if ($this->input->post('premio') == 'Envío') {
-					
+
 					$params = array(
 						'descripcion' => $this->input->post('premio'),
 						'estado' => 'Activo',
