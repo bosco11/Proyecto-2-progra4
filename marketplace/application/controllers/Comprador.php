@@ -30,6 +30,7 @@ class Comprador extends CI_Controller
 
 		if (isset($this->session->userdata['logged_in'])) {
 			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+				$data['premios']= $this->Comprador_model->get_all_premios($this->session->userdata['logged_in']['users_id']);
 				$data['notificaciones'] = $this->Comprador_model->notificaionesComprador($this->session->userdata['logged_in']['users_id']);
 				$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
 				$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
@@ -333,6 +334,7 @@ class Comprador extends CI_Controller
 					'precio_total' => $precioTotal,
 					'id_direcciones' => $this->input->post('cmb_direccion'),
 					'id_premios' => 1
+					
 				);
 				$id_compra = $this->Comprador_model->add_compra($params);
 
@@ -469,6 +471,7 @@ class Comprador extends CI_Controller
 			return number_format($calificacion / count($calificaciones), 0, ",", ".");
 		}
 	}
+
 	function guardarPremio($id_usuario)
 	{
 		if ($this->input->post('premio') == 'Nada') {
@@ -535,7 +538,7 @@ class Comprador extends CI_Controller
 					'cantidad_giros' => 1
 				);
 				$this->User_model->update_user($this->session->userdata['logged_in']['users_id'], $params2);
-			} else {
+			} else{
 				if ($user['fecha_giros'] < $fecha) {
 					$params2 = array(
 						'fecha_giros' => $fecha,

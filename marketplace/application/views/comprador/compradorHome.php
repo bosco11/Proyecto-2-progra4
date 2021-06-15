@@ -286,15 +286,15 @@
 						<?php } ?>
 					</select>
 					<br>
-					<!-- <h6>Premios alquiridos:</h6>
+					<h6>Premios adquiridos:</h6>
 					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						<option value="">Sin seleccionar</option>
-						<?php if (!empty($categorias)) { ?>
-							<?php foreach ($categorias as $cate) { ?>
-								<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+						<?php if (!empty($premios)) { ?>
+							<?php foreach ($premios as $premio) { ?>
+								<option value="<?php echo $premio['id_premios'] ?>"><?php echo $premio['descripcion'] ?></option>
 							<?php } ?>
 						<?php } ?>
-					</select> -->
+					</select>
 				</div>
 
 				<hr>
