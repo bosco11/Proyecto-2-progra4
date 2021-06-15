@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_redes_sociales` (
   `nombre_usuario` VARCHAR(150) NOT NULL,
   `id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`id_redes_sociales`),
-  INDEX `fk_tbl_redes_sociales_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_redes_sociales_tbl_usuarios1_idx` (`id_usuarios` ASC),
   CONSTRAINT `fk_tbl_redes_sociales_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_direcciones` (
   `observaciones` VARCHAR(300) NOT NULL,
   `id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`id_direcciones`),
-  INDEX `fk_tbl_direcciones_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_direcciones_tbl_usuarios1_idx` (`id_usuarios` ASC),
   CONSTRAINT `fk_tbl_direcciones_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_formas_pago` (
   `saldo` FLOAT NOT NULL,
   `id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`id_formas_pago`),
-  INDEX `fk_tbl_formas_pago_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_formas_pago_tbl_usuarios1_idx` (`id_usuarios` ASC),
   CONSTRAINT `fk_tbl_formas_pago_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_categorias` (
   `id_categorias` BIGINT NOT NULL AUTO_INCREMENT,
   `categorias` VARCHAR(200) NOT NULL,
   PRIMARY KEY (`id_categorias`),
-  UNIQUE INDEX `categorias_UNIQUE` (`categorias` ASC) VISIBLE)
+  UNIQUE INDEX `categorias_UNIQUE` (`categorias` ASC))
 ENGINE = InnoDB;
 
 
@@ -124,8 +124,8 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_productos` (
   `id_categorias` BIGINT NOT NULL,
   `cantidad` BIGINT NOT NULL,
   PRIMARY KEY (`id_productos`),
-  INDEX `fk_tbl_productos_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
-  INDEX `fk_tbl_productos_tbl_categorias1_idx` (`id_categorias` ASC) VISIBLE,
+  INDEX `fk_tbl_productos_tbl_usuarios1_idx` (`id_usuarios` ASC),
+  INDEX `fk_tbl_productos_tbl_categorias1_idx` (`id_categorias` ASC),
   CONSTRAINT `fk_tbl_productos_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_galeria` (
   `imagen_producto` VARCHAR(200) NOT NULL,
   `id_productos` BIGINT NOT NULL,
   PRIMARY KEY (`id_galeria`),
-  INDEX `fk_tbl_galeria_tbl_productos1_idx` (`id_productos` ASC) VISIBLE,
+  INDEX `fk_tbl_galeria_tbl_productos1_idx` (`id_productos` ASC),
   CONSTRAINT `fk_tbl_galeria_tbl_productos1`
     FOREIGN KEY (`id_productos`)
     REFERENCES `bd_marketplace`.`tbl_productos` (`id_productos`)
@@ -163,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_suscriptores` (
   `tienda_id_usuarios` BIGINT NOT NULL,
   `comprador_id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`tienda_id_usuarios`, `comprador_id_usuarios`),
-  INDEX `fk_tbl_suscriptores_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_suscriptores_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC),
   CONSTRAINT `fk_tbl_suscriptores_tbl_usuarios1`
     FOREIGN KEY (`tienda_id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_premios` (
   `estado` VARCHAR(45) NOT NULL,
   `id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`id_premios`),
-  INDEX `fk_tbl_premios_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_premios_tbl_usuarios1_idx` (`id_usuarios` ASC),
   CONSTRAINT `fk_tbl_premios_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -207,10 +207,10 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_compras` (
   `id_direcciones` BIGINT NOT NULL,
   `id_premios` BIGINT NULL,
   PRIMARY KEY (`id_compras`),
-  INDEX `fk_tbl_compras_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
-  INDEX `fk_tbl_compras_tbl_formas_pago1_idx` (`id_formas_pago` ASC) VISIBLE,
-  INDEX `fk_tbl_compras_tbl_direcciones1_idx` (`id_direcciones` ASC) VISIBLE,
-  INDEX `fk_tbl_compras_tbl_premios1_idx` (`id_premios` ASC) VISIBLE,
+  INDEX `fk_tbl_compras_tbl_usuarios1_idx` (`id_usuarios` ASC),
+  INDEX `fk_tbl_compras_tbl_formas_pago1_idx` (`id_formas_pago` ASC),
+  INDEX `fk_tbl_compras_tbl_direcciones1_idx` (`id_direcciones` ASC),
+  INDEX `fk_tbl_compras_tbl_premios1_idx` (`id_premios` ASC),
   CONSTRAINT `fk_tbl_compras_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -241,8 +241,8 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_productos_compras` (
   `id_productos` BIGINT NOT NULL,
   `id_compras` BIGINT NOT NULL,
   `cantidades` BIGINT NOT NULL,
-  INDEX `fk_tbl_productos_compras_tbl_productos1_idx` (`id_productos` ASC) VISIBLE,
-  INDEX `fk_tbl_productos_compras_tbl_compras1_idx` (`id_compras` ASC) VISIBLE,
+  INDEX `fk_tbl_productos_compras_tbl_productos1_idx` (`id_productos` ASC),
+  INDEX `fk_tbl_productos_compras_tbl_compras1_idx` (`id_compras` ASC),
   CONSTRAINT `fk_tbl_productos_compras_tbl_productos1`
     FOREIGN KEY (`id_productos`)
     REFERENCES `bd_marketplace`.`tbl_productos` (`id_productos`)
@@ -264,8 +264,8 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_carrito_deseos` (
   `id_productos` BIGINT NOT NULL,
   `tipo_producto` VARCHAR(45) NOT NULL,
   `cantidad` BIGINT NOT NULL,
-  INDEX `fk_tbl_carrito_deseos_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
-  INDEX `fk_tbl_carrito_deseos_tbl_productos1_idx` (`id_productos` ASC) VISIBLE,
+  INDEX `fk_tbl_carrito_deseos_tbl_usuarios1_idx` (`id_usuarios` ASC),
+  INDEX `fk_tbl_carrito_deseos_tbl_productos1_idx` (`id_productos` ASC),
   CONSTRAINT `fk_tbl_carrito_deseos_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_calificacion_productos` (
   `comentarios` VARCHAR(300) NULL,
   `respuetas` VARCHAR(300) NULL,
   `id_usuarios` BIGINT NOT NULL,
-  INDEX `fk_tbl_calificacion_productos_tbl_productos1_idx` (`id_productos` ASC) VISIBLE,
+  INDEX `fk_tbl_calificacion_productos_tbl_productos1_idx` (`id_productos` ASC),
   PRIMARY KEY (`id_usuarios`, `id_productos`),
   CONSTRAINT `fk_tbl_calificacion_productos_tbl_productos1`
     FOREIGN KEY (`id_productos`)
@@ -311,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_calificacion_tienda` (
   `tienda_id_usuarios` BIGINT NOT NULL,
   `comprador_id_usuarios` BIGINT NOT NULL,
   PRIMARY KEY (`tienda_id_usuarios`, `comprador_id_usuarios`),
-  INDEX `fk_tbl_calificacion_tienda_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_calificacion_tienda_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC),
   CONSTRAINT `fk_tbl_calificacion_tienda_tbl_usuarios1`
     FOREIGN KEY (`tienda_id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -335,8 +335,8 @@ CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_notificaciones` (
   `estado` VARCHAR(1) NOT NULL,
   `id_productos` BIGINT NOT NULL,
   PRIMARY KEY (`id_notificaciones`),
-  INDEX `fk_tbl_notificaciones_tbl_usuarios1_idx` (`id_usuarios` ASC) VISIBLE,
-  INDEX `fk_tbl_notificaciones_tbl_productos1_idx` (`id_productos` ASC) VISIBLE,
+  INDEX `fk_tbl_notificaciones_tbl_usuarios1_idx` (`id_usuarios` ASC),
+  INDEX `fk_tbl_notificaciones_tbl_productos1_idx` (`id_productos` ASC),
   CONSTRAINT `fk_tbl_notificaciones_tbl_usuarios1`
     FOREIGN KEY (`id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)
@@ -356,8 +356,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `bd_marketplace`.`tbl_denuncias` (
   `tienda_id_usuarios` BIGINT NOT NULL,
   `comprador_id_usuarios` BIGINT NOT NULL,
-  INDEX `fk_tbl_denuncias_tbl_usuarios1_idx` (`tienda_id_usuarios` ASC) VISIBLE,
-  INDEX `fk_tbl_denuncias_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC) VISIBLE,
+  INDEX `fk_tbl_denuncias_tbl_usuarios1_idx` (`tienda_id_usuarios` ASC),
+  INDEX `fk_tbl_denuncias_tbl_usuarios2_idx` (`comprador_id_usuarios` ASC),
   CONSTRAINT `fk_tbl_denuncias_tbl_usuarios1`
     FOREIGN KEY (`tienda_id_usuarios`)
     REFERENCES `bd_marketplace`.`tbl_usuarios` (`id_usuarios`)

@@ -392,7 +392,8 @@ class Comprador extends CI_Controller
 							$params3 = array(
 								'descripcion' => "El producto $descripcion fue comprado",
 								'id_usuarios' => $r['id_usuarios'],
-								'estado' => "N"
+								'estado' => "N",
+								'id_productos' =>$r['id_productos']
 							);
 							$this->Comprador_model->addNotificacionesTienda($params3);
 						}
