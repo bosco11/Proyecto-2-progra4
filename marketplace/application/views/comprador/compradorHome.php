@@ -214,7 +214,7 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<?php foreach ($notificaciones as $notificacion) { ?>
-									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones']) ?>">
+									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones']."/".$notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?> </span>
 										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>

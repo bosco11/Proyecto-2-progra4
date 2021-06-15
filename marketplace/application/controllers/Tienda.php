@@ -142,7 +142,8 @@ class Tienda extends CI_Controller
 			$params = array(
 				'descripcion' => "El producto $descripcion cambio",
 				'id_usuarios' => $value['id_usuarios'],
-				'estado' => "N"
+				'estado' => "N",
+				'id_productos' => $id
 			);
 			$this->Tienda_model->addNotificacionesProducto($params);
 		}
@@ -348,10 +349,10 @@ class Tienda extends CI_Controller
 		$this->message_display = "Tienda calificada correctamente.";
 		$this->perfiltienda($id);
 	}
-	function ocultarNotificacion($id)
+	function ocultarNotificacion($id,$idProducto)
 	{
 		$this->Tienda_model->ocultarNotificacion($id);
-		$this->index();
+		redirect('comprador/perfilProducto/' . $idProducto, 'refresh');
 	}
 	function addCategoria($id = null)
 	{
