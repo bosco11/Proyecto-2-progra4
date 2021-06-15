@@ -129,7 +129,7 @@ if (validation_errors() !== "") {
                 <?php } ?>
             </div>
             <hr>
-            <div class="product-price">₡<?php echo $producto['precio'] ?></div>
+            <div class="product-price">$<?php echo $producto['precio'] ?></div>
             <?php if ($producto['cantidad'] > 0) { ?>
                 <div class="product-stock">Disponible</div>
             <?php } else { ?>
@@ -176,7 +176,7 @@ if (validation_errors() !== "") {
                     <li>Nombre: <?php echo $producto['descripcion'] ?></li>
                     <li>fecha publicación: <?php echo $producto['fecha_publicacion'] ?></li>
                     <li>Ubicación física: <?php echo $producto['ubicacion_fisica'] ?></li>
-                    <li>Precio: ₡<?php echo $producto['precio'] ?></li>
+                    <li>Precio: $<?php echo $producto['precio'] ?></li>
                     <li>Tiempo promedio de envío (horas): <?php echo $producto['tiempo_promedio'] ?></li>
                     <li>Costo de envío: <?php echo $producto['costo_envio'] ?></li>
                     <li>Cantidad disponible: <?php echo $producto['cantidad'] ?></li>
