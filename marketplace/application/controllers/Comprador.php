@@ -500,6 +500,7 @@ class Comprador extends CI_Controller
 				$this->Comprador_model->insertPremio($params);
 			} else {
 				if ($this->input->post('premio') == 'Envío') {
+					
 					$params = array(
 						'descripcion' => $this->input->post('premio'),
 						'estado' => 'Activo',
