@@ -210,7 +210,7 @@ class User extends CI_Controller
 
         $this->form_validation->set_rules('txt_propietario', 'Dueño', 'required|max_length[200]');
         $this->form_validation->set_rules('txt_numero', 'Numero', 'required|max_length[16]');
-        $this->form_validation->set_rules('txt_codigo', 'CVV', 'required|max_length[4]');
+        $this->form_validation->set_rules('txt_codigo', 'CVV', 'required|max_length[3]');
         $this->form_validation->set_rules('vencimiento', 'fecha', 'required');
         $this->form_validation->set_rules('txt_saldo', 'saldo', 'required');
 
@@ -221,7 +221,7 @@ class User extends CI_Controller
                 $params = array(
                     'nombre_dueno' => $this->input->post('txt_propietario'),
                     'numero_tarjeta' => $this->input->post('txt_numero'),
-                    'cvv' => $this->input->post('txt_codigo'),
+                    'cvv' => password_hash($this->input->post('txt_codigo'), PASSWORD_BCRYPT),
                     'fecha_vencimiento' => $this->input->post('vencimiento'),
                     'saldo' => $this->input->post('txt_saldo'),
                     'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
