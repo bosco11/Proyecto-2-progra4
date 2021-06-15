@@ -113,12 +113,11 @@ class Tienda extends CI_Controller
 			redirect('comprador/perfilProducto/' . $id, 'refresh');
 		} else {
 			if (isset($_POST['btn_elim'])) {
-				try {
-					$this->Tienda_model->get_elimnar_producto($id);
-					$this->error_message =  "Se ha producido un error al eliminar el producto.";
-				} catch (Exception $e) {
+
+				if ($this->Tienda_model->get_elimnar_producto($id)) {
 					$this->message_display = "Producto eliminado correctamente.";
-					
+				} else {
+					$this->error_message =  "Se ha producido un error al eliminar el producto.";
 				}
 				$this->index();
 			} else {
@@ -349,7 +348,7 @@ class Tienda extends CI_Controller
 		$this->message_display = "Tienda calificada correctamente.";
 		$this->perfiltienda($id);
 	}
-	function ocultarNotificacion($id,$idProducto)
+	function ocultarNotificacion($id, $idProducto)
 	{
 		$this->Tienda_model->ocultarNotificacion($id);
 		redirect('comprador/perfilProducto/' . $idProducto, 'refresh');
@@ -363,11 +362,18 @@ class Tienda extends CI_Controller
 				'categorias' => $this->input->post('txt_categoria')
 			);
 			if ($id != null) {
-				$this->Tienda_model->editCategoria($id, $params);
+				if ($this->Tienda_model->editCategoria($id, $params)) {
+					$this->message_display = "Categoria guardada correctamente.";
+				} else {
+					$this->error_message =  "Se ha producido un error al guardar la categoria.";
+				}
 			} else {
-				$this->Tienda_model->addCategoria($params);
+				if ($this->Tienda_model->addCategoria($params)) {
+					$this->message_display = "Categoria guardada correctamente.";
+				} else {
+					$this->error_message =  "Se ha producido un error al guardar la categoria.";
+				}
 			}
-			$this->message_display = "Categoria guardada correctamente.";
 			$this->mantCategoria();
 		} else {
 			if ($id != null) {

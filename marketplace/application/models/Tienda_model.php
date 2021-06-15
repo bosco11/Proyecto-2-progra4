@@ -37,7 +37,7 @@ class Tienda_model extends CI_Model
 	}
 	public function get_elimnar_producto($id)
 	{
-		$this->db->delete('tbl_productos', array('id_productos' => $id));
+		return $this->db->delete('tbl_productos', array('id_productos' => $id));
 	}
 	public function get_categorias()
 	{
@@ -50,14 +50,14 @@ class Tienda_model extends CI_Model
 	}
 	public function addCategoria($params)
 	{
-		$this->db->insert('tbl_categorias', $params);
-		$this->db->insert_id();
+		return $this->db->insert('tbl_categorias', $params);
+		
 	}
 
 	public function editCategoria($id, $params)
 	{
 		$this->db->where('id_categorias', $id);
-		$this->db->update('tbl_categorias', $params);
+		return $this->db->update('tbl_categorias', $params);
 	}
 	public function addProducto($params)
 	{
@@ -106,7 +106,7 @@ class Tienda_model extends CI_Model
 		if ($fechaFinal != null and $fechaInicial != null and $categoria == null and $precioMax != null) {
 			$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal'");
 		} else {
-			if ($fechaFinal == null and $fechaInicial == null and $categoria != null and $precioMax != null)  {
+			if ($fechaFinal == null and $fechaInicial == null and $categoria != null and $precioMax != null) {
 				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.id_categorias = " . $categoria);
 			} else {
 				if ($fechaFinal != null  and $fechaInicial != null and $categoria != null and $precioMax != null) {
