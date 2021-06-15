@@ -1,4 +1,25 @@
-<?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
+<?php 
+
+if (isset($logout_message)) {
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
+		. $logout_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if (isset($message_display)) {
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+		. $message_display .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+
+if (isset($error_message)) {
+
+	echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+		. $error_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
     <div id="panel_app">
         <div class="box-header">
             <h2 class="box-title">Mantenimiento Categorias</h2>

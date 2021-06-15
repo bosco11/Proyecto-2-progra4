@@ -1,4 +1,15 @@
-<?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
+<?php
+
+
+
+// if (validation_errors() !== "") {
+
+//     echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+//         . validation_errors() .
+//         "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+// }
+
+if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
 		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 			<div class="container">
@@ -19,7 +30,7 @@
 					<!-- Left -->
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item active">
-							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/mantCategoria')?>">Categorias
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/mantCategoria') ?>">Categorias
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
@@ -38,9 +49,9 @@
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<?php foreach ($notificaciones as $notificacion) { ?>
-									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/'.$notificacion['id_notificaciones'])?>">
+									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
-										<span> <?php echo $notificacion['descripcion']?> </span>
+										<span> <?php echo $notificacion['descripcion'] ?> </span>
 										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
 									</a>
 								<?php } ?>
@@ -52,8 +63,8 @@
 								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-							<a class="dropdown-item" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>">Ver perfil</a>
-								<a class="dropdown-item" href="<?php echo site_url('user/edit/'. $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
+								<a class="dropdown-item" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>">Ver perfil</a>
+								<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
 								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
 							</div>
 						</li>
@@ -63,8 +74,29 @@
 
 			</div>
 		</nav>
-		<br><br><br><br>
-		</nav>
+		<br><br><br>
+		<?php
+		if (isset($logout_message)) {
+
+			echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
+				. $logout_message .
+				"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+		}
+
+		if (isset($message_display)) {
+
+			echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+				. $message_display .
+				"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+		}
+
+		if (isset($error_message)) {
+
+			echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+				. $error_message .
+				"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+		}
+		?>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,10 +114,10 @@
 					<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
 					<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
 					<?php echo form_close(); ?>
-					<?php echo form_open('tienda/addProducto'); ?>
+					<?php echo form_open('tienda/addProducto/1'); ?>
 					<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="AddProducto">Agregar Producto</button>
 					<?php echo form_close(); ?>
-					<?php echo form_open('tienda/viewSuscriptores/'. $this->session->userdata['logged_in']['users_id']); ?>
+					<?php echo form_open('tienda/viewSuscriptores/' . $this->session->userdata['logged_in']['users_id']); ?>
 					<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="AddProducto">Ver Suscriptores</button>
 					<?php echo form_close(); ?>
 				</div>
@@ -123,7 +155,7 @@
 								<td><?php echo $pro['tiempo_promedio'] ?></td>
 								<td><?php echo $pro['ubicacion_fisica'] ?></td>
 								<td><?php echo $pro['cantidadDeseos'] ?></td>
-								<td> <button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">Perfil</button>  <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">Editar</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar">Eliminar</button> </td>
+								<td><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm " title="Perfil">👤</button><button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">✎</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"> ⤫ </button> </td>
 							</tr>
 							<?php echo form_close(); ?>
 						<?php } ?>

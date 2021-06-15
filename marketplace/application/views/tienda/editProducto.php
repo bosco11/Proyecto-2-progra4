@@ -1,15 +1,40 @@
-<?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
+<?php
+
+if (isset($logout_message)) {
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
+		. $logout_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if (isset($message_display)) {
+
+	echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+		. $message_display .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+
+if (isset($error_message)) {
+
+	echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+		. $error_message .
+		"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+
+
+
+
+if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
 		<div class="box-header">
 			<h2 class="box-title">Mantenimiento Producto</h2>
-			<?php echo form_open('tienda/mantGaleriaProductos/'. $producto['id_productos']); ?>
+			<?php echo form_open('tienda/mantGaleriaProductos/' . $producto['id_productos']); ?>
 			<button type="submit" name="btn_galeria" id="btn_galeria" class="btn btn-secondary" title="AddProducto">Galeria de Producto</button>
 			<?php echo form_close(); ?>
 			<?php echo form_open('auth/login'); ?>
 			<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
 			<?php echo form_close(); ?>
 		</div>
-		<?php echo form_open('tienda/mantPro/' . $producto['id_productos']); ?>
+		<?php echo form_open('tienda/editProducto/' . $producto['id_productos']); ?>
 		<div id="edit_panel">
 			<div id="div1">
 				<label for="txt_descripcion" class="control-label"><span class="text-danger">* </span>Descripcion:</label>

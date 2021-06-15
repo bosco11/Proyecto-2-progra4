@@ -1,4 +1,24 @@
-<?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
+<?php
+if (isset($logout_message)) {
+
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
+        . $logout_message .
+        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if (isset($message_display)) {
+
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+        . $message_display .
+        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+
+if (isset($error_message)) {
+
+    echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
+        . $error_message .
+        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+}
+if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
     <div id="panel_app">
         <div class="box-header">
             <h2 class="box-title">Galeria de Producto</h2>
@@ -12,7 +32,7 @@
                     <?php foreach ($fotos as $fot) { ?>
                         <div class="col-3">
                             <img src='<?php echo site_url('/resources/files/' . $fot['imagen_producto']) ?>' class="d-block w-100" alt="...">
-                            <?php echo form_open('tienda/deleteFoto/'. $producto['id_productos'].'/' . $fot['id_galeria']); ?>
+                            <?php echo form_open('tienda/deleteFoto/' . $producto['id_productos'] . '/' . $fot['id_galeria']); ?>
                             <button type="submit" name="btn_elinfoto" id="btn_elinfoto" class="btn btn-danger me-2" title="Eliminar">X</button>
                             <?php echo form_close(); ?>
                         </div>
