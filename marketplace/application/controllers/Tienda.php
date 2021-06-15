@@ -113,9 +113,14 @@ class Tienda extends CI_Controller
 			redirect('comprador/perfilProducto/' . $id, 'refresh');
 		} else {
 			if (isset($_POST['btn_elim'])) {
-				$this->Tienda_model->get_elimnar_producto($id);
-				$data['message_display'] = "Producto eliminado correctamente.";
-				redirect('tienda/tiendaHome', 'refresh');
+				try {
+					$this->Tienda_model->get_elimnar_producto($id);
+					$this->error_message =  "Se ha producido un error al eliminar el prodcuto.";
+				} catch (Exception $e) {
+					$this->message_display = "Producto eliminado correctamente.";
+					
+				}
+				$this->index();
 			} else {
 				$producto = $this->Tienda_model->get_productos_id($id);
 				if ($producto != FALSE) {
@@ -174,7 +179,6 @@ class Tienda extends CI_Controller
 			if ($opcion == 0) {
 				$data['error_message'] = "Error al guardar el producto";
 			}
-
 			$categoria = $this->Tienda_model->get_categorias();
 			$data['categorias'] = $categoria;
 			$data['_view'] = 'tienda/addProducto';
