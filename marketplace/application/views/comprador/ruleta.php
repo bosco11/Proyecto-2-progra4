@@ -61,9 +61,9 @@ if ($error_message != null) {
             <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
         <?php } ?>
         <canvas id="canvas" width="600" height="600"></canvas>
-        <div id="cen-ruleta">
+        <!-- <div id="cen-ruleta">
             <img style="position: absolute; left: 2px;bottom: 2px;" id="item-display" src='<?php echo site_url('/resources/img/ruleta.png') ?>'>
-        </div>
+        </div> -->
     </div>
     <br>
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -72,9 +72,7 @@ if ($error_message != null) {
             <div class="modal-content" style="color: black;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Felicidades has sido premiado</h5>
-                    <!-- <button type="button" class="close" onclick="closeModal()" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> -->
+
                 </div>
                 <div class="modal-body" style="color: black;">
                     <h3> Descripcion del premio:</h3>
