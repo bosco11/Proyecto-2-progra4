@@ -8,12 +8,13 @@ if ($message_display != null) {
             "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     }
 }
+if ($error_message != null) {
+    if (isset($error_message)) {
 
-if (isset($error_message)) {
-
-    echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'> <i class='fas fa-exclamation-triangle'></i>"
-        . $error_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        echo "<div style='font-size: 18px;' class='alert alert-warning alert-dismissible fade show' role='alert'> <i class='fas fa-exclamation-triangle'></i>"
+            . $error_message .
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    }
 }
 
 if (validation_errors() !== "") {
@@ -50,7 +51,7 @@ if (validation_errors() !== "") {
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationServer023">CVV</label><br>
-                <input type="number" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_codigo') ? $this->input->post('txt_codigo') : $pagos2['cvv']); ?>" <?php } ?> required>
+                <input type="number" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="" <?php } ?> required>
 
             </div>
             <div class="col-md-4 mb-3">

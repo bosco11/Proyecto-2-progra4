@@ -35,6 +35,7 @@ class User extends CI_Controller
         $data['direcciones2'] = null;
         $data['social2'] = null;
         $data['message_display'] = null;
+        $data['error_message'] = null;
         $data['_view'] = $view;
         $this->load->view('layouts/main', $data);
     }
@@ -232,14 +233,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_pay($params);
 
                 $data['message_display'] = 'Ha registrado el metodo de pago correctamente.';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -261,13 +262,13 @@ class User extends CI_Controller
 
                 $data['message_display'] = 'Ha actualizado el metodo de pago correctamente.';
                 $data['pagos2'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -286,7 +287,7 @@ class User extends CI_Controller
                 throw new exception();
             } else {
                 $data['message_display'] = 'Se ha eliminado el metodo de pago!';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -311,6 +312,7 @@ class User extends CI_Controller
         } else {
             $data['pay'] = $this->User_model->get_form_pay($id);
             $data['message_display'] = null;
+            $data['error_message'] = null;
             $data['pagos2'] = $data['pay'];
             $data['direcciones2'] = null;
             $data['social2'] = null;
@@ -343,14 +345,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_direction($params);
 
                 $data['message_display'] = 'Ha registrado la dirección correctamente.';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -372,14 +374,14 @@ class User extends CI_Controller
 
                 $user_id = $this->User_model->update_direction($this->input->post('btn_edit'), $params);
                 $data['message_display'] = 'Ha actualizado la dirección correctamente.';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -400,7 +402,7 @@ class User extends CI_Controller
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $data['message_display'] = 'Se ha eliminado la dirección!';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $this->load_data_view2('user/social', $data);
             }
         } catch (Exception $e) {
@@ -421,6 +423,7 @@ class User extends CI_Controller
 
             $data['dir'] = $this->User_model->get_direction($dir_id);
             $data['message_display'] = null;
+            $data['error_message'] = null;
             $data['pagos2'] = null;
             $data['direcciones2'] = $data['dir'];
             $data['social2'] = null;
@@ -447,14 +450,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->add_red($params);
 
                 $data['message_display'] = 'Ha registrado la red social correctamente.';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -472,14 +475,14 @@ class User extends CI_Controller
                 $user_id = $this->User_model->update_red($this->input->post('btn_edit'), $params);
 
                 $data['message_display'] = 'Ha actualizado la red social correctamente.';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $this->load_data_view2('user/social', $data);
             } else {
                 $data['message_display'] = null;
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $data['pagos2'] = null;
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
@@ -500,7 +503,7 @@ class User extends CI_Controller
                 $data['direcciones2'] = null;
                 $data['social2'] = null;
                 $data['message_display'] = 'Se ha eliminado la red social!';
-                $data['error_message'] =null;
+                $data['error_message'] = null;
                 $this->load_data_view2('user/social', $data);
             }
         } catch (Exception $e) {
@@ -521,6 +524,7 @@ class User extends CI_Controller
         } else {
             $data['red'] = $this->User_model->get_red($id);
             $data['message_display'] = null;
+            $data['error_message'] = null;
             $data['pagos2'] = null;
             $data['direcciones2'] = null;
             $data['social2'] = $data['red'];
