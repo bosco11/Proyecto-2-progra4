@@ -31,16 +31,16 @@ if (validation_errors() !== "") {
             <?php
             if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
                 <?php echo form_open('tienda/tiendaHome'); ?>
-                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
+                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                 <?php echo form_close(); ?>
             <?php  } else { ?>
                 <?php echo form_open('comprador/compradorHome'); ?>
-                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
+                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                 <?php echo form_close(); ?>
             <?php } ?>
         <?php } else { ?>
             <?php echo form_open('comprador/compradorHome'); ?>
-            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
+            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
         <?php } ?>
     </div>
@@ -140,10 +140,10 @@ if (validation_errors() !== "") {
                 <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
                     <?php echo form_open('comprador/addCarritoDeseo2/' . $producto_id); ?>
                     <div class="btn-group cart">
-                        <button type="submit" class="btn btn-success" id=" btn_carrito" name="btn_carrito" value="btn_carrito">🛒 agregar al carrito</button>
+                        <button type="submit" class="btn btn-success" id=" btn_carrito" name="btn_carrito" value="btn_carrito"><i class="fas fa-shopping-cart"></i> agregar al carrito</button>
                     </div>
                     <div class="btn-group wishlist">
-                        <button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-danger" value="btn_deseo">❤️ agregar a la lista de deseos</button>
+                        <button id=" btn_deseo" name="btn_deseo" type="submit" class="btn btn-danger" value="btn_deseo"><i class="fas fa-heart"></i> agregar a la lista de deseos</button>
                     </div>
                     <?php echo form_close(); ?>
                 <?php } ?>

@@ -107,7 +107,7 @@
 																<span class="price text-info" style="display: inline-block;">
 																	$<?php echo $p['precio'] ?></span> <span class="count">
 																	<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
-																	<button type="submit" id=" btn_eliminar_deseo" name="btn_eliminar_deseo" value="btn_eliminar_deseo" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+																	<button type="submit" id=" btn_eliminar_deseo" name="btn_eliminar_deseo" value="btn_eliminar_deseo" class="btn btn-danger pull-right btn-sm" style="display: inline-block;"><i class="fas fa-trash-alt"></i></button>
 																	<?php echo form_close(); ?>
 																</span>
 															</div>
@@ -183,7 +183,7 @@
 																		<button type="submit" id="btn_menos" name="btn_menos" value="btn_menos" class="btn btn-primary btn-sm" style="display: inline-block;"><i class="fa fa-minus"></i></button>
 																		<input type="text" class="form-control  text-center" value='<?php echo $car['cantidad'] ?>' disabled style="display: inline-block;width:40px ;height:30px; font-size: 10px;">
 																		<button type="submit" id="btn_mas" name="btn_mas" value="btn_mas" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></button>
-																		<button type="submit" id=" btn_eliminar_carrito" name="btn_eliminar_carrito" value="btn_eliminar_carrito" class="btn btn-danger pull-right btn-sm" style="display: inline-block;">x</button>
+																		<button type="submit" id=" btn_eliminar_carrito" name="btn_eliminar_carrito" value="btn_eliminar_carrito" class="btn btn-danger pull-right btn-sm" style="display: inline-block;"><i class="fas fa-trash-alt"></i></button>
 																		<?php echo form_close(); ?>
 																	</span>
 
@@ -199,7 +199,7 @@
 									</div>
 									<div class="row">
 										<div class="col-lg-12 col-sm-12 col-12 text-center checkout" data-bs-toggle="modal" <?php echo $funcionBoton ?>>
-											<button class="btn btn-primary btn-block" <?php echo $botonDisable ?>>Checkout</button>
+											<button class="btn btn-primary btn-block" <?php echo $botonDisable ?>>Realizar pago</button>
 										</div>
 									</div>
 
@@ -228,17 +228,17 @@
 								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-								<a class="dropdown-item" href="<?php echo site_url('user/perfilUsuario/' . $this->session->userdata['logged_in']['users_id']); ?>">Ver perfil</a>
-								<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
-								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
+								<a class="dropdown-item" href="<?php echo site_url('user/perfilUsuario/' . $this->session->userdata['logged_in']['users_id']); ?>"> <i class="fas fa-user"></i> Ver perfil</a>
+								<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>"><i class="fas fa-edit"></i> Editar perfil</a>
+								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item"> <i class="fas fa-arrow-left"></i> Salir</a>
 							</div>
 						</li>
 					<?php } else { ?>
 						<?php echo form_open('auth/logout'); ?>
-						<button class="btn btn-outline-primary  me-2" type="submit">Ingresar</button>
+						<button class="btn btn-outline-primary  me-2" type="submit"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
 						<?php echo form_close(); ?>
 						<?php echo form_open('user/add'); ?>
-						<button class="btn btn-outline-success  me-2" type="submit">Registrarme</button>
+						<button class="btn btn-outline-success  me-2" type="submit"><i class="fas fa-user-plus"></i> Registrarme</button>
 						<?php echo form_close(); ?>
 					<?php } ?>
 				</ul>
@@ -395,8 +395,8 @@
 												<?php } ?>
 												<?php if ($seccion == TRUE) { ?>
 													<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-													<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
-													<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+													<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+													<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
 													<?php echo form_close(); ?>
 												<?php } ?>
 												<h4 class="font-weight-bold black-text" style="color: black;">
@@ -446,7 +446,7 @@
 						<input id=" txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
 					</li>
 					<li class="nav-item me-2">
-						<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+						<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
 					</li>
 
 					<?php echo form_close(); ?>
@@ -517,8 +517,8 @@
 															<?php } ?>
 															<?php if ($seccion == TRUE) { ?>
 																<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-																<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;">🛒</button>
-																<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;">❤️</button>
+																<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+																<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
 																<?php echo form_close(); ?>
 															<?php } ?>
 															<h4 class="font-weight-bold black-text" style="color: black;">

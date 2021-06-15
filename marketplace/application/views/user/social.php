@@ -30,7 +30,7 @@ if (validation_errors() !== "") {
     <div class="box-header">
         <h2 class="box-title">Otras configuraciones del usuario</h2>
         <?php echo form_open('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>
-        <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar">←</button>
+        <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
         <?php echo form_close(); ?>
     </div>
     <br>
