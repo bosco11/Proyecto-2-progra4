@@ -27,9 +27,13 @@
             <h5 align="center">Forma de pago</h5>
             <h6 align="center"><?php echo $compra['numero_tarjeta'] ?></h6>
             <h5 align="center">Dirrecion de envio</h5>
-            <h6 align="center"><?php echo $compra['pais_direccion'] ." ".$compra['provincia'] .", casillero: ". $compra['numero_casillero'] ?></h6>
+            <h6 align="center"><?php echo $compra['pais_direccion'] . " " . $compra['provincia'] . ", casillero: " . $compra['numero_casillero'] ?></h6>
             <h5 align="center">Fecha compra</h5>
             <h6 align="center"><?php echo $compra['fecha'] ?></h6>
+            <?php if (isset($compra['id_premios'])) { ?>
+                <h5 align="center">Premio seleccionado</h5>
+                <h6 align="center"><?php echo $compra['descripcion'] ?></h6>
+            <?php } ?>
             <h5 align="center">Productos comprados</h5>
             <div id="tableview">
                 <table class="table table-striped table-white" id="table">
