@@ -398,7 +398,7 @@
 													<?php echo form_close(); ?>
 												<?php } ?>
 												<h4 class="font-weight-bold black-text" style="color: black;">
-													<strong>₡ <?php echo $p['precio'] ?></strong>
+													<strong>$ <?php echo $p['precio'] ?></strong>
 												</h4>
 											</div>
 										</div>
@@ -520,7 +520,7 @@
 																<?php echo form_close(); ?>
 															<?php } ?>
 															<h4 class="font-weight-bold black-text" style="color: black;">
-																<strong>₡ <?php echo $p['precio'] ?></strong>
+																<strong>$ <?php echo $p['precio'] ?></strong>
 															</h4>
 														</div>
 													</div>
