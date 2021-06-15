@@ -275,4 +275,12 @@ class Comprador_model extends CI_Model
         $query = $this->db->query("SELECT u.*,p.*,s.*,c.* FROM tbl_productos_compras u JOIN tbl_productos p ON u.id_productos=p.id_productos JOIN tbl_usuarios s ON s.id_usuarios = p.id_usuarios JOIN tbl_categorias c ON c.id_categorias = p.id_categorias where u.id_compras = $id");
         return $query->result_array();
     }
+
+    public function editPremio($params, $id_premio)
+	{
+		$this->db->where('id_premios', $id_premio);
+		$this->db->update('tbl_premios', $params);
+	}
+
+    
 }

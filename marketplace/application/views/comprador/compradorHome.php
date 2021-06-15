@@ -3,6 +3,7 @@
 	$cobro_envio = 0;
 	$botonDisable = '';
 	$funcionBoton = '';
+	$boni = '';
 ?>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
 		<div class="container">
@@ -251,8 +252,8 @@
 	<!-- Modal -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<?php $precioTotal = $precio + $cobro_envio ?>
-			<?php echo form_open('comprador/comprarProductos/' . $precioTotal); ?>
+
+			<?php echo form_open('comprador/comprarProductos/') ?>
 			<div class="modal-content" style="background-color: #15202B;">
 
 				<div class="modal-header">
@@ -287,8 +288,8 @@
 					</select>
 					<br>
 					<h6>Premios adquiridos:</h6>
-					<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm" aria-label=".form-select-sm example">
-						<option value="">Sin seleccionar</option>
+					<select name="cmb_boni" id="cmb_boni" onchange="ShowSelected();" class="form-select form-select-sm" aria-label=".form-select-sm example">
+						<option value="0">Sin seleccionar</option>
 						<?php if (!empty($premios)) { ?>
 							<?php foreach ($premios as $premio) { ?>
 								<option value="<?php echo $premio['id_premios'] ?>"><?php echo $premio['descripcion'] ?></option>
@@ -301,20 +302,21 @@
 				<div class="row total-section">
 					<div class="col-lg-5 col-sm-5 col-5 total-section text-left">
 						<h6>
-							<p>Subtotal: <span class="text-info">$<?php echo $precio ?></span></p>
+							<p>Subtotal: <span class="text-info" id="precio">$<?php echo $precio ?></span></p>
 						</h6>
 						<h6>
-							<p>Costo de envio: <span class="text-info">$<?php echo $cobro_envio ?></span></p>
+							<p>Costo de envio: <span class="text-info" id="envio">$<?php echo $cobro_envio ?></span></p>
 						</h6>
 						<h6>
-							<p>Bonificación: <span class="text-info">Nada</span></p>
+							<p>Bonificación: <span class="text-info" id="boni"></span></p>
 						</h6>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="col-lg-6 col-sm-6 col-6 total-section text-left" style="display: inline-block; margin-top: 15px;">
 						<h4>
-							<p>Total: <span class="text-info">$<?php echo $precio + $cobro_envio ?></span></p>
+							<p>Total: <span class="text-info" id="total">$<?php echo $precio + $cobro_envio ?></span></p>
+							<input type="hidden" id="total1" name="total1" value="<?php echo $precio + $cobro_envio ?>">
 						</h4>
 					</div>
 					<button style="display: inline-block;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -410,7 +412,7 @@
 							<?php } ?>
 						<?php } ?>
 					<?php } else { ?>
-					<label for="">No hay productos mas vendidos</label>
+						<label for="">No hay productos mas vendidos</label>
 					<?php } ?>
 				</div>
 			</div>
@@ -555,14 +557,56 @@
 
 		var unlock = document.getElementById("cmb_direccion");
 		unlock.addEventListener("click", validar, false);
+
+		var unlock = document.getElementById("cmb_boni");
+		unlock.addEventListener("click", boni, false);
 		// validar();
 
 		document.getElementById("cvv").addEventListener("input", (e) => {
 			let value = e.target.value;
 			e.target.value = value.replace(/[^A-Z\d-]/g, "");
 		});
+
+		
+
+		// const selectElement = document.querySelector('#cmb_boni');
+
+		// selectElement.addEventListener('change', (event) => {
+		// 	const resultado = document.querySelector('#boni');
+		// 	resultado.textContent = 'Te gusta el sabor ${event.target.value}';
+		// });
 	}
 
+	function ShowSelected() {
+		/* Para obtener el valor */
+
+
+		/* Para obtener el texto */
+		var combo = document.getElementById("cmb_boni");
+		var selected = combo.options[combo.selectedIndex].text;
+		document.getElementById("boni").innerHTML = selected;
+
+		
+
+		
+		if (selected == 'Envío') {
+			document.getElementById("precio").innerHTML = "$" + <?php echo $precio ?>;
+			document.getElementById("envio").innerHTML = "$" + 0;
+			document.getElementById("total").innerHTML = "$" + <?php echo $precio ?>;
+			document.getElementById("total1").value = <?php echo $precio ?>;
+		} else if (selected == '%10') {
+			document.getElementById("precio").innerHTML = "$" + <?php echo $precio - ($precio * 0.10) ?>;
+			document.getElementById("envio").innerHTML = "$" + <?php echo $cobro_envio ?>;
+			document.getElementById("total").innerHTML = "$" + <?php echo ($precio - ($precio * 0.10)) + $cobro_envio ?>;
+			document.getElementById("total1").value = <?php echo ($precio - ($precio * 0.10)) + $cobro_envio ?>;
+		} else {
+			document.getElementById("precio").innerHTML = "$" + <?php echo $precio ?>;
+			document.getElementById("envio").innerHTML = "$" + <?php echo $cobro_envio ?>;
+			document.getElementById("total").innerHTML = "$" + <?php echo $precio + $cobro_envio ?>;
+			document.getElementById("total1").value = <?php echo $precio + $cobro_envio ?>;
+		}
+		console.log(document.getElementById("total1").value);
+	}
 
 
 	function validar() {
@@ -575,7 +619,6 @@
 
 	function esCVV(text) {
 		var campo = document.getElementById(text);
-		console.log(campo.value);
 		if (campo.value == "") {
 			return true; //boton disable 
 		} else {
@@ -585,7 +628,7 @@
 
 	function esVacio(idcampo) {
 		var campo = document.getElementById(idcampo);
-		console.log(campo.value);
+		console.log(document.getElementById("total1").value);
 		if (campo.value == "0") {
 			return true; //boton disable 
 		} else {

@@ -312,7 +312,7 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'reportes/factura';
 		$this->load->view('layouts/main', $data);
 	}
-	function comprarProductos($precioTotal)
+	function comprarProductos()
 	{
 		$valor1 = 0;
 		$valor2 = 0;
@@ -322,20 +322,41 @@ class Comprador extends CI_Controller
 
 
 
-
+		$precioTotal=$this->input->post('total1');
+		
 		if ($cvv != null) {
 			$saldo = $cvv['saldo'] - $precioTotal;
 			if ($saldo > 0) {
 
-				$params = array(
-					'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
-					'id_formas_pago' => $this->input->post('cmb_metodo'),
-					'fecha' => date('Y-m-d H:i:s'),
-					'precio_total' => $precioTotal,
-					'id_direcciones' => $this->input->post('cmb_direccion'),
-					'id_premios' => 1
-					
-				);
+				$boni =$this->input->post('cmb_boni');
+				if($boni==0 || $boni=='')
+				{
+					$params = array(
+						'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+						'id_formas_pago' => $this->input->post('cmb_metodo'),
+						'fecha' => date('Y-m-d H:i:s'),
+						'precio_total' => $precioTotal,
+						'id_direcciones' => $this->input->post('cmb_direccion'),
+						
+						
+					);
+				}else{
+					$params = array(
+						'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
+						'id_formas_pago' => $this->input->post('cmb_metodo'),
+						'fecha' => date('Y-m-d H:i:s'),
+						'precio_total' => $precioTotal,
+						'id_direcciones' => $this->input->post('cmb_direccion'),
+						'id_premios' => $boni
+					);
+
+					$params7 = array(
+						'estado' => 'Inactivo',
+					);
+
+					$this->Comprador_model->editPremio($params7 ,$boni);
+				}
+				
 				$id_compra = $this->Comprador_model->add_compra($params);
 
 
