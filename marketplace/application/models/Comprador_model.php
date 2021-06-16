@@ -322,4 +322,9 @@ class Comprador_model extends CI_Model
         $this->db->where('id_premios', $id_premio);
         $this->db->update('tbl_premios', $params);
     }
+    
+    public function get_Count_denuncias(){
+        $query = $this->db->query("SELECT COUNT(*) as cantidad,tbl_denuncias.tienda_id_usuarios FROM tbl_denuncias GROUP BY tbl_denuncias.tienda_id_usuarios");
+        return $query->result_array();
+    }
 }
