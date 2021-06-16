@@ -91,8 +91,8 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pa['fecha_vencimiento'] ?></td>
                                 <td><?php echo $pa['saldo'] ?></td>
                                 <td>
-                                    <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button>
-                                    <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                    <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -158,7 +158,7 @@ if (validation_errors() !== "") {
                                 <td><?php echo $pro['numero_casillero'] ?></td>
                                 <td><?php echo $pro['codigo_postal'] ?></td>
                                 <td><?php echo $pro['observaciones'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i> Editar</button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
@@ -204,7 +204,7 @@ if (validation_errors() !== "") {
                             <tr align="center">
                                 <td><?php echo $pro['red_social'] ?></td>
                                 <td><?php echo $pro['nombre_usuario'] ?></td>
-                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i>Editar</button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i> Eliminar</button>
+                                <td> <button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button><button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                             <?php echo form_close(); ?>
