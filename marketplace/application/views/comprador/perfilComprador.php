@@ -73,7 +73,7 @@
                                             </tr>
                                         <?php }
                                     } else { ?>
-                                        <h2>No hay suscripciones por mostar</h2>
+                                        <h2>No hay suscripciones por mostrar</h2>
                                     <?php } ?>
                                 </tbody>
                             </table>
