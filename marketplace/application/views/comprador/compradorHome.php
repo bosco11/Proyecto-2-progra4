@@ -395,7 +395,7 @@
 													<?php } ?>
 													<?php if ($seccion == TRUE) { ?>
 														<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-														<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+														<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-cart-plus"></i></button>
 														<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
 														<?php echo form_close(); ?>
 													<?php } ?>
@@ -519,7 +519,7 @@
 														<?php } ?>
 														<?php if ($seccion == TRUE) { ?>
 															<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-															<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+															<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-cart-plus"></i></button>
 															<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
 															<?php echo form_close(); ?>
 														<?php } ?>
