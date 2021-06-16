@@ -30,15 +30,16 @@
 							<span class="sr-only">(current)</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link waves-effect" href="#">Acerca de
-						</a>
-					</li>
+
 					<li class="nav-item">
 						<a class="nav-link waves-effect" href="<?php echo site_url('tienda/getTiendasProductos'); ?>">Reporte Ofertas
 						</a>
 					</li>
 					<?php if ($seccion == TRUE) { ?>
+						<li class="nav-item">
+							<a class="nav-link waves-effect" data-bs-toggle="modal" data-bs-target="#compras" href="#">Historial compras
+							</a>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link waves-effect" href="<?php echo site_url('comprador/ruleta'); ?>">Ruleta de la suerte
 							</a>
@@ -327,6 +328,53 @@
 
 			</div>
 			<?php echo form_close(); ?>
+		</div>
+	</div>
+	<!-- Termina Modal -->
+
+	<!-- Modal -->
+	<div class="modal fade" data-bs-backdrop="static" id="compras" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+
+			<div class="modal-content" style="background-color: #15202B;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Historial de compras</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body" style="text-align: center;">
+					<div id="tableview2">
+						<table class="table table-striped table-dark" id="tables">
+							<thead>
+								<tr align="center">
+									<td>Fecha de compra </td>
+									<td>Precio</td>
+									<td>Acción</td>
+								</tr>
+							</thead>
+							<tbody id="tbTable">
+								<?php if (!empty($compras)) { ?>
+									<?php foreach ($compras as $com) { ?>
+										<tr align="center">
+											<td><?php echo $com['fecha'] ?></td>
+											<td><?php echo $com['precio_total'] ?></td>
+											<?php echo form_open('comprador/facturaCompra/' . $com['id_compras']) ?>
+											<td><button class="btn btn-primary" id="factura">Ver factura</button></td>
+											<?php echo form_close(); ?>
+										</tr>
+									<?php }
+								} else { ?>
+									<h2>No hay compras por mostrar</h2>
+								<?php } ?>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="modal-footer">
+						<button style="display: inline-block;" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Salir</button>
+					</div>
+
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Termina Modal -->

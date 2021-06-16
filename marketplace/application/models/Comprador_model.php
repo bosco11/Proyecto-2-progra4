@@ -129,30 +129,30 @@ class Comprador_model extends CI_Model
 
 
     public function get_pagoUnico($data)
-	{
-		$pagoExists = $this->get_informacion_pago($data['id_formas_pago']);
+    {
+        $pagoExists = $this->get_informacion_pago($data['id_formas_pago']);
 
-		//Se compara el password que viene por POST con el encriptado de la BD por medio de password_verify()
-		if ($pagoExists != false && password_verify($data['cvv'], $pagoExists[0]->cvv)) {
-			return true; //Existe: autenticado
-		} else {
-			return false; //No autenticado
-		}
-	}
+        //Se compara el password que viene por POST con el encriptado de la BD por medio de password_verify()
+        if ($pagoExists != false && password_verify($data['cvv'], $pagoExists[0]->cvv)) {
+            return true; //Existe: autenticado
+        } else {
+            return false; //No autenticado
+        }
+    }
 
-	//Retorna los datos del usuario indicado por parámetro
-	public function get_informacion_pago($id_formas_pago)
-	{
+    //Retorna los datos del usuario indicado por parámetro
+    public function get_informacion_pago($id_formas_pago)
+    {
 
-		$query = $this->db->query("SELECT * FROM tbl_formas_pago 
+        $query = $this->db->query("SELECT * FROM tbl_formas_pago 
              WHERE tbl_formas_pago.id_formas_pago=$id_formas_pago");
 
-		if ($query->num_rows() == 1) {
-			return $query->result();
-		} else {
-			return false;
-		}
-	}
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        } else {
+            return false;
+        }
+    }
 
     function get_pagoUnicoTodo($id_pago)
     {
@@ -186,22 +186,22 @@ class Comprador_model extends CI_Model
     }
 
     public function notificaionesComprador($id)
-	{
-		$query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
-		return $query->result_array();
-	}
+    {
+        $query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
+        return $query->result_array();
+    }
 
     public function addNotificacionesTienda($params)
-	{
-		$this->db->insert('tbl_notificaciones', $params);
-		return $this->db->insert_id();
-	}
+    {
+        $this->db->insert('tbl_notificaciones', $params);
+        return $this->db->insert_id();
+    }
 
     public function ocultarNotificacion($id)
-	{
-		$this->db->where('id_notificaciones', $id);
-		$this->db->update('tbl_notificaciones', array('estado' => 'S'));
-	}
+    {
+        $this->db->where('id_notificaciones', $id);
+        $this->db->update('tbl_notificaciones', array('estado' => 'S'));
+    }
 
     function search_producto($data)
     {
@@ -279,10 +279,10 @@ class Comprador_model extends CI_Model
     }
 
     public function editMonto($params, $id_pago)
-	{
-		$this->db->where('id_formas_pago', $id_pago);
-		$this->db->update('tbl_formas_pago', $params);
-	}
+    {
+        $this->db->where('id_formas_pago', $id_pago);
+        $this->db->update('tbl_formas_pago', $params);
+    }
 
     function get_productos_mas_vendidos()
     {
@@ -297,20 +297,26 @@ class Comprador_model extends CI_Model
         $this->db->insert('tbl_premios', $params);
         return $this->db->insert_id();
     }
-    public function getCompra($id){
+    public function getCompra($id)
+    {
         $query = $this->db->query("SELECT u.*,c.*,d.*,s.*,t.* FROM tbl_compras u JOIN tbl_usuarios c ON c.id_usuarios=u.id_usuarios JOIN tbl_direcciones d ON d.id_direcciones=u.id_direcciones JOIN tbl_formas_pago s ON s.id_formas_pago=u.id_formas_pago left JOIN tbl_premios t ON t.id_premios = u.id_premios  where u.id_compras = $id");
         return $query->row_array();
     }
-    public function getProductosCompra($id){
+
+    public function getCompras($id)
+    {
+        $query = $this->db->query("SELECT u.* FROM tbl_compras u where u.id_usuarios = $id");
+        return $query->result_array();
+    }
+    public function getProductosCompra($id)
+    {
         $query = $this->db->query("SELECT u.*,p.*,s.*,c.* FROM tbl_productos_compras u JOIN tbl_productos p ON u.id_productos=p.id_productos JOIN tbl_usuarios s ON s.id_usuarios = p.id_usuarios JOIN tbl_categorias c ON c.id_categorias = p.id_categorias where u.id_compras = $id");
         return $query->result_array();
     }
 
     public function editPremio($params, $id_premio)
-	{
-		$this->db->where('id_premios', $id_premio);
-		$this->db->update('tbl_premios', $params);
-	}
-
-    
+    {
+        $this->db->where('id_premios', $id_premio);
+        $this->db->update('tbl_premios', $params);
+    }
 }

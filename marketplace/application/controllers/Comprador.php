@@ -34,6 +34,7 @@ class Comprador extends CI_Controller
 				$data['notificaciones'] = $this->Comprador_model->notificaionesComprador($this->session->userdata['logged_in']['users_id']);
 				$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
 				$data['pagos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);
+				$data['compras'] = $this->Comprador_model->getCompras($this->session->userdata['logged_in']['users_id']);
 				$data['val'] = true;
 			} else {
 				$data['val'] = false;
