@@ -67,8 +67,9 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT *
                                 FROM tbl_usuarios
                                 WHERE tbl_usuarios.tipo_usuario = 'Tienda'
-                                 AND tbl_usuarios.nombre_real LIKE '%" . $data . "%'
-                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
+                                AND tbl_usuarios.nombre_real LIKE '%" .$data. "%'
+                                AND tbl_usuarios.denuncias < 10
+                                ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
     function search_categoriaT($data)
@@ -79,6 +80,7 @@ class Comprador_model extends CI_Model
                                 AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
                                 AND tbl_productos.id_categorias = tbl_categorias.id_categorias
                                 AND tbl_categorias.id_categorias = '$data'
+                                AND tbl_usuarios.denuncias < 10 
                                 GROUP BY tbl_usuarios.nombre_real
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
@@ -90,7 +92,8 @@ class Comprador_model extends CI_Model
                                 WHERE tbl_usuarios.tipo_usuario = 'Tienda'
                                 AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
                                 AND tbl_productos.id_categorias = tbl_categorias.id_categorias
-                                AND tbl_categorias.id_categorias = '$data' 
+                                AND tbl_categorias.id_categorias = '$data'
+                                AND tbl_usuarios.denuncias < 10 
                                 group by tbl_productos.descripcion
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
@@ -183,7 +186,8 @@ class Comprador_model extends CI_Model
                                 FROM tbl_usuarios,tbl_productos
                                 WHERE tbl_usuarios.tipo_usuario = 'Tienda'
                                 AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
-                                AND tbl_productos.descripcion LIKE '%" . $data . "%'
+                                AND tbl_productos.descripcion LIKE '%" .$data. "%'
+                                AND tbl_usuarios.denuncias < 10
                                 GROUP BY tbl_usuarios.nombre_real
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
@@ -212,7 +216,8 @@ class Comprador_model extends CI_Model
                                 FROM tbl_usuarios,tbl_productos
                                 WHERE tbl_usuarios.tipo_usuario = 'Tienda'
                                 AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
-                                AND tbl_productos.descripcion LIKE '%" . $data . "%'
+                                AND tbl_productos.descripcion LIKE '%" .$data ."%'
+                                AND tbl_usuarios.denuncias < 10
                                 group by tbl_productos.descripcion
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
@@ -322,8 +327,9 @@ class Comprador_model extends CI_Model
         $this->db->where('id_premios', $id_premio);
         $this->db->update('tbl_premios', $params);
     }
-    
-    public function get_Count_denuncias(){
+
+    public function get_Count_denuncias()
+    {
         $query = $this->db->query("SELECT COUNT(*) as cantidad,tbl_denuncias.tienda_id_usuarios FROM tbl_denuncias GROUP BY tbl_denuncias.tienda_id_usuarios");
         return $query->result_array();
     }
