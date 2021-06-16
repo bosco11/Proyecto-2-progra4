@@ -9,7 +9,7 @@
         <hr>
         <nav class="navbar navbar-light bg-light justify-content-between">
             <?php echo form_open('comprador/compradorHome'); ?>
-            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
+            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
             <div class="nav-item">
                 <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />

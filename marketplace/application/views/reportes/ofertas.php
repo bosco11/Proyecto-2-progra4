@@ -6,20 +6,20 @@
     <hr>
     <nav class="navbar navbar-light bg-light justify-content-between">
         <?php echo form_open('comprador/compradorHome'); ?>
-        <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">Salir</button>
+        <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
         <?php echo form_close(); ?>
         <div class="nav-item">
             <?php echo form_open('tienda/buscarProductosReportesOfertas', "class=\"d-flex\"") ?>
-            <input class="form-control mr-sm-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
-            <input class="form-control mr-sm-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
-            <input class="form-control mr-sm-2" type="number" id="precio" name="precio" placeholder="Precio Maximo" aria-label="Precio Maximo">
-            <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
+            <input class="form-control me-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
+            <input class="form-control me-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
+            <input class="form-control me-2" type="number" id="precio" name="precio" placeholder="Precio Maximo" aria-label="Precio Maximo">
+            <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select me-2">
                 <option selected>Seleccionar categoría</option>
                 <?php foreach ($categorias as $cate) { ?>
                     <option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
                 <?php } ?>
             </select>
-            <button class="btn btn-outline-success my-2 my-sm-0 me-2" type="submit">Buscar</button>
+            <button class="btn btn-secondary me-2" type="submit">Buscar</button>
             <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />
             <?php echo form_close(); ?>
         </div>
