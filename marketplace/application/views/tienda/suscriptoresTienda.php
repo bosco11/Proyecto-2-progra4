@@ -27,7 +27,7 @@
                             <div class="card-body text-center">
                                 <h4 class="font-weight-bold black-text" style="color: black;"><?php echo $suscriptor['nombre_real'] ?></h4>
                                 <?php echo form_open('user/perfilUsuario/' . $suscriptor['id_usuarios']) ?>
-                                <button type="submit" class="btn btn-primary" title="Ver perfil"><i class="fas fa-user"></i></button>
+                                <button type="submit" class="btn btn-primary" title="Ver perfil"><i class="fas fa-user"> Ver perfil</i></button>
                                 <?php echo form_close() ?>
                             </div>
                         </div>

@@ -20,7 +20,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
                 <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                 <?php echo form_close(); ?>
                 <?php echo form_open('tienda/addCategoria'); ?>
-                <button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Categoria">Agregar Categoria</button>
+                <button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Categoria"><i class="fas fa-plus"></i> Agregar Categoria</button>
                 <?php echo form_close(); ?>
 
             </div>

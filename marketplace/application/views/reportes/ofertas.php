@@ -19,7 +19,7 @@
                     <option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
                 <?php } ?>
             </select>
-            <button class="btn btn-secondary me-2" type="submit">Buscar</button>
+            <button class="btn btn-secondary me-2" type="submit" title="Buscar"><i class="fas fa-search"></i>Buscar</button>
             <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />
             <?php echo form_close(); ?>
         </div>

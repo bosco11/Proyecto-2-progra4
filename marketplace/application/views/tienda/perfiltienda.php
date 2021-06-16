@@ -34,6 +34,27 @@ if (isset($error_message)) {
                     <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                     <?php echo form_close(); ?>
                 <?php } ?>
+                <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
+                    $suscribir = "Suscribirse";
+                    $icon = "<i class='fas fa-plus'></i> ";
+                    if ($suscrito) {
+                        $icon = "<i class='fas fa-times'></i> ";
+                        $suscribir = "Desuscribirse";
+                    } ?>
+                    <?php echo form_open('tienda/suscribirseTienda/' . $tienda['id_usuarios']) ?>
+                    <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-primary me-2" value="<?php echo $suscribir ?>" title="Suscripcion"><?php echo $icon . $suscribir ?></button>
+                    <?php echo form_close(); ?>
+                    <?php
+                    $abuso = "Denunciar";
+                    $icon = "<i class='fas fa-times'></i> ";
+                    if ($denuncia) {
+                        $icon = "<i class='fas fa-lock'></i> ";
+                        $abuso = "Denunciada";
+                    } ?>
+                    <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
+                    <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-danger me-2" value="denunciar" title="Denuncia"> <?php echo $icon . $abuso ?></button>
+                    <?php echo form_close(); ?>
+                <?php } ?>
             </div>
         </nav>
     </div>
@@ -74,25 +95,6 @@ if (isset($error_message)) {
                 <i class="fa fa-star"></i>
             <?php  } ?>
         </div>
-        <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
-            $suscribir = "Suscribirse";
-            if ($suscrito) {
-                $suscribir = "Desuscribirse";
-            } ?>
-            <?php echo form_open('tienda/suscribirseTienda/' . $tienda['id_usuarios']) ?>
-            <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Suscripcion"><?php echo $suscribir ?></button>
-            <?php echo form_close(); ?>
-            <?php
-            $abuso = "Denunciar";
-            if ($denuncia) {
-                $abuso = "Denunciada";
-            } ?>
-            <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
-            <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-danger btn-sm me-2" value="denunciar" title="Denuncia"><?php echo $abuso ?></button>
-            <?php echo form_close(); ?>
-        <?php } ?>
         <hr>
         <div class="col-md-16 product-info">
             <ul id="myTab" class="nav nav-tabs">
@@ -129,7 +131,7 @@ if (isset($error_message)) {
                                     </select>
 
                                     <input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
-                                    <button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
+                                    <button class="btn  btn-secondary  me-2" type="submit" title="Buscar"><i class="fas fa-search"></i> Buscar</button>
                                     <?php echo form_close(); ?>
                                 </div>
                             </div>
@@ -163,7 +165,7 @@ if (isset($error_message)) {
                                             <td><?php echo $pro['ubicacion_fisica'] ?></td>
 
                                             <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" style="float: left;" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" style="float: left;" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito"><i class="fas fa-shopping-cart"></i></button> <button type="submit" style="float: left;" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo"><i class="fas fa-heart"></i></button><?php echo form_close(); ?> </td>
+                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" style="float: left;" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" style="float: left;" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito"><i class="fas fa-cart-plus"></i></button> <button type="submit" style="float: left;" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo"><i class="fas fa-heart"></i></button><?php echo form_close(); ?> </td>
                                             <?php } else { ?>
                                                 <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil"><i class="fas fa-heart"></i></button> <?php echo form_close(); ?> </td>
                                             <?php } ?>

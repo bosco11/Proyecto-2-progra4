@@ -15,7 +15,7 @@
                 <?php echo form_open('tienda/buscarProductosReportes', "class=\"d-flex\"") ?>
                 <input class="form-control me-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
                 <input class="form-control me-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
-                <button class="btn btn-secondary me-2" type="submit">Buscar</button>
+                <button class="btn btn-secondary me-2"title="Buscar" type="submit"><i class="fas fa-search"></i>Buscar</button>
                 <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />
                 <?php echo form_close(); ?>
             </div>

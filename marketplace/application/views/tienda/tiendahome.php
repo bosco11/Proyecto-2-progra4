@@ -63,9 +63,9 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 								<img src='<?php echo site_url('/resources/photos/' . $this->session->userdata['logged_in']['imagen']) ?>' class="rounded-circle" style="height: 34px;" alt="avatar image">
 							</a>
 							<div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="navbarDropdownMenuLink-55">
-								<a class="dropdown-item" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>">Ver perfil</a>
-								<a class="dropdown-item" href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>">Editar perfil</a>
-								<a href="<?php echo site_url('auth/logout'); ?>" class="dropdown-item">Salir</a>
+								<a class="dropdown-item" title="Perfil" href="<?php echo site_url('tienda/perfiltienda/' . $this->session->userdata['logged_in']['users_id']); ?>"><i class="fas fa-user"></i> Ver perfil</a>
+								<a class="dropdown-item" title="Editar perfil"href="<?php echo site_url('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>"><i class="fas fa-edit"></i> Editar perfil</a>
+								<a href="<?php echo site_url('auth/logout'); ?>" title="Salir" class="dropdown-item"><i class="fas fa-arrow-left"></i> Salir</a>
 							</div>
 						</li>
 					</ul>
@@ -107,14 +107,14 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 					<?php } ?>
 				</select>
 				<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
-				<button class="btn btn-secondary me-2" title="Buscar" type="submit">Buscar</button>
+				<button class="btn btn-secondary me-2" title="Buscar" type="submit"><i class="fas fa-search"></i> Buscar</button>
 				<?php echo form_close(); ?>
 
 				<?php echo form_open('tienda/addProducto/1'); ?>
-				<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Producto">Agregar Producto</button>
+				<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Producto"><i class="fas fa-plus"></i> Agregar Producto</button>
 				<?php echo form_close(); ?>
 				<?php echo form_open('tienda/viewSuscriptores/' . $this->session->userdata['logged_in']['users_id']); ?>
-				<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="Ver Suscriptores">Ver Suscriptores</button>
+				<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="Ver Suscriptores"><i class="fas fa-list-ul"></i> Ver Suscriptores</button>
 				<?php echo form_close(); ?>
 			</div>
 		</nav>
