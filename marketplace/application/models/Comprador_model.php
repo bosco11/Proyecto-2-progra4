@@ -38,6 +38,7 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT *
                                 FROM tbl_usuarios
                                 WHERE tbl_usuarios.tipo_usuario = 'Tienda'
+                                and tbl_usuarios.denuncias < 10
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
@@ -104,9 +105,11 @@ class Comprador_model extends CI_Model
 
     function get_all_carrito($id_usuario, $tipo_producto)
     {
-        return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos
+        return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos,tbl_usuarios
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
                                 AND tbl_productos.id_productos = tbl_carrito_deseos.id_productos
+                                AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
+                                and tbl_usuarios.denuncias < 10
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
     function get_all_carrito_deseo($id_usuario, $tipo_producto)
