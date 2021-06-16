@@ -22,18 +22,22 @@ if (isset($error_message)) {
 ?>
 <div id="panel_app" style=" align-items: center;">
     <div class="box-header">
-        <h2 class="box-title">Informacion de la tienda</h2>
-        <?php
-        if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
-            <?php echo form_open('tienda/tiendaHome'); ?>
-            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
-            <?php echo form_close(); ?>
-        <?php  } else { ?>
-            <?php echo form_open('comprador/compradorHome'); ?>
-            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
-            <?php echo form_close(); ?>
-        <?php } ?>
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <div class="container-fluid">
+                <?php
+                if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
+                    <?php echo form_open('tienda/tiendaHome'); ?>
+                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                    <?php echo form_close(); ?>
+                <?php  } else { ?>
+                    <?php echo form_open('comprador/compradorHome'); ?>
+                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                    <?php echo form_close(); ?>
+                <?php } ?>
+            </div>
+        </nav>
     </div>
+    <h2 style="text-align: center;" class="box-title">Informacion de la tienda</h2>
     <div class="container-fluid" style=" align-items: center;">
         <div class="col-md-5">
             <img id="item-display" src='<?php echo site_url('/resources/photos/' . $tienda['imagen']) ?>' class="d-block w-100" height="300px" width="600px" alt="...">
@@ -77,7 +81,7 @@ if (isset($error_message)) {
             } ?>
             <?php echo form_open('tienda/suscribirseTienda/' . $tienda['id_usuarios']) ?>
             <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Suscribirse"><?php echo $suscribir ?></button>
+            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="<?php echo $suscribir ?>" title="Suscripcion"><?php echo $suscribir ?></button>
             <?php echo form_close(); ?>
             <?php
             $abuso = "Denunciar";
@@ -86,7 +90,7 @@ if (isset($error_message)) {
             } ?>
             <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
             <hr>
-            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-secondary btn-sm me-2" value="denunciar" title="Denuncia"><?php echo $abuso ?></button>
+            <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-danger btn-sm me-2" value="denunciar" title="Denuncia"><?php echo $abuso ?></button>
             <?php echo form_close(); ?>
         <?php } ?>
         <hr>
@@ -159,9 +163,9 @@ if (isset($error_message)) {
                                             <td><?php echo $pro['ubicacion_fisica'] ?></td>
 
                                             <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito">🛒</button> <button type="submit" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo">❤️</button><?php echo form_close(); ?> </td>
+                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" style="float: left;" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" style="float: left;" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito"><i class="fas fa-shopping-cart"></i></button> <button type="submit" style="float: left;" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo"><i class="fas fa-heart"></i></button><?php echo form_close(); ?> </td>
                                             <?php } else { ?>
-                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil">👤</button> <?php echo form_close(); ?> </td>
+                                                <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil"><i class="fas fa-heart"></i></button> <?php echo form_close(); ?> </td>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>

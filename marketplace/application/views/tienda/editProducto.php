@@ -26,16 +26,21 @@ if (isset($error_message)) {
 if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
 		<div class="box-header">
-			<h2 class="box-title">Mantenimiento Producto</h2>
-			<?php echo form_open('tienda/mantGaleriaProductos/' . $producto['id_productos']); ?>
-			<button type="submit" name="btn_galeria" id="btn_galeria" class="btn btn-secondary" title="AddProducto">Galeria de Producto</button>
-			<?php echo form_close(); ?>
-			<?php echo form_open('auth/login'); ?>
-			<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
-			<?php echo form_close(); ?>
+			<nav class="navbar navbar-dark bg-dark justify-content-between">
+				<div class="container-fluid">
+					<?php echo form_open('auth/login'); ?>
+					<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+					<?php echo form_close(); ?>
+					<?php echo form_open('tienda/mantGaleriaProductos/' . $producto['id_productos']); ?>
+					<button type="submit" name="btn_galeria" id="btn_galeria" class="btn btn-secondary" title="Galeria del Prodcutos">Galeria del Producto</button>
+					<?php echo form_close(); ?>
+				</div>
+			</nav>
 		</div>
+		<br>
 		<?php echo form_open('tienda/editProducto/' . $producto['id_productos']); ?>
 		<div id="edit_panel">
+			<h2 style="text-align: center;" class="box-title">Mantenimiento Producto</h2>
 			<div id="div1">
 				<label for="txt_descripcion" class="control-label"><span class="text-danger">* </span>Descripcion:</label>
 				<div class="form-group">

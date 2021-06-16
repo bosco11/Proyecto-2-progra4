@@ -49,7 +49,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<?php foreach ($notificaciones as $notificacion) { ?>
-									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones']."/".$notificacion['id_productos']) ?>">
+									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?> </span>
 										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
@@ -97,33 +97,28 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 				"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 		}
 		?>
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav class="navbar navbar-dark bg-dark justify-content-between">
 			<div class="container-fluid">
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<?php echo form_open('tienda/buscarProductos/' . $this->session->userdata['logged_in']['users_id'], "class=\"d-flex\"") ?>
-					<select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
-						<option selected>Seleccionar categoría</option>
-						<?php foreach ($categorias as $cate) { ?>
-							<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
-						<?php } ?>
-					</select>
+				<?php echo form_open('tienda/buscarProductos/' . $this->session->userdata['logged_in']['users_id'], "class=\"d-flex\"") ?>
+				<select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
+					<option selected>Seleccionar categoría</option>
+					<?php foreach ($categorias as $cate) { ?>
+						<option value="<?php echo $cate['id_categorias'] ?>"><?php echo $cate['categorias'] ?></option>
+					<?php } ?>
+				</select>
+				<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
+				<button class="btn btn-secondary me-2" title="Buscar" type="submit">Buscar</button>
+				<?php echo form_close(); ?>
 
-					<input class="form-control form-sm me-2" type="search" id="txt_buscar" name="txt_buscar" placeholder="Descripcion" aria-label="Descripcion">
-					<button class="btn  btn-outline-secondary  me-2" type="submit">Buscar</button>
-					<?php echo form_close(); ?>
-					<?php echo form_open('tienda/addProducto/1'); ?>
-					<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="AddProducto">Agregar Producto</button>
-					<?php echo form_close(); ?>
-					<?php echo form_open('tienda/viewSuscriptores/' . $this->session->userdata['logged_in']['users_id']); ?>
-					<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="AddProducto">Ver Suscriptores</button>
-					<?php echo form_close(); ?>
-				</div>
+				<?php echo form_open('tienda/addProducto/1'); ?>
+				<button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Producto">Agregar Producto</button>
+				<?php echo form_close(); ?>
+				<?php echo form_open('tienda/viewSuscriptores/' . $this->session->userdata['logged_in']['users_id']); ?>
+				<button type="submit" name="btn_add" id="btn_add" class="btn btn-secondary me-2" title="Ver Suscriptores">Ver Suscriptores</button>
+				<?php echo form_close(); ?>
 			</div>
 		</nav>
-
+		<br>
 		<div class="box-header">
 			<h3 align="center">PRODUCTOS</h3>
 			<div id="tableview">
@@ -155,7 +150,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 								<td><?php echo $pro['tiempo_promedio'] ?></td>
 								<td><?php echo $pro['ubicacion_fisica'] ?></td>
 								<td><?php echo $pro['cantidadDeseos'] ?></td>
-								<td><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm " title="Perfil">👤</button><button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar">✎</button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"> ⤫ </button> </td>
+								<td><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm" title="Perfil"><i class="fas fa-user"></i></button><button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button> </td>
 							</tr>
 							<?php echo form_close(); ?>
 						<?php } ?>
