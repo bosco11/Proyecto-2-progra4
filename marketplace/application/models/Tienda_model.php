@@ -12,7 +12,7 @@ class Tienda_model extends CI_Model
 	}
 	function get_all_tiendas()
 	{
-		return $this->db->query("SELECT * FROM tbl_usuarios WHERE tbl_usuarios.tipo_usuario = 'Tienda'")->result_array();
+		return $this->db->query("SELECT * FROM tbl_usuarios WHERE tbl_usuarios.tipo_usuario = 'Tienda' AND tbl_usuarios.denuncias < 10 ")->result_array();
 	}
 	//Retorna los datos del usuario indicado por parámetro
 	public function get_user_information($username)
@@ -219,7 +219,7 @@ class Tienda_model extends CI_Model
 	// Comprador------------
 	public function getSuscripcionesComprador($id)
 	{
-		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.tienda_id_usuarios where u.comprador_id_usuarios = $id");
+		$query = $this->db->query("SELECT u.*, c.* FROM tbl_suscriptores u JOIN tbl_usuarios c ON c.id_usuarios=u.tienda_id_usuarios where u.comprador_id_usuarios = $id AND c.denuncias < 10 ");
 		return $query->result_array();
 	}
 	public function getDeseosTiendaSuscripta($idTienda, $idComprador)
@@ -256,4 +256,14 @@ class Tienda_model extends CI_Model
 			return false;
 		}
 	}
+	public function get_Count_denuncias($id)
+    {
+        $query = $this->db->query("SELECT COUNT(*) as cantidad FROM tbl_denuncias WHERE tbl_denuncias.tienda_id_usuarios = $id GROUP BY tbl_denuncias.tienda_id_usuarios");
+        return $query->row_array();
+    }
+	public function editTienda($params, $id_usuarios)
+    {
+        $this->db->where('id_usuarios', $id_usuarios);
+        $this->db->update('tbl_usuarios', $params);
+    }
 }

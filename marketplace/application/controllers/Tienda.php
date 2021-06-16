@@ -315,6 +315,12 @@ class Tienda extends CI_Controller
 			'tienda_id_usuarios' => $id
 		);
 		$this->Tienda_model->denunciarTienda($params);
+		$count = $this->Tienda_model->get_Count_denuncias($id);
+		$params = array(
+			'denuncias' => $count['cantidad']
+		);
+		$this->Tienda_model->editTienda($params,$id);
+
 		$this->message_display = "Tienda denunciada correctamente.";
 		$this->perfiltienda($id);
 	}
