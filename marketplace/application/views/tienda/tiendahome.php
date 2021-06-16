@@ -35,7 +35,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/ventas/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte tienda
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/ventas/' . $this->session->userdata['logged_in']['users_id']); ?>">Reporte de ventas
 							</a>
 						</li>
 					</ul>
@@ -119,46 +119,49 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 			</div>
 		</nav>
 		<br>
-		<div class="box-header">
-			<h3 align="center">PRODUCTOS</h3>
-			<div id="tableview">
-				<table class="table table-striped table-dark" id="table">
-					<thead>
-						<tr align="center">
-							<td>Descripcion </td>
-							<td>Cantidad</td>
-							<td>Costo envio</td>
-							<td>Precio</td>
-							<td>Fecha publicacion</td>
-							<td>Categoria</td>
-							<td>Tiempo de entrega</td>
-							<td>Ubicacion del producto</td>
-							<td>Cantidad de deseos</td>
-							<td>Acciones</td>
-						</tr>
-					</thead>
-					<tbody id="tbTable">
-						<?php foreach ($productos as $pro) { ?>
-							<?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?>
+		<div id="main_panel">
+			<div class="box-header">
+				<h3 align="center">PRODUCTOS</h3>
+				<div id="tableview">
+					<table class="table table-striped table-dark" id="table">
+						<thead>
 							<tr align="center">
-								<td><?php echo $pro['descripcion'] ?></td>
-								<td><?php echo $pro['cantidad'] ?></td>
-								<td><?php echo $pro['costo_envio'] ?></td>
-								<td><?php echo $pro['precio'] ?></td>
-								<td><?php echo $pro['fecha_publicacion'] ?></td>
-								<td><?php echo $pro['categorias'] ?></td>
-								<td><?php echo $pro['tiempo_promedio'] ?></td>
-								<td><?php echo $pro['ubicacion_fisica'] ?></td>
-								<td><?php echo $pro['cantidadDeseos'] ?></td>
-								<td><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm" title="Perfil"><i class="fas fa-user"></i></button><button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button> </td>
+								<td>Descripcion </td>
+								<td>Cantidad</td>
+								<td>Costo envio</td>
+								<td>Precio</td>
+								<td>Fecha publicacion</td>
+								<td>Categoria</td>
+								<td>Tiempo de entrega</td>
+								<td>Ubicacion del producto</td>
+								<td>Cantidad de deseos</td>
+								<td>Acciones</td>
 							</tr>
-							<?php echo form_close(); ?>
-						<?php } ?>
+						</thead>
+						<tbody id="tbTable">
+							<?php foreach ($productos as $pro) { ?>
+								<?php echo form_open('tienda/mantPro/' . $pro['id_productos']); ?>
+								<tr align="center">
+									<td><?php echo $pro['descripcion'] ?></td>
+									<td><?php echo $pro['cantidad'] ?></td>
+									<td><?php echo $pro['costo_envio'] ?></td>
+									<td><?php echo $pro['precio'] ?></td>
+									<td><?php echo $pro['fecha_publicacion'] ?></td>
+									<td><?php echo $pro['categorias'] ?></td>
+									<td><?php echo $pro['tiempo_promedio'] ?></td>
+									<td><?php echo $pro['ubicacion_fisica'] ?></td>
+									<td><?php echo $pro['cantidadDeseos'] ?></td>
+									<td><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm" title="Perfil"><i class="fas fa-user"></i></button><button type="submit" name="btn_editar" id="btn_editar" class="btn btn-secondary btn-sm me-2" title="Editar"><i class="fas fa-edit"></i></button> <button type="submit" name="btn_elim" id="btn_elim" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash-alt"></i></button> </td>
+								</tr>
+								<?php echo form_close(); ?>
+							<?php } ?>
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
 
+				</div>
 			</div>
+
 		</div>
 	</div>
 <?php

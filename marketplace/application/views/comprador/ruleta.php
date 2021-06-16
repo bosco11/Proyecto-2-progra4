@@ -20,52 +20,59 @@ if ($error_message != null) {
 ?>
 <div id="panel_app">
     <div class="box-header">
-        <h2 class="box-title">Ruleta de la suerte</h2>
-        <?php if ($seccion == TRUE) { ?>
-            <?php
-            if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
-                <?php echo form_open('tienda/tiendaHome'); ?>
-                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←<i class="fas fa-arrow-left"></i>/button>
-                <?php echo form_close(); ?>
-            <?php  } else { ?>
-                <?php echo form_open('comprador/compradorHome'); ?>
-                <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
-                <?php echo form_close(); ?>
-            <?php } ?>
-        <?php } else { ?>
-            <?php echo form_open('comprador/compradorHome'); ?>
-            <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
-            <?php echo form_close(); ?>
-        <?php } ?>
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <div class="container-fluid">
+                <?php if ($seccion == TRUE) { ?>
+                    <?php
+                    if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
+                        <?php echo form_open('tienda/tiendaHome'); ?>
+                        <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←<i class="fas fa-arrow-left"></i></button>
+                        <?php echo form_close(); ?>
+                    <?php  } else { ?>
+                        <?php echo form_open('comprador/compradorHome'); ?>
+                        <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                        <?php echo form_close(); ?>
+                    <?php } ?>
+                <?php } else { ?>
+                    <?php echo form_open('comprador/compradorHome'); ?>
+                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                    <?php echo form_close(); ?>
+                <?php } ?>
+                <?php
+                $fecha = date("Y-m-d");
+                if ($user['fecha_giros'] < $fecha) {
+                    $result = 3;
+                } else {
+                    if ($user['fecha_giros'] <= $fecha) {
+                        $total = 3;
+                        $cantidad = $user['cantidad_giros'];
+                        $result = $total - $cantidad;
+                    }
+                }
+                if (sizeof($metodos) > 0 && $user['cantidad_giros'] < 3) { ?>
+                    <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
+                    <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
+
+                <?php } else { ?>
+                    <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
+                    <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary" disabled>Girar la ruleta</button>
+
+                <?php } ?>
+            </div>
+        </nav>
     </div>
     <br>
     <div style="text-align: center;">
         <!-- <input type="button" value="spin" id='spin' class="btn btn-primary" /> -->
 
-        <?php
-        $fecha = date("Y-m-d");
-        if ($user['fecha_giros'] < $fecha) {
-            $result = 3;
-        } else {
-            if ($user['fecha_giros'] <= $fecha) {
-                $total = 3;
-                $cantidad = $user['cantidad_giros'];
-                $result = $total - $cantidad;
-            }
-        }
-        if (sizeof($metodos) > 0 && $user['cantidad_giros'] < 3) { ?>
-            <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
-            <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
-        <?php } else { ?>
-            <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary" disabled>Girar la ruleta</button>
-            <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
-        <?php } ?>
-        <canvas id="canvas" width="600" height="600"></canvas>
-        <!-- <div id="cen-ruleta">
-            <img style="position: absolute; left: 2px;bottom: 2px;" id="item-display" src='<?php echo site_url('/resources/img/ruleta.png') ?>'>
-        </div> -->
+
+        <div id="main_panel">
+            <h2 style="text-align: center;" class="box-title">Ruleta de la suerte</h2>
+            <canvas id="canvas" width="600" height="600"></canvas>
+        </div>
     </div>
     <br>
+
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <?php echo form_open('comprador/guardarPremio/' . $this->session->userdata['logged_in']['users_id']); ?>
         <div class="modal-dialog modal-dialog-centered" role="document">

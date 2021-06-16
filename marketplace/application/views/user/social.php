@@ -28,12 +28,16 @@ if (validation_errors() !== "") {
 
 <div id="panel_app">
     <div class="box-header">
-        <h2 class="box-title">Otras configuraciones del usuario</h2>
-        <?php echo form_open('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>
-        <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
-        <?php echo form_close(); ?>
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <div class="container-fluid">
+                <?php echo form_open('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>
+                <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                <?php echo form_close(); ?>
+            </div>
+        </nav>
     </div>
     <br>
+    <h2  style="text-align: center;" class="box-title">Otras configuraciones del usuario</h2>
     <br>
     <div id="pago">
         <h2 id="user">Formas de pago</h2>

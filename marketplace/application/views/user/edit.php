@@ -1,12 +1,12 @@
 <?php if (!empty($this->session)) {
 	if ($this->session->flashdata('error')) {
-		
+
 		echo "<div style='font-size: 18px;' class='alert alert-danger alert-dismissible fade show' role='alert'><i class='fas fa-exclamation-triangle'></i> "
 			. $this->session->flashdata('error') .
 			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 	if ($this->session->flashdata('success')) {
-		
+
 		echo "<div style='font-size: 18px;' class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check-circle'></i>"
 			. $this->session->flashdata('success') .
 			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
@@ -17,22 +17,28 @@
 
 	<div id="panel_app">
 		<div class="box-header">
-			<h2 class="box-title">Editando Usuario</h2>
-			<?php
-			if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
-				<?php echo form_open('tienda/tiendaHome'); ?>
-				<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
-				<?php echo form_close(); ?>
-			<?php  } else { ?>
-				<?php echo form_open('comprador/compradorHome'); ?>
-				<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
-				<?php echo form_close(); ?>
-			<?php } ?>
+			<nav class="navbar navbar-dark bg-dark justify-content-between">
+				<div class="container-fluid">
+					
+					<?php
+					if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
+						<?php echo form_open('tienda/tiendaHome'); ?>
+						<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+						<?php echo form_close(); ?>
+					<?php  } else { ?>
+						<?php echo form_open('comprador/compradorHome'); ?>
+						<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+						<?php echo form_close(); ?>
+					<?php } ?>
+				</div>
+			</nav>
 
 		</div>
+		<br>
 		<?php echo form_open('user/edit/' . $user['id_usuarios']); ?>
-		<div id="edit_panel">
-
+		<div id="">
+			
+		<h2  style="text-align: center;" class="box-title">Editar Usuario</h2>
 			<div id="div1">
 				<label for="txt_usuario" class="control-label"><span class="text-danger">* </span>Usuario:</label>
 				<div class="form-group">

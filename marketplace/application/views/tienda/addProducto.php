@@ -25,7 +25,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
             <nav class="navbar navbar-dark bg-dark justify-content-between">
                 <div class="container-fluid">
                     <?php echo form_open('tienda/tiendaHome'); ?>
-                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar">←</button>
+                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                     <?php echo form_close(); ?>
                 </div>
             </nav>

@@ -207,14 +207,14 @@
 							</div>
 						</li>
 
-						<li class="nav-item dropdown notifications-nav ">
+						<li class="nav-item dropdown notifications-nav">
 							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?></span>
 								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<?php foreach ($notificaciones as $notificacion) { ?>
-									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones']."/".$notificacion['id_productos']) ?>">
+									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?> </span>
 										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
@@ -340,84 +340,87 @@
 			"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
 	}
 	?>
-
-	<div id="mas_vendidos">
-		<div class='post_block'>
-			<div class='post_detail' style="text-align: center;">
-				<a class="nav-link waves-effect">
-					<h5>Productos más vendidos</h5>
-				</a>
-				<hr>
-				<br>
-				<div class="row align-items ">
-					<?php $TOP = 0;
-					if (!empty($productosMasVendidos)) { ?>
-						<?php foreach ($productosMasVendidos as $pmv) { ?>
-							<?php foreach ($pro as $p) { ?>
-								<?php if ($pmv['id_productos'] == $p['id_productos']) {
-									$TOP = $TOP + 1 ?>
-									<div class="col-4">
-										<div class="card">
-											<div class="view overlay">
-												<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-													<div class="carousel-inner">
-														<?php $cont = 1 ?>
-														<?php if (!empty($galerias)) { ?>
-															<?php foreach ($galerias as $g) { ?>
-																<?php if ($g['id_productos'] == $p['id_productos']) {
-																	if ($cont == 1) {
-																		$band = 'active';
-																	} else {
-																		$band = '';
-																	}
-																	$cont = $cont + 1;
-																?>
-																	<div class="carousel-item <?php echo $band ?>">
-																		<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
-																	</div>
+	<div id="main_panel">
+		<div id="mas_vendidos">
+			<div class='post_block'>
+				<div class='post_detail' style="text-align: center;">
+					<a class="nav-link waves-effect">
+						<h5>Productos más vendidos</h5>
+					</a>
+					<hr>
+					<br>
+					<div class="row align-items ">
+						<?php $TOP = 0;
+						if (!empty($productosMasVendidos)) { ?>
+							<?php foreach ($productosMasVendidos as $pmv) { ?>
+								<?php foreach ($pro as $p) { ?>
+									<?php if ($pmv['id_productos'] == $p['id_productos']) {
+										$TOP = $TOP + 1 ?>
+										<div class="col-4">
+											<div class="card">
+												<div class="view overlay">
+													<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+														<div class="carousel-inner">
+															<?php $cont = 1 ?>
+															<?php if (!empty($galerias)) { ?>
+																<?php foreach ($galerias as $g) { ?>
+																	<?php if ($g['id_productos'] == $p['id_productos']) {
+																		if ($cont == 1) {
+																			$band = 'active';
+																		} else {
+																			$band = '';
+																		}
+																		$cont = $cont + 1;
+																	?>
+																		<div class="carousel-item <?php echo $band ?>">
+																			<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
+																		</div>
+																	<?php } ?>
 																<?php } ?>
 															<?php } ?>
-														<?php } ?>
+														</div>
 													</div>
+													<a>
+														<div class="mask rgba-white-slight"></div>
+													</a>
 												</div>
-												<a>
-													<div class="mask rgba-white-slight"></div>
-												</a>
+												<div class="card-body text-center">
+													<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+														<h5><?php echo $p['descripcion'] ?></h5>
+													</a>
+													<?php if ($p['cantidad'] > 0) { ?>
+														<div class="product-stock">Disponible</div>
+													<?php } else { ?>
+														<div class="product-stock2">No disponible</div>
+													<?php } ?>
+													<?php if ($seccion == TRUE) { ?>
+														<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+														<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+														<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
+														<?php echo form_close(); ?>
+													<?php } ?>
+													<h4 class="font-weight-bold black-text" style="color: black;">
+														<strong>$ <?php echo $p['precio'] ?></strong>
+													</h4>
+												</div>
 											</div>
-											<div class="card-body text-center">
-												<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
-													<h5><?php echo $p['descripcion'] ?></h5>
-												</a>
-												<?php if ($p['cantidad'] > 0) { ?>
-													<div class="product-stock">Disponible</div>
-												<?php } else { ?>
-													<div class="product-stock2">No disponible</div>
-												<?php } ?>
-												<?php if ($seccion == TRUE) { ?>
-													<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-													<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
-													<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
-													<?php echo form_close(); ?>
-												<?php } ?>
-												<h4 class="font-weight-bold black-text" style="color: black;">
-													<strong>$ <?php echo $p['precio'] ?></strong>
-												</h4>
+											<div>
+												<h2>TOP <?php echo $TOP ?></h2>
 											</div>
 										</div>
-										<div>
-											<h2>TOP <?php echo $TOP ?></h2>
-										</div>
-									</div>
+									<?php } ?>
 								<?php } ?>
 							<?php } ?>
+						<?php } else { ?>
+							<label for="">No hay productos mas vendidos</label>
 						<?php } ?>
-					<?php } else { ?>
-						<label for="">No hay productos mas vendidos</label>
-					<?php } ?>
+					</div>
 				</div>
 			</div>
 		</div>
-		<!--Navbar-->
+	</div>
+	<!--Navbar-->
+	<div id="main_panel">
 		<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
 
 			<span class="navbar-brand">Filtros:</span>
@@ -428,7 +431,7 @@
 				<ul class="navbar-nav mr-auto">
 					<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
 					<li class="nav-item me-2">
-						<select name="cmb_categoria" id="cmb_categoria" class="form-select form-select-sm me-2" aria-label=".form-select-sm example">
+						<select name="cmb_categoria" id="cmb_categoria" class="form-select me-2" aria-label=".form-select-sm example">
 							<option value="">Sin seleccionar</option>
 							<?php if (!empty($categorias)) { ?>
 								<?php foreach ($categorias as $cate) { ?>
@@ -439,14 +442,14 @@
 					</li>
 
 					<li class="nav-item me-2">
-						<input id=" txt_producto" name="txt_producto" class="form-control form-sm me-2" placeholder="Producto" aria-label="Search">
+						<input id=" txt_producto" name="txt_producto" class="form-control me-2" placeholder="Producto" aria-label="Search">
 
 					</li>
 					<li class="nav-item me-2">
-						<input id=" txt_tienda" name="txt_tienda" class="form-control form-sm me-2" placeholder="Tienda" aria-label="Search">
+						<input id=" txt_tienda" name="txt_tienda" class="form-control me-2" placeholder="Tienda" aria-label="Search">
 					</li>
 					<li class="nav-item me-2">
-						<button id=" btn_search" name="btn_search" value="btn_search" class="btn  btn-outline-secondary  me-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
+						<button id=" btn_search" name="btn_search" value="btn_search" class="btn btn-secondary me-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
 					</li>
 
 					<?php echo form_close(); ?>
@@ -459,85 +462,82 @@
 
 
 		<!-- traer tiendas de base de datos -->
-		<div id="main_panel">
-			<?php if (!empty($tiendas)) { ?>
-				<?php foreach ($tiendas as $t) { ?>
-					<div class='post_block'>
-						<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
-						</span>
-						<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
-							<div class='post_detail' style="text-align: center;">
-								<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $t['id_usuarios']); ?>">
-									<h5><?php echo $t['nombre_real']; ?></h5>
-								</a>
-								<hr>
-								<br>
-								<div class="row align-items">
-									<?php if (!empty($productos)) { ?>
-										<?php foreach ($productos as $p) { ?>
-											<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
-												<div class="col-lg-3 col-md-6 mb-4">
-													<div class="card">
-														<!--Card image-->
-														<div class="view overlay">
-															<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-																<div class="carousel-inner">
-																	<?php $cont = 1 ?>
-																	<?php if (!empty($galerias)) { ?>
-																		<?php foreach ($galerias as $g) { ?>
-																			<?php if ($g['id_productos'] == $p['id_productos']) {
-																				if ($cont == 1) {
-																					$band = 'active';
-																				} else {
-																					$band = '';
-																				}
-																				$cont = $cont + 1;
-																			?>
-																				<div class="carousel-item <?php echo $band ?>">
-																					<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
-																				</div>
-																			<?php } ?>
+		<?php if (!empty($tiendas)) { ?>
+			<?php foreach ($tiendas as $t) { ?>
+				<div class='post_block'>
+					<span class='post_text' id='post_<?php echo $t['id_usuarios']; ?>'>
+					</span>
+					<div id='content_post_<?php echo $t['id_usuarios']; ?>'>
+						<div class='post_detail' style="text-align: center;">
+							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/perfiltienda/' . $t['id_usuarios']); ?>">
+								<h5><?php echo $t['nombre_real']; ?></h5>
+							</a>
+							<hr>
+							<br>
+							<div class="row align-items">
+								<?php if (!empty($productos)) { ?>
+									<?php foreach ($productos as $p) { ?>
+										<?php if ($t['id_usuarios'] == $p['id_usuarios']) { ?>
+											<div class="col-lg-3 col-md-6 mb-4">
+												<div class="card">
+													<!--Card image-->
+													<div class="view overlay">
+														<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+															<div class="carousel-inner">
+																<?php $cont = 1 ?>
+																<?php if (!empty($galerias)) { ?>
+																	<?php foreach ($galerias as $g) { ?>
+																		<?php if ($g['id_productos'] == $p['id_productos']) {
+																			if ($cont == 1) {
+																				$band = 'active';
+																			} else {
+																				$band = '';
+																			}
+																			$cont = $cont + 1;
+																		?>
+																			<div class="carousel-item <?php echo $band ?>">
+																				<img src='<?php echo site_url('/resources/files/' . $g['imagen_producto']) ?>' height="200" class="d-block w-100" alt="...">
+																			</div>
 																		<?php } ?>
 																	<?php } ?>
-																</div>
-
+																<?php } ?>
 															</div>
-															<a>
-																<div class="mask rgba-white-slight"></div>
-															</a>
+
 														</div>
-														<div class="card-body text-center">
-															<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
-																<h5><?php echo $p['descripcion'] ?></h5>
-															</a>
-															<?php if ($p['cantidad'] > 0) { ?>
-																<div class="product-stock">Disponible</div>
-															<?php } else { ?>
-																<div class="product-stock2">No disponible</div>
-															<?php } ?>
-															<?php if ($seccion == TRUE) { ?>
-																<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
-																<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
-																<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
-																<?php echo form_close(); ?>
-															<?php } ?>
-															<h4 class="font-weight-bold black-text" style="color: black;">
-																<strong>$ <?php echo $p['precio'] ?></strong>
-															</h4>
-														</div>
+														<a>
+															<div class="mask rgba-white-slight"></div>
+														</a>
+													</div>
+													<div class="card-body text-center">
+														<a href="<?php echo site_url('comprador/perfilProducto/' . $p['id_productos']); ?>" class="grey-text">
+															<h5><?php echo $p['descripcion'] ?></h5>
+														</a>
+														<?php if ($p['cantidad'] > 0) { ?>
+															<div class="product-stock">Disponible</div>
+														<?php } else { ?>
+															<div class="product-stock2">No disponible</div>
+														<?php } ?>
+														<?php if ($seccion == TRUE) { ?>
+															<?php echo form_open('comprador/addCarritoDeseo/' . $p['id_productos']); ?>
+															<button id=" btn_carrito" name="btn_carrito" value="btn_carrito" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-shopping-cart"></i></button>
+															<button id=" btn_deseo" name="btn_deseo" value="btn_deseo" type="submit" class="btn btn-primary" style="display: inline-block;"><i class="fas fa-heart"></i></button>
+															<?php echo form_close(); ?>
+														<?php } ?>
+														<h4 class="font-weight-bold black-text" style="color: black;">
+															<strong>$ <?php echo $p['precio'] ?></strong>
+														</h4>
 													</div>
 												</div>
-											<?php } ?>
+											</div>
 										<?php } ?>
 									<?php } ?>
-								</div>
-							</div><br />
-						</div>
+								<?php } ?>
+							</div>
+						</div><br />
 					</div>
-				<?php } ?>
+				</div>
 			<?php } ?>
-		</div>
-		<!-- aqui termina el llamado a las tiendas  -->
+		<?php } ?>
 	</div>
 <?php } else {
 	header("location: " . base_url()); //dirección de arranque especificada en config.php y luego en routes.php
@@ -567,7 +567,7 @@
 			e.target.value = value.replace(/[^A-Z\d-]/g, "");
 		});
 
-		
+
 
 		// const selectElement = document.querySelector('#cmb_boni');
 
@@ -586,9 +586,9 @@
 		var selected = combo.options[combo.selectedIndex].text;
 		document.getElementById("boni").innerHTML = selected;
 
-		
 
-		
+
+
 		if (selected == 'Envío') {
 			document.getElementById("precio").innerHTML = "$" + <?php echo $precio ?>;
 			document.getElementById("envio").innerHTML = "$" + 0;
