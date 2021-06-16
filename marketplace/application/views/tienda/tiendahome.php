@@ -16,7 +16,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 
 				<!-- Brand -->
 				<a class="navbar-brand waves-effect" href="#">
-					<strong class="blue-text">MarketPlace</strong>
+					<strong class="blue-text"><img src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="Marktplace" width="50" height="50"></strong>
 				</a>
 
 				<!-- Collapse -->

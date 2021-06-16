@@ -1,5 +1,5 @@
 <div id="app" style="background-color: white; color: black; width: 100%; height: 100%;">
-    <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" />
+    <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" height="100" />
     <br>
     <h2 style='text-align: center; padding-top: 60px;'>Reporte Ofertas</h2>
     <br>

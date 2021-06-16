@@ -1,7 +1,7 @@
 <?php if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 
     <div  id="app" style="background-color: white; color: black; width: 100%; height: 100%;">
-        <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" />
+        <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" height="100"/>
         <br>
         <h2 style='text-align: center; padding-top: 60px;'>Reporte Ventas</h2>
         <h4 style='text-align: center;'>Tienda <?php echo $this->session->userdata['logged_in']['nombre_real'] ?></h4>
