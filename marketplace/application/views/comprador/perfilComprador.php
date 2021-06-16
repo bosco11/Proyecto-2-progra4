@@ -86,7 +86,7 @@
                             <thead>
                                 <tr align="center">
                                     <td>Nombre tienda </td>
-                                    <td>Imagen</td>
+                                    <td>Logo</td>
                                     <td>Direccion</td>
                                 </tr>
                             </thead>
@@ -95,7 +95,7 @@
                                     <?php foreach ($suscripciones as $pro) { ?>
                                         <tr align="center">
                                             <td><?php echo $pro['nombre_real'] ?></td>
-                                            <td><img style="border-radius: 10px;" id="item-display" src='<?php echo site_url('/resources/photos/' . $pro['imagen']) ?>' class="d-block w-100" height="90px" width="10px" alt=""></td>
+                                            <td><img style="border-radius: 10px;" id="item-display" src='<?php echo site_url('/resources/photos/' . $pro['imagen']) ?>'  height="40px" width="50px" alt=""></td>
                                             <td><?php echo $pro['direccion'] ?></td>
                                         </tr>
                                     <?php }
