@@ -179,8 +179,6 @@ if (validation_errors() !== "") {
                 <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
                     <div id="tableview2">
                         <section class="container product-info">
-
-
                             <h3>Detalle de producto: </h3>
                             <li>Nombre: <?php echo $producto['descripcion'] ?></li>
                             <li>fecha publicación: <?php echo $producto['fecha_publicacion'] ?></li>
@@ -200,7 +198,7 @@ if (validation_errors() !== "") {
                             <br>
                             <br>
                             <img src='<?php echo site_url('/resources/photos/' . $producto['imagen']) ?>' width="200" alt="">
-                            <h3> Información de tienda: </h3>
+                            <br>
                             <li>Nombre tienda:<?php echo $producto['nombre_real'] ?></li>
                             <li>Teléfono:<?php echo $producto['telefono'] ?></li>
                             <li>Correo:<?php echo $producto['correo'] ?></li>
@@ -213,11 +211,12 @@ if (validation_errors() !== "") {
                     </div>
                 </div>
                 <div class="tab-pane container" id="service-three">
+                    <br><br>
                     <div id="tableview2">
                         <section class="container reviews-info">
                             <?php if ($seccion == TRUE) { ?>
                                 <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
-                                    <div class="container d-flex justify-content-center mt-200">
+                                    <div class="container d-flex">
                                         <div class="row">
                                             <?php if (!empty($calificaciones)) { ?>
                                                 <?php foreach ($calificaciones as $cal) {

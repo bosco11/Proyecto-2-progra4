@@ -187,7 +187,7 @@ if (isset($error_message)) {
                             <br>
                             <br>
                             <img src='<?php echo site_url('/resources/photos/' . $tienda['imagen']) ?>' width="200" alt="">
-                            <h3> Información de tienda: </h3>
+                            <br>
                             <li>Nombre tienda:<?php echo $tienda['nombre_real'] ?></li>
                             <li>Teléfono:<?php echo $tienda['telefono'] ?></li>
                             <li>Correo:<?php echo $tienda['correo'] ?></li>
@@ -199,9 +199,10 @@ if (isset($error_message)) {
                 </div>
                 <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
                     <div class="tab-pane container" id="service-three">
+                        <br><br>
                         <div id="tableview2">
                             <section class="container reviews-info">
-                                <div class="container d-flex justify-content-center mt-200">
+                                <div class="container d-flex">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="stars">
