@@ -63,12 +63,9 @@ if ($error_message != null) {
     </div>
     <br>
     <div style="text-align: center;">
-        <!-- <input type="button" value="spin" id='spin' class="btn btn-primary" /> -->
-
-
         <div id="main_panel">
-            <h2  class="box-title">Ruleta de la suerte</h2>
-            <canvas id="canvas" width="600" height="600"></canvas>
+            <h2 style="left: 500px;" class="box-title">Ruleta de la suerte</h2>
+            <canvas style="text-align: center;" id="canvas" width="600" height="600"></canvas>
         </div>
     </div>
     <br>

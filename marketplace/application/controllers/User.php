@@ -189,7 +189,7 @@ class User extends CI_Controller
 
         if (!$this->upload->do_upload('txt_file')) {
             $error = array('error' => $this->upload->display_errors());
-            $this->session->set_flashdata('error', $error['error']);
+            $this->session->set_flashdata('error','No ha seleccionado una imagen para cargar en el sistema');
         } else {
             $data = array('upload_data' => $this->upload->data());
             $params = array(

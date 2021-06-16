@@ -105,12 +105,6 @@ if (validation_errors() !== "") {
 		</div>
 
 		<?php echo form_close(); ?>
-		<!-- <br>
-		<br>
-		<br>
-		<br>
-		<br>
-		 -->
 
 	</div>
 
