@@ -402,7 +402,12 @@ img {
 	/* margin-bottom: 10px; */
 	/* padding-bottom: 80px; */
 }
-
+.fa-heart{
+	color:red;
+}
+.fa-shopping-cart{
+	color: black;
+}
 #div2 {
 	position: relative;
 	bottom: 5px;

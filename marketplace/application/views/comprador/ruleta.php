@@ -67,7 +67,7 @@ if ($error_message != null) {
 
 
         <div id="main_panel">
-            <h2 style="text-align: center;" class="box-title">Ruleta de la suerte</h2>
+            <h2  class="box-title">Ruleta de la suerte</h2>
             <canvas id="canvas" width="600" height="600"></canvas>
         </div>
     </div>
