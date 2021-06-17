@@ -295,7 +295,10 @@ class Comprador_model extends CI_Model
     function get_productos_mas_vendidos()
     {
         return $this->db->query("SELECT  tbl_productos_compras.id_productos, SUM(tbl_productos_compras.cantidades)
-                                FROM tbl_productos_compras
+                                FROM tbl_productos_compras,tbl_usuarios,tbl_productos
+                                WHERE tbl_productos.id_productos = tbl_productos_compras.id_productos
+                                AND tbl_productos.id_usuarios = tbl_usuarios.id_usuarios
+                                AND tbl_usuarios.denuncias < 10
                                 GROUP BY tbl_productos_compras.id_productos
                                 ORDER BY SUM(tbl_productos_compras.cantidades) DESC
                                 LIMIT 3")->result_array();
