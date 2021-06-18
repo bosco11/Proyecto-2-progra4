@@ -29,7 +29,7 @@ if (validation_errors() !== "") {
 }
 
 ?>
-
+<!-- Vista de insercion de usuarios -->
 <div id="panel_app">
 	<div class="box-header">
 		<nav class="navbar navbar-dark bg-dark justify-content-between">

@@ -52,12 +52,11 @@
 
 	?>
 
-
+<!-- vista de Login, recuadro para ingresar los datos -->
 	<div class="container-sm">
 		<div class="d-flex justify-content-center h-100">
 			<div class="card">
-				<div class="imgcontainer">
-					<!-- <img src="/resources/img/usuario.png" alt="Avatar" class="avatar" style="background-color: transparent" /> -->
+				<div class="imgcontainer">					
 					<?php
 					echo "<img src='" . site_url('/resources/img/user.png')
 						. "' alt='Avatar' class='avatar' style='background-color: transparent' />";
@@ -68,7 +67,7 @@
 					<h3>Inicio de sesion</h3>
 				</div>
 				<div class="card-body">
-
+					<!-- Se crea un form para ingresar los datos-->
 					<?php echo form_open('auth/login');	?>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">

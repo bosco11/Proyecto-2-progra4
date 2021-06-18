@@ -35,6 +35,7 @@
 
 		</div>
 		<br>
+		<!-- se crea un form para ingresar los datos del usuario  -->
 		<?php echo form_open('user/edit/' . $user['id_usuarios']); ?>
 		<div id="">
 			
@@ -103,19 +104,19 @@
 				<button type="submit" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
 			</div>
 			<?php echo form_close(); ?>
-
+			<!-- form para el boton de eliminar cuenta -->
 			<?php echo form_open('user/delete/' . $user['id_usuarios']); ?>
 			<div id="delet">
 				<button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Eliminar mi cuenta</button>
 			</div>
 			<?php echo form_close(); ?>
-
+			<!-- form para redirigir a la tienda de inserccion de red social, direcciones y metodos de pago -->
 			<?php echo form_open('user/social'); ?>
 			<div id="bt_social2">
 				<button id="bt_social" type="submit" class="btn btn-primary">Redes sociales,direcciones,metodo pagos</button>
 			</div>
 			<?php echo form_close(); ?>
-
+			<!-- form para actualizar la foto del usuario -->
 			<div class="box-body">
 				<div class="form-group-photo">
 					<?php echo "<img src='" . site_url('/resources/photos/' . $user['imagen'])

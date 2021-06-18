@@ -30,6 +30,7 @@ if (validation_errors() !== "") {
     <div class="box-header">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
             <div class="container-fluid">
+                <!-- form para devolver a la vista editar usuario -->
                 <?php echo form_open('user/edit/' . $this->session->userdata['logged_in']['users_id']); ?>
                 <button type="submit" name="btn_logout" id="btn_logout" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                 <?php echo form_close(); ?>
@@ -41,6 +42,7 @@ if (validation_errors() !== "") {
     <br>
     <div id="pago">
         <h2 id="user">Formas de pago</h2>
+        <!-- form para agregar un metodo de pago -->
         <?php echo form_open('user/agregarmetodo'); ?>
         <div class="column1" id="primero">
             <div class="col-md-4 mb-3">
@@ -72,6 +74,7 @@ if (validation_errors() !== "") {
                 <button class="btn btn-primary" name="btn_edit" id="btn_edit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $pagos2['id_formas_pago']); ?>" type="submit"> <i class="fas fa-save"></i> Actualizar metodo pago</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
+        <!-- form para el table de metodos de pago -->
         <div class="column2" name='segundo' id="segundo">
             <div id="tableview1">
                 <table class="table table-striped table-dark" id="table">
@@ -111,6 +114,7 @@ if (validation_errors() !== "") {
 
     <div id="direcciones">
         <h2 id="user">Direcciones de envio</h2>
+        <!-- form para el agregar un direccion  -->
         <?php echo form_open('user/agregarDireccion'); ?>
         <div class="column" id="primero">
             <div class="col-md-4 mb-3">
@@ -139,6 +143,7 @@ if (validation_errors() !== "") {
                 <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $direcciones2['id_direcciones']); ?>"><i class="fas fa-save"></i> Actualizar dirección</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
+        <!-- form para el table de direcciones -->
         <div class="column" id="segundo">
             <div id="tableview2">
                 <table class="table table-striped table-dark" id="table">
@@ -178,6 +183,7 @@ if (validation_errors() !== "") {
     <br>
     <div id="Redes">
         <h2 id="user">Redes sociales</h2>
+        <!-- form para el metodo de agregar redes sociales -->
         <?php echo form_open('user/agregarRed'); ?>
         <div class="column" id="primero">
             <div class="col-md-4 mb-3">
@@ -192,6 +198,7 @@ if (validation_errors() !== "") {
                 <button class="btn btn-primary" name="btn_edit" id="btn_edit" type="submit" value="<?php echo ($this->input->post('btn_edit') ? $this->input->post('btn_edit') : $social2['id_redes_sociales']); ?>"><i class="fas fa-save"></i> Actualizar red social</button><?php } ?>
         </div>
         <?php echo form_close(); ?>
+        <!-- form para el table de redes sociales -->
         <div class="column" id="segundo">
             <div id="tableview3">
                 <table class="table table-striped table-dark" id="table">
