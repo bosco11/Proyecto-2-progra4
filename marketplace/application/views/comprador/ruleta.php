@@ -21,6 +21,7 @@ if ($error_message != null) {
 <div id="panel_app">
     <div class="box-header">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <!-- form para regresar de vista -->
             <div class="container-fluid">
                 <?php if ($seccion == TRUE) { ?>
                     <?php
@@ -40,6 +41,7 @@ if ($error_message != null) {
                 <?php } ?>
                 <?php
                 $fecha = date("Y-m-d");
+                // Se validan los giros que un usuario ha realizado
                 if ($user['fecha_giros'] < $fecha) {
                     $result = 3;
                 } else {
@@ -48,7 +50,7 @@ if ($error_message != null) {
                         $cantidad = $user['cantidad_giros'];
                         $result = $total - $cantidad;
                     }
-                }
+                } //se habilita el boton de girar la ruleta si posee los giros suficientes
                 if (sizeof($metodos) > 0 && $user['cantidad_giros'] < 3) { ?>
                     <h3>Cantidad de giros restantes: <?php echo $result ?></h3>
                     <button type="button" style="float:left; margin-left: 30px;" value="spin" id='spin' class="btn btn-primary">Girar la ruleta</button>
@@ -62,6 +64,7 @@ if ($error_message != null) {
         </nav>
     </div>
     <br>
+    <!-- form donde se pinta la ruleta -->
     <div style="text-align: center;">
         <div id="main_panel">
             <h2 style="left: 500px;" class="box-title">Ruleta de la suerte</h2>
@@ -69,7 +72,7 @@ if ($error_message != null) {
         </div>
     </div>
     <br>
-
+    <!-- showmodal para reclamar el premio -->
     <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <?php echo form_open('comprador/guardarPremio/' . $this->session->userdata['logged_in']['users_id']); ?>
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -93,8 +96,7 @@ if ($error_message != null) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" value="" id="premio" name="premio">
-                    <!-- <button type="button" class="btn btn-secondary" onclick="closeModal()" data-dismiss="modal">Close</button> -->
+                    <input type="hidden" value="" id="premio" name="premio">                 >
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
@@ -104,10 +106,11 @@ if ($error_message != null) {
 
 </div>
 <script>
+    // se declara el array de premios
     var options = ["$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada", "$50", "Envío", "%10", "Nada"];
 
     var startAngle = 0;
-    var arc = Math.PI / (options.length / 2);
+    var arc = Math.PI / (options.length / 2);//operacion matematica para calcular el arco
     var spinTimeout = null;
 
     var spinArcStart = 10;
@@ -117,7 +120,7 @@ if ($error_message != null) {
     var ctx;
 
     document.getElementById("spin").addEventListener("click", spin);
-
+    // obtener los colores en codigo hexadecimal
     function byte2Hex(n) {
         var nybHexString = "0123456789ABCDEF";
         return String(nybHexString.substr((n >> 4) & 0x0F, 1)) + nybHexString.substr(n & 0x0F, 1);
@@ -126,7 +129,7 @@ if ($error_message != null) {
     function RGB2Color(r, g, b) {
         return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
     }
-
+    // obtener los colores 
     function getColor(item, maxitem) {
         var phase = 0;
         var center = 128;
@@ -137,9 +140,9 @@ if ($error_message != null) {
         green = Math.sin(frequency * item + 0 + phase) * width + center;
         blue = Math.sin(frequency * item + 4 + phase) * width + center;
 
-        return RGB2Color(red, green, blue);
+        return RGB2Color(red, green, blue);//devuelve los colores
     }
-
+    // Funcion para dibujar la ruleta con los colores
     function drawRouletteWheel() {
         var canvas = document.getElementById("canvas");
         if (canvas.getContext) {
@@ -154,10 +157,10 @@ if ($error_message != null) {
             ctx.lineWidth = 4;
 
             ctx.font = 'bold 12px Helvetica, Arial';
-
+            // Se dibuja cada segmento de la ruleta
             for (var i = 0; i < options.length; i++) {
                 var angle = startAngle + i * arc;
-                //ctx.fillStyle = colors[i];
+            
                 ctx.fillStyle = getColor(i, options.length);
 
                 ctx.beginPath();
@@ -180,7 +183,7 @@ if ($error_message != null) {
                 ctx.restore();
             }
 
-            //Arrow
+            //Dibuja la flecha
             ctx.fillStyle = "white";
             ctx.beginPath();
             ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
@@ -194,7 +197,7 @@ if ($error_message != null) {
             ctx.fill();
         }
     }
-
+    // Funcion para iniciar el giro de la ruleta
     function spin() {
         document.getElementById('spin').disabled = "true";
         spinAngleStart = Math.random() * 10 + 10;
@@ -202,7 +205,7 @@ if ($error_message != null) {
         spinTimeTotal = Math.random() * 3 + 16 * 1000;
         rotateWheel();
     }
-
+    // Funcion que gira la ruleta 
     function rotateWheel() {
         spinTime += 30;
         if (spinTime >= spinTimeTotal) {
@@ -214,7 +217,7 @@ if ($error_message != null) {
         drawRouletteWheel();
         spinTimeout = setTimeout('rotateWheel()', 30);
     }
-
+    // Funcion que detiene el giro de la ruleta
     function stopRotateWheel() {
         clearTimeout(spinTimeout);
         var degrees = startAngle * 180 / Math.PI + 90;
@@ -225,6 +228,7 @@ if ($error_message != null) {
         var text = options[index]
         ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
         ctx.restore();
+        // Se obtiene el premio
         document.getElementById('nota').innerHTML = text;
         document.getElementById('premio').value = text;
         if (text == "$50") {
@@ -237,17 +241,17 @@ if ($error_message != null) {
         }
         $('#exampleModalCenter').modal('show');
     }
-
+    // Funcion para poder girar la ruleta
     function easeOut(t, b, c, d) {
         var ts = (t /= d) * t;
         var tc = ts * t;
         return b + c * (tc + -3 * ts + 3 * t);
     }
-
+    // Funcion para cerrar el showmodal
     function closeModal() {
         $('#exampleModalCenter').modal('hide');
         drawRouletteWheel();
     }
-
+    
     drawRouletteWheel();
 </script>
