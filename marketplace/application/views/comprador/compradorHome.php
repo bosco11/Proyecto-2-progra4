@@ -5,7 +5,7 @@
 	$funcionBoton = '';
 	$boni = '';
 ?>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
+	<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" id="nav-comprador" style="background-color: black;">
 		<div class="container">
 
 			<!-- Brand -->
@@ -24,7 +24,7 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 
 				<!-- Left -->
-				<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav mr-auto" id="ul1">
 					<li class="nav-item active">
 						<a class="nav-link waves-effect" href="#">Inicio
 							<span class="sr-only">(current)</span>
