@@ -124,7 +124,7 @@ if (isset($error_message)) {
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <?php echo form_open('tienda/buscarProductosPerfil/' . $tienda['id_usuarios'], "class=\"d-flex\"") ?>
+                                        <?php echo form_open('tienda/buscarProductos/' . $tienda['id_usuarios'].'/1', "class=\"d-flex\"") ?>
                                         <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
                                             <option selected>Seleccionar categoría</option>
                                             <?php foreach ($categorias as $cate) { ?>
