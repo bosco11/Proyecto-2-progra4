@@ -27,6 +27,7 @@ if (validation_errors() !== "") {
 <div id="panel_app">
     <div class="box-header">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <!-- form para regresar a otra vista -->
             <div class="container-fluid">
                 <?php if ($seccion == TRUE) { ?>
                     <?php
@@ -53,6 +54,7 @@ if (validation_errors() !== "") {
 
         <div class="col-md-12">
             <center>
+                <!-- form para el carrousel de las fotos del producto -->
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style="padding-top: 20px;">
                     <div class="carousel-inner " style="width: 500px; height: 300px; border-radius: 20px;">
                         <?php $cont = 1 ?>
@@ -87,6 +89,7 @@ if (validation_errors() !== "") {
         <br>
         <div>
             <br>
+            <!-- form para obtener la calificacion en estrellas globales del producto -->
             <div class="product-title"><?php echo $producto['descripcion'] ?></div>
             <hr>
             <div class="product-title">Calificacion</div>
@@ -138,6 +141,7 @@ if (validation_errors() !== "") {
                 <?php } ?>
             </div>
             <hr>
+            <!-- form para mostrarle al usuario si el producto esta disponible -->
             <div class="product-price">$<?php echo "Precio: " . $producto['precio'] ?></div>
             <?php if ($producto['cantidad'] > 0) { ?>
                 <div class="product-stock">Disponible</div>
@@ -147,6 +151,7 @@ if (validation_errors() !== "") {
             <hr />
             <?php if ($seccion == TRUE) { ?>
                 <?php if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') { ?>
+                    <!-- form para los botones de agregar al carrito de deseos o compras -->
                     <?php echo form_open('comprador/addCarritoDeseo2/' . $producto_id); ?>
                     <div class="btn-group cart">
                         <button type="submit" class="btn btn-success" id=" btn_carrito" name="btn_carrito" title="agregar al carrito" value="btn_carrito"><i class="fas fa-cart-plus"></i></button>
@@ -161,7 +166,7 @@ if (validation_errors() !== "") {
 
 
         <div class="col-md-16 product-info">
-
+            <!-- form de tab -->
             <ul id="myTab" class="nav nav-tabs">
 
                 <li class="nav-item me-2">
@@ -176,6 +181,7 @@ if (validation_errors() !== "") {
 
             </ul>
             <div id="myTabContent" class="tab-content">
+                <!-- form para mostrar la informacion del producto -->
                 <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
                     <div id="tableview2">
                         <section class="container product-info">
@@ -192,6 +198,7 @@ if (validation_errors() !== "") {
                         </section>
                     </div>
                 </div>
+                <!-- form para mostrar la informacion de la tienda -->
                 <div class="tab-pane container" id="service-two" style="font-size: 18px;">
                     <div id="tableview2">
                         <section class="container shop-info">
@@ -211,6 +218,7 @@ if (validation_errors() !== "") {
                     </div>
                 </div>
                 <div class="tab-pane container" id="service-three">
+                    <!-- form para realizar el proceso de calificacion y comentario -->
                     <br><br>
                     <div id="tableview2">
                         <section class="container reviews-info">
@@ -249,6 +257,7 @@ if (validation_errors() !== "") {
                                                     <?php echo form_close(); ?>
                                                 <?php }
                                             } else { ?>
+                                            <!-- form para las estrellas de las calificaciones -->
                                                 <?php echo form_open('comprador/calificarProducto/' . $producto_id); ?>
                                                 <div class="col-md-12">
                                                     <div class="stars">
@@ -276,6 +285,7 @@ if (validation_errors() !== "") {
                                 <?php } ?>
                             <?php } ?>
                             <br><br><br><br><br>
+                            <!-- form para la lista de comentarios -->
                             <div id="comentarios">
                                 <h2>Lista Comentarios</h2>
                                 <div class='post_block2'>

@@ -1,6 +1,7 @@
 <div id="panel_app">
     <div class="box-header">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <!-- form para devolverse a otra vista -->
             <div class="container-fluid">
                 <?php
                 if ($this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
@@ -18,6 +19,7 @@
     <div id="panel_app">
         <h2 style="text-align: center;" class="box-title">Informacion del usuario</h2>
         <center>
+            <!-- form para la imagen del usuario -->
             <div class="col-md-4">
 
                 <div>
@@ -27,6 +29,7 @@
             </div>
         </center>
         <br>
+        <!-- form para mostrar la informacion del usuario -->
         <div class="col-md-12">
             <hr>
             <h3>Nombre completo: <?php echo $user['nombre_real'] ?></h3>
@@ -37,6 +40,7 @@
             <h3>País: <?php echo $user['pais'] ?></h3>
             <hr>
         </div>
+        <!-- form para tabs -->
         <div class="col-md-12 product-info">
             <ul id="myTab" class="nav nav-tabs">
                 <li class="nav-item me-2">
@@ -47,6 +51,7 @@
                 </li>
             </ul>
             <div id="myTabContent" class="tab-content">
+                <!-- form para mostrar la lista de productos deseados -->
                 <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
                     <section class="container lista-deseo">
                         <div id="tableview2">
@@ -81,6 +86,7 @@
                     </section>
                 </div>
                 <div class="tab-pane container" id="service-two" style="font-size: 18px;">
+                <!-- form para la lista de tiendas suscritas -->
                     <section class="container suscripciones">
                         <div id="tableview2">
                             <br><br>
