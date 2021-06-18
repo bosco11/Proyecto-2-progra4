@@ -1,11 +1,4 @@
 <?php
-
-if (isset($logout_message)) {
-
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
-        . $logout_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
 if (isset($message_display)) {
 
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
@@ -25,14 +18,14 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
             <nav class="navbar navbar-dark bg-dark justify-content-between">
                 <div class="container-fluid">
 
-                    <?php echo form_open('tienda/mantCategoria'); ?>
-                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
+                     <?php echo form_open('tienda/mantCategoria'); ?> <!-- Se crea un form para regresar a la vista mentenimiento categoria -->
+                    <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button><!-- Se crea un boton de regresar -->
                     <?php echo form_close(); ?>
                 </div>
             </nav>
         </div>
         <br>
-        <?php if ($categoria != null) {
+        <?php if ($categoria != null) { //Condicion para determinar si la vista se utilizara para editar o crear una categoria.
             echo form_open('tienda/addCategoria/' . $categoria['id_categorias']);
         } else {
             echo form_open('tienda/addCategoria');

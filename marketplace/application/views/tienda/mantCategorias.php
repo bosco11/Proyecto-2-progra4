@@ -16,10 +16,10 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
     <div id="panel_app">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
             <div class="container-fluid">
-                <?php echo form_open('tienda/tiendaHome'); ?>
+                <?php echo form_open('tienda/tiendaHome'); ?><!-- Se crea un form para regresar a la vista anterior -->
                 <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                 <?php echo form_close(); ?>
-                <?php echo form_open('tienda/addCategoria'); ?>
+                <?php echo form_open('tienda/addCategoria'); ?> <!-- Se cra un form para ir a la vista de agrgar categorias-->
                 <button type="submit" name="btn_add" id="btn_add" class="btn btn-primary me-2" title="Agregar Categoria"><i class="fas fa-plus"></i> Agregar Categoria</button>
                 <?php echo form_close(); ?>
 
@@ -37,7 +37,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
                         </tr>
                     </thead>
                     <tbody id="tbTable">
-                        <?php foreach ($categorias as $categoria) { ?>
+                        <?php foreach ($categorias as $categoria) { ?><!-- Se carga un tableview con todas las categorias -->
                             <?php echo form_open('tienda/addCategoria/' . $categoria['id_categorias']); ?>
                             <tr align="center">
                                 <td><?php echo $categoria['categorias'] ?></td>

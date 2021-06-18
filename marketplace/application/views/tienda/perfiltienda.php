@@ -1,11 +1,4 @@
 <?php
-if (isset($logout_message)) {
-
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert' style='font-size: 20px;'>"
-        . $logout_message .
-        "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
-}
-
 if (isset($message_display)) {
 
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'style='font-size: 20px;'>"
@@ -24,6 +17,7 @@ if (isset($error_message)) {
     <div class="box-header">
         <nav class="navbar navbar-dark bg-dark justify-content-between">
             <div class="container-fluid">
+                <!-- Se cargan botonos correspondientes al usuario logueado, esto para evitar errores -->
                 <?php
                 if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['tipo'] == 'Tienda') { ?>
                     <?php echo form_open('tienda/tiendaHome'); ?>
@@ -33,8 +27,8 @@ if (isset($error_message)) {
                     <?php echo form_open('comprador/compradorHome'); ?>
                     <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                     <?php echo form_close(); ?>
-                <?php } ?>
-                <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
+                <?php }
+                if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) {
                     $suscribir = "Suscribirse";
                     $icon = "<i class='fas fa-plus'></i> ";
                     if ($suscrito) {
@@ -70,7 +64,7 @@ if (isset($error_message)) {
         <div class="product-title"><?php echo $tienda['nombre_real'] ?></div>
         <hr>
         <h4>Calificacion de la tienda</h4>
-        <div class="product-rating">
+        <div class="product-rating"><!-- Se promedia en estrellas la calificacion de la tienda -->
             <?php if ($calificacion >= 1) { ?>
                 <i class="fa fa-star gold"></i>
             <?php  } else { ?>
@@ -99,7 +93,7 @@ if (isset($error_message)) {
         </div>
         <hr>
         <div class="col-md-16 product-info">
-            <ul id="myTab" class="nav nav-tabs">
+            <ul id="myTab" class="nav nav-tabs"><!-- Se crean 3 tabs en la vista, uno para visualizar los productos, otro muestra informacion basica de la tienda y otro donde se prodra calificar dicha tienda -->
 
                 <li class="nav-item me-2">
                     <a class="nav-link active" href="#service-one" data-toggle="tab">PRODUCTOS</a>
@@ -115,7 +109,7 @@ if (isset($error_message)) {
 
             </ul>
             <div id="myTabContent" class="tab-content">
-                <div class="tab-pane container active" id="service-one" style="font-size: 18px;">
+                <div class="tab-pane container active" id="service-one" style="font-size: 18px;"><!-- Tab para  visualizar los productos -->
                     <div id="tableview2">
                         <section class="container product-info">
                             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -124,7 +118,7 @@ if (isset($error_message)) {
                                         <span class="navbar-toggler-icon"></span>
                                     </button>
                                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                        <?php echo form_open('tienda/buscarProductos/' . $tienda['id_usuarios'].'/1', "class=\"d-flex\"") ?>
+                                        <?php echo form_open('tienda/buscarProductos/' . $tienda['id_usuarios'] . '/1', "class=\"d-flex\"") ?>
                                         <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
                                             <option selected>Seleccionar categoría</option>
                                             <?php foreach ($categorias as $cate) { ?>
@@ -155,7 +149,7 @@ if (isset($error_message)) {
                                         </tr>
                                     </thead>
                                     <tbody id="tbTable">
-                                        <?php foreach ($productos as $pro) { ?>
+                                        <?php foreach ($productos as $pro) { ?> <!-- Se carga un tableview con todas los productos  -->
                                             <tr align="center">
                                                 <td><?php echo $pro['descripcion'] ?></td>
                                                 <td><?php echo $pro['cantidad'] ?></td>
@@ -166,7 +160,7 @@ if (isset($error_message)) {
                                                 <td><?php echo $pro['tiempo_promedio'] ?></td>
                                                 <td><?php echo $pro['ubicacion_fisica'] ?></td>
 
-                                                <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
+                                                <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?> <!-- Se cra un form para ver el perfil del producto y para agregar al carrito o lista de deseos -->
                                                     <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" style="float: left;" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?> <?php echo form_open('comprador/addCarritoDeseo/' . $pro['id_productos']); ?> <button type="submit" style="float: left;" name="btn_carrito" id="btn_carrito" value="btn_carrito" class="btn btn-secondary btn-sm me-2" title="Carrito"><i class="fas fa-cart-plus"></i></button> <button type="submit" style="float: left;" value="btn_deseo" name="btn_deseo" id="btn_deseo" class="btn btn-danger btn-sm" title="Deseo"><i class="fas fa-heart"></i></button><?php echo form_close(); ?> </td>
                                                 <?php } else { ?>
                                                     <td> <?php echo form_open('comprador/perfilProducto/' . $pro['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary btn-sm me-2" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?> </td>
@@ -181,7 +175,7 @@ if (isset($error_message)) {
                         </section>
                     </div>
                 </div>
-                <div class="tab-pane container" id="service-two" style="font-size: 18px;">
+                <div class="tab-pane container" id="service-two" style="font-size: 18px;"> <!-- Se crea un  tab mostrar la informacion basica de la tienda  -->
                     <div id="tableview2">
                         <section class="container shop-info">
                             <br>
@@ -198,7 +192,7 @@ if (isset($error_message)) {
                     </div>
                 </div>
                 <?php if (isset($this->session->userdata['logged_in']) and $this->session->userdata['logged_in']['users_id'] != $tienda['id_usuarios']) { ?>
-                    <div class="tab-pane container" id="service-three">
+                    <div class="tab-pane container" id="service-three">  <!-- Se crea un  tab calificar la tienda -->
                         <br><br>
                         <div id="tableview2">
                             <section class="container reviews-info">

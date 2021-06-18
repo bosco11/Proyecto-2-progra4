@@ -3,7 +3,7 @@
         <div class="box-header">
             <nav class="navbar navbar-dark bg-dark justify-content-between">
                 <div class="container-fluid">
-                    <?php echo form_open('tienda/tiendaHome') ?>
+                    <?php echo form_open('tienda/tiendaHome') ?> <!-- Se crea un form para regresar a la vista anterior -->
                     <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
                     <?php echo form_close() ?>
                 </div>
@@ -14,7 +14,7 @@
         <div id="main_panel">
             <h2 style="text-align: center;" class="box-title">Lista de suscriptores</h2>
             <div class="row align-items">
-                <?php foreach ($suscriptores as $suscriptor) { ?>
+                <?php foreach ($suscriptores as $suscriptor) { ?>  <!-- Se crea dinamiocamente divs con la informacion de los suscriptores de una tienda -->
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card">
                             <div class="view overlay">
@@ -26,7 +26,7 @@
 
                             <div class="card-body text-center">
                                 <h4 class="font-weight-bold black-text" style="color: black;"><?php echo $suscriptor['nombre_real'] ?></h4>
-                                <?php echo form_open('user/perfilUsuario/' . $suscriptor['id_usuarios']) ?>
+                                <?php echo form_open('user/perfilUsuario/' . $suscriptor['id_usuarios']) ?> <!-- Se crea un form para ir a la vista del perfil del suscriptor -->
                                 <button type="submit" class="btn btn-primary" title="Ver perfil"><i class="fas fa-user"> Ver perfil</i></button>
                                 <?php echo form_close() ?>
                             </div>

@@ -28,17 +28,17 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 		<div class="box-header">
 			<nav class="navbar navbar-dark bg-dark justify-content-between">
 				<div class="container-fluid">
-					<?php echo form_open('auth/login'); ?>
+					<?php echo form_open('auth/login'); ?><!-- Se crea un form para regresar a la vista anterior -->
 					<button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
 					<?php echo form_close(); ?>
-					<?php echo form_open('tienda/mantGaleriaProductos/' . $producto['id_productos']); ?>
+					<?php echo form_open('tienda/mantGaleriaProductos/' . $producto['id_productos']); ?><!-- Se cra un form para ir a la vista de galeria de prodcutos -->
 					<button type="submit" name="btn_galeria" id="btn_galeria" class="btn btn-secondary" title="Galeria del Prodcutos">Galeria del Producto</button>
 					<?php echo form_close(); ?>
 				</div>
 			</nav>
 		</div>
 		<br>
-		<?php echo form_open('tienda/editProducto/' . $producto['id_productos']); ?>
+		<?php echo form_open('tienda/editProducto/' . $producto['id_productos']); ?><!-- Se crea un form para editar un producto -->
 		<div id="edit_panel">
 			<h2 style="text-align: center;" class="box-title">Mantenimiento Producto</h2>
 			<div id="div1">
@@ -66,7 +66,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 			<div id="div2">
 				<label for="cmb_categoria" class="control-label"><span class="text-danger">* </span>Categoria:</label>
 				<div class="form-group">
-					<select name="cmb_categoria" id="cmb_categoria" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm">
+					<select name="cmb_categoria" id="cmb_categoria" variant="primary" class="form-select form-select-sm" aria-label=".form-select-sm example" class="d-flex form-control form-control-sm"> <!-- Se carga un combobox con todas las categorias -->
 						<?php foreach ($categorias as $cate) {
 							$selected = " ";
 							if ($cate['id_categorias'] == $producto['id_categorias']) {
