@@ -8,20 +8,20 @@
         <br>
         <hr>
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <?php echo form_open('comprador/compradorHome'); ?>
+            <?php echo form_open('comprador/compradorHome'); ?> <!-- Se crea un form para regresar a la vista anterior -->
             <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
             <div class="nav-item">
-                <?php echo form_open('tienda/buscarProductosReportesCompras', "class=\"d-flex\"") ?>
+                <?php echo form_open('tienda/buscarProductosReportesCompras', "class=\"d-flex\"") ?> <!-- Se crea un form para filtrar los productos por rengo de fechas -->
                 <input class="form-control me-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
                 <input class="form-control me-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
                 <button class="btn btn-secondary me-2" type="submit" title="Buscar"><i class="fas fa-search"></i>Buscar</button>
-                <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" />
+                <img style="cursor: pointer;" onclick="window.print()" src="https://www.altadenalibrary.org/wp-content/uploads/2020/08/printericon.png" title="Imprimir" alt="Imprimir" width="40" /><!-- Se crea un boton para imprimir vista -->
                 <a hrf></a>
                 <?php echo form_close(); ?>
             </div>
         </nav>
-        <div style="text-align: center;">
+        <div style="text-align: center;"> <!-- Se muestra los filtros utilizados por el usuario -->
             <?php if ($FechaIni != null) { ?>
                 <h5>Fecha Inicial: <?php echo $FechaIni  ?> | Fecha Final: <?php echo $FechaFin ?></h5>
             <?php } ?>
@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbTable">
-                        <?php foreach ($productos as $pro) { ?>
+                        <?php foreach ($productos as $pro) { ?> <!-- Se crea un table motrando todos los productos comprados -->
                             <tr align="center">
                                 <td><?php echo $pro['descripcion'] ?></td>
                                 <td><?php echo $pro['fecha'] ?></td>
@@ -58,7 +58,7 @@
 
             </div>
             <hr>
-            <?php
+            <?php // Se calcula la cantidad de compras por producto
             $productosGrafico = array();
 
             $precioTotal = 0;
@@ -87,7 +87,7 @@
             echo "<h3>Precio Total : " . $precioTotal . "</h3>";
             ?>
             <hr>
-            <script type="text/javascript">
+            <script type="text/javascript"> // Se crea un grafico con google.charts con el calculo de cantidad de compras por producto.
                 google.charts.load('current', {
                     'packages': ['corechart']
                 });
@@ -115,7 +115,7 @@
                     chart.draw(data, options);
                 }
             </script>
-            <div style="text-align: center;" id="piechart"></div>
+            <div style="text-align: center;" id="piechart"></div> <!-- Div encargado de almacenar el grafico-->
         </div>
     </div>
 <?php

@@ -81,7 +81,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 		?>
 		<nav class="navbar navbar-dark bg-dark justify-content-between">
 			<div class="container-fluid">
-				<?php echo form_open('tienda/buscarProductos/' . $this->session->userdata['logged_in']['users_id'], "class=\"d-flex\"") ?> <!-- Se crea un form para filtrar los prudctos por categoria o descripcion -->
+				<?php echo form_open('tienda/buscarProductos/' . $this->session->userdata['logged_in']['users_id'], "class=\"d-flex\"") ?> <!-- Se crea un form para filtrar los productos por categoria o descripcion -->
 				<select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select form-select-sm me-2">
 					<option selected>Seleccionar categoría</option> 
 					<?php foreach ($categorias as $cate) { ?> <!-- Se carga un combobox con todas las categorias -->

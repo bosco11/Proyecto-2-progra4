@@ -8,7 +8,7 @@
         <br>
         <hr>
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <?php echo form_open('comprador/compradorHome'); ?>
+            <?php echo form_open('comprador/compradorHome'); ?> <!-- Se crea un form para regresar a la vista anterior -->
             <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
             <div class="nav-item">
@@ -16,7 +16,7 @@
             </div>
         </nav>
         <hr>
-        <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones">
+        <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones"> 
 
             <h3 align="center">Suscripciones</h3>
             <hr>
@@ -51,7 +51,7 @@
                     <tbody id="tbTable">
                         <?php
                         $productos = $compra['productos'];
-                        foreach ($productos as $pro) { ?>
+                        foreach ($productos as $pro) { ?> <!-- Se carga un tableview con todos los productos comprados-->
                             <tr align="center">
                                 <td><?php echo $pro['descripcion'] ?></td>
                                 <td><?php echo $pro['fecha_publicacion'] ?></td>

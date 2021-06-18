@@ -8,7 +8,7 @@
         <br>
         <hr>
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <?php echo form_open('comprador/compradorHome'); ?>
+            <?php echo form_open('comprador/compradorHome'); ?> <!-- Se crea un form para regresar a la vista anterior -->
             <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
             <div class="nav-item">
@@ -20,7 +20,7 @@
 
             <h3 align="center">Suscripciones</h3>
             <?php
-            foreach ($tiendas as $Tienda) {
+            foreach ($tiendas as $Tienda) { // Se muestran dinamicamente la lista de tiendas
                 $productos = $Tienda['productos']
             ?>
 
@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody id="tbTable">
-                            <?php foreach ($productos as $pro) { ?>
+                            <?php foreach ($productos as $pro) { ?> <!-- Se carga un tableview  con los productos de cada tienda en especifico -->
                                 <tr align="center">
                                     <td><?php echo $pro['descripcion'] ?></td>
                                     <td><?php echo $pro['fecha_publicacion'] ?></td>
