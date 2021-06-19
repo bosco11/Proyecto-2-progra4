@@ -52,11 +52,11 @@
 
 	?>
 
-<!-- vista de Login, recuadro para ingresar los datos -->
+	<!-- vista de Login, recuadro para ingresar los datos -->
 	<div class="container-sm">
 		<div class="d-flex justify-content-center h-100">
 			<div class="card">
-				<div class="imgcontainer">					
+				<div class="imgcontainer">
 					<?php
 					echo "<img src='" . site_url('/resources/img/user.png')
 						. "' alt='Avatar' class='avatar' style='background-color: transparent' />";
@@ -80,6 +80,11 @@
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
 						<input type="password" class="form-control" name="txt_password" id="txt_password" aria-label="**********" aria-describedby="addon-wrapping" placeholder="**********" title="Contraseña" class="cajatexto" /><br />
+						<div class="input-group-append">
+							<button id="show_password" class="btn btn-primary" style="height: 50px;" type="button" onclick="mostrarContrasena()">
+								<span class="input-group-text"><i id="icon" class="fa fa-eye password-icon show-password"></i></span>
+							</button>
+						</div>
 					</div>
 
 					<button type="submit" class="btn btn-primary" name="btn_login" id="btn_login">Ingresar</button>
@@ -88,8 +93,6 @@
 						<a href="<?php echo site_url('comprador/compradorHome'); ?>" id="btn_adduser" name='btn_adduser' title="Registrarse">Volver al inicio</a>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</div>
@@ -97,3 +100,17 @@
 </body>
 
 </html>
+<script>
+	function mostrarContrasena() {
+		var tipo = document.getElementById("txt_password");
+		showPassword = document.querySelector('.show-password');
+		if (tipo.type == "password") {
+			tipo.type = "text";
+			showPassword.classList.toggle("fa-eye-slash");
+		} else {
+			tipo.type = "password";
+			showPassword.classList.remove('fa-eye-slash');
+
+		}
+	}
+</script>

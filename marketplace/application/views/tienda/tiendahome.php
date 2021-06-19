@@ -1,7 +1,7 @@
 <?php
 if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
-		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" style="background-color: black;">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" id="nav-comprador" style="background-color: black;">
 			<div class="container">
 				<a class="navbar-brand waves-effect" href="#">
 					<strong class="blue-text"><img src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="Marktplace" width="50" height="50"></strong>

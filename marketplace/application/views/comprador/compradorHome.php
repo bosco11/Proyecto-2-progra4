@@ -82,7 +82,7 @@
 										$precio = 0;
 									} ?>
 								</button>
-								<div class="dropdown-menu">
+								<div class="dropdown-menu ">
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
 											<i class="fa fa-heart" aria-hidden="true"></i> <span class="badge badge-pill badge-danger"><?php echo $cont ?></span>
@@ -147,7 +147,7 @@
 										$precio = 0;
 									} ?>
 								</button>
-								<div class="dropdown-menu" style="margin-right: 1000%">
+								<div class="dropdown-menu " style="margin-right: 1000%">
 									<?php $botonDisable = 'disabled'; ?>
 									<div class="row total-header-section">
 										<div class="col-lg-6 col-sm-6 col-6">
@@ -475,8 +475,8 @@
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="basicExampleNav">
-				<ul class="navbar-nav mr-auto">
+			<div class="collapse navbar-collapse" id="basicExampleNav" >
+				<ul class="navbar-nav mr-auto" style="padding-top: 25px;">
 					<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
 					<li class="nav-item me-2">
 						<select name="cmb_categoria" id="cmb_categoria" class="form-select me-2" aria-label=".form-select-sm example">
@@ -489,14 +489,14 @@
 						</select>
 					</li>
 
-					<li class="nav-item me-2">
+					<li class="nav-item me-2" >
 						<input id=" txt_producto" name="txt_producto" class="form-control me-2" placeholder="Producto" aria-label="Search">
 
 					</li>
 					<li class="nav-item me-2">
 						<input id=" txt_tienda" name="txt_tienda" class="form-control me-2" placeholder="Tienda" aria-label="Search">
 					</li>
-					<li class="nav-item me-2">
+					<li class="nav-item me-2" style="position: relative; bottom: 10px;">
 						<button id=" btn_search" name="btn_search" value="btn_search" class="btn btn-secondary me-2" type="submit"><i class="fas fa-search"></i> Buscar</button>
 					</li>
 

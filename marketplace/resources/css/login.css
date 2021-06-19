@@ -137,8 +137,9 @@ body {
 
 .input-group-append span {
 	width: 40px;
-	height: 50;
+	height: 40;
 	color: black;
+	background-color: transparent;
 	border: 0 !important;
 	font-size: 20px;
 }
@@ -222,6 +223,7 @@ body {
 		width: 20px;
 		height: 40;
 		color: black;
+		background-color: transparent;
 		border: 0 !important;
 		font-size: 12px;
 	}
