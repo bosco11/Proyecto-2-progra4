@@ -99,10 +99,10 @@ class Comprador extends CI_Controller
 			$this->index();
 		}
 	}
-
+	// Funcion que redirige a la vista perfil producto
 	function perfilProducto($id)
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) {//Ingresa solo si el usuario inició sesion
 			$data['seccion'] = $this->session->userdata['logged_in'];
 			$data['calificaciones'] = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
 		} else {
@@ -415,20 +415,20 @@ class Comprador extends CI_Controller
 		}
 	}
 
-
+	// Funcion para calificar un producto y tambien para comentar un producto
 	function calificarProducto($id)
 	{
 
 		$datas = $this->Comprador_model->get_calificacion_producto_usuarioId($id, $this->session->userdata['logged_in']['users_id']);
 
-		if (isset($_POST['btn_rating2'])) {
+		if (isset($_POST['btn_rating2'])) {//Se ingresa a este apartado solo si el usuario ya realizó una calificacion previamente
 			$calificacion = $this->input->post('star');
 			$params = array(
 				'calificacion' => $calificacion
 			);
 			$this->Comprador_model->actualizarCalificarProducto($params, $id, $this->session->userdata['logged_in']['users_id']);
 		} else {
-
+			// en este apartado se realiza la insercion de una calificacion y comentario de un producto
 			if (isset($_POST['btn_rating1']) && empty($datas)) {
 				$calificacion = $this->input->post('star');
 				$params = array(
@@ -439,7 +439,7 @@ class Comprador extends CI_Controller
 					'id_usuarios' => $this->session->userdata['logged_in']['users_id']
 				);
 				$this->Comprador_model->calificarProducto($params);
-			} else {
+			} else {//se ingresa a este apartado solo si ya calificó un producto pero no realizó un comentario
 				$calificacion = $this->input->post('star');
 				$params = array(
 					'id_productos' => $id,
@@ -452,6 +452,7 @@ class Comprador extends CI_Controller
 		$this->mensaje = 'Has realizado una calificacion sobre el producto';
 		$this->perfilProducto($id);
 	}
+	// Funcion para un usuario tienda que permita responder la retroalimentación de un comprador
 	function respuestaComentarios($id_producto, $id_usuario)
 	{
 		$params = array(
@@ -460,14 +461,15 @@ class Comprador extends CI_Controller
 		$this->Comprador_model->actualizarCalificarProducto($params, $id_producto, $id_usuario);
 		$this->perfilProducto($id_producto);
 	}
+	// Funcion que permite validar cierta información y redirige al usuario a la vista de la ruleta
 	function ruleta()
 	{
-		if (isset($this->session->userdata['logged_in'])) {
+		if (isset($this->session->userdata['logged_in'])) {//solo se ingresa si el usuario inició sesion
 			$data['seccion'] = $this->session->userdata['logged_in'];
 			$data['metodos'] = $this->Comprador_model->get_all_pago($this->session->userdata['logged_in']['users_id']);;
 			$data['user'] = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
 			$fecha = date("Y-m-d");
-			if ($data['user']['fecha_giros'] < $fecha) {
+			if ($data['user']['fecha_giros'] < $fecha) {//en este apartado se valida si la fecha es diferente a la de hoy y se resetea la informacion de los giros
 				$params2 = array(
 					'fecha_giros' => $fecha,
 					'cantidad_giros' => 0
@@ -485,6 +487,7 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'comprador/ruleta';
 		$this->load->view('layouts/main', $data);
 	}
+	// Funcion que permite obtener la calificacion global(promedio) de un producto
 	function calificacionProducto($id)
 	{
 		$calificaciones = $this->Comprador_model->get_calificaciones_productos($id);
@@ -498,10 +501,10 @@ class Comprador extends CI_Controller
 			return number_format($calificacion / count($calificaciones), 0, ",", ".");
 		}
 	}
-
+	// Funcion que permite almacenar los premios obtenidos de la ruleta
 	function guardarPremio($id_usuario)
 	{
-		if ($this->input->post('premio') == 'Nada') {
+		if ($this->input->post('premio') == 'Nada') {//Se ingresa si no se obteien premio y se le resta un giro 
 			$fecha = date("Y-m-d");
 			$user = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
 			if ($user['fecha_giros'] == '' || $user['fecha_giros'] == null) {
@@ -556,7 +559,7 @@ class Comprador extends CI_Controller
 					}
 				}
 			}
-			// echo printf("la fecha actual es " . date("d") . " del " . date("m") . " de " . date("Y"));
+			// apartado para actualizar la fecha y la cantidad de giros del usuario
 			$fecha = date("Y-m-d");
 			$user = $this->User_model->get_user($this->session->userdata['logged_in']['users_id']);
 			if ($user['fecha_giros'] == '' || $user['fecha_giros'] == null) {
