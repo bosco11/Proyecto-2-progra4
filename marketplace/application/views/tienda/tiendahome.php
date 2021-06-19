@@ -1,7 +1,7 @@
 <?php
 if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 	<div id="panel_app">
-		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" id="nav-comprador" style="background-color: black;">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark white scrolling-navbar" id="nav-comprador"  style="background-color: black;">
 			<div class="container">
 				<a class="navbar-brand waves-effect" href="#">
 					<strong class="blue-text"><img src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="Marktplace" width="50" height="50"></strong>
@@ -28,7 +28,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 					<ul class="navbar-nav nav-flex-icons ml_auto">
 						<li title="Cantidad de denuncias" class="nav-item dropdown">
 							<a class="nav-link">
-								<span class="badge badge-pill bg-danger"><?php echo $tienda['denuncias'] ?></span>
+								<span class="badge badge-pill bg-danger"><?php echo $tienda['denuncias']?></span>
 								<span><i class="fas fa-user-slash" style="font-size: 27px; margin-top: 5px;"></i></span>
 							</a>
 						</li>
@@ -66,7 +66,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 
 			</div>
 		</nav>
-		<br><br><br>
+		<br><br><br><br>
 		<?php
 		if (isset($logout_message)) {
 
