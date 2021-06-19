@@ -4,11 +4,12 @@
         <img style='' src="<?php echo site_url('resources/img/tienda.png'); ?>" alt="logo" width="100" height="100" />
         <br>
         <h2 style='text-align: center; padding-top: 60px;'>Factura de compra</h2>
-        <h4 style='text-align: center;'>Usuario <?php echo $this->session->userdata['logged_in']['nombre_real'] ?></h4>
+        <h4 style='text-align: center;'>Comprador <?php echo $this->session->userdata['logged_in']['nombre_real'] ?></h4>
         <br>
         <hr>
         <nav class="navbar navbar-light bg-light justify-content-between">
-            <?php echo form_open('comprador/compradorHome'); ?> <!-- Se crea un form para regresar a la vista anterior -->
+            <?php echo form_open('comprador/compradorHome'); ?>
+            <!-- Se crea un form para regresar a la vista anterior -->
             <button type="submit" name="btn_return" id="btn_return" class="boton" title="Regresar"><i class="fas fa-arrow-left"></i></button>
             <?php echo form_close(); ?>
             <div class="nav-item">
@@ -16,25 +17,22 @@
             </div>
         </nav>
         <hr>
-        <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones"> 
+        <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones">
 
-            <h3 align="center">Suscripciones</h3>
+            <h3 align="center">Datos del comprador</h3>
             <hr>
-            <h5 align="center">Nombre comprador</h5>
-            <h6 align="center"><?php echo $compra['nombre_real'] ?></h6>
-            <h5 align="center">Cedula comprador</h5>
-            <h6 align="center"><?php echo $compra['cedula'] ?></h6>
-            <h5 align="center">Forma de pago</h5>
-            <h6 align="center"><?php echo $compra['numero_tarjeta'] ?></h6>
-            <h5 align="center">Dirrecion de envio</h5>
-            <h6 align="center"><?php echo $compra['pais_direccion'] . " " . $compra['provincia'] . ", casillero: " . $compra['numero_casillero'] ?></h6>
-            <h5 align="center">Fecha compra</h5>
-            <h6 align="center"><?php echo $compra['fecha'] ?></h6>
+            <h5>Nombre comprador: <?php echo $compra['nombre_real'] ?> </h5>
+            <h5>Cedula comprador: <?php echo $compra['cedula'] ?></h5>
+            <h5>Forma de pago: <?php echo $compra['numero_tarjeta'] ?></h5>
+            <h5>Dirrecion de envio: <?php echo $compra['pais_direccion'] . " " . $compra['provincia'] . ", casillero: " . $compra['numero_casillero'] ?></h5>
+            <h5>Fecha compra: <?php echo $compra['fecha'] ?></h5>
+
             <?php if (isset($compra['id_premios'])) { ?>
                 <h5 align="center">Premio seleccionado</h5>
                 <h6 align="center"><?php echo $compra['descripcion'] ?></h6>
             <?php } ?>
-            <h5 align="center">Productos comprados</h5>
+            <hr>
+            <h3 align="center">Detalle compra</h3>
             <div id="tableview">
                 <table class="table table-striped table-white" id="table">
                     <thead>
@@ -42,7 +40,7 @@
                             <td>Descripcion </td>
                             <td>Fecha publicacion</td>
                             <td>Categoria</td>
-                            <td>Cantidad disponible</td>
+                            <td>Cantidad adquirida</td>
                             <td>Costo envio</td>
                             <td>Precio del producto(Unidad)</td>
                             <td>Tienda</td>
@@ -51,7 +49,8 @@
                     <tbody id="tbTable">
                         <?php
                         $productos = $compra['productos'];
-                        foreach ($productos as $pro) { ?> <!-- Se carga un tableview con todos los productos comprados-->
+                        foreach ($productos as $pro) { ?>
+                            <!-- Se carga un tableview con todos los productos comprados-->
                             <tr align="center">
                                 <td><?php echo $pro['descripcion'] ?></td>
                                 <td><?php echo $pro['fecha_publicacion'] ?></td>
@@ -65,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-            <h5 align="center">Precio total: <?php echo $compra['precio_total'] ?></h5>
+            <h3>Precio total:$ <?php echo $compra['precio_total'] ?></h3>
         </div>
     </div>
 
