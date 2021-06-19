@@ -112,6 +112,7 @@
 																	<?php echo form_close(); ?>
 																</span>
 															</div>
+															<hr>
 														<?php } ?>
 													<?php } ?>
 												</div>
@@ -189,7 +190,7 @@
 																	</span>
 
 																</div>
-
+																	<hr>
 															<?php } ?>
 														<?php } ?>
 													<?php } ?>
@@ -213,13 +214,14 @@
 								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?></span>
 								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+							<div style="overflow: auto; max-height: 400px;  padding-left: 5px;" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<?php foreach ($notificaciones as $notificacion) { ?>
 									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?> </span>
-										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
+										<!-- <span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span> -->
 									</a>
+									<hr>
 								<?php } ?>
 							</div>
 						</li>
