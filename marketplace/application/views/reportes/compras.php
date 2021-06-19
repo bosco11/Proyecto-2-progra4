@@ -43,7 +43,7 @@
                         </tr>
                     </thead>
                     <tbody id="tbTable">
-                        <?php foreach ($productos as $pro) { ?> <!-- Se crea un table motrando todos los productos comprados -->
+                        <?php foreach ($productos as $pro) { ?> <!-- Se crea un table mostrando todos los productos comprados -->
                             <tr align="center">
                                 <td><?php echo $pro['descripcion'] ?></td>
                                 <td><?php echo $pro['fecha'] ?></td>

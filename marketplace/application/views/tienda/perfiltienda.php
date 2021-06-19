@@ -40,13 +40,13 @@ if (isset($error_message)) {
                     <?php echo form_close(); ?>
                     <?php
                     $abuso = "Denunciar";
-                    $icon = "<i class='fas fa-times'></i> ";
+                    $icon = "<i class='fas fa-user-slash'></i> ";
                     if ($denuncia) {
-                        $icon = "<i class='fas fa-lock'></i> ";
-                        $abuso = "Denunciada";
+                        $icon = "<i class='fas fa-times'></i> ";
+                        $abuso = "Cancelar denuncia";
                     } ?>
                     <?php echo form_open('tienda/denunciarTienda/' . $tienda['id_usuarios']) ?>
-                    <button type="submit" name="btn_suscripcion" id="btn_suscripcion" class="btn btn-danger me-2" value="denunciar" title="Denuncia"> <?php echo $icon . $abuso ?></button>
+                    <button type="submit" name="btn_denunciar" id="btn_denunciar" class="btn btn-danger me-2" value="<?php echo $abuso ?>" title="Denuncia"> <?php echo $icon . $abuso ?></button>
                     <?php echo form_close(); ?>
                 <?php } ?>
             </div>
