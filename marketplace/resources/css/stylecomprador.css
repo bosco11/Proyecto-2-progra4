@@ -332,7 +332,6 @@ label.star:before {
 }
 
 #nav-comprador a {
-	/* line-height: 50px; */
 	height: 100%;
 	font-size: 10px;
 	display: inline-block;
@@ -361,7 +360,7 @@ label.star:before {
 
 #nav-comprador #ul1 li a:hover {
 	border-radius: 30px;
-	background-color: #018a6e;
-	color: black;
+	background-color: #253341;
+	color: white;
 }
 
