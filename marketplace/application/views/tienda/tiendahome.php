@@ -12,7 +12,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 				</button>
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
+					<ul class="navbar-nav mr-auto" id="ul1">
 						<li class="nav-item active">
 							<a class="nav-link waves-effect" href="<?php echo site_url('tienda/mantCategoria') ?>">Categorias
 								<!-- Se crea un boton para ir a la vista de mantenimineto de categorias -->
