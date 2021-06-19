@@ -43,7 +43,6 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?></span>
-										
 									</a>
 									<hr>
 								<?php } ?>
