@@ -35,16 +35,17 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 						<li class="nav-item dropdown notifications-nav ">
 							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?> </span>
-								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
+								<span><i class="fas fa-bell" style="font-size: 27px;"></i></span>
 							</a>
-							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
+							<div  style="overflow: auto; max-height: 400px;  padding-left: 5px;" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink151">
 								<!-- Se crea un menu modal donde se muestran las notificaiones-->
 								<?php foreach ($notificaciones as $notificacion) { ?>
 									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
-										<span> <?php echo $notificacion['descripcion'] ?> </span>
-										<span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span>
+										<span> <?php echo $notificacion['descripcion'] ?></span>
+										
 									</a>
+									<hr>
 								<?php } ?>
 							</div>
 						</li>
