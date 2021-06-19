@@ -66,8 +66,9 @@ if ($error_message != null) {
     <br>
     <!-- form donde se pinta la ruleta -->
     <div style="text-align: center;">
-        <div id="main_panel">
-            <h2 style="left: 500px;" class="box-title">Ruleta de la suerte</h2>
+        <div id="main_panel" ">
+            <div style="position: relative; right: 70px;"><h2  class="box-title">Ruleta de la suerte</h2></div>
+            
             <canvas style="text-align: center;" id="canvas" width="600" height="600"></canvas>
         </div>
     </div>
