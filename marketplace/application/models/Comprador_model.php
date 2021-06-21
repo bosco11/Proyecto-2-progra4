@@ -7,7 +7,7 @@ class Comprador_model extends CI_Model
         parent::__construct();
     }
 
-    public function update_carrito($params, $id_producto, $id_user)
+    public function update_carrito($params, $id_producto, $id_user)//edita el tipo del carrito , si es deseo o si es carrito
     {
 
         $this->db->where('id_productos', $id_producto);
@@ -15,25 +15,25 @@ class Comprador_model extends CI_Model
         $this->db->update('tbl_carrito_deseos', $params);
     }
 
-    public function add_carrito($params)
+    public function add_carrito($params)//agrega al carrito_deseo con la letra C de carrio o D de deseo
     {
         $this->db->insert('tbl_carrito_deseos', $params);
         // return $this->db->insert_id();
     }
 
-    public function add_producto_compra($params)
+    public function add_producto_compra($params)//agrega a a tabla producto compra despues de realizar la compra para la factura
     {
         $this->db->insert('tbl_productos_compras', $params);
         // return $this->db->insert_id();
     }
 
-    public function add_compra($params)
+    public function add_compra($params)//agrega una compra
     {
         $this->db->insert('tbl_compras', $params);
         return $this->db->insert_id();
     }
 
-    function get_all_tiendas()
+    function get_all_tiendas() //trae todas las tiendas de base de datos que tengan menos de 10 denuncias
     {
         return $this->db->query("SELECT *
                                 FROM tbl_usuarios
@@ -42,27 +42,27 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    function get_all_productos()
+    function get_all_productos() //trae todos los productos
     {
         return $this->db->query("SELECT *
                                 FROM tbl_productos
                                 ")->result_array();
     }
 
-    function get_all_premios($id_usuario)
+    function get_all_premios($id_usuario) //trae todos los productos
     {
         return $this->db->query("SELECT * FROM tbl_premios WHERE tbl_premios.id_usuarios =$id_usuario and tbl_premios.estado = 'Activo'")->result_array();
     }
 
 
-    function get_all_galerias()
+    function get_all_galerias() //trae todas las fotos
     {
         return $this->db->query("SELECT *
                                 FROM tbl_galeria
                                 ")->result_array();
     }
 
-    function search_tiendas($data)
+    function search_tiendas($data) //trae todas las tiendas con la informacion que ingresa el usuario con menos de 10 denuncias
     {
         return $this->db->query("SELECT *
                                 FROM tbl_usuarios
@@ -72,7 +72,7 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    function search_categoriaT($data)
+    function search_categoriaT($data)//trae todas las tiendas , segun el combobox que selecciona el usuario de categorias con menos de 10 denuncias
     {
         return $this->db->query("SELECT tbl_usuarios.*
                                 FROM tbl_usuarios,tbl_productos,tbl_categorias
@@ -85,7 +85,7 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    function search_categoria($data)
+    function search_categoria($data)//trae todos los productos con la iformacion que el usuario ingreso
     {
         return $this->db->query("SELECT tbl_productos.*
                                 FROM tbl_usuarios,tbl_productos,tbl_categorias
@@ -98,7 +98,7 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
-    function search_carrito_deseo($id_user, $id_producto, $tipo_producto)
+    function search_carrito_deseo($id_user, $id_producto, $tipo_producto)//filtra todo lo del carrito o lo de la lista de deseo segun el usuario ingresado 
     {
         return $this->db->query("SELECT * FROM tbl_carrito_deseos 
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_user
@@ -106,7 +106,7 @@ class Comprador_model extends CI_Model
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->row_array();
     }
 
-    function get_all_carrito($id_usuario, $tipo_producto)
+    function get_all_carrito($id_usuario, $tipo_producto)//trae todo lo del carrito segun el usuario ingresado 
     {
         return $this->db->query("SELECT tbl_carrito_deseos.* FROM tbl_carrito_deseos, tbl_productos,tbl_usuarios
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
@@ -115,7 +115,7 @@ class Comprador_model extends CI_Model
                                 and tbl_usuarios.denuncias < 10
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
-    function get_all_carrito_deseo($id_usuario, $tipo_producto)
+    function get_all_carrito_deseo($id_usuario, $tipo_producto)//trae todos lo del carrito o lo de la lista de deseo segun el usuario ingresado 
     {
         return $this->db->query("SELECT tbl_carrito_deseos.*,tbl_productos.* FROM tbl_carrito_deseos, tbl_productos
                                 WHERE tbl_carrito_deseos.id_usuarios = $id_usuario
@@ -123,18 +123,18 @@ class Comprador_model extends CI_Model
                                 AND tbl_carrito_deseos.tipo_producto = '$tipo_producto'")->result_array();
     }
 
-    function get_direcciones($users_id)
+    function get_direcciones($users_id)//trae todas las direcciones de un usuario
     {
         return $this->db->query("SELECT tbl_direcciones.* FROM tbl_direcciones WHERE tbl_direcciones.id_usuarios = " . $users_id)->result_array();
     }
 
-    function get_all_pago($id_usuario)
+    function get_all_pago($id_usuario)//trae todos los metodos de pago de un usuario
     {
         return $this->db->query("SELECT * from tbl_formas_pago WHERE tbl_formas_pago.id_usuarios = $id_usuario")->result_array();
     }
 
 
-    public function get_pagoUnico($data)
+    public function get_pagoUnico($data)//trae un metodo de pago y comprueba que el cvv son iguales al de base de datos
     {
         $pagoExists = $this->get_informacion_pago($data['id_formas_pago']);
 
@@ -160,7 +160,7 @@ class Comprador_model extends CI_Model
         }
     }
 
-    function get_pagoUnicoTodo($id_pago)
+    function get_pagoUnicoTodo($id_pago)//trae todos los metodos de pago
     {
         return $this->db->query("SELECT * FROM tbl_formas_pago 
         WHERE tbl_formas_pago.id_formas_pago=$id_pago")->row_array();
@@ -169,18 +169,18 @@ class Comprador_model extends CI_Model
 
 
 
-    function get_pagoId_pago($id_pago)
+    function get_pagoId_pago($id_pago)//trae todos los metodos de pago
     {
         return $this->db->query("SELECT * FROM tbl_formas_pago 
         WHERE tbl_formas_pago.id_formas_pago=$id_pago ")->row_array();
     }
 
-    public function delete_carrito($id, $tipo_producto)
+    public function delete_carrito($id, $tipo_producto)//elimina de la tabla carrito_deseos por el id del producto y por el tipo
     {
         $this->db->delete('tbl_carrito_deseos', array('id_productos' => $id, 'tipo_producto' => $tipo_producto));
     }
 
-    function search_productoT($data)
+    function search_productoT($data)//filra por nombre que ingresa el usuario los producto
     {
         return $this->db->query("SELECT tbl_usuarios.*
                                 FROM tbl_usuarios,tbl_productos
@@ -192,25 +192,25 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_usuarios.nombre_real ASC")->result_array();
     }
 
-    public function notificaionesComprador($id)
+    public function notificaionesComprador($id)//trae todas las notificaciones del usuario que no se hayan visto
     {
         $query = $this->db->query("SELECT u.* FROM tbl_notificaciones u where u.id_usuarios = $id AND u.estado='N'");
         return $query->result_array();
     }
 
-    public function addNotificacionesTienda($params)
+    public function addNotificacionesTienda($params)//se agregan notificaciones
     {
         $this->db->insert('tbl_notificaciones', $params);
         return $this->db->insert_id();
     }
 
-    public function ocultarNotificacion($id)
+    public function ocultarNotificacion($id)//se les cambia el estado de las notificaciones
     {
         $this->db->where('id_notificaciones', $id);
         $this->db->update('tbl_notificaciones', array('estado' => 'S'));
     }
 
-    function search_producto($data)
+    function search_producto($data)//filtra por el nombre del produto que el usuario ingresa
     {
         return $this->db->query("SELECT tbl_productos.*
                                 FROM tbl_usuarios,tbl_productos
@@ -222,12 +222,12 @@ class Comprador_model extends CI_Model
                                 ORDER BY tbl_productos.descripcion ASC")->result_array();
     }
 
-    function get_all_categorias()
+    function get_all_categorias()//trae todas las categorias 
     {
         return $this->db->get('tbl_categorias')->result_array();
     }
 
-    function get_producto_id($prod_id)
+    function get_producto_id($prod_id)//trea el producto, las calificaciones, los usuarios y categorias con el id de un producto
     {
         return $this->db->query("SELECT p.*, ca.*, u.*,c.*
         FROM tbl_productos p 
@@ -236,19 +236,19 @@ class Comprador_model extends CI_Model
         join tbl_categorias c on c.id_categorias=p.id_categorias 
         WHERE p.id_productos = " . $prod_id)->row_array();
     }
-    function get_galerias($id)
+    function get_galerias($id)//trae todas las fotos de la galeria de un producto
     {
         return $this->db->query("SELECT *
                                 FROM tbl_galeria
                                 where tbl_galeria.id_productos= " . $id)->result_array();
     }
-    function get_calificaciones_productos($id)
+    function get_calificaciones_productos($id)//trae todas las calificaciones con el id de un producto
     {
         return $this->db->query("SELECT *
                                 FROM tbl_calificacion_productos
                                 where tbl_calificacion_productos.id_productos= " . $id)->result_array();
     }
-    function get_calificacion_producto_usuarioId($id_producto, $id_usuario)
+    function get_calificacion_producto_usuarioId($id_producto, $id_usuario)//trae todas las calificaciones con el id de un producto y un id de un usaurio
     {
         return $this->db->query("SELECT *
                                 FROM tbl_calificacion_productos
@@ -256,13 +256,13 @@ class Comprador_model extends CI_Model
                                 and tbl_calificacion_productos.id_usuarios=$id_usuario")->result_array();
     }
 
-    public function calificarProducto($params)
+    public function calificarProducto($params)//se inserta la calificacion de un producto
     {
         $this->db->insert('tbl_calificacion_productos', $params);
         return $this->db->insert_id();
     }
 
-    public function actualizarCalificarProducto($params, $id_producto, $id_user)
+    public function actualizarCalificarProducto($params, $id_producto, $id_user)//se actualiza la calificacion de un producto
     {
 
         $this->db->where('id_productos', $id_producto);
@@ -270,13 +270,13 @@ class Comprador_model extends CI_Model
         $this->db->update('tbl_calificacion_productos', $params);
     }
 
-    public function editProducto($params, $id)
+    public function editProducto($params, $id)//se edita el producto
     {
         $this->db->where('id_productos', $id);
         $this->db->update('tbl_productos', $params);
     }
 
-    public function get_productoUnico($id)
+    public function get_productoUnico($id)//se trae un producto en especifico con el id del producto
     {
         return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
     }
@@ -286,13 +286,13 @@ class Comprador_model extends CI_Model
         return $this->db->query("SELECT * FROM tbl_productos WHERE tbl_productos.id_productos=$id")->row_array();
     }
 
-    public function editMonto($params, $id_pago)
+    public function editMonto($params, $id_pago)//edita el monto del metodo de pago
     {
         $this->db->where('id_formas_pago', $id_pago);
         $this->db->update('tbl_formas_pago', $params);
     }
 
-    function get_productos_mas_vendidos()
+    function get_productos_mas_vendidos()//se trae los 3 productos mas vendidos segun la tabla productos_compras, las cuales esos productos las tiendas tiene que tener menos de 10 denuncias
     {
         return $this->db->query("SELECT  tbl_productos_compras.id_productos, SUM(tbl_productos_compras.cantidades)
                                 FROM tbl_productos_compras,tbl_usuarios,tbl_productos
@@ -303,18 +303,18 @@ class Comprador_model extends CI_Model
                                 ORDER BY SUM(tbl_productos_compras.cantidades) DESC
                                 LIMIT 3")->result_array();
     }
-    public function insertPremio($params)
+    public function insertPremio($params)//inserta un premio
     {
         $this->db->insert('tbl_premios', $params);
         return $this->db->insert_id();
     }
-    public function getCompra($id)
+    public function getCompra($id)//trae la compra
     {
         $query = $this->db->query("SELECT u.*,c.*,d.*,s.*,t.* FROM tbl_compras u JOIN tbl_usuarios c ON c.id_usuarios=u.id_usuarios JOIN tbl_direcciones d ON d.id_direcciones=u.id_direcciones JOIN tbl_formas_pago s ON s.id_formas_pago=u.id_formas_pago left JOIN tbl_premios t ON t.id_premios = u.id_premios  where u.id_compras = $id");
         return $query->row_array();
     }
 
-    public function getCompras($id)
+    public function getCompras($id)//trae las compras realizadas
     {
         $query = $this->db->query("SELECT u.* FROM tbl_compras u where u.id_usuarios = $id");
         return $query->result_array();
@@ -325,13 +325,13 @@ class Comprador_model extends CI_Model
         return $query->result_array();
     }
 
-    public function editPremio($params, $id_premio)
+    public function editPremio($params, $id_premio)//edita el premio
     {
         $this->db->where('id_premios', $id_premio);
         $this->db->update('tbl_premios', $params);
     }
 
-    public function get_Count_denuncias()
+    public function get_Count_denuncias()//cuenta las denuncias que tiene las tiendas
     {
         $query = $this->db->query("SELECT COUNT(*) as cantidad,tbl_denuncias.tienda_id_usuarios FROM tbl_denuncias GROUP BY tbl_denuncias.tienda_id_usuarios");
         return $query->result_array();
