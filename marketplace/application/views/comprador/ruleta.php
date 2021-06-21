@@ -97,7 +97,7 @@ if ($error_message != null) {
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="hidden" value="" id="premio" name="premio">                 >
+                    <input type="hidden" value="" id="premio" name="premio">                 
                     <button type="submit" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
