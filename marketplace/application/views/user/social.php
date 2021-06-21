@@ -40,6 +40,7 @@ if (validation_errors() !== "") {
     <br>
     <h2  style="text-align: center;" class="box-title">Otras configuraciones del usuario</h2>
     <br>
+    <?php if($this->session->userdata['logged_in']['tipo']=='Comprador'){?>
     <div id="pago">
         <h2 id="user">Formas de pago</h2>
         <!-- form para agregar un metodo de pago -->
@@ -52,12 +53,12 @@ if (validation_errors() !== "") {
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationServer023">Numero tarjeta</label>
-                <input type="number" name="txt_numero" id="txt_numero" placeholder="Numero tarjeta" class="cajatexto2" maxlength="8" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_numero') ? $this->input->post('txt_numero') : $pagos2['numero_tarjeta']); ?>" <?php } ?> required>
+                <input type="text" name="txt_numero" id="txt_numero" placeholder="Numero tarjeta" class="cajatexto2" maxlength="16" <?php if ($pagos2 != null) { ?> value="<?php echo ($this->input->post('txt_numero') ? $this->input->post('txt_numero') : $pagos2['numero_tarjeta']); ?>" <?php } ?> required>
 
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationServer023">CVV</label><br>
-                <input type="password" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" required class="cajatexto2" <?php if ($pagos2 != null) { ?> value="" <?php } ?> required>
+                <input type="text" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" required class="cajatexto2" <?php if ($pagos2 != null) { ?> value="" <?php } ?> required>
 
             </div>
             <div class="col-md-4 mb-3">
@@ -181,6 +182,7 @@ if (validation_errors() !== "") {
 
     <br>
     <br>
+    <?php }?>
     <div id="Redes">
         <h2 id="user">Redes sociales</h2>
         <!-- form para el metodo de agregar redes sociales -->
@@ -227,3 +229,20 @@ if (validation_errors() !== "") {
         </div>
     </div>
 </div>
+<script>
+	window.addEventListener('load', miFuncionLoad, false);
+
+	function miFuncionLoad() {		
+		var nrc = document.getElementById('txt_codigo');
+		nrc.addEventListener('keyup', validarNumero, false);
+		var nrc = document.getElementById('txt_numero');
+		nrc.addEventListener('keyup', validarNumero, false);	
+	}
+
+	function validarNumero() {
+		var val = document.getElementById(this.id).value;
+		if (isNaN(document.getElementById(this.id).value)) {
+			this.value = val.substring(0, val.length - 1);
+		}
+	}
+</script>

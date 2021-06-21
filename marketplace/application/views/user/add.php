@@ -43,27 +43,27 @@ if (validation_errors() !== "") {
 	</div>
 	<br>
 	<?php echo form_open_multipart('user/agregarUsuario'); ?>
-	<div >
-	<h2  style="text-align: center;" class="box-title">Agregando Usuario</h2>
+	<div>
+		<h2 style="text-align: center;" class="box-title">Agregando Usuario</h2>
 		<div id="div1">
 			<label for="txt_usuario" class="control-label"><span class="text-danger">* </span>Usuario:</label>
 			<div class="form-group">
-				<input type="text" name="txt_usuario" value="<?php echo $this->input->post('txt_usuario'); ?>" class="cajatexto" id="txt_usuario" />
+				<input type="text" name="txt_usuario" value="<?php echo $this->input->post('txt_usuario'); ?>" class="cajatexto" id="txt_usuario" maxlength="50" />
 				<span class="text-danger"><?php echo form_error('txt_usuario'); ?></span>
 			</div>
 			<label for="txt_clave" class="control-label"><span class="text-danger">* </span>Contraseña:</label>
 			<div class="form-group">
-				<input type="password" name="txt_clave" value="<?php echo $this->input->post('txt_clave'); ?>" class="cajatexto" id="txt_clave" />
+				<input type="password" name="txt_clave" value="<?php echo $this->input->post('txt_clave'); ?>" class="cajatexto" id="txt_clave" maxlength="200" />
 				<span class="text-danger"><?php echo form_error('txt_clave'); ?></span>
 			</div>
 			<label for="txt_nombre" class="control-label"><span class="text-danger">* </span>Nombre Real:</label>
 			<div class="form-group">
-				<input type="text" name="txt_nombre" value="<?php echo $this->input->post('txt_nombre'); ?>" class="cajatexto" id="txt_nombre" />
+				<input type="text" name="txt_nombre" value="<?php echo $this->input->post('txt_nombre'); ?>" class="cajatexto" id="txt_nombre" maxlength="100" />
 				<span class="text-danger"><?php echo form_error('txt_nombre'); ?></span>
 			</div>
 			<label for="txt_cedula" class="control-label"><span class="text-danger">* </span>Cedula:</label>
 			<div class="form-group">
-				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" />
+				<input type="text" name="txt_cedula" value="<?php echo $this->input->post('txt_cedula'); ?>" class="cajatexto" id="txt_cedula" maxlength="12" />
 				<span class="text-danger"><?php echo form_error('txt_cedula'); ?></span>
 			</div>
 		</div>
@@ -71,12 +71,12 @@ if (validation_errors() !== "") {
 		<div id="div2">
 			<label for="txt_telefono" class="control-label"><span class="text-danger">* </span>Telefono:</label>
 			<div class="form-group">
-				<input type="number" name="txt_telefono" value="<?php echo $this->input->post('txt_telefono'); ?>" class="cajatexto" id="txt_telefono" />
+				<input type="text" name="txt_telefono" value="<?php echo $this->input->post('txt_telefono'); ?>" class="cajatexto" id="txt_telefono" maxlength="14" />
 				<span class="text-danger"><?php echo form_error('txt_telefono'); ?></span>
 			</div>
 			<label for="txt_correo" class="control-label"><span class="text-danger">* </span>Correo:</label>
 			<div class="form-group">
-				<input type="email" name="txt_correo" value="<?php echo $this->input->post('txt_correo'); ?>" class="cajatexto" id="txt_correo" />
+				<input type="email" name="txt_correo" value="<?php echo $this->input->post('txt_correo'); ?>" class="cajatexto" id="txt_correo" maxlength="45" />
 				<span class="text-danger"><?php echo form_error('txt_correo'); ?></span>
 			</div>
 			<label for="cmb_tipo" class="control-label"><span class="text-danger">* </span>Tipo usuario:</label>
@@ -88,12 +88,12 @@ if (validation_errors() !== "") {
 			</div>
 			<label for="txt_pais" class="control-label"><span class="text-danger">* </span>Pais:</label>
 			<div class="form-group">
-				<input type="text" name="txt_pais" value="<?php echo $this->input->post('txt_pais'); ?>" class="cajatexto" id="txt_pais" />
+				<input type="text" name="txt_pais" value="<?php echo $this->input->post('txt_pais'); ?>" class="cajatexto" id="txt_pais" maxlength="100"/>
 				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
 			</div>
 			<label for="txt_direccion" class="control-label"><span class="text-danger">* </span>Direccion:</label>
 			<div class="form-group">
-				<input type="text" name="txt_direccion" value="<?php echo $this->input->post('txt_direccion'); ?>" class="cajatexto" id="txt_direccion" />
+				<input type="text" name="txt_direccion" value="<?php echo $this->input->post('txt_direccion'); ?>" class="cajatexto" id="txt_direccion" maxlength="200"/>
 				<span class="text-danger"><?php echo form_error('txt_pais'); ?></span>
 			</div>
 		</div>
@@ -109,3 +109,20 @@ if (validation_errors() !== "") {
 	</div>
 
 </div>
+<script>
+	window.addEventListener('load', miFuncionLoad, false);
+
+	function miFuncionLoad() {		
+		var nrc = document.getElementById('txt_cedula');
+		nrc.addEventListener('keyup', validarNumero, false);
+		var nrc = document.getElementById('txt_telefono');
+		nrc.addEventListener('keyup', validarNumero, false);	
+	}
+
+	function validarNumero() {
+		var val = document.getElementById(this.id).value;
+		if (isNaN(document.getElementById(this.id).value)) {
+			this.value = val.substring(0, val.length - 1);
+		}
+	}
+</script>
