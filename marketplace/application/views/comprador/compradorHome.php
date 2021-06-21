@@ -614,20 +614,9 @@
 			let value = e.target.value;
 			e.target.value = value.replace(/[^A-Z\d-]/g, "");
 		});
-
-
-
-		// const selectElement = document.querySelector('#cmb_boni');
-
-		// selectElement.addEventListener('change', (event) => {
-		// 	const resultado = document.querySelector('#boni');
-		// 	resultado.textContent = 'Te gusta el sabor ${event.target.value}';
-		// });
 	}
 
 	function ShowSelected() {
-		/* Para obtener el valor */
-
 
 		/* Para obtener el texto */
 		var combo = document.getElementById("cmb_boni");
@@ -637,7 +626,7 @@
 
 
 
-		if (selected == 'Envío') {
+		if (selected == 'Envío') { //para hacer las rebajas de los premios
 			document.getElementById("precio").innerHTML = "$" + <?php echo $precio ?>;
 			document.getElementById("envio").innerHTML = "$" + 0;
 			document.getElementById("total").innerHTML = "$" + <?php echo $precio ?>;
@@ -657,7 +646,7 @@
 	}
 
 
-	function validar() {
+	function validar() { //para validar que no se pueda comprar sin poner el cvv, direccion y metodo de pago
 		if (esVacio("cmb_metodo") || esVacio("cmb_direccion") || esCVV('cvv')) {
 			document.getElementById('pagar').disabled = true; //boton disable   
 		} else {
