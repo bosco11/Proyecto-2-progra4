@@ -60,7 +60,7 @@
 				<!-- Right -->
 				<ul class="navbar-nav nav-flex-icons ml_auto">
 					<?php if ($seccion == TRUE) { ?>
-						<li class="nav-item">
+						<li class="nav-item"> <!--  trae las lista de deseos del usuario que esta logueado-->
 							<div class="dropdown">
 								<button type="button" class="btn btn-danger" data-toggle="dropdown">
 									<i class="fa fa-heart" aria-hidden="true">
@@ -122,7 +122,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item"><!--  trae las lista de carrito del usuario que esta logueado-->
 							<div class="dropdown">
 								<button type="button" class="btn btn-info" data-toggle="dropdown">
 									<i class="fa fa-shopping-cart" aria-hidden="true">
@@ -209,7 +209,7 @@
 							</div>
 						</li>
 
-						<li class="nav-item dropdown notifications-nav">
+						<li class="nav-item dropdown notifications-nav"><!--  trae las lista de notificaciones del usuario que esta logueado, de los cambios de los productos de la lista de deseos-->
 							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?></span>
 								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
@@ -219,7 +219,6 @@
 									<a class="dropdown-item" href="<?php echo site_url('/tienda/ocultarNotificacion/' . $notificacion['id_notificaciones'] . "/" . $notificacion['id_productos']) ?>">
 										<i class="far fa-bell mr-2" aria-hidden="true"></i>
 										<span> <?php echo $notificacion['descripcion'] ?> </span>
-										<!-- <span class="float-right"><i class="far fa-eye-slash" aria-hidden="true"></i></span> -->
 									</a>
 									<hr>
 								<?php } ?>
@@ -252,7 +251,7 @@
 	<br><br><br><br>
 	<!-- Navbar -->
 
-	<!-- Modal -->
+	<!-- Modal para ejercer la compra -->
 	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 
@@ -261,7 +260,6 @@
 
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel">Realizar Pago</h5>
-					<!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 				</div>
 
 				<div class="modal-body" style="text-align: center;">
@@ -273,7 +271,7 @@
 					<h6>Método de pago:</h6>
 					<select name="cmb_metodo" id="cmb_metodo" value="cmb_metodo" class="form-select form-select-sm " aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($pagos)) { ?>
+						<?php if (!empty($pagos)) { ?><!--  trae las lista de las formas de pago-->
 							<?php foreach ($pagos as $pag) { ?>
 								<option value="<?php echo $pag['id_formas_pago'] ?>">Numero Tarjeta:<?php echo $pag['numero_tarjeta'] ?> - Saldo:<?php echo $pag['saldo'] ?></option>
 							<?php } ?>
@@ -283,7 +281,7 @@
 					<h6>Dirección de envio:</h6>
 					<select name="cmb_direccion" id="cmb_direccion" value="cmb_direccion" class="form-select form-select-sm " aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($direcciones)) { ?>
+						<?php if (!empty($direcciones)) { ?><!--  trae las lista dedirecciones del usuario logueado-->
 							<?php foreach ($direcciones as $dir) { ?>
 								<option value="<?php echo $dir['id_direcciones'] ?>">Pais:<?php echo $dir['pais_direccion'] ?> - Dirección:<?php echo $dir['observaciones'] ?></option>
 							<?php } ?>
@@ -293,7 +291,7 @@
 					<h6>Premios adquiridos:</h6>
 					<select name="cmb_boni" id="cmb_boni" onchange="ShowSelected();" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($premios)) { ?>
+						<?php if (!empty($premios)) { ?><!--  trae las lista de premios del usuario logueado-->
 							<?php foreach ($premios as $premio) { ?>
 								<option value="<?php echo $premio['id_premios'] ?>"><?php echo $premio['descripcion'] ?></option>
 							<?php } ?>
@@ -334,7 +332,7 @@
 	</div>
 	<!-- Termina Modal -->
 
-	<!-- Modal -->
+	<!-- Modal del historial de las compras del usuario logueado-->
 	<div class="modal fade" data-bs-backdrop="static" id="compras" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 
@@ -401,7 +399,7 @@
 					<br>
 					<div class="row align-items ">
 						<?php $TOP = 0;
-						if (!empty($productosMasVendidos)) { ?>
+						if (!empty($productosMasVendidos)) { ?><!--  trae las lista de los productos mas vendidos-->
 							<?php foreach ($productosMasVendidos as $pmv) { ?>
 								<?php foreach ($pro as $p) { ?>
 									<?php if ($pmv['id_productos'] == $p['id_productos']) {
@@ -470,7 +468,7 @@
 		</div>
 	</div>
 	<!--Navbar-->
-	<div id="main_panel">
+	<div id="main_panel"><!--  Aqui estan los filtros donde el usaurio puede filtrar por producto , por tienda y por categoria-->
 		<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
 
 			<span class="navbar-brand">Filtros:</span>

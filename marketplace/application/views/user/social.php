@@ -57,7 +57,7 @@ if (validation_errors() !== "") {
             </div>
             <div class="col-md-4 mb-3">
                 <label for="validationServer023">CVV</label><br>
-                <input type="number" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" class="cajatexto2" <?php if ($pagos2 != null) { ?> value="" <?php } ?> required>
+                <input type="password" name="txt_codigo" id="txt_codigo" placeholder="Codigo de seguridad" maxlength="3" required class="cajatexto2" <?php if ($pagos2 != null) { ?> value="" <?php } ?> required>
 
             </div>
             <div class="col-md-4 mb-3">
