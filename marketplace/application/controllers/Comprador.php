@@ -17,7 +17,7 @@ class Comprador extends CI_Controller
 		$this->load->model('User_model');
 	}
 
-	//Muestra la vista del Login
+	//Muestra la vista compradorHome
 	public function index($tienda_data = array())
 	{
 		$data['productos'] = $this->Comprador_model->get_all_productos();
@@ -29,7 +29,7 @@ class Comprador extends CI_Controller
 
 
 		if (isset($this->session->userdata['logged_in'])) {
-			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
+			if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {//se cargan estas listas si esta logueado como comprador
 				$data['premios']= $this->Comprador_model->get_all_premios($this->session->userdata['logged_in']['users_id']);
 				$data['notificaciones'] = $this->Comprador_model->notificaionesComprador($this->session->userdata['logged_in']['users_id']);
 				$data['direcciones'] = $this->Comprador_model->get_direcciones($this->session->userdata['logged_in']['users_id']);
@@ -50,7 +50,7 @@ class Comprador extends CI_Controller
 		if ($tienda_data == null) {
 			$data['tiendas'] = $this->Comprador_model->get_all_tiendas();
 			$data['message_display'] = null;
-		} else {
+		} else {//traer las tiendas con filtros,ya sea por categorias por producto en especifico o tienda
 			if ($this->input->post('txt_tienda') != "") {
 				$data['tiendas'] = $tienda_data;
 				$data['message_display'] = null;
@@ -68,22 +68,21 @@ class Comprador extends CI_Controller
 			}
 		}
 
-		$data['_view'] = 'comprador/compradorHome';
+		$data['_view'] = 'comprador/compradorHome';//llama a la vista  
 		$this->load->view('layouts/main', $data);
-		// $this->load_data_view('comprador/compradorHome');
 	}
 	function compradorHome()
 	{
 		$this->index();
 	}
 
-	function ocultarNotificacion($id)
+	function ocultarNotificacion($id)//le cambia el estado a las notificaciones
 	{
 		$this->Comprador_model->ocultarNotificacion($id);
 		$this->index();
 	}
 
-	function search()
+	function search()//realiza los filtros dependiendo cual utiliza el usuario
 	{
 
 		if ($this->input->post('txt_tienda') != "") {
@@ -119,7 +118,7 @@ class Comprador extends CI_Controller
 		$this->load->view('layouts/main', $data);
 	}
 
-	function addCarritoDeseo($id)
+	function addCarritoDeseo($id)//agrega los productos a la lista de deseos o a la lista del carrito
 	{
 
 		if ($this->input->post('btn_carrito')) {
@@ -244,26 +243,26 @@ class Comprador extends CI_Controller
 
 	function process($id)
 	{
-		if ($this->input->post('btn_eliminar_carrito')) {
+		if ($this->input->post('btn_eliminar_carrito')) {//se elimina del carrito
 			$this->deleteCarrito($id, 'C');
-		} else if ($this->input->post('btn_mas')) {
+		} else if ($this->input->post('btn_mas')) {//aumenta la cantidad del producto del carrito
 			$this->masCarrito($id);
-		} else if ($this->input->post('btn_menos')) {
+		} else if ($this->input->post('btn_menos')) {//disminuye la cantidad del producto del carrito
 			$this->menosCarrito($id);
-		} else if ($this->input->post('btn_eliminar_deseo')) {
+		} else if ($this->input->post('btn_eliminar_deseo')) {//se elimina de lista de deseos
 			$this->deleteCarrito($id, 'D');
 		}
 	}
 
 
 
-	function deleteCarrito($id, $tipo_producto)
+	function deleteCarrito($id, $tipo_producto)//elimina del carrito o de lista de deseo
 	{
 		$this->Comprador_model->delete_carrito($id, $tipo_producto);
 		$this->index();
 	}
 
-	function menosCarrito($id)
+	function menosCarrito($id)//disminuye la cantidad del producto del carrito
 	{
 		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, 'C');
 		$suma = 0;
@@ -278,7 +277,7 @@ class Comprador extends CI_Controller
 		$this->index();
 	}
 
-	function masCarrito($id)
+	function masCarrito($id)//aumenta la cantidad del producto del carrito
 	{
 		$suma2 = 0;
 		$result = $this->Comprador_model->search_carrito_deseo($this->session->userdata['logged_in']['users_id'], $id, 'C');
@@ -313,7 +312,7 @@ class Comprador extends CI_Controller
 		$data['_view'] = 'reportes/factura';
 		$this->load->view('layouts/main', $data);
 	}
-	function comprarProductos()
+	function comprarProductos()//donde se realiza la compra de productos del carrito
 	{
 		$valor1 = 0;
 		$valor2 = 0;
@@ -323,7 +322,7 @@ class Comprador extends CI_Controller
 			'id_formas_pago' => $this->input->post('cmb_metodo'),
 			'cvv' => $this->input->post('cvv')
 		);
-		$cvv = $this->Comprador_model->get_pagoUnico($dataa);
+		$cvv = $this->Comprador_model->get_pagoUnico($dataa);//se comprueba que el cvv sea el de la tarjeta 
 
 
 
@@ -334,7 +333,7 @@ class Comprador extends CI_Controller
 			if ($saldo > 0) {
 
 				$boni =$this->input->post('cmb_boni');
-				if($boni==0 || $boni=='')
+				if($boni==0 || $boni=='')//comprueba si selecciono un descuneto o envio gratis
 				{
 					$params = array(
 						'id_usuarios' => $this->session->userdata['logged_in']['users_id'],
@@ -362,7 +361,7 @@ class Comprador extends CI_Controller
 					$this->Comprador_model->editPremio($params7 ,$boni);
 				}
 				
-				$id_compra = $this->Comprador_model->add_compra($params);
+				$id_compra = $this->Comprador_model->add_compra($params);//agrega la compra
 
 
 
@@ -375,15 +374,15 @@ class Comprador extends CI_Controller
 					foreach ($producto as $r) {
 						if ($r['id_productos'] == $c['id_productos']) {
 							$valor1 = $r['cantidad'] - $c['cantidad'];
-							if ($valor1 >= 0) {
+							if ($valor1 >= 0) {//verifica que si haya cantidad de los productos en base de datos antes de realizar la compra
 								$params = array(
 									'cantidad' => $valor1,
 								);
-								$this->Comprador_model->editProducto($params, $r['id_productos']);
+								$this->Comprador_model->editProducto($params, $r['id_productos']);//les reduce la cantidad(stock)
 							}
 
 
-							$this->Comprador_model->delete_carrito($r['id_productos'], 'C');
+							$this->Comprador_model->delete_carrito($r['id_productos'], 'C');//los elimina del carrito una vez comprados
 
 
 							$params2 = array(
@@ -400,7 +399,7 @@ class Comprador extends CI_Controller
 								'estado' => "N",
 								'id_productos' => $r['id_productos']
 							);
-							$this->Comprador_model->addNotificacionesTienda($params3);
+							$this->Comprador_model->addNotificacionesTienda($params3);//notifica a las tiendas de los productos comprados
 						}
 					}
 				}
