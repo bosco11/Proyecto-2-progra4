@@ -139,8 +139,8 @@ if (isset($error_message)) {
                                         <tr align="center">
                                             <td>Descripcion </td>
                                             <td>Cantidad disponible</td>
-                                            <td>Costo envio</td>
-                                            <td>Precio</td>
+                                            <td>($)Costo envio</td>
+                                            <td>($)Precio del producto(Unidad)</td>
                                             <td>Fecha publicacion</td>
                                             <td>Categoria</td>
                                             <td>Tiempo de entrega</td>

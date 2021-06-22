@@ -41,8 +41,8 @@
                             <td>Fecha publicacion</td>
                             <td>Categoria</td>
                             <td>Cantidad adquirida</td>
-                            <td>Costo envio</td>
-                            <td>Precio del producto(Unidad)</td>
+                            <td>($)Costo envio</td>
+                            <td>($)Precio del producto(Unidad)</td>
                             <td>Tienda</td>
                         </tr>
                     </thead>
@@ -64,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-            <h3>Precio total:$ <?php echo $compra['precio_total'] ?></h3>
+            <h3>Precio total: $ <?php echo $compra['precio_total'] ?></h3>
         </div>
     </div>
 

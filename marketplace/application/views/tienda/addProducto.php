@@ -38,12 +38,12 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
                     <input type="number" name="txt_cantidad" value="<?php echo $this->input->post('txt_cantidad'); ?>" class="cajatexto" id="txt_cantidad" />
 
                 </div>
-                <label for="txt_costoEnvio" class="control-label"><span class="text-danger">* </span>Costo de Envio:</label>
+                <label for="txt_costoEnvio" class="control-label"><span class="text-danger">* </span>Costo de Envio:($)</label>
                 <div class="form-group">
                     <input type="number" name="txt_costoEnvio" value="<?php echo $this->input->post('txt_costoEnvio'); ?>" class="cajatexto" id="txt_costoEnvio" />
 
                 </div>
-                <label for="txt_precio" class="control-label"><span class="text-danger">* </span>Precio:</label>
+                <label for="txt_precio" class="control-label"><span class="text-danger">* </span>Precio:($)</label>
                 <div class="form-group">
                     <input type="number" name="txt_precio" value="<?php echo $this->input->post('txt_precio'); ?>" class="cajatexto" id="txt_precio" />
 

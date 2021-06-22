@@ -36,8 +36,8 @@
                                 <td>Fecha publicacion</td>
                                 <td>Categoria</td>
                                 <td>Cantidad disponible</td>
-                                <td>Costo envio</td>
-                                <td>Precio del producto(Unidad)</td>
+                                <td>($)Costo envio</td>
+                                <td>($)Precio del producto(Unidad)</td>
                             </tr>
                         </thead>
                         <tbody id="tbTable">

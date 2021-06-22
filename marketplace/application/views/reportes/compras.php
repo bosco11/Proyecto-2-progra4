@@ -38,8 +38,8 @@
                             <td>Fecha compra</td>
                             <td>Categoria</td>
                             <td>Unidades compradas</td>
-                            <td>Costo envio</td>
-                            <td>Precio del producto(Unidad)</td>
+                            <td>($)Costo envio</td>
+                            <td>($)Precio del producto(Unidad)</td>
                         </tr>
                     </thead>
                     <tbody id="tbTable">
@@ -84,7 +84,7 @@
                     array_push($productosGrafico, array("id_productos" => $pro['id_productos'], "descripcion" => $pro['descripcion'], "cantidades" => $cantidadProductos));
                 }
             }
-            echo "<h3>Precio Total : " . $precioTotal . "</h3>";
+            echo "<h3>Precio Total : $" . $precioTotal . "</h3>";
             ?>
             <hr>
             <script type="text/javascript"> // Se crea un grafico con google.charts con el calculo de cantidad de compras por producto.
