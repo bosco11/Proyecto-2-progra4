@@ -10,9 +10,10 @@
         <?php echo form_close(); ?>
         <div class="nav-item">
             <?php echo form_open('tienda/buscarProductosReportesOfertas', "class=\"d-flex\"") ?><!-- Se crea un form para filtrar los prudctos por rango de fecha, precio o categoria -->
-            <input class="form-control me-2" type="date" id="FechaInicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
-            <input class="form-control me-2" type="date" id="FechaFinal" name="FechaFinal" placeholder="Fecha Final" aria-label="Fecha Final">
-            <input class="form-control me-2" type="number" id="precio" name="precio" placeholder="Precio Maximo" aria-label="Precio Maximo">
+            <input class="form-control me-2" type="date" id="FechaInicial" title="Fecha Inicial" name="FechaInicial" placeholder="Fecha Inicial" aria-label="Fecha Inicial">
+            <input class="form-control me-2" type="date" id="FechaFinal" name="FechaFinal" title="Fecha Final" placeholder="Fecha Final" aria-label="Fecha Final">
+            <label for="precio" class="precio"><h3 class="text-danger">*</h3></label>
+            <input class="form-control me-2" type="number" id="precio" name="precio" placeholder="($)Precio Maximo" aria-label="Precio Maximo">
             <select name="cmb_categoria" id="cmb_categoria" variant="primary" aria-label=".form-select-sm example" class="form-select me-2">
                 <option selected>Seleccionar categoría</option>
                 <?php foreach ($categorias as $cate) { ?> <!-- Se carga un combobox con todas las categorias -->
@@ -28,7 +29,7 @@
         <h5><?php if ($categoria != null) echo " Categorias: $categoria";
             if ($fechaIni != null) echo " Fecha Inicial: $fechaIni";
             if ($fechaFin != null) echo " Fecha Final: $fechaFin";
-            if ($precio != null) echo " Precio maximo: $precio"; ?></h5>
+            if ($precio != null) echo " Precio maximo: $$precio"; ?></h5>
     </div>
     <hr>
     <div style="background-color: white; height: 1000px;" class="box-header-imprimir" id="ReporteSuscripciones">
