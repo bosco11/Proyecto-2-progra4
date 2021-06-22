@@ -36,7 +36,7 @@
                             <td>Descripcion </td>
                             <td>Fecha compra</td>
                             <td>Categoria</td>
-                            <td>Cantidad de vendido</td>
+                            <td>Cantidad vendida</td>
                             <td>($)Costo envio</td>
                             <td>($)Precio del producto(Unidad)</td>
                         </tr>
