@@ -240,7 +240,7 @@ class Tienda extends CI_Controller
 			$desc = null;
 		}
 		if ($perfil == null) {
-			$this->load_data_view('tienda/tiendaHome', $id, $cate, $desc);
+			$this->load_data_view('tienda/tiendahome', $id, $cate, $desc);
 		} else {
 			$this->perfiltienda($id, $cate, $desc);
 		}
