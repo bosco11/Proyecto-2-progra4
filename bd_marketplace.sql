@@ -33,7 +33,7 @@ CREATE TABLE `tbl_calificacion_productos` (
   `comentarios` varchar(300) DEFAULT NULL,
   `respuetas` varchar(300) DEFAULT NULL,
   `id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ CREATE TABLE `tbl_calificacion_tienda` (
   `calificacion` bigint NOT NULL,
   `tienda_id_usuarios` bigint NOT NULL,
   `comprador_id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE `tbl_carrito_deseos` (
   `id_productos` bigint NOT NULL,
   `tipo_producto` varchar(45) NOT NULL,
   `cantidad` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -69,7 +69,7 @@ CREATE TABLE `tbl_carrito_deseos` (
 CREATE TABLE `tbl_categorias` (
   `id_categorias` bigint NOT NULL,
   `categorias` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -85,7 +85,7 @@ CREATE TABLE `tbl_compras` (
   `precio_total` float NOT NULL,
   `id_direcciones` bigint NOT NULL,
   `id_premios` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -96,7 +96,7 @@ CREATE TABLE `tbl_compras` (
 CREATE TABLE `tbl_denuncias` (
   `tienda_id_usuarios` bigint NOT NULL,
   `comprador_id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -112,7 +112,7 @@ CREATE TABLE `tbl_direcciones` (
   `codigo_postal` varchar(100) NOT NULL,
   `observaciones` varchar(300) NOT NULL,
   `id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,7 @@ CREATE TABLE `tbl_formas_pago` (
   `fecha_vencimiento` date NOT NULL,
   `saldo` float NOT NULL,
   `id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE `tbl_galeria` (
   `id_galeria` bigint NOT NULL,
   `imagen_producto` varchar(200) NOT NULL,
   `id_productos` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -154,7 +154,7 @@ CREATE TABLE `tbl_notificaciones` (
   `id_usuarios` bigint NOT NULL,
   `estado` varchar(1) NOT NULL,
   `id_productos` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -167,7 +167,7 @@ CREATE TABLE `tbl_premios` (
   `descripcion` varchar(45) NOT NULL,
   `estado` varchar(45) NOT NULL,
   `id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -186,7 +186,7 @@ CREATE TABLE `tbl_productos` (
   `id_usuarios` bigint NOT NULL,
   `id_categorias` bigint NOT NULL,
   `cantidad` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -198,7 +198,7 @@ CREATE TABLE `tbl_productos_compras` (
   `id_productos` bigint NOT NULL,
   `id_compras` bigint NOT NULL,
   `cantidades` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -211,7 +211,7 @@ CREATE TABLE `tbl_redes_sociales` (
   `red_social` varchar(64) NOT NULL,
   `nombre_usuario` varchar(150) NOT NULL,
   `id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -222,7 +222,7 @@ CREATE TABLE `tbl_redes_sociales` (
 CREATE TABLE `tbl_suscriptores` (
   `tienda_id_usuarios` bigint NOT NULL,
   `comprador_id_usuarios` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
 
@@ -245,7 +245,7 @@ CREATE TABLE `tbl_usuarios` (
   `fecha_giros` date DEFAULT NULL,
   `cantidad_giros` bigint DEFAULT NULL,
   `denuncias` bigint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Índices para tablas volcadas
