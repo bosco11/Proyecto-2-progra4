@@ -18,7 +18,7 @@ class Tienda extends CI_Controller
 
 	public function index() //Metodo para principal creado para llamar a la funcion que carga la vista principal, tiendaHome
 	{
-		$this->load_data_view('tienda/tiendaHome');
+		$this->load_data_view('tienda/tiendahome');
 	}
 	function tiendaHome() //Metodo para principal creado para llamar a la funcion que carga la vista principal, tiendaHome
 	{

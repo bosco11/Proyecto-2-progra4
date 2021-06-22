@@ -85,7 +85,7 @@ class Auth extends CI_Controller
 						if ($this->session->userdata['logged_in']['tipo'] == 'Comprador') {
 							redirect('comprador/compradorHome', 'refresh');
 						} else {
-							redirect('tienda/tiendaHome', 'refresh');
+							redirect('tienda/tiendahome', 'refresh');
 						}
 					} else {
 						$data = array(
