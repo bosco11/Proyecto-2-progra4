@@ -28,8 +28,7 @@
             <h5>Fecha compra: <?php echo $compra['fecha'] ?></h5>
 
             <?php if (isset($compra['id_premios'])) { ?>
-                <h5 align="center">Premio seleccionado</h5>
-                <h6 align="center"><?php echo $compra['descripcion'] ?></h6>
+                <h5 >Premio seleccionado: <?php echo $compra['descripcion'] ?></h5>
             <?php } ?>
             <hr>
             <h3 align="center">Detalle compra</h3>
