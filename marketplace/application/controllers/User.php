@@ -247,7 +247,7 @@ class User extends CI_Controller
                 $params = array(
                     'nombre_dueno' => $this->input->post('txt_propietario'),
                     'numero_tarjeta' => $this->input->post('txt_numero'),
-                    'cvv' => $this->input->post('txt_codigo'),
+                    'cvv' => password_hash($this->input->post('txt_codigo'), PASSWORD_BCRYPT),
                     'fecha_vencimiento' => $this->input->post('vencimiento'),
                     'saldo' => $this->input->post('txt_saldo')
 
