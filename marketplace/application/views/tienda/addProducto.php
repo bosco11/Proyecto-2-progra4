@@ -73,7 +73,7 @@ if ($this->session->userdata['logged_in']['logged_in'] == TRUE) { ?>
 
             <div>
                 <div class="box-footer">
-                    <button type="submit" title="Guardar"class="btn btn-primary"><i class="fas fa-save"></i>Guardar</button>
+                    <button type="submit" title="Guardar"class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
                 </div>
             </div>
         </div>
