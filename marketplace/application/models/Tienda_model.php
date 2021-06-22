@@ -95,16 +95,16 @@ class Tienda_model extends CI_Model
 	{
 		$query = null;
 		if ($fechaFinal != null and $fechaInicial != null and $categoria == null and $precioMax != null) {
-			$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal'");
+			$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio <= $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal'");
 		} else {
 			if ($fechaFinal == null and $fechaInicial == null and $categoria != null and $precioMax != null) {
-				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.id_categorias = " . $categoria);
+				$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio <= $precioMax AND u.id_categorias = " . $categoria);
 			} else {
 				if ($fechaFinal != null  and $fechaInicial != null and $categoria != null and $precioMax != null) {
-					$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal' AND u.id_categorias = $categoria");
+					$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio <= $precioMax AND u.fecha_publicacion BETWEEN '$fechaInicial' AND '$fechaFinal' AND u.id_categorias = $categoria");
 				} else {
 					if ($fechaFinal == null and $categoria == null and $precioMax != null) {
-						$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio < $precioMax");
+						$query = $this->db->query("SELECT u.*,c.categorias FROM tbl_productos u JOIN tbl_categorias c ON c.id_categorias=u.id_categorias where u.id_usuarios = $id AND u.precio <= $precioMax");
 					}
 				}
 			}

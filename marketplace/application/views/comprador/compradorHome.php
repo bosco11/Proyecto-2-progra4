@@ -60,7 +60,8 @@
 				<!-- Right -->
 				<ul class="navbar-nav nav-flex-icons ml_auto">
 					<?php if ($seccion == TRUE) { ?>
-						<li class="nav-item"> <!--  trae las lista de deseos del usuario que esta logueado-->
+						<li class="nav-item">
+							<!--  trae las lista de deseos del usuario que esta logueado-->
 							<div class="dropdown">
 								<button type="button" class="btn btn-danger" data-toggle="dropdown">
 									<i class="fa fa-heart" aria-hidden="true">
@@ -110,6 +111,7 @@
 																	<?php echo form_open('comprador/process/' . $p['id_productos']); ?>
 																	<button type="submit" id=" btn_eliminar_deseo" name="btn_eliminar_deseo" value="btn_eliminar_deseo" class="btn btn-danger pull-right btn-sm" style="display: inline-block;"><i class="fas fa-trash-alt"></i></button>
 																	<?php echo form_close(); ?>
+																	<?php echo form_open('comprador/perfilProducto/' . $p['id_productos']); ?><button type="submit" name="btn_perfil" id="btn_perfil" class="btn btn-secondary pull-right btn-sm me-2" title="Perfil"><i class="fas fa-user"></i></button> <?php echo form_close(); ?>
 																</span>
 															</div>
 															<hr>
@@ -122,7 +124,8 @@
 								</div>
 							</div>
 						</li>
-						<li class="nav-item"><!--  trae las lista de carrito del usuario que esta logueado-->
+						<li class="nav-item">
+							<!--  trae las lista de carrito del usuario que esta logueado-->
 							<div class="dropdown">
 								<button type="button" class="btn btn-info" data-toggle="dropdown">
 									<i class="fa fa-shopping-cart" aria-hidden="true">
@@ -190,7 +193,7 @@
 																	</span>
 
 																</div>
-																	<hr>
+																<hr>
 															<?php } ?>
 														<?php } ?>
 													<?php } ?>
@@ -209,7 +212,8 @@
 							</div>
 						</li>
 
-						<li class="nav-item dropdown notifications-nav"><!--  trae las lista de notificaciones del usuario que esta logueado, de los cambios de los productos de la lista de deseos-->
+						<li class="nav-item dropdown notifications-nav">
+							<!--  trae las lista de notificaciones del usuario que esta logueado, de los cambios de los productos de la lista de deseos-->
 							<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink151" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								<span class="badge badge-pill bg-danger"><?php echo count($notificaciones) ?></span>
 								<span><i class="fas fa-bell" style="font-size: 27px; margin-top: 5px;"></i></span>
@@ -271,7 +275,8 @@
 					<h6>Método de pago:</h6>
 					<select name="cmb_metodo" id="cmb_metodo" value="cmb_metodo" class="form-select form-select-sm " aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($pagos)) { ?><!--  trae las lista de las formas de pago-->
+						<?php if (!empty($pagos)) { ?>
+							<!--  trae las lista de las formas de pago-->
 							<?php foreach ($pagos as $pag) { ?>
 								<option value="<?php echo $pag['id_formas_pago'] ?>">Numero Tarjeta:<?php echo $pag['numero_tarjeta'] ?> - Saldo:<?php echo $pag['saldo'] ?></option>
 							<?php } ?>
@@ -281,7 +286,8 @@
 					<h6>Dirección de envio:</h6>
 					<select name="cmb_direccion" id="cmb_direccion" value="cmb_direccion" class="form-select form-select-sm " aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($direcciones)) { ?><!--  trae las lista dedirecciones del usuario logueado-->
+						<?php if (!empty($direcciones)) { ?>
+							<!--  trae las lista dedirecciones del usuario logueado-->
 							<?php foreach ($direcciones as $dir) { ?>
 								<option value="<?php echo $dir['id_direcciones'] ?>">Pais:<?php echo $dir['pais_direccion'] ?> - Dirección:<?php echo $dir['observaciones'] ?></option>
 							<?php } ?>
@@ -291,7 +297,8 @@
 					<h6>Premios adquiridos:</h6>
 					<select name="cmb_boni" id="cmb_boni" onchange="ShowSelected();" class="form-select form-select-sm" aria-label=".form-select-sm example">
 						<option value="0">Sin seleccionar</option>
-						<?php if (!empty($premios)) { ?><!--  trae las lista de premios del usuario logueado-->
+						<?php if (!empty($premios)) { ?>
+							<!--  trae las lista de premios del usuario logueado-->
 							<?php foreach ($premios as $premio) { ?>
 								<option value="<?php echo $premio['id_premios'] ?>"><?php echo $premio['descripcion'] ?></option>
 							<?php } ?>
@@ -399,7 +406,8 @@
 					<br>
 					<div class="row align-items ">
 						<?php $TOP = 0;
-						if (!empty($productosMasVendidos)) { ?><!--  trae las lista de los productos mas vendidos-->
+						if (!empty($productosMasVendidos)) { ?>
+							<!--  trae las lista de los productos mas vendidos-->
 							<?php foreach ($productosMasVendidos as $pmv) { ?>
 								<?php foreach ($pro as $p) { ?>
 									<?php if ($pmv['id_productos'] == $p['id_productos']) {
@@ -468,14 +476,15 @@
 		</div>
 	</div>
 	<!--Navbar-->
-	<div id="main_panel"><!--  Aqui estan los filtros donde el usaurio puede filtrar por producto , por tienda y por categoria-->
+	<div id="main_panel">
+		<!--  Aqui estan los filtros donde el usaurio puede filtrar por producto , por tienda y por categoria-->
 		<nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5" style="background-color: black;">
 
 			<span class="navbar-brand">Filtros:</span>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="basicExampleNav" >
+			<div class="collapse navbar-collapse" id="basicExampleNav">
 				<ul class="navbar-nav mr-auto" style="padding-top: 25px;">
 					<?php echo form_open('comprador/search', "class=\"d-flex\""); ?>
 					<li class="nav-item me-2">
@@ -489,7 +498,7 @@
 						</select>
 					</li>
 
-					<li class="nav-item me-2" >
+					<li class="nav-item me-2">
 						<input id=" txt_producto" name="txt_producto" class="form-control me-2" placeholder="Producto" aria-label="Search">
 
 					</li>
